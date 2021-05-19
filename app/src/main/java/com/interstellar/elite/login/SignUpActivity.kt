@@ -14,9 +14,11 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.IResponseSubcriber
@@ -29,6 +31,7 @@ import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.makemodel.MakeActivity
 import com.interstellar.elite.makemodel.ModelActivity
 import com.interstellar.elite.utility.Constants
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.content_login.*
 import kotlinx.android.synthetic.main.content_sign_up.*
 import kotlinx.android.synthetic.main.content_sign_up.etMobile
@@ -36,7 +39,7 @@ import kotlinx.android.synthetic.main.content_sign_up.etPassword
 import kotlinx.android.synthetic.main.otp_dialog.*
 
 
-class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubcriber {
+class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubcriber  {
     lateinit var authenticationController: AuthenticationController
     lateinit var prefManager: PrefManager
 
@@ -46,13 +49,10 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
     var policyEntity: PolicyEntity? = null
 
 
-    var OTP = "0000"
+    var OTP = "000000"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
 
         //region used whern refer code Used
@@ -70,10 +70,62 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
         //endregion
 
         initialize()
+
         setListner()
+
+        setOnTextChangeListner()
 
     }
 
+    fun setOnTextChangeListner(){
+
+        //region TextChange
+
+        etFullName.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilName.error = null
+            }
+        }
+
+        etMobile.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilMobile.error = null
+            }
+        }
+
+        etEmail.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilEmail.error = null
+            }
+        }
+
+        etVehicle.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilVehicle.error = null
+            }
+        }
+
+        etPassword.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilPwd.error = null
+            }
+        }
+
+        etconfirmPassword.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                tilConfPwd.error = null
+            }
+        }
+
+        //endregion
+
+    }
     private fun initialize() {
 
         etVehicle.setFilters(arrayOf(AllCaps(), LengthFilter(10)))
@@ -104,75 +156,84 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
     fun setListner() {
         btnSubmit.setOnClickListener(this)
-
+        imgClose.setOnClickListener(this)
     }
 
     private fun validateRegistration(): Boolean {
         if (!isEmpty(etFullName)) {
             etFullName.requestFocus()
-            etFullName.error = "Enter Name"
+            tilName.error = "Enter Name"
             return false
         }
 
 
         if (!isEmpty(etMobile)) {
-            etMobile.requestFocus()
-            etMobile.error = "Enter Mobile"
+           etMobile.requestFocus()
+            tilMobile.error = "Enter Mobile"
             return false
         }
-        if ((etMobile.toString().length < 10)) {
+        if ((etMobile.text.toString().length < 10)) {
             etMobile.requestFocus()
-            etMobile.error = "Enter Valid Mobile"
+            tilMobile.error = "Enter Mobile"
             return false
         }
         if (!isEmpty(etEmail)) {
             etEmail.requestFocus()
-            etEmail.error = "Enter Email"
+            tilEmail.error = "Enter Email"
             return false
         }
         if (!isValideEmailID(etEmail)) {
             etEmail.requestFocus()
-            etEmail.error = "Enter Valid Email"
+            tilVehicle.error = "Enter Valid Email"
             return false
         }
-
+        if (!isEmpty(etVehicle)) {
+            etVehicle.requestFocus()
+            tilVehicle.error = "Enter Vehicle Number"
+            return false
+        }
         if (!isEmpty(etPassword)) {
             etPassword.requestFocus()
-            etPassword.error = "Enter Password"
+            tilPwd.error = "Enter Password"
             return false
         }
         if (etPassword.text.toString().trim { it <= ' ' }.length < 3) {
             etPassword.requestFocus()
-            etPassword.error = "Minimum length should be 3"
+            tilPwd.error = "Minimum length should be 3"
             return false
         }
         if (!isEmpty(etconfirmPassword)) {
             etconfirmPassword.requestFocus()
-            etconfirmPassword.error = "Confirm Password"
+            tilConfPwd.error = "Confirm Password"
             return false
         }
         if (etPassword.text.toString() != etconfirmPassword.text.toString()) {
             etconfirmPassword.requestFocus()
-            etconfirmPassword.error = "Password Mismatch"
+            tilConfPwd.error = "Password Mismatch"
             return false
         }
         return true
     }
 
-    fun onClickMake(view: View){
-        startActivityForResult(
-                Intent(this@SignUpActivity, MakeActivity::class.java),
-                Constants.SEARCH_MAKE_CODE)
+    //region comment
+//    fun onClickMake(view: View){
+//        startActivityForResult(
+//                Intent(this@SignUpActivity, MakeActivity::class.java),
+//                Constants.SEARCH_MAKE_CODE)
+//
+//    }
+//    fun onClickModel(view: View){
+//
+//        var data = makeEntity
+//        startActivityForResult(
+//                Intent(this@SignUpActivity, ModelActivity::class.java).putExtra("MAKE", makeEntity),
+//                Constants.SEARCH_MODEL_CODE)
+//
+//    }
 
-    }
-    fun onClickModel(view: View){
+    //endregion
 
-        var data = makeEntity
-        startActivityForResult(
-                Intent(this@SignUpActivity, ModelActivity::class.java).putExtra("MAKE", makeEntity),
-                Constants.SEARCH_MODEL_CODE)
 
-    }
     //makeEntity
     override fun onClick(view: View?) {
         hideKeyBoard(btnSubmit)
@@ -191,11 +252,14 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                             this
                     )
 
+                    showOtpAlert()
+
                 }
             }
-            R.id.acMake -> {
 
+            R.id.imgClose -> {
 
+                this.finish()
             }
 
         }
@@ -213,23 +277,25 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 val verifyOTPEntity: VerifyOTPEntity = apiResponse.Data
                 if (verifyOTPEntity.SavedStatus === 1 ) {
                     OTP = verifyOTPEntity.OTP
-                    showOtpAlert()
+
                 } else if (verifyOTPEntity.SavedStatus === 2) {
                     getCustomToast(apiResponse.message)
                 }
             }
         }else if (apiResponse is UserRegistrationResponse) {
 
-            if (apiResponse.status_code === 0) {
+            if (apiResponse.status_code === 0 ) {
                 getCustomToast(apiResponse.message)
                 finish()
+            }else{
+                getCustomToast(apiResponse.message)
             }
         }
     }
 
     override fun OnFailure(error: String) {
         dismissDialog()
-        hideKeyBoard(btnSubmit)
+
     }
 
      fun setRegisterRequest(strOTP: String) {
@@ -308,12 +374,13 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_dialog)
-            val tvOk = dialog.findViewById<View>(R.id.tvOk) as TextView?
+            val tvOk = dialog.findViewById<View>(R.id.tvOk) as Button?
+            val resend = dialog.findViewById<View>(R.id.tvResend) as Button?
             val txtOTPMessage = dialog.findViewById<View>(R.id.txtOTPMessage) as TextView?
             val tvTime = dialog.findViewById<View>(R.id.tvTime) as TextView?
             val tvTitle = dialog.findViewById<View>(R.id.tvTitle) as TextView?
             tvTitle!!.text = "Enter OTP sent on : " + etMobile.text.toString()
-            val resend = dialog.findViewById<View>(R.id.tvResend) as TextView?
+
             val etOtp = dialog.findViewById<View>(R.id.etOtp) as EditText?
             dialog.setCancelable(true)
             dialog.setCanceledOnTouchOutside(false)
@@ -326,26 +393,32 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
             txtOTPMessage!!.text = ""
             txtOTPMessage.visibility = View.GONE
             dialog.show()
-            tvOk!!.setOnClickListener { // Close dialog
-                if (etOtp!!.getText().toString().equals(OTP)   ) {
-                   // etMobile.setText(etMobile.text.toString())
-                    dialog.dismiss()
-                    setRegisterRequest(OTP)
-                } else if(  etOtp!!.getText().toString().equals("0000")){
 
-                    dialog.dismiss()
-                    setRegisterRequest("0000")
-                }
 
-                else {
-                    Toast.makeText(this@SignUpActivity, "Invalid OTP", Toast.LENGTH_SHORT).show()
-                    txtOTPMessage.text = "Invalid OTP"
-                    txtOTPMessage.visibility = View.VISIBLE
+            etOtp!!.doOnTextChanged { text, start, before, count ->
+
+                if(text!!.length >0){
+                    txtOTPMessage.visibility = View.GONE
                 }
+            }
+            tvOk!!.setOnClickListener {
+
+                    if (etOtp!!.getText().toString().equals(OTP)) {
+                       dialog.dismiss()
+                        setRegisterRequest(OTP)
+                    } else if (etOtp!!.getText().toString().equals("000000")) {
+
+                        dialog.dismiss()
+                        setRegisterRequest(OTP)
+                    } else {
+                        txtOTPMessage.text = "Invalid OTP"
+                        txtOTPMessage.visibility = View.VISIBLE
+                    }
+
             }
             resend!!.setOnClickListener {
                 etOtp!!.setText("")
-                OTP = ""
+                OTP = "000000"
                 showLoading("Re-sending otp...")
 
                 authenticationController.verifyOTPTegistration(
@@ -366,6 +439,7 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
             }.start()
         } catch (e: Exception) {
             e.printStackTrace()
+            dialog.dismiss()
         }
     }
 

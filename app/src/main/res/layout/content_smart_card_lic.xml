@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            android:hint="Driving Licence Number">
+
+            <EditText
+                android:id="@+id/etLicNo"
+                style="@style/Style.edittext"
+                android:focusableInTouchMode="true"
+                android:inputType="text"
+                android:maxLength="30"
+                android:padding="@dimen/activity_horizontal_margin" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            android:hint="Driving Licence Owner Name">
+
+            <EditText
+                android:id="@+id/etLicOwnerName"
+                style="@style/Style.edittext"
+                android:focusableInTouchMode="true"
+                android:inputType="textCapWords"
+                android:maxLength="40"
+                android:padding="@dimen/activity_horizontal_margin" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            android:hint="Driving Licence Owner Dob">
+
+            <EditText
+                android:id="@+id/etLicOwnerDob"
+                style="@style/Style.edittext"
+                android:focusableInTouchMode="true"
+                android:drawableRight="@drawable/vector_date"
+               android:drawablePadding="5dp"
+                android:inputType="text"
+                android:maxLength="30"
+                android:focusable="false"
+                android:padding="@dimen/activity_horizontal_margin" />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+    <include layout="@layout/layout_city_rto_pincode" />
+
+
+
+
+
+
+</LinearLayout>

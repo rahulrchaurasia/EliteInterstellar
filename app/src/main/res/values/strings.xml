@@ -1,0 +1,163 @@
+<resources>
+    <string name="app_name">EliteInterstellar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="file_provider_authority" translatable="false">com.interstellar.elite.fileprovider</string>
+    <string name="search">Search</string>
+    <string name="CityName">Search City</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="Rs">\u20B9</string>
+    <string name="copyright">Copyright 2021</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="dashboard_title">Welcome to\nthe world of</string>
+    <string name="dashboard_desc">To know more about its Benefits, Click on 1 of the below options.</string>
+    <string name="title_activity_login">Login</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="VehicleExample">Example : MH01DE4131</string>
+    <string name="userAuth">  User is Not Authenticated.\nPlease Contact to Admin Person</string>
+
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <string name="four_Wheeler">Four Wheeler</string>
+
+    <string name="two_four_Wheeler">Four Wheeler And Two Wheeler </string>
+
+    <string name="aboutUs_one">As an organization, we firmly believe that our customers are the driving force behind our success,
+        which is why we welcome you, our esteemed customer to be a part of an exclusive circle, the <b>Landmark Elite Program.</b>
+        Welcome to the world of Landmark</string>
+
+    <string name="aboutUs_two">Welcome to the world of <b>Landmark Elite Program -</b> an exclusive world of richer experiences curated
+        to enhance your service experience.
+    </string>
+
+    <string name="aboutUs_three">We are hopeful that with this initiative, everything you have come to appreciate about Landmark
+        Group, will be raised to new heights of increasingly remarkable experiences.
+    </string>
+
+    <string name="aboutUs_four">As an Elite customer, you would benefit from a range of extended services that we believe reinforces
+        our commitment in making your experience with us a lot more rewarding.
+    </string>
+
+
+    <array name="array_employee_type">
+        <item>Salaried</item>
+        <item>Self Employed</item>
+        <item>Professional</item>
+
+
+    </array>
+
+    <string-array name="FamilyMemNo">
+        <item>Select No. Of Family Members</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+
+    </string-array>
+
+    <array name="CorrectionType">
+        <item>Name</item>
+        <item>DOB</item>
+        <item>Driving Licence</item>
+        <item>Addres</item>
+
+
+    </array>
+
+    <string name="reg_msg">Please Enter Your Vehicle Registration Number Or</string>
+    <string name="reg_msg_oth">Policy Number</string>
+    <string name="profile_msg">Please complete your Profile for getting full benefit of app. </string>
+    <string name="error_Msg">Something went wrong on server side. Please Contact to Admin Person</string>
+
+    <string name="rate_Negative">Oops! please share with us what went wrong.</string>
+    <string name="rate_Positive">Thanks! we are glad you are happy with our services.</string>
+    <string name="supp_Calling">Do you want to call Elite Support Team?</string>
+    <!-- <string name="call_number">9702943935</string>-->
+    <string name="email">rahulrchaurasia@gmail.com</string>
+    <string name="doc_popup">Thank you for uploading all the documents.\nWe will verify the documents and call you back within 24 working hours if required.</string>
+
+
+    <string name="signup">Not a Member? <b><u>Sign up now!</u></b></string>
+    <string name="click_here"> <b><u>Click Here!!</u></b></string>
+    <string name="register_here"> <b><u>Register Here!</u></b></string>
+    <string name="forgotPwd"><u><i>Forgot Password? .</i></u></string>
+
+    <string name="download"> <b><u>Download</u></b></string>
+
+    <string name="title_activity_product">Request Form</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_register">Register</string>
+    <string name="copyright_content">Powered by Interstellar</string>
+
+
+    <string name="openDrawer">Open navigation drawer</string>
+    <string name="closeDrawer">Close navigation drawer</string>
+    <string name="req_doc"><u> <b>Click Here</b></u></string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_sign_up">Registration</string>
+    <string name="title_activity_forgot_password">Forgot Password</string>
+    <string name="title_activity_dash_board_product_list">DashBoardProductListActivity</string>
+
+
+    <string name="title_activity_payment_razor">Payment</string>
+    <string name="title_activity_doc_upload">Upload Document</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_terms_condition">TermsConditionActivity</string>
+    <string name="title_activity_eula">Licence Agreement</string>
+    <string name="title_activity_search_city">SearchCityActivity</string>
+    <string name="title_activity_service">Service</string>
+    <string name="title_activity_order">Request</string>
+    <string name="title_activity_feedback">Feedback</string>
+    <string name="title_activity_email_us">Email Us</string>
+    <string name="title_activity_product_main">ProductMainActivity</string>
+    <string name="title_activity_notification">Notification</string>
+    <string name="title_activity_transfer_ownership">TransferOwnership</string>
+    <string name="title_activity_rate">Rating</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_insurance_comp">Insurance Company</string>
+</resources>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lyLic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtLic"
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Driving Licence Number"
+
+                android:textColor="@color/black" />
+
+
+            <ImageView
+                android:id="@+id/ivLic"
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/star_img"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etLic"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:minLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyVehicleType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Vehicle Type "
+            android:textColor="@color/black" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rbfour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checked="true"
+                    android:text="@string/four_Wheeler" />
+
+                <RadioButton
+                    android:id="@+id/rbtwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/two_four_Wheeler" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlCorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/seperator_white"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/lyDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:gravity="left"
+
+                android:text="Select Correction Field: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/ivTick"
+                style="@style/TextViewStyle.MediumRegular"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="top"
+                android:layout_marginLeft="5dp"
+                android:text="*"
+                android:textColor="@color/red_nav" />
+
+
+        </LinearLayout>
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/down_arrow" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llCorrection"
+        style="@style/LinearLayoutStyle"
+        android:animateLayoutChanges="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/custom_white"
+
+        android:visibility="visible">
+
+        <TextView
+            style="@style/TextViewStyle.MediumLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Please checked and enter required correction field"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/lyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputMaterialStyle"
+                android:hint="Correction in Name">
+
+
+                <EditText
+                    android:id="@+id/etName"
+                    style="@style/Style.edittext"
+                    android:inputType="text"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/input_label_vertical_spacing"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputMaterialStyle"
+                android:hint="Correction in DOB">
+
+
+                <EditText
+                    android:id="@+id/etDOB"
+                    style="@style/Style.edittext"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/input_label_vertical_spacing"
+
+                    android:drawableRight="@drawable/vector_date"
+                    android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputMaterialStyle"
+                android:hint="Correction in Address">
+
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    style="@style/Style.edittext"
+                    android:inputType="text"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/input_label_vertical_spacing"
+                    android:lines="1"
+                    android:maxLength="40"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_city_rto_pincode" />
+
+
+
+
+</LinearLayout>

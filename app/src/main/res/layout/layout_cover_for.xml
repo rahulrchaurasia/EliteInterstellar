@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/four"
+        style="@style/CardStyle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextViewStyle.MediumLarge"
+
+                android:padding="10dp"
+                android:background="@color/seperator_white"
+                android:textColor="@color/black"
+                android:text="Covered For" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbIndividual"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Individual" />
+
+                <RadioButton
+                    android:id="@+id/rbFloater"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="Floater" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/lyFamily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible"
+                    android:text="Please Select Number Of Family Member :" />
+
+
+                <Spinner
+
+                    android:id="@+id/spNoOfFamily"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/four"
+                    android:background="@drawable/style_spinner"
+                    android:entries="@array/FamilyMemNo"
+                    android:gravity="center"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:spinnerMode="dropdown" />
+
+
+<!--                style="@style/SpinnerStyle.Underlined"-->
+<!--                android:spinnerMode="dropdown"-->
+
+
+                <TextView
+                    android:id="@+id/txtFamilyError"
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_color"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    android:text="Select Number Of Family Member !!" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+</LinearLayout>

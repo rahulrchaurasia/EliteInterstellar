@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle.MediumDark"
+            android:layout_marginLeft="@dimen/input_label_horizontal_spacing"
+            android:layout_marginTop="@dimen/eight"
+            android:text="My Current City" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tilCity"
+            android:hint="City Name"
+            android:gravity="center"
+            style="@style/TextInputMaterialStyleFilledBox"
+            app:startIconDrawable="@drawable/ic_city_24"
+            app:endIconDrawable="@drawable/ic_drop_down"
+            android:layout_marginTop="@dimen/eight"
+            app:endIconMode="custom"
+            app:endIconTint="@color/sub_text_color"
+            >
+
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+
+                android:ellipsize="end"
+                android:focusable="false"
+                android:inputType="text|textNoSuggestions"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true" />
+
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle.MediumDark"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_marginLeft="@dimen/input_label_horizontal_spacing"
+            android:text="My Nearest RTO"
+            />
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tilRTO"
+            android:hint="Nearest RTO"
+            android:gravity="center"
+            style="@style/TextInputMaterialStyleFilledBox"
+            app:startIconDrawable="@drawable/ic_garage_24"
+            app:endIconDrawable="@drawable/ic_drop_down"
+            android:layout_marginTop="@dimen/eight"
+            app:endIconMode="custom"
+            app:endIconTint="@color/sub_text_color"
+            >
+
+            <EditText
+                android:id="@+id/etRTO"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="text"
+                android:ellipsize="end"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+
+        <EditText
+            android:id="@+id/etRTO_OTH"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

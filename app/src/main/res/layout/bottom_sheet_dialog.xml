@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+    android:background="@drawable/custom_grey"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/description_text">
+                <TextView
+                    android:id="@+id/txtHdr"
+                    style="@style/TextViewStyle.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="Select City"
+                    android:textColor="@color/white" />
+
+
+
+
+                <ImageView
+                    android:id="@+id/ivCross"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/close_ic"
+                    android:visibility="visible" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRTO"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:paddingBottom="5dp"
+                android:visibility="visible">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>

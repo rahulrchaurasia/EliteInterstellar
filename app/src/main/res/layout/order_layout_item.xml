@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:background="@color/bg_dashboard"
+    android:paddingBottom="2dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="2dp"
+
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:cardCornerRadius="5dp"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:weightSum="100">
+
+
+                    <ImageView
+                        android:id="@+id/ivReqLogo"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+
+                        android:gravity="left|top"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/elite_placeholder" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/ivReqLogo"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/txtPrdName"
+                            style="@style/TextViewStyle.Large"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/ivReqLogo"
+                            android:text="Customer Name wwwwe ce"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <TextView
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+
+                                android:text="Request Date:" />
+
+                            <TextView
+                                android:id="@+id/txtDate"
+                                style="@style/TextViewStyle.MediumBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="Dec 17 2016"
+                                android:textColor="@color/black"
+                                android:textStyle="italic" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/seperator"></View>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/txtStatus"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/textOrder"
+                        style="@style/TextViewStyle.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Request ID:" />
+
+                    <TextView
+                        android:id="@+id/txtOrderID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Product"
+
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:id="@+id/lyAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextViewStyle.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Amount:" />
+
+
+                        <TextView
+                            android:id="@+id/txtAmnt"
+                            style="@style/TextViewStyle.Large"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="5dp"
+
+                            android:text="50"
+                            android:textColor="@color/tab_color"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="50"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <!--style = "?android:attr/ratingBarStyleSmall"-->
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="5.0"
+                            android:stepSize="0.5"
+                            android:isIndicator="true"
+                            android:theme="@style/RatingBar" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:id="@+id/lyReceipt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextViewStyle.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Receipt:" />
+
+                        <ImageView
+                            android:id="@+id/ivReceipt"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="centerInside"
+
+                            android:src="@drawable/receipt" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtStatus"
+                        style="@style/TextViewStyle.MediumBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="50"
+                        android:gravity="right"
+                        android:text="Paid"
+                        android:textColor="@color/green_descent"
+                        android:textStyle="bold"
+
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--<View-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="@color/seperator"></View>-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_darkgrey"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:layout_marginTop="5dp"
+                android:weightSum="100">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="50"
+                    android:weightSum="100"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/lychat"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+
+                        <FrameLayout
+                            style="?attr/actionButtonStyle"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:focusable="true">
+
+                            <ImageView
+                            android:id="@+id/ivchat"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="left"
+
+                            android:background="@drawable/circularbg_primary_color"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_chat" />
+
+                            <TextView
+                                android:id="@+id/chat_badge"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="right|end|top"
+                                android:layout_marginEnd="-5dp"
+                                android:layout_marginRight="-5dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/badge_background"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:textColor="@color/white"
+                                android:text=""
+                                android:visibility="visible"
+                                android:textSize="8sp"/>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyFeedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginRight="10dp"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivFeedBack"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="@dimen/four"
+                            android:layout_gravity="center"
+                            android:background="@drawable/circularbg_primary_color"
+                            android:padding="2dp"
+                            android:src="@drawable/feedback1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lyUpload"
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/btnUpload"
+                        style="@style/ButtonGreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/buttonRedBackground"
+                        android:drawableLeft="@drawable/ic_file_upload"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:text="Upload Document"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+
+                <!--/>-->
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

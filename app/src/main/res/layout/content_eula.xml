@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".welcome.EulaActivity"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:showIn="@layout/activity_eula">
+
+    <LinearLayout
+        android:id="@+id/lyhdr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/elite_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="END-USER LICENCE AGREEMENT – ELITE"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            style="@style/TextViewStyle.Large"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lyWeb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_marginTop="0dp"
+
+        android:layout_below="@+id/lyhdr"
+        android:layout_above="@+id/lybottom"
+        android:background="@drawable/borderthealthcheckup">
+
+        <WebView
+            android:scrollbars="none"
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight= "4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/borderthealthcheckup"></WebView>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lybottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="0dp"
+
+        android:layout_alignParentBottom="true"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDisAgree"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:padding="6dp"
+            android:text="I DISAGREE"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnAgree"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:padding="6dp"
+            android:text="I AGREE"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

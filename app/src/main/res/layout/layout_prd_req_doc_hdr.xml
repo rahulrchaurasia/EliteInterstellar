@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="@dimen/four"
+        android:layout_marginRight="@dimen/four"
+        android:background="@color/seperator_white"
+        android:layout_centerVertical="true">
+        <LinearLayout
+            android:id="@+id/lyDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtDoc"
+                style="@style/TextViewStyle.Large"
+                android:fontFamily="@font/muli"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+
+
+                android:gravity="left"
+
+                android:text="List Of Document Required: "
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/TextViewStyle.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bungee"
+
+
+                android:gravity="left"
+
+                android:text="@string/req_doc"
+                android:textColor="@color/blue" />
+
+
+        </LinearLayout>
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+</LinearLayout>

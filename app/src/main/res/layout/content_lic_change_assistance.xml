@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+        app:startIconDrawable="@drawable/ic_name"
+        android:hint="Nominee Name">
+
+        <EditText
+            android:id="@+id/etNomineeName"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:inputType="textCapWords"
+            android:maxLength="80"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+        app:startIconDrawable="@drawable/ic_baseline_relation_24"
+        android:hint="Proposal Relation with Nominee">
+
+        <EditText
+            android:id="@+id/etRelationNominee"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:inputType="textCapWords"
+            android:maxLength="50"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+        app:startIconDrawable="@drawable/ic_city_24"
+        android:hint="Insurance Company Name">
+
+        <EditText
+            android:id="@+id/etInsCompanyName"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:inputType="textCapWords"
+            android:maxLength="50"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <include
+        layout="@layout/layout_city_pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

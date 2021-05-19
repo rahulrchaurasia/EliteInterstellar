@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlEditVehicle"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/seperator_white"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/TextViewStyle.MediumRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentLeft="true"
+
+                android:text="Do you have another vehicle?"
+                android:textColor="@color/black" />
+
+
+            <ImageView
+
+                android:id="@+id/ivArrow"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_edit" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lyVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/bg_dashboard"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/TextInputMaterialStyle"
+                app:endIconMode="none"
+                app:startIconDrawable="@drawable/ic_vehicle"
+                android:hint="Vehicle Number">
+
+                <EditText
+                    android:id="@+id/etVehicle"
+                    style="@style/Style.edittext"
+                    android:enabled="false"
+                    android:maxLength="15"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/activity_horizontal_margin" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Vehicle Finance From"
+                style="@style/TextInputMaterialStyle"
+                >
+
+                <EditText
+                    android:id="@+id/etFinance"
+                    style="@style/Style.edittext"
+                    android:focusableInTouchMode="true"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:padding="@dimen/activity_horizontal_margin" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+        <include
+            layout="@layout/layout_city_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

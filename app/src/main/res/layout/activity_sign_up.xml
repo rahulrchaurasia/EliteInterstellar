@@ -9,19 +9,33 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/white"-->
+        <!--            app:popupTheme="@style/AppTheme.PopupOverlay" >-->
+
+
+        <!--        </androidx.appcompat.widget.Toolbar>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_sign_up" />
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginRight="@dimen/eight"
+        android:fitsSystemWindows="true"
+        app:srcCompat="@drawable/ic_close" />
+
 
 
 

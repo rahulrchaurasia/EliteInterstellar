@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--// Note : background color is apply by toolbar so height changes no effect -->
+<!--    android:background="@color/colorPrimary"-->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/dashboardBanner"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/banner"
+        android:paddingBottom="@dimen/eight">
+
+        <LinearLayout
+            android:id="@+id/lyMenu"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/imgHamburger"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:scaleType="fitStart"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_hamburger_menu" />
+
+            <ImageView
+                android:id="@+id/imglogo"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/four"
+                android:scaleType="fitStart"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/elite_plus" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lyWelcomeUser"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/profile_w"
+                android:layout_width="14dp"
+                android:layout_height="14dp"/>
+            <TextView
+                android:id="@+id/txtName"
+                android:text="Welcome"
+
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/white"
+                style="@style/CustomTitle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lydashboardDesc"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lyMenu"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTitle.Header"
+                android:fontFamily="@font/bungee"
+                android:textStyle="bold|italic"
+                android:text="@string/dashboard_title"
+                />
+            <ImageView
+                android:id="@+id/imglogoDashboard"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+
+                android:scaleType="fitStart"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/elite_plus" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtdashboardTitle"
+            android:visibility="gone"
+            android:layout_below="@+id/lyMenu"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/CustomTitle.Header"
+            android:textStyle="bold"
+            android:text="Elite"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/otherBanner"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/banner"
+        android:paddingBottom="@dimen/eight">
+
+        <LinearLayout
+            android:id="@+id/lyMenuOth"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/imgHamburgerOth"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:scaleType="fitStart"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_hamburger_menu" />
+
+
+
+            <ImageView
+                android:id="@+id/imglogo1"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/four"
+                android:scaleType="fitStart"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/elite_plus" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lyWelcomeUser1"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/profile_w"
+                android:layout_width="14dp"
+                android:layout_height="14dp"/>
+            <TextView
+                android:id="@+id/txtNameOth"
+                android:text="Welcome"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/white"
+
+                style="@style/CustomTitle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:visibility="visible"
+            android:layout_below="@+id/lyMenuOth"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/CustomTitle.Header"
+            android:textStyle="bold"
+            android:text="Elite"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

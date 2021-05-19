@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_dashboard"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rlEditMakeModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/seperator_white"
+        android:visibility="gone"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/TextViewStyle.MediumRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:text="Do you have another vehicle?"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_edit" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/lyVehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/btnGo"
+                android:background="@color/bg_edit"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/TextInputMaterialStyle"
+                    app:endIconMode="none"
+                    app:startIconDrawable="@drawable/ic_vehicle"
+                    android:hint="Vehicle Number">
+
+                    <EditText
+                        android:id="@+id/etVehicle"
+                        style="@style/Style.edittext"
+                        android:drawablePadding="10dp"
+                        android:maxLength="15"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:enabled="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnGo"
+                style="@style/ButtonGreenSmall"
+                android:text="GO"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lyMakeModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_dashboard"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Make :"
+
+                    android:textColor="@color/black" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/acMake"
+                    style="@style/Style.edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/make_logo"
+                    android:drawablePadding="4dp"
+                    android:dropDownWidth="250dp"
+                    android:enabled="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtModel"
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Model :"
+
+                    android:textColor="@color/black" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/acModel"
+                    style="@style/Style.edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/make_logo"
+                    android:drawablePadding="4dp"
+
+                    android:dropDownWidth="250dp"
+                    android:enabled="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/layout_city_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textCity"
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:text="City :"
+
+                android:textColor="@color/black" />
+
+
+            <Spinner
+
+                android:id="@+id/spCity"
+                style="@style/SpinnerStyle.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lyRTO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <TextView
+
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="RTO Location :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+
+                <Spinner
+                    android:id="@+id/spRTO"
+                    style="@style/SpinnerStyle.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:singleLine="true" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/lvLogo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:visibility="gone">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivLogo"-->
+                <!--android:layout_width="64dp"-->
+                <!--android:layout_height="64dp"-->
+                <!--android:layout_marginLeft="5dp" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="4dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/textCharges"-->
+                        <!--style="@style/TextViewStyle.MediumBold"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Charges :"-->
+
+                        <!--android:textStyle="italic" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/txtCharges"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="2dp"-->
+                        <!--android:text=""-->
+                        <!--android:textColor="@color/blue"-->
+                        <!--android:textSize="15sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/lyTAT"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/texttat"-->
+                        <!--style="@style/TextViewStyle.MediumBold"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="TAT :"-->
+                        <!--android:textStyle="italic" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/txtTAT"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="2dp"-->
+                        <!--android:text=""-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="15sp" />-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</LinearLayout>-->
+
+
+        <!--</LinearLayout>-->
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

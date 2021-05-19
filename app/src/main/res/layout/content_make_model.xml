@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/lvParent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".makemodel.MakeActivity"
+    tools:showIn="@layout/activity_search_city">
+
+    <LinearLayout
+        android:id="@+id/lyOtherCity"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp"
+
+            android:gravity="left|center_vertical"
+
+            android:src="@drawable/search" />
+
+
+        <TextView
+            android:id="@+id/txtOtherCity"
+            style="@style/TextViewStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:text="OTHER CITY"
+            android:padding="10dp"
+            android:layout_marginLeft="2dp"
+            ></TextView>
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/lightGrey"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMakeModel"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

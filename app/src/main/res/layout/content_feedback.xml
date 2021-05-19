@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".feedback.FeedbackActivity"
+    tools:showIn="@layout/activity_feedback">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/bg_dashboard"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:background="@color/bg_dashboard"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewStyle.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Complain and Feedback"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        style="@style/TextViewStyle.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/eight"
+                        android:text="Share your experiance regarding  your request "
+
+                        android:textColor="@color/black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/lightGrey" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textRequestID"
+                            style="@style/TextViewStyle.MediumRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+
+                            android:text="Select Request ID: " />
+
+                        <TextView
+                            android:id="@+id/txtReqestID"
+                            style="@style/TextViewStyle.MediumRegular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text=""
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtServiceName"
+                        style="@style/TextViewStyle.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Service" />
+
+
+                    <LinearLayout
+                        android:id="@+id/lyReqID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+
+                        <EditText
+                            android:id="@+id/etReqName"
+                            style="@style/Style.edittext"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:clickable="true"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:focusable="false"
+                            android:inputType="textMultiLine"
+                            android:maxLines="3"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        style="@style/TextViewStyle.MediumRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Enter Your Feedback:" />
+
+                    <EditText
+                        android:id="@+id/etBody"
+                        style="@style/Style.edittext"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="100"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_horizontal_margin" />
+
+
+                    <Button
+                        android:id="@+id/btnSubmit"
+                        style="@style/ButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="8dp"
+
+                        android:text="Submit" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

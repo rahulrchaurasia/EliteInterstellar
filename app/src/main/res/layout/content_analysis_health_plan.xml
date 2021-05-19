@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+
+<com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       style="@style/TextInputMaterialStyle"
+        app:startIconDrawable="@drawable/ic_name"
+         android:id="@+id/tilNameOfProposer"
+        android:hint="Proposal Name">
+
+        <EditText
+            android:id="@+id/etNameOfProposer"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:inputType="text"
+            android:maxLength="50"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+        android:id="@+id/tilSumAssured"
+        app:startIconDrawable="@drawable/ic_calculate_24"
+        android:hint="Sum Insured">
+
+        <EditText
+            android:id="@+id/etSumAssured"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+       app:startIconDrawable="@drawable/ic_calendar_24"
+        android:id="@+id/tilDOB"
+        app:endIconMode="none"
+        app:errorIconDrawable="@null"
+        android:hint="Date of Birth">
+
+        <EditText
+            android:id="@+id/etDOB"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusable="false"
+
+            android:padding="@dimen/activity_horizontal_margin" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <include
+        layout="@layout/layout_cover_for"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        layout="@layout/layout_city_pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

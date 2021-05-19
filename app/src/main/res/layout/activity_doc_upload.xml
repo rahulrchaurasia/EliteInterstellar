@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".document.DocUploadActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--<fragment-->
+        <!--android:name="com.pb.elite.document.DocUploadFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/fragment"/>-->
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/txtClientName"
+            style="@style/TextViewStyle.Large"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/seperator_white"
+            android:text="Upload Required Document"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProduct"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txtDocVerify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextViewStyle.Large"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:visibility="visible"
+        android:text="Please Upload all required document"/>
+
+</LinearLayout>

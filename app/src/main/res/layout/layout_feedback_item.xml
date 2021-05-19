@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/off_white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lyParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="Request ID: "></TextView>
+
+            <TextView
+                android:id="@+id/txtReqID"
+                style="@style/TextViewStyle.MediumDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="dedee"
+                android:textColor="@color/black"></TextView>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txtBody"
+            style="@style/TextViewStyle.MediumLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:padding="8dp"
+            android:text="ss"></TextView>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_below="@+id/txtTitle"
+        android:background="@color/lightGrey" />
+
+</LinearLayout>

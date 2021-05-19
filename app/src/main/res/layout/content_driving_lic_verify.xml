@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlCorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/seperator_white"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/lyDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewStyle.MediumLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:gravity="left"
+
+                android:text="Driving Details"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/ivTick"
+                android:layout_marginLeft="10dp"
+                style="@style/TextViewStyle.MediumRegular"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/tick"
+                android:visibility="gone"
+                />
+
+
+        </LinearLayout>
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/down_arrow" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llCorrection"
+        style="@style/LinearLayoutStyle"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/custom_white"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewStyle.MediumLarge"
+            android:padding="3dp"
+            android:textColor="@color/black"
+            android:text="Please enter all required details. "/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            app:startIconDrawable="@drawable/ic_name"
+            android:hint="Enter Name">
+
+            <EditText
+                android:id="@+id/etName"
+                style="@style/Style.edittext"
+
+                android:inputType="textCapWords"
+                android:lines="1"
+                android:maxLines="1"
+                android:focusableInTouchMode="true"
+
+                android:maxLength="40" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            app:startIconDrawable="@drawable/vector_date"
+            android:hint="Enter DOB">
+
+            <EditText
+                android:id="@+id/etDOB"
+                style="@style/Style.edittext"
+                android:focusableInTouchMode="true"
+
+                android:focusable="false"
+                android:maxLength="30" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            app:startIconDrawable="@drawable/ic_vehicle"
+            android:hint="Enter Driving Licence">
+
+            <EditText
+                android:id="@+id/etLic"
+                style="@style/Style.edittext"
+                android:focusableInTouchMode="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:maxLength="30" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_city_rto_pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

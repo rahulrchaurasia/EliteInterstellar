@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnClose"
+        android:id="@+id/lyParent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txtHdr"
+            style="@style/TextViewStyle.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/header_light_text"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="Documents Required"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProductDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHdr"
+            android:paddingBottom="3dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="top|right"
+        android:adjustViewBounds="true"
+        android:background="@drawable/cross_with_circle"
+        android:scaleType="center" />
+
+
+
+    <Button
+        android:id="@+id/btnClose"
+        style="@style/ButtonStyle"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:text="CLOSE" />
+
+
+</RelativeLayout>

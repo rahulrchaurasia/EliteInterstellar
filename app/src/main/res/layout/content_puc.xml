@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlEditVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:background="@color/seperator_white"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/TextViewStyle.MediumRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:text="Do you have another vehicle?"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_edit" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+
+        <LinearLayout
+            android:id="@+id/lyVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/bg_edit"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/TextInputMaterialStyle"
+                app:endIconMode="none"
+                app:startIconDrawable="@drawable/ic_vehicle"
+                android:hint="Vehicle Number">
+
+                <EditText
+                    android:id="@+id/etVehicle"
+                    style="@style/Style.edittext"
+                    android:enabled="false"
+                    android:focusableInTouchMode="true"
+                    android:maxLength="15"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/input_label_vertical_spacing" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextInputMaterialStyle"
+        app:startIconDrawable="@drawable/ic_calendar_24"
+        android:hint="PUC Expiry Date">
+
+        <EditText
+            android:id="@+id/etDate"
+            style="@style/Style.edittext"
+            android:layout_width="match_parent"
+            android:focusable="false"
+            android:drawableRight="@drawable/vector_date"
+             />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <include
+        layout="@layout/layout_city_pincode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

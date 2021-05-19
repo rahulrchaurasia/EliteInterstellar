@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".rto.RtoListFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/fab_margin"
+                android:orientation="vertical">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvRcBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/eight"
+                    app:cardElevation="4dp">
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/fab_margin"
+                        android:paddingRight="@dimen/fab_margin"
+                        android:paddingTop="@dimen/eight"
+                        android:paddingBottom="@dimen/eight"
+                        android:weightSum="1"
+                        android:background="@drawable/bg_rect_red">
+
+                        <LinearLayout
+                            android:layout_weight="0.5"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+
+                            android:layout_height="0dp">
+                            <ImageView
+
+                                android:layout_marginRight="@dimen/eight"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:src="@drawable/rc_book_assist"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="0.5"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="0dp">
+                            <TextView
+                                android:layout_marginLeft="@dimen/eight"
+                                android:text="RC BOOK ASSISTANCE"
+                                style="@style/CustomTitle.dashboard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+           <androidx.cardview.widget.CardView
+               android:layout_marginTop="@dimen/fab_margin"
+            android:id="@+id/cvDlAssistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/eight"
+            app:cardElevation="4dp">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/fab_margin"
+                android:paddingRight="@dimen/fab_margin"
+                android:paddingTop="@dimen/eight"
+                android:paddingBottom="@dimen/eight"
+                android:weightSum="1"
+                android:background="@drawable/bg_rect_red">
+
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+
+                    android:layout_height="0dp">
+                    <ImageView
+
+                        android:layout_marginRight="@dimen/eight"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:src="@drawable/dl_assistance"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="0dp">
+                    <TextView
+                        android:layout_marginLeft="@dimen/eight"
+                        android:text="DRIVING LICENSE ASSISTANCE"
+                        style="@style/CustomTitle.dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+
+</LinearLayout>

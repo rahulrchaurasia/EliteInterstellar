@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_light_color"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        app:tint="@color/primary_dark_color"
+        app:srcCompat="@drawable/ic_baseline_signal_wifi_off_24"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="34sp"
+            android:textColor="@color/black"
+            style="@style/CustomTitle.Header"
+            android:text="OOPS!"
+            />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="@color/header_text_color"
+        style="@style/CustomTitle.Header"
+        android:text="No Internet Connection"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/header_text_color"
+        style="@style/CustomTitle.Header"
+        android:text="Please Check your connection"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRetry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:layout_margin="50dp"
+        android:text="RETRY"
+        android:textColor="@color/white"
+      android:background="@drawable/custom_curve"/>
+</LinearLayout>

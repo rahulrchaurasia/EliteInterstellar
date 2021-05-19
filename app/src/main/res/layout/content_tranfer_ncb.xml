@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlEditVehicle"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/seperator_white"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/TextViewStyle.MediumRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:text="Do you have another vehicle?"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_edit" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lyVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/btnGo"
+
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextInputMaterialStyle"
+                    app:endIconMode="none"
+                    app:startIconDrawable="@drawable/ic_vehicle"
+                    android:hint="Vehicle Number">
+
+                    <EditText
+                        android:id="@+id/etVehicle"
+                        style="@style/Style.edittext"
+
+                        android:inputType="text"
+                        android:maxLength="15"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGo"
+                style="@style/ButtonGreenSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:text="GO"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewStyle.MediumDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:text="Make :" />
+
+            <AutoCompleteTextView
+                android:id="@+id/acMake"
+                style="@style/Style.edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/make_logo"
+                android:drawablePadding="4dp"
+                android:dropDownWidth="250dp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            android:hint="Insurer Company Name">
+
+            <EditText
+                android:id="@+id/etInsCompanyName"
+                style="@style/Style.edittext"
+                android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
+                android:inputType="text"
+                android:padding="@dimen/activity_horizontal_margin" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <include
+            layout="@layout/layout_city_rto_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

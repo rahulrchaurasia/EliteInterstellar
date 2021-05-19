@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/txtPlanName"
+            style="@style/TextViewStyle.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:minHeight="45dp"
+            android:padding="8dp"
+            android:text="OTP VERIFICATION"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivCross"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/clock"
+        />
+
+    <TextView
+        android:id="@+id/tvTime"
+        style="@style/TextViewStyle.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Time remaining " />
+
+    <TextView
+        style="@style/TextViewStyle.MediumRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:text="A few seconds while we verify your mobile number" />
+
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:background="@color/search_gray"/>
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextViewStyle.MediumRegular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginTop="10dp"
+        android:text="Enter OTP sent on " />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="left"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/txtOTPMessage"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/TextViewStyle.MediumBold"
+            android:text=""
+            android:textColor="@color/red_nav"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/tvOk"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:minHeight="35dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:text="VERIFY OTP" />
+
+
+    <Button
+        android:id="@+id/tvResend"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RESEND OTP"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:minHeight="35dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp" />
+</LinearLayout>

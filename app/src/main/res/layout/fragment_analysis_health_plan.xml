@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="5dp"
+    android:animateLayoutChanges="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="secure.ExpertReviewOFCurrentHealthPolicyFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnBooked"
+        android:layout_alignParentTop="true"
+        android:overScrollMode="ifContentScrolls"
+        android:paddingBottom="10dp"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <include
+                android:id="@+id/ly_prod_hdr_logo"
+                layout="@layout/layout_prod_hdr_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                style="@style/CardStyle"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/nav_header_vertical_spacing"-->
+<!--                android:orientation="vertical">-->
+
+<!--           -->
+<!--            </androidx.cardview.widget.CardView>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@color/bg_content"
+                android:orientation="vertical">
+
+
+                <!-- ***************** Add Content Here ****************-->
+                <include
+                    android:id="@+id/ly_analysis_health_plan"
+                    layout="@layout/content_analysis_health_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--***************** End *****************-->
+
+
+                <include
+                    android:id="@+id/ly_prd_req_doc_hdr"
+                    layout="@layout/layout_prd_req_doc_hdr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
+
+                <include
+                    android:id="@+id/ly_tat_display"
+                    layout="@layout/layout_tat_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnBooked"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/input_label_vertical_spacing"
+        android:text="Book Now" />
+</RelativeLayout>

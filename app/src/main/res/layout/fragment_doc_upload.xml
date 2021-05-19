@@ -1,0 +1,351 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".document.DocUploadFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="2dp">
+
+            <TextView
+                android:id="@+id/txtClientName"
+                style="@style/TextViewStyle.Large"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="Upload Required Document"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ScrollView
+        android:id="@+id/svParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/cvClient"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+
+                    <View
+                        android:id="@+id/viewdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:background="@color/lightGrey">
+
+                    </View>
+
+                    <LinearLayout
+                        android:id="@+id/llDocumentUpload"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:id="@+id/ivPhoto"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:padding="2dp"
+                                android:src="@drawable/doc_notuploaded" />
+
+                            <TextView
+                                android:id="@+id/txtDOC1"
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:layout_toRightOf="@+id/ivPhoto"
+                                android:text="Document 1" />
+
+
+                            <TextView
+                                android:id="@+id/txtViewDoc1"
+                                style="@style/TextViewStyle.Large"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:text="View"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <ImageView
+                                android:id="@+id/ivPhotoGallery"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="20dp"
+                                android:layout_toLeftOf="@+id/txtViewDoc1"
+                                android:padding="2dp"
+                                android:src="@drawable/folder_icon" />
+
+                            <ImageView
+                                android:id="@+id/ivPhotoCam"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="15dp"
+                                android:layout_toLeftOf="@+id/ivPhotoGallery"
+                                android:padding="2dp"
+                                android:src="@drawable/camera_icon" />
+
+
+                        </RelativeLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/bg" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:id="@+id/ivPan"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:padding="2dp"
+                                android:src="@drawable/doc_notuploaded" />
+
+                            <TextView
+                                android:id="@+id/txtDOC2"
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:layout_toRightOf="@+id/ivPan"
+                                android:text="Document 2" />
+
+
+                            <TextView
+                                android:id="@+id/txtViewDoc2"
+                                style="@style/TextViewStyle.Large"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:text="View"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <ImageView
+                                android:id="@+id/ivPanGallery"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="20dp"
+                                android:layout_toLeftOf="@+id/txtViewDoc2"
+                                android:padding="2dp"
+                                android:src="@drawable/folder_icon" />
+
+                            <ImageView
+                                android:id="@+id/ivPanCam"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="15dp"
+                                android:layout_toLeftOf="@+id/ivPanGallery"
+                                android:padding="2dp"
+                                android:src="@drawable/camera_icon" />
+
+
+                        </RelativeLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/bg" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:id="@+id/ivCancel"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:padding="2dp"
+                                android:src="@drawable/doc_notuploaded" />
+
+                            <TextView
+                                android:id="@+id/txtDOC3"
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/ivCancel"
+                                android:text="Document 3" />
+
+
+                            <TextView
+                                android:id="@+id/txtViewDoc3"
+                                style="@style/TextViewStyle.Large"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:text="View"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <ImageView
+                                android:id="@+id/ivCancelGallery"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="20dp"
+                                android:layout_toLeftOf="@+id/txtViewDoc3"
+                                android:padding="2dp"
+                                android:src="@drawable/folder_icon" />
+
+                            <ImageView
+                                android:id="@+id/ivCancelCam"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="15dp"
+                                android:layout_toLeftOf="@+id/ivCancelGallery"
+                                android:padding="2dp"
+                                android:src="@drawable/camera_icon" />
+
+
+                        </RelativeLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/bg" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:id="@+id/ivAadhar"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:padding="2dp"
+                                android:src="@drawable/doc_notuploaded" />
+
+                            <TextView
+                                android:id="@+id/txtDOC4"
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/ivAadhar"
+                                android:text="Document 4" />
+
+
+                            <TextView
+                                android:id="@+id/txtViewDoc4"
+                                style="@style/TextViewStyle.Large"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="5dp"
+                                android:text="View"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <ImageView
+                                android:id="@+id/ivAadharGallery"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="20dp"
+                                android:layout_toLeftOf="@+id/txtViewDoc4"
+                                android:padding="2dp"
+                                android:src="@drawable/folder_icon" />
+
+                            <ImageView
+                                android:id="@+id/ivAadharCam"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="15dp"
+                                android:layout_toLeftOf="@+id/ivAadharGallery"
+                                android:padding="2dp"
+                                android:src="@drawable/camera_icon" />
+
+
+                        </RelativeLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

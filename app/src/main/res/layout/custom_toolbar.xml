@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/banner"
+        app:contentInsetStartWithNavigation="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        android:contentInsetEnd="0dp"
+        android:paddingLeft="0dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/otherBanner"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingBottom="@dimen/eight">
+
+            <LinearLayout
+                android:id="@+id/lyMenu"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+
+                <ImageView
+                    android:id="@+id/imglogo"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="0dp"
+                    android:scaleType="fitStart"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/elite_plus" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lyWelcomeUser"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_marginRight="@dimen/eight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile_w"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"/>
+                <TextView
+                    android:id="@+id/txtName"
+                    android:text="Welcome"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/white"
+                    style="@style/CustomTitle.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginLeft="-40dp"
+                android:id="@+id/txtTitle"
+                android:visibility="visible"
+                android:layout_below="@+id/lyMenu"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CustomTitle.Header"
+                android:textStyle="bold"
+                android:text="Elite"
+                />
+
+
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+</LinearLayout>

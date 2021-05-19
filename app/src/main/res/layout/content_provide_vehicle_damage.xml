@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rlEditVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/seperator_white"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/TextViewStyle.MediumRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:text="Do you have another vehicle?"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+
+            android:id="@+id/ivArrow"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_edit" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <LinearLayout
+            android:id="@+id/lyVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/bg_edit"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Vehicle Number"
+                style="@style/TextInputMaterialStyle"
+                app:endIconMode="none"
+                app:startIconDrawable="@drawable/ic_vehicle">
+
+                <EditText
+                    android:id="@+id/etVehicle"
+                    style="@style/Style.edittext"
+                    android:enabled="false"
+                    android:focusableInTouchMode="true"
+                    android:maxLength="15"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/input_label_vertical_spacing" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:startIconDrawable="@drawable/ic_calendar_24"
+                style="@style/TextInputMaterialStyle"
+                android:hint="Accident Date">
+
+                <EditText
+                    android:id="@+id/etDate"
+                    style="@style/Style.edittext"
+                    android:layout_width="match_parent"
+                    android:focusable="false"
+                    android:padding="@dimen/activity_horizontal_margin" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:startIconDrawable="@drawable/ic_time_24"
+
+                style="@style/TextInputMaterialStyle"
+                android:hint="Accident Time">
+
+                <EditText
+                    android:id="@+id/etTime"
+                    style="@style/Style.edittext"
+                    android:layout_width="match_parent"
+                    android:focusable="false"
+                    android:padding="@dimen/activity_horizontal_margin" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextInputMaterialStyle"
+            android:hint="Place Of Accident">
+
+            <EditText
+                android:id="@+id/etPlaceOfAccident"
+                style="@style/Style.edittext"
+                android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
+                android:inputType="text"
+                android:maxLines="1"
+                android:minLines="1"
+                android:padding="@dimen/activity_horizontal_margin" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            style="@style/TextViewStyle.MediumLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Insurer Company Name"
+            android:visibility="gone"
+             />
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Insurer Company Name"
+            android:gravity="center"
+            app:startIconDrawable="@drawable/ic_city_24"
+            style="@style/TextInputMaterialStyleFilledBox"
+
+            app:endIconDrawable="@drawable/ic_drop_down"
+            android:layout_marginTop="@dimen/eight"
+            app:endIconMode="custom"
+            app:endIconTint="@color/color_close"
+            >
+
+
+            <EditText
+                android:id="@+id/etInsCompanyName"
+                style="@style/EditTextStyle"
+                android:inputType="text|textNoSuggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:minLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <include
+            android:layout_marginTop="@dimen/four"
+            layout="@layout/layout_city_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

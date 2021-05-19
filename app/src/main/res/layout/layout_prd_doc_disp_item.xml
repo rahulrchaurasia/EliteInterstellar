@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@color/off_white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/lyParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/txtDownload"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+
+                android:gravity="left|center_vertical"
+                android:padding="6dp"
+                android:src="@drawable/red_dot" />
+
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/TextViewStyle.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+
+                android:padding="5dp"
+                android:text="cwcwwc"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDownload"
+            style="@style/TextViewStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_descent"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+         android:layout_alignParentRight="true"
+
+            android:text="@string/download"
+            android:textStyle="bold"></TextView>
+
+    </RelativeLayout>
+    <!--<ImageView-->
+    <!--android:id="@+id/ivProduct"-->
+    <!--android:layout_width="16dp"-->
+    <!--android:layout_height="16dp"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="0dp"-->
+    <!--android:gravity="left"-->
+    <!--android:scaleType="centerInside" />-->
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_below="@+id/txtTitle"
+        android:background="@color/lightGrey" />
+
+</LinearLayout>

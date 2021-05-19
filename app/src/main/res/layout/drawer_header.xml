@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_color"
+    android:gravity="bottom"
+    android:minHeight="180dp"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/car"
+        android:visibility="visible" />
+    <TextView
+        android:id="@+id/txtVehicle"
+        android:layout_gravity="center"
+        style="@style/TextViewStyle.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:text=""
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtName"
+        style="@style/TextViewStyle.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text=""
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtVersion"
+        style="@style/TextViewStyle.Medium"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:text=""
+
+        android:visibility="visible" />
+
+
+
+
+</LinearLayout>
