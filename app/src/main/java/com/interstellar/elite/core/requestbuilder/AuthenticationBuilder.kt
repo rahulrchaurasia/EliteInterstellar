@@ -42,6 +42,8 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
         @GET()
         fun getUserEligibility(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<EligibilityUserResponse>
 
+        @GET()
+        fun getLandmarkEliteTataPee(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<TataLandmarkResponse>
 
         @POST("/api/get-user-constant")
         fun getUserConstant(@Body body: HashMap<String, String>): Call<UserConsttantResponse>
@@ -57,5 +59,13 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
 
         @POST("/api/user-otp-verify")
         fun userRegistration(@Body registerRequest: RegisterRequest): Call<UserRegistrationResponse>
+
+        @POST("/api/load-Tata-Peep")
+        fun getTataPeep(@Body body: HashMap<String, String>): Call<TataResponse>
+
+        @POST("/api/insertTataPeep")
+        fun insertTataPeep(@Body  body: HashMap<String, String>): Call<CommonResponse>
+
+
     }
 }

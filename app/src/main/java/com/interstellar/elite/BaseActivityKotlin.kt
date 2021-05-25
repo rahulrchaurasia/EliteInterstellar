@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.provider.Settings
 import android.util.Patterns
@@ -24,8 +25,10 @@ import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.utility.Utility
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.concurrent.Executors
 import java.util.regex.Pattern
 
 
@@ -93,10 +96,10 @@ open class BaseActivityKotlin : AppCompatActivity() {
     }
 
     protected fun showMessage(
-        view: View,
-        message: String,
-        action: String,
-        onClickListener: View.OnClickListener?
+            view: View,
+            message: String,
+            action: String,
+            onClickListener: View.OnClickListener?
     ) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG)
             .setAction(action, onClickListener).show()
@@ -241,7 +244,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
             val positiveText = "Call"
             val NegativeText = "Cancel"
             builder.setPositiveButton(
-                positiveText
+                    positiveText
             ) { dialog, which ->
                 val intentCalling = Intent(Intent.ACTION_DIAL)
                 intentCalling.data = Uri.parse("tel:$strMobile")
@@ -249,11 +252,11 @@ open class BaseActivityKotlin : AppCompatActivity() {
             }
 
             builder.setNegativeButton(NegativeText,
-                object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface, which: Int) {
-                        dialog.dismiss()
-                    }
-                })
+                    object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface, which: Int) {
+                            dialog.dismiss()
+                        }
+                    })
             val dialog = builder.create()
             dialog.setCancelable(false)
             dialog.setCanceledOnTouchOutside(false)
@@ -313,7 +316,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
             builder.setMessage(strBody)
             val positiveText = "Ok"
             builder.setPositiveButton(
-                positiveText
+                    positiveText
             ) { dialog, which -> dialog.dismiss() }
             val dialog = builder.create()
             dialog.setCancelable(false)
@@ -332,7 +335,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
             builder.setMessage(strBody)
             val positiveText = "Ok"
             builder.setPositiveButton(
-                positiveText
+                    positiveText
             ) { dialog, which ->
                 dialog.dismiss()
                 if (popUpListener != null) {
@@ -364,8 +367,8 @@ open class BaseActivityKotlin : AppCompatActivity() {
 
     open fun getCustomToast(strMessage: String) {
         val layout = this.layoutInflater.inflate(
-            R.layout.layout_custom_toast,
-            findViewById(R.id.toast_layout_root)
+                R.layout.layout_custom_toast,
+                findViewById(R.id.toast_layout_root)
         )
         val text = layout.findViewById<View>(R.id.txtMessage) as TextView
         text.text = "" + strMessage
@@ -378,13 +381,13 @@ open class BaseActivityKotlin : AppCompatActivity() {
     }
 
     open fun openPopUp(
-        view: View?,
-        title: String?,
-        desc: String?,
-        positiveButtonName: String?,
-        negativeButtonName: String?,
-        isNegativeVisible: Boolean,
-        isCancelable: Boolean
+            view: View?,
+            title: String?,
+            desc: String?,
+            positiveButtonName: String?,
+            negativeButtonName: String?,
+            isNegativeVisible: Boolean,
+            isCancelable: Boolean
     ) {
         try {
             val dialog: Dialog
@@ -415,20 +418,20 @@ open class BaseActivityKotlin : AppCompatActivity() {
             dialog.show()
             tvOk.setOnClickListener { // Close dialog
                 if (customPopUpListener != null) customPopUpListener!!.onPositiveButtonClick(
-                    dialog,
-                    view
+                        dialog,
+                        view
                 )
             }
             tvCancel.setOnClickListener { // Close dialog
                 if (customPopUpListener != null) customPopUpListener!!.onCancelButtonClick(
-                    dialog,
-                    view
+                        dialog,
+                        view
                 )
             }
             ivCross.setOnClickListener { // Close dialog
                 if (customPopUpListener != null) customPopUpListener!!.onCancelButtonClick(
-                    dialog,
-                    view
+                        dialog,
+                        view
                 )
             }
         } catch (e: java.lang.Exception) {
@@ -514,14 +517,46 @@ open class BaseActivityKotlin : AppCompatActivity() {
         }
     }
 
+    open fun getExecutor(imgURL: String, tempfileName: String) {
+
+        var dir: File? = null
+        var outFile: File? = null
+        var fileURL: String
+        var fileName: String
+
+        showLoading("Please wait...")
+        fileURL = imgURL
+        dir = Utility.createDirIfNotExists()
+        fileName = "$tempfileName.pdf"
+        fileName = fileName.replace("\\s+".toRegex(), "")
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Do backbround Work here
+
+            outFile = File(dir, fileName)
+
+            try {
+                outFile!!.createNewFile()
+            } catch (e1: IOException) {
+                e1.printStackTrace()
+            }
+            DownloadFile(fileURL, outFile)
+        }
+        handler.post {
+            dismissDialog()
+            showPdf(outFile)
+        }
+    }
+
     open fun showPdf(file: File?) {
         try {
 //            Uri selectedUri = FileProvider.getUriForFile(this,
 //                    this.getString(R.string.file_provider_authority),
 //                    new File(Environment.getExternalStorageDirectory() + "/MTC Report/" + FileName + ".pdf"));
             val selectedUri = FileProvider.getUriForFile(
-                this,
-                this.getString(R.string.file_provider_authority), file!!
+                    this,
+                    this.getString(R.string.file_provider_authority), file!!
             )
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(selectedUri, "application/pdf")

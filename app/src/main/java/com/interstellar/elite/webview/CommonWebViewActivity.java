@@ -1,6 +1,7 @@
 package com.interstellar.elite.webview;
 
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -120,7 +121,7 @@ public class CommonWebViewActivity extends BaseActivity {
         return cm.getActiveNetworkInfo() != null;
     }
 
-    private void downloadPdf(String url, String name) {
+    private  void downloadPdf(String url, String name) {
         Toast.makeText(this, "Download started..", Toast.LENGTH_LONG).show();
         DownloadManager.Request r = new DownloadManager.Request(Uri.parse(url));
         r.setMimeType("application/pdf");
@@ -137,14 +138,13 @@ public class CommonWebViewActivity extends BaseActivity {
 
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(false);
-        settings.setJavaScriptEnabled(true);
         settings.setSupportMultipleWindows(false);
 
         settings.setLoadsImagesAutomatically(true);
-        settings.setLightTouchEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setLoadWithOverviewMode(true);
-        settings.setJavaScriptEnabled(true);
+
+        webView.addJavascriptInterface(new MyJavaScriptInterface(), "Android");
 
 
       /*  MyWebViewClient webViewClient = new MyWebViewClient(this);
@@ -199,24 +199,7 @@ public class CommonWebViewActivity extends BaseActivity {
     }
 
 
-    private class ProgressAsync extends AsyncTask<Void, Void, Void> {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-            for (int i = 0; i < 8000000; i++) {
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            cancelDialog();
-        }
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -255,6 +238,43 @@ public class CommonWebViewActivity extends BaseActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+        }
+
+
+        @JavascriptInterface
+        public void moveToPlayStore(String str) {
+
+            onBrowseClick(webView,str);
+        }
+
+        @JavascriptInterface
+        public void moveToPlayStore_fin(String str) {
+
+            onBrowseClick(webView,str);
+        }
+        // For ios App
+//        public void moveToAppStore_fin(String str) {
+//
+//            onBrowseClick(webView,str);
+//        }
+
+    }
+
+    public void onBrowseClick(View v,String url ){
+
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        // Verify that the intent will resolve to an activity
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            // Here we use an intent without a Chooser unlike the next example
+//            startActivity(intent);
+//        }
+
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            // Display some error message
+            Log.d("URL BROWSER", e.toString()) ;
         }
     }
 

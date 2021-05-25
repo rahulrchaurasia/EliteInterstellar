@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.interstellar.elite.BuildConfig
 import com.interstellar.elite.R
@@ -42,12 +44,11 @@ import com.interstellar.elite.login.LoginActivity
 import com.interstellar.elite.notification.NotificationFragment
 import com.interstellar.elite.orderDetail.OrderDetailFragment
 import com.interstellar.elite.profile.ProfileFragment
+import com.interstellar.elite.utility.Constants
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_rto_list.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
-
 import kotlinx.android.synthetic.main.layout_dashboard_banner.*
-import kotlinx.android.synthetic.main.layout_dashboard_banner.txtName
 import kotlinx.android.synthetic.main.layout_dashboard_banner.view.*
 
 
@@ -83,9 +84,9 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         loginEntity.let {
 
             authenticationController.getUserEligibility(
-                it!!.mobile.toString(),
-                it!!.vehicleno,
-                this@HomeActivity
+                    it!!.mobile.toString(),
+                    it!!.vehicleno,
+                    this@HomeActivity
             )
             //
         }
@@ -103,11 +104,11 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         // Note : toolbar replace by null bec here using custom icon
         val drawerToggle :ActionBarDrawerToggle  = object : ActionBarDrawerToggle(
-            this,
-            drawer_layout,
-            null,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+                this,
+                drawer_layout,
+                null,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
         ){}
 
         drawerToggle.isDrawerIndicatorEnabled = true
@@ -125,8 +126,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
 
         authenticationController = ServiceRequest.getService(
-            ServiceName.AUTHENTICATION.value,
-            this
+                ServiceName.AUTHENTICATION.value,
+                this
         ) as AuthenticationController
 
         init_headers()
@@ -137,8 +138,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     fun getEligibilityCall(){
 
         var eligibleJson = ""
-        if( loginEntity!!.mobile.equals("8779909962")) {
-             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"Y\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
+        if( loginEntity!!.mobile.equals("8779909962")  ||  loginEntity!!.mobile.equals("9833797088") ) {
+             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"YES\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
         }else{
              eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"N\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
 
@@ -148,7 +149,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         val objResponse =  Gson().fromJson(eligibleJson, EligibilityUserResponse::class.java)
 
         var objEligibility :EligibilityEntity = objResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(
-            0
+                0
         )
         prefManager.storeUserEligibility(objEligibility)
         checkEligibility()
@@ -171,43 +172,43 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
                        //Gold
                        imglogo.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_gold
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_gold
+                               )
                        )
                        imglogoDashboard.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_gold
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_gold
+                               )
                        )
                        imglogo1.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_gold
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_gold
+                               )
                        )
 
                    }else{
                        //Plus
                        imglogo.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_plus
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_plus
+                               )
                        )
                        imglogo1.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_plus
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_plus
+                               )
                        )
                        imglogoDashboard.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               applicationContext,
-                               R.drawable.elite_plus
-                           )
+                               ContextCompat.getDrawable(
+                                       applicationContext,
+                                       R.drawable.elite_plus
+                               )
                        )
                    }
 
@@ -311,10 +312,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                    AppCompatResources.getColorStateList(
-                        fabHome.context,
-                        R.color.button_color
-                    )
+                        AppCompatResources.getColorStateList(
+                                fabHome.context,
+                                R.color.button_color
+                        )
                 )
             }
         } else if(type.equals("HomeChild")){
@@ -325,10 +326,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                    AppCompatResources.getColorStateList(
-                        fabHome.context,
-                        R.color.button_color
-                    )
+                        AppCompatResources.getColorStateList(
+                                fabHome.context,
+                                R.color.button_color
+                        )
                 )
             }
         }else{
@@ -340,10 +341,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                    AppCompatResources.getColorStateList(
-                        fabHome.context,
-                        R.color.gray_primary_color
-                    )
+                        AppCompatResources.getColorStateList(
+                                fabHome.context,
+                                R.color.gray_primary_color
+                        )
                 )
             }
         }
@@ -353,8 +354,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     // region Dialog
     fun authenticationAlert(
-        strhdr: String,
-        strBody: String
+            strhdr: String,
+            strBody: String
     ) {
         val builder = AlertDialog.Builder(this@HomeActivity, R.style.CustomDialog)
         val btnClose: Button
@@ -395,33 +396,33 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         builder.setMessage("Do you want to exit the application?")
         builder.setCancelable(false)
         builder.setPositiveButton(
-            "YES"
+                "YES"
         ) { dialog, _ ->
             dialog.cancel()
             this.finish()
         }
 
         builder.setNegativeButton(
-            "NO",
-            object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface, id: Int) {
-                    dialog.cancel()
-                }
-            })
+                "NO",
+                object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface, id: Int) {
+                        dialog.cancel()
+                    }
+                })
         val exitdialog = builder.create()
         exitdialog.show()
 
         exitdialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.header_text_color
-            )
+                ContextCompat.getColor(
+                        this,
+                        R.color.header_text_color
+                )
         )
         exitdialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.sub_text_color
-            )
+                ContextCompat.getColor(
+                        this,
+                        R.color.sub_text_color
+                )
         )
 
     }
@@ -558,18 +559,55 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     override fun onResume() {
         super.onResume()
 
+
+        verifyNetwork()
+
+    }
+
+
+    fun verifyNetwork()
+    {
+        if (!Constants.checkInternetStatus(this@HomeActivity)) {
+
+            checkNetwork()
+
+        }else{
+
+            apiService()
+        }
+
+
+    }
+
+    fun apiService(){
+
         showLoading("Please wait..")
 
         loginEntity.let {
 
             authenticationController.getUserConstatnt(it!!.user_id.toString(), this@HomeActivity)
         }
-
-
     }
 
 
-
+     fun checkNetwork() {
+        val builder = AlertDialog.Builder(this)
+        val btnRetry: AppCompatButton
+        val inflater = this.layoutInflater
+        val dialogView: View
+        dialogView = inflater.inflate(R.layout.lycheck_internet_dialog, null)
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+        // set the custom dialog components - text, image and button
+        btnRetry = dialogView.findViewById<View>(R.id.btnRetry) as AppCompatButton
+        btnRetry.setOnClickListener {
+            alertDialog.dismiss()
+            verifyNetwork()
+        }
+        alertDialog.setCancelable(false)
+        // alertDialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogAnimation;
+        alertDialog.show()
+    }
 
     override fun onBackPressed() {
 
@@ -607,7 +645,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
 
                 prefManager.storeUserEligibility(
-                    apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
+                        apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
                 )
 
                 checkEligibility()
@@ -618,7 +656,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
                 // temp added 05
                // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
 
-                if(loginEntity!!.mobile.equals("9833797088") || loginEntity!!.mobile.equals("9773113793")  || loginEntity!!.mobile.equals("8779909962")){
+                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")){
 
 
                     getEligibilityCall()

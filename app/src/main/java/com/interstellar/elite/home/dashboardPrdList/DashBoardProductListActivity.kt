@@ -3,6 +3,7 @@ package com.interstellar.elite.home.dashboardPrdList
 import BaseActivityKotlin
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
@@ -13,7 +14,9 @@ import com.interstellar.elite.core.model.DashProductEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.product.ProductMainActivity
+import com.interstellar.elite.secure.WalletActivity
 import com.interstellar.elite.utility.Constants
+import com.interstellar.elite.webview.CommonWebViewActivity
 import com.interstellar.elite.webview.WebViewHtmlActivity
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.fragment_secure_list.*
@@ -64,17 +67,17 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
 
             if (eligibilityEntity?.eligible?.toUpperCase().equals("YES")) {
                 imglogo.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.elite_gold
-                    )
+                        ContextCompat.getDrawable(
+                                applicationContext,
+                                R.drawable.elite_gold
+                        )
                 )
             } else {
                 imglogo.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.elite_plus
-                    )
+                        ContextCompat.getDrawable(
+                                applicationContext,
+                                R.drawable.elite_plus
+                        )
                 )
             }
 
@@ -95,16 +98,16 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             Constants.Secure_List -> {
 
                 bindData(
-                    DBPersistanceController.getSecureList(
-                        prefManager.getUserEligibility()?.eligible ?: ""
-                    ), dbProductType
+                        DBPersistanceController.getSecureList(
+                                prefManager.getUserEligibility()?.eligible ?: ""
+                        ), dbProductType
                 )
             }
             Constants.Assure_List -> {
                 bindData(
-                    DBPersistanceController.getAssureList(
-                        prefManager.getUserEligibility()?.eligible ?: ""
-                    ), dbProductType
+                        DBPersistanceController.getAssureList(
+                                prefManager.getUserEligibility()?.eligible ?: ""
+                        ), dbProductType
                 )
             }
             Constants.RTO_RC_BOOK_List -> {
@@ -134,10 +137,17 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
     fun getProduct(entity: DashProductEntity) {
 
 
-        if(entity.ProductCode.equals("500") || entity.ProductCode.equals("501") ){
+        if(entity.ProductCode.equals("500") || entity.ProductCode.equals("501"))
+        {
 
             loadWeb(entity)
-        }else{
+        }else if(entity.ProductCode.equals("401")){
+
+            val intent = Intent(this, WalletActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+
+        } else{
 
             val intent = Intent(this, ProductMainActivity::class.java)
             intent.putExtra(Constants.NON_RTO_PRODUCT_DATA, entity)
@@ -152,15 +162,56 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
 
     fun loadWeb(productEntity: DashProductEntity) {
         if (productEntity.ProductCode.equals("500", ignoreCase = true)) {
-            val intent = Intent(this, WebViewHtmlActivity::class.java)
-            intent.putExtra("title", "Finpeace")
-            intent.putExtra("type", "FINPEACE")
+
+
+
+            var finPeaceUrl: String = "http://elite.interstellar.co.in/elite_gold/Elite_Gold_App/Finpeace.html?"
+
+            val append = "name="+ loginEntity!!.name + "&MobileNo=" + loginEntity!!.mobile + "&RegistrationNo=" + loginEntity!!.vehicleno
+
+            finPeaceUrl = finPeaceUrl + append
+
+            Log.d("URL",finPeaceUrl);
+            val intent = Intent(this, CommonWebViewActivity::class.java)
+            intent.putExtra("URL", finPeaceUrl)
+            intent.putExtra("TITLE", "Finpeace")
+            intent.putExtra("NAME", "FINPEACE")
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         } else if (productEntity.ProductCode.equals("501", ignoreCase = true)) {
-            val intent = Intent(this, WebViewHtmlActivity::class.java)
-            intent.putExtra("title", "Pit Stop ")
-            intent.putExtra("type", "PIT")
+
+            var pitShopUrl: String = "http://elite.interstellar.co.in/elite_gold/Elite_Gold_App/Pit_Stop.html?"
+
+
+            val append = "name="+ loginEntity!!.name + "&MobileNo=" + loginEntity!!.mobile + "&RegistrationNo=" + loginEntity!!.vehicleno
+
+            pitShopUrl = pitShopUrl + append
+
+            Log.d("URL",pitShopUrl);
+            val intent = Intent(this, CommonWebViewActivity::class.java)
+            intent.putExtra("URL", pitShopUrl)
+            intent.putExtra("TITLE", "Pit Stop ")
+            intent.putExtra("NAME", "PIT")
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+        }
+
+
+
+        else if (productEntity.ProductCode.equals("501", ignoreCase = true)) {
+
+            var pitShopUrl: String = "http://elite.interstellar.co.in/elite_gold/Elite_Gold_App/Pit_Stop.html?"
+
+
+            val append = "name="+ loginEntity!!.name + "&MobileNo=" + loginEntity!!.mobile + "&RegistrationNo=" + loginEntity!!.vehicleno
+
+            pitShopUrl = pitShopUrl + append
+
+            Log.d("URL",pitShopUrl);
+            val intent = Intent(this, CommonWebViewActivity::class.java)
+            intent.putExtra("URL", pitShopUrl)
+            intent.putExtra("TITLE", "Pit Stop ")
+            intent.putExtra("NAME", "PIT")
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         }

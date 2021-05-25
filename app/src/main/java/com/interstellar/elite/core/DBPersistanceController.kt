@@ -129,8 +129,8 @@ open class DBPersistanceController {
 
             //adding some dummy data to the list
             if(type.toUpperCase().equals("YES")) {
-                productList.add(DashProductEntity(1, "", R.drawable.cover, "Wallet/ATM/Key Cover"))
-                productList.add(DashProductEntity(2, "", R.drawable.rsa, "Road Side Assistancer"))
+                productList.add(DashProductEntity(1, "401", R.drawable.cover, "Wallet/ATM/Key Cover"))
+                productList.add(DashProductEntity(2, "402", R.drawable.rsa, "Road Side Assistancer"))
             }
             productList.add(
                 DashProductEntity(
@@ -165,8 +165,8 @@ open class DBPersistanceController {
 
             //adding some dummy data to the list
             if(type.toUpperCase().equals("YES")) {
-                productList.add(DashProductEntity(1, "501", R.drawable.pit_stop, "Pit Stop"))
-                productList.add(DashProductEntity(2, "500", R.drawable.finpeace, "FinPeace"))
+                productList.add(DashProductEntity(11, "501", R.drawable.pit_stop, "Pit Stop"))
+                productList.add(DashProductEntity(10, "500", R.drawable.finpeace, "FinPeace"))
             }
 
             productList.add(DashProductEntity(131, "11", R.drawable.puc, "PUC Expiry Renewal Reminder"))

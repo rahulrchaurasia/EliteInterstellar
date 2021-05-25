@@ -1,6 +1,7 @@
 package com.interstellar.elite;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +40,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -437,6 +444,52 @@ public class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void getExecutor(String imgURL, String tempfileName){
+
+        showDialog();
+        File dir;
+        File outFile;
+        String fileURL;
+        String fileName;
+
+        fileURL = imgURL;
+        dir = Utility.createDirIfNotExists();
+        fileName = tempfileName + ".pdf";
+        fileName = fileName.replaceAll("\\s+", "");
+
+        outFile = new File(dir, fileName);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler =  new Handler(Looper.getMainLooper());
+
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+
+
+                try {
+                    outFile.createNewFile();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                DownloadFile(fileURL, outFile);
+            }
+        });
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                cancelDialog();
+                showPdf(outFile);
+            }
+        });
+
+
     }
 
 

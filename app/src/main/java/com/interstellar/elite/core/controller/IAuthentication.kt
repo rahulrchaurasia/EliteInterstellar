@@ -9,6 +9,8 @@ interface IAuthentication {
 
     fun getUserEligibility( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
+    fun getLandmarkEliteTataPee( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
+
     fun getUserConstatnt(userid: String,iResponseSubcriber: IResponseSubcriber)
 
      fun getCityState(pincode: String, iResponseSubcriber: IResponseSubcriber)
@@ -32,5 +34,15 @@ interface IAuthentication {
         devId: String,
         iResponseSubcriber: IResponseSubcriber
     )
+
+
+    fun insertTataPeep(
+        MobileNo: String,
+        RegistrationNo: String,
+        PolicyLink: String,
+        iResponseSubcriber: IResponseSubcriber
+    )
+
+    fun getTataPeep(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
 
 }

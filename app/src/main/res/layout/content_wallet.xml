@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:cardCornerRadius="@dimen/eight"
+        android:elevation="@dimen/eight">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/eight"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_marginTop="@dimen/four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    style="@style/TextViewStyle.Large"
+                    android:text="Lost Wallet Cover"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:text="Rs. 1,000"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="@dimen/four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    style="@style/TextViewStyle.Large"
+                    android:text="ATM Assalut and Robbery"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:text="Rs. 1,000"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="@dimen/four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    style="@style/TextViewStyle.Large"
+                    android:text="Key Replacement Cover"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    style="@style/TextViewStyle.MediumLarge"
+                    android:text="Rs. 25,000"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnPolicy"
+       android:background="@drawable/bg_primary_rect"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="DOWNLOAD POLICY" />
+
+</LinearLayout>

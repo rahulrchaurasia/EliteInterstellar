@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,10 +45,13 @@ import java.util.List;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.MultipartBody;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 public class DocUploadActivity extends BaseActivity implements IResponseSubcriber, BaseActivity.CustomPopUpListener {
 
@@ -421,6 +427,17 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
+        if (requestCode == Constants.PERMISSION_CAMERA_STORACGE_CONSTANT) {
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    // perform action when allow permission success
+                } else {
+                    Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
         // Below For Cropping The Camera Image
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             //extractTextFromImage();
@@ -542,12 +559,26 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
-        int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
-        int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
+//        int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
+//        int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
+//
+//        return camera == PackageManager.PERMISSION_GRANTED
+//                && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
+//                && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
 
-        return camera == PackageManager.PERMISSION_GRANTED
+
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            return Environment.isExternalStorageManager() && camera == PackageManager.PERMISSION_GRANTED;
+        } else {
+            int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
+            int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
+
+
+                    return camera == PackageManager.PERMISSION_GRANTED
                 && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
                 && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
+
+        }
     }
 
     private boolean checkRationalePermission() {
@@ -558,11 +589,34 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         boolean read_external = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, perms[2]);
 
         return camera || write_external || read_external;
+
+
+
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, perms, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+
+
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                ActivityCompat.requestPermissions(this, perms, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
+                startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+            } catch (Exception e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+            }
+        } else {
+            //below android 11
+            ActivityCompat.requestPermissions(this, perms, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+        }
     }
+
+
 
 
     @Override

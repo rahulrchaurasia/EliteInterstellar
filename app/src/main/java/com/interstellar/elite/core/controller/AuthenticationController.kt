@@ -76,6 +76,50 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
         })
     }
 
+    override fun getLandmarkEliteTataPee(
+        MobileNo: String,
+        RegistrationNo: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+
+        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/EliteTataPeep"
+
+
+
+        authenticationBuilder.getLandmarkEliteTataPee(url,MobileNo,RegistrationNo).enqueue(object :
+            Callback<TataLandmarkResponse> {
+            override fun onResponse(
+                call: Call<TataLandmarkResponse>,
+                response: Response<TataLandmarkResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()!!.EliteTataPeepResult.EliteTataPeepdetails != null) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, "")
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, "")
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<TataLandmarkResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
     override fun getUserConstatnt(userid: String, iResponseSubcriber: IResponseSubcriber) {
         var map = hashMapOf<String, String>()
         map.put("userid", userid)
@@ -337,4 +381,95 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
         })
     }
+
+    override fun insertTataPeep(
+        MobileNo: String,
+        RegistrationNo: String,
+        PolicyLink: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+        map.put("RegistrationNo", RegistrationNo)
+        map.put("PolicyLink", PolicyLink)
+
+
+
+        authenticationBuilder.insertTataPeep(map).enqueue(object : Callback<CommonResponse> {
+            override fun onResponse(
+                call: Call<CommonResponse>,
+                response: Response<CommonResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnFailure(response.body()?.message!!)
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+
+    }
+
+    override fun getTataPeep(MobileNo: String, iResponseSubcriber: IResponseSubcriber) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+
+
+
+        authenticationBuilder.getTataPeep(map).enqueue(object : Callback<TataResponse> {
+            override fun onResponse(
+                call: Call<TataResponse>,
+                response: Response<TataResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<TataResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+
+
 }

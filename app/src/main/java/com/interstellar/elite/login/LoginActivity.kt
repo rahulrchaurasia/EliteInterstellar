@@ -3,10 +3,15 @@ package com.interstellar.elite.login
 import BaseActivityKotlin
 import ServiceName
 import ServiceRequest
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
@@ -28,6 +33,7 @@ import kotlinx.android.synthetic.main.content_login.*
 import kotlinx.android.synthetic.main.content_login.etMobile
 import kotlinx.android.synthetic.main.content_login.etPassword
 import kotlinx.android.synthetic.main.content_sign_up.*
+
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
 
@@ -65,8 +71,8 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
             window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
         initialize()
@@ -220,15 +226,44 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
     //region permission
     private fun checkPermission(): Boolean {
-        val camera = ContextCompat.checkSelfPermission(applicationContext, perms.get(0))
-        val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
-        val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
 
-        return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
+
+        val camera = ContextCompat.checkSelfPermission(applicationContext, perms.get(0))
+
+
+//        val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
+//        val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
+//
+//        return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
+
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+          return  Environment.isExternalStorageManager()  && camera == PackageManager.PERMISSION_GRANTED
+        } else {
+            val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
+             val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
+            return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
+
+        }
     }
 
     private fun requestPermission() {
-        ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
+
+
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                intent.addCategory("android.intent.category.DEFAULT")
+                intent.data = Uri.parse(String.format("package:%s", applicationContext.packageName))
+                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
+            } catch (e: Exception) {
+                val intent = Intent()
+                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
+            }
+        } else {
+            //below android 11
+            ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
+        }
     }
 
 }

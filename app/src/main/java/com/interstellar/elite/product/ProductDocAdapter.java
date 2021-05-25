@@ -1,6 +1,8 @@
 package com.interstellar.elite.product;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +72,11 @@ public class ProductDocAdapter extends RecyclerView.Adapter<ProductDocAdapter.Pr
             @Override
             public void onClick(View view) {
 
-                ((ProductMainActivity) mContext).new DownloadFromUrl(docProductEnity.getDocumenturl(), docProductEnity.getDocument_name()).execute();
+               // ((ProductMainActivity) mContext).new DownloadFromUrl(docProductEnity.getDocumenturl(), docProductEnity.getDocument_name()).execute();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(docProductEnity.getDocumenturl()));
+                ((ProductMainActivity) mContext).startActivity(intent);
 
 
             }

@@ -168,36 +168,5 @@ public class SplashScreenActivity extends BaseActivity implements IResponseSubcr
         }
     }
 
-    private void checkNetwork() {
 
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this );
-
-        AppCompatButton btnRetry;
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView;
-
-        dialogView = inflater.inflate(R.layout.lycheck_internet_dialog, null);
-
-
-        builder.setView(dialogView);
-        final AlertDialog alertDialog = builder.create();
-        // set the custom dialog components - text, image and button
-        btnRetry = (AppCompatButton) dialogView.findViewById(R.id.btnRetry);
-
-        btnRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                verify();
-            }
-        });
-
-        alertDialog.setCancelable(false);
-       // alertDialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogAnimation;
-        alertDialog.show();
-
-
-
-    }
 }
