@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import okhttp3.MediaType;
@@ -57,4 +59,10 @@ public class Utility {
         return file;
     }
 
+    public static   String currentDateTime() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateformat = new SimpleDateFormat("ddMMMyyyyhhmmss");  //it will give you the date in the formate that is given in the image
+        String datetime = dateformat.format(c.getTime()); // it will give you the date
+        return datetime;
+    }
 }

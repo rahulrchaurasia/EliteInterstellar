@@ -1,4 +1,4 @@
-package com.interstellar.elite.orderDetail;
+package com.interstellar.elite.request;
 
 
 import android.content.Intent;
@@ -150,9 +150,9 @@ public class OrderDetailFragment extends BaseFragment implements IResponseSubcri
 //                .putExtra("TITLE", "RECEIPT"));
         //endregion
 
-       // new DownloadFromUrl(orderDetailEntity.getReceipt()+".pdf", "EliteReceipt").execute();
+        new DownloadFromUrl(orderDetailEntity.getReceipt()+".pdf", "EliteReceipt").execute();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(orderDetailEntity.getReceipt()));
-        startActivity(intent);
+//        Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(orderDetailEntity.getReceipt()));
+//        startActivity(intent);
     }
 }

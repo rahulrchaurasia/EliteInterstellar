@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.interstellar.elite.BuildConfig
 import com.interstellar.elite.R
@@ -42,7 +41,7 @@ import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.dashboard.DashboardFragment
 import com.interstellar.elite.login.LoginActivity
 import com.interstellar.elite.notification.NotificationFragment
-import com.interstellar.elite.orderDetail.OrderDetailFragment
+import com.interstellar.elite.request.OrderDetailFragment
 import com.interstellar.elite.profile.ProfileFragment
 import com.interstellar.elite.utility.Constants
 import kotlinx.android.synthetic.main.activity_home.*

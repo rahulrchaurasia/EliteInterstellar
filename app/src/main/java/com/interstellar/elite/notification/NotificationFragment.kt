@@ -19,7 +19,7 @@ import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.response.NotificationResponse
 import com.interstellar.elite.document.DocUploadActivity
 import com.interstellar.elite.facade.PrefManager
-import com.interstellar.elite.orderDetail.OrderActivity
+import com.interstellar.elite.request.OrderActivity
 import kotlinx.android.synthetic.main.content_notification.*
 import java.util.*
 

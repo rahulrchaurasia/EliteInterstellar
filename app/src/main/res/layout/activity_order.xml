@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".orderDetail.OrderActivity">
+    tools:context=".request.OrderActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.interstellar.elite.orderDetail.OrderDetailFragment"
+        android:name="com.interstellar.elite.request.OrderDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

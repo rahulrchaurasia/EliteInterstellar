@@ -90,7 +90,7 @@
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".orderDetail.OrderActivity"
+            android:name=".request.OrderActivity"
             android:label="@string/title_activity_order"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"

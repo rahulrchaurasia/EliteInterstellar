@@ -62,7 +62,7 @@
                         android:gravity="left|center_vertical"
 
                         android:padding="5dp"
-                        android:text="These services are a platters of various financial insurance claims general insurance/ health/life insurance/ loan related activities which are required in day to day life of an person ."></TextView>
+                        android:text="These services are a platters of various financial insurance claims general insurance/ health/life insurance/ loan related activities which are required in day to day life of an person."></TextView>
 
 
                 </LinearLayout>

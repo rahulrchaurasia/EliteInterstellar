@@ -87,8 +87,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 // cvRating.setVisibility(View.GONE);
                 txtServiceName.setVisibility(View.VISIBLE);
                 orderDetailEntity = getIntent().getExtras().getParcelable(Constants.FEEDBACK_DATA);
-                textRequestID.setText("Request ID: ");
-//                txtReqestID.setText("" + orderDetailEntity.getDisplay_order_id());    // temp commented
+//                textRequestID.setText("Request ID: ");
+ //               txtReqestID.setText("" + orderDetailEntity.getDisplay_order_id());    // temp commented
                 txtReqestID.setText("" + orderDetailEntity.getOrder_id());
                 txtServiceName.setText("" + orderDetailEntity.getProduct_name());
                 OrderId = orderDetailEntity.getOrder_id();

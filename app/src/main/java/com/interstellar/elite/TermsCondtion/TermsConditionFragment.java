@@ -39,7 +39,7 @@ public class TermsConditionFragment extends BaseFragment {
     String name;
     String title;
 
-    public static boolean isActive = false;
+    public static boolean isActive = true;
 
 
     @Override
@@ -51,7 +51,7 @@ public class TermsConditionFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_terms_condition, container, false);
         initialize(view);
         if (isNetworkConnected()) {
-            url = "http://elite.rupeeboss.com/elitetnc.html";
+            url = "http://elite.interstellar.co.in/elite_gold/slider/elitetnc.html";
            // url = " http://elite.rupeeboss.com/elite-receipt/363";
             settingWebview();
 
@@ -70,6 +70,7 @@ public class TermsConditionFragment extends BaseFragment {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+
 
     private void downloadPdf(String url, String name) {
         Toast.makeText(getActivity(), "Download started..", Toast.LENGTH_LONG).show();
@@ -115,6 +116,7 @@ public class TermsConditionFragment extends BaseFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // TODO hide your progress image
+                isActive = false;
                 cancelDialog();
                 super.onPageFinished(view, url);
             }

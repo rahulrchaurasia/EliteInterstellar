@@ -236,7 +236,7 @@
                         android:id="@+id/lyReceipt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-
+                         android:visibility="invisible"
                         android:layout_weight="50"
                         android:orientation="horizontal">
 

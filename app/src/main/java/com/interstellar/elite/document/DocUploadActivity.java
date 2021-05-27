@@ -2,9 +2,11 @@ package com.interstellar.elite.document;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,8 +51,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import okhttp3.MultipartBody;
 
+import static android.Manifest.permission.CAMERA;
 import static android.os.Build.VERSION.SDK_INT;
 
 public class DocUploadActivity extends BaseActivity implements IResponseSubcriber, BaseActivity.CustomPopUpListener {
@@ -125,7 +129,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     }
 
     /**
-     //TODO: Crop image activity to crop capture image.
+     * //TODO: Crop image activity to crop capture image.
      * Start crop image activity for the given image.
      */
     private void startCropImageActivity(Uri imageUri) {
@@ -136,7 +140,6 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     }
 
     private void setDocumentUpload(String urlPath) {
-
 
 
         if (documentViewEntity != null) {
@@ -154,7 +157,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         if (url.equals("")) {
             return;
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(DocUploadActivity.this ,R.style.CustomDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(DocUploadActivity.this, R.style.CustomDialog);
 
         // TouchImageView ivDocFile;
         ImageView ivDocFile;
@@ -227,17 +230,22 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         if (!checkPermission()) {
 
-            if (checkRationalePermission()) {
-                //Show Information about why you need the permission
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+
                 requestPermission();
-
             } else {
-                //Previously Permission Request was cancelled with 'Dont Ask Again',
-                // Redirect to Settings after showing Information about why you need the permission
-                //  permissionAlert(navigationView,"Need Call Permission","This app needs Call permission.");
-                openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
+                if (checkRationalePermission()) {
+                    //Show Information about why you need the permission
+                    requestPermission();
+
+                } else {
+                    //Previously Permission Request was cancelled with 'Dont Ask Again',
+                    // Redirect to Settings after showing Information about why you need the permission
+                    //  permissionAlert(navigationView,"Need Call Permission","This app needs Call permission.");
+                    openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
 
 
+                }
             }
         } else {
 
@@ -309,15 +317,13 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
                 }
             }
         }
-        return  true;
+        return true;
     }
 
-    private void setDocNote()
-    {
-        if(checkAllFileUploaded())
-        {
+    private void setDocNote() {
+        if (checkAllFileUploaded()) {
             txtDocVerify.setVisibility(View.GONE);
-        }else{
+        } else {
             txtDocVerify.setVisibility(View.VISIBLE);
 
         }
@@ -328,7 +334,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
 
         Button btnSubmit;
-        TextView txtTile, txtBody,txtMob;
+        TextView txtTile, txtBody, txtMob;
         ImageView ivCross;
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -341,9 +347,9 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         txtTile = (TextView) dialogView.findViewById(R.id.txtTile);
         txtBody = (TextView) dialogView.findViewById(R.id.txtMessage);
         txtMob = (TextView) dialogView.findViewById(R.id.txtOther);
-        ivCross  = (ImageView) dialogView.findViewById(R.id.ivCross);
+        ivCross = (ImageView) dialogView.findViewById(R.id.ivCross);
 
-        btnSubmit  = (Button) dialogView.findViewById(R.id.btnSubmit);
+        btnSubmit = (Button) dialogView.findViewById(R.id.btnSubmit);
 
         btnSubmit.setText("HOME");
         txtTile.setText(Title);
@@ -382,15 +388,14 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             if (response.getStatus_code() == 0) {
 
                 setDocumentUpload(((DocumentResponse) response).getData().get(0).getPath());
-                if(lstDoc != null && lstDoc.size() >0){
+                if (lstDoc != null && lstDoc.size() > 0) {
 
-                    if(checkAllFileUploaded())
-                    {
+                    if (checkAllFileUploaded()) {
 
                         txtDocVerify.setVisibility(View.GONE);
-                        ConfirmDocAlert("Document Uploaded",getResources().getString(R.string.doc_popup),""  );
+                        ConfirmDocAlert("Document Uploaded", getResources().getString(R.string.doc_popup), "");
 
-                    }else{
+                    } else {
                         txtDocVerify.setVisibility(View.VISIBLE);
 
                     }
@@ -433,7 +438,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
                 if (Environment.isExternalStorageManager()) {
                     // perform action when allow permission success
                 } else {
-                    Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    dialogStorage();
                 }
             }
         }
@@ -444,7 +449,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             startCropImageActivity(imageUri);
         }
         // Below For Cropping The Gallery Image
-       else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+        else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
             startCropImageActivity(selectedImageUri);
         }
@@ -482,47 +487,6 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             }
         }
 
-        //region Comment
-//        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-//            Bitmap mphoto = null;
-//            try {
-//                mphoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-//                mphoto = getResizedBitmap(mphoto, 800);
-//
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            showDialog();
-//            file = saveImageToStorage(mphoto, DOC1);
-//            part = Utility.getMultipartImage(file);
-//            body = Utility.getBody(this, loginEntity.getUser_id(), documentViewEntity.getDoc_id(), OrderID);
-//            new ProductController(this).uploadDocuments(part, body, this);
-//
-//
-//        } else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
-//            Uri selectedImageUri = data.getData();
-//            Bitmap mphoto = null;
-//            try {
-//                mphoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-//                mphoto = getResizedBitmap(mphoto, 800);
-//
-//                showDialog();
-//                file = saveImageToStorage(mphoto, DOC1);
-//                part = Utility.getMultipartImage(file);
-//                body = Utility.getBody(this, loginEntity.getUser_id(), documentViewEntity.getDoc_id(), OrderID);
-//
-//                new ProductController(this).uploadDocuments(part, body, this);
-//
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//
-//        }
-        //endregion
 
     }
 
@@ -559,13 +523,6 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
-//        int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
-//        int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
-//
-//        return camera == PackageManager.PERMISSION_GRANTED
-//                && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
-//                && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
-
 
         if (SDK_INT >= Build.VERSION_CODES.R) {
             return Environment.isExternalStorageManager() && camera == PackageManager.PERMISSION_GRANTED;
@@ -574,9 +531,9 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
 
 
-                    return camera == PackageManager.PERMISSION_GRANTED
-                && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
-                && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
+            return camera == PackageManager.PERMISSION_GRANTED
+                    && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
+                    && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
 
         }
     }
@@ -591,19 +548,20 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         return camera || write_external || read_external;
 
 
-
     }
 
     private void requestPermission() {
 
 
         if (SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                ActivityCompat.requestPermissions(this, perms, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
+
+
+                try {
+                ActivityCompat.requestPermissions(this, new String[]{CAMERA}, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
 
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
+                intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
                 startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
             } catch (Exception e) {
                 Intent intent = new Intent();
@@ -617,6 +575,32 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     }
 
 
+    public void dialogStorage() {
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Permission Required..!");
+        builder.setMessage("Please allow the storage permission");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton(
+                "Allow",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        if (!checkPermission()) {
+                            requestPermission();
+                        }
+                    }
+                });
+
+
+        androidx.appcompat.app.AlertDialog exitdialog = builder.create();
+        exitdialog.show();
+        Button positive = exitdialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        positive.setTextColor(getResources().getColor(R.color.black));
+
+
+    }
 
 
     @Override
@@ -628,15 +612,26 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
                     //boolean writeExternal = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
-                    boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeExternal = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    boolean readExternal = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
-                    if (camera && writeExternal && readExternal) {
 
-                        showCamerGalleryPopUp();
+                    if (SDK_INT >= Build.VERSION_CODES.R) {
+                        if (Environment.isExternalStorageManager()) {
+                            // perform action when allow permission success
+                        }
+                    } else {
 
+                        boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                        boolean writeExternal = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                        boolean readExternal = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+
+                        if (camera && writeExternal && readExternal) {
+
+                            showCamerGalleryPopUp();
+
+                        }
                     }
+
+
 
                 }
                 break;
@@ -644,6 +639,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         }
     }
+
 
     //endregion
 

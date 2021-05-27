@@ -1,6 +1,5 @@
-package com.interstellar.elite.orderDetail;
+package com.interstellar.elite.request;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.model.OrderDetailEntity;
 

@@ -59,7 +59,7 @@
                         android:gravity="left|center_vertical"
 
                         android:padding="5dp"
-                        android:text="This year, we are celebrating completion of 18 successful and prosperous years of our existence. As we turn 18, we have created a platform that offers 18 extended services to our esteemed customers."></TextView>
+                        android:text="This year, we are celebrating completion of 18 successful and prosperous years of our existence.As we turn 18, we have created a platform that offers 18 extended services to our esteemed customers."></TextView>
 
 
                 </LinearLayout>
@@ -88,8 +88,7 @@
                         android:gravity="left|center_vertical"
 
                         android:padding="5dp"
-                        android:text="Presenting Landmark ELITE , an exclusive world of richer experiences curated to enhance our customers’ service experience
-As an organization, we firmly believe that our customers are the driving force behind our success, which is why we are reaching out to esteemed customer base, to be a part of an exclusive circle club. This service extension is being rolled out from Mumbai to begin with, and shall be expanded to all locations in near future."></TextView>
+                        android:text="Presenting Landmark ELITE , an exclusive world of richer experiences curated to enhance our customers' service experience As an organization, we firmly believe that our customers are the driving force behind our success, which is why we are reaching out to esteemed customer base, to be a part of an exclusive circle club. This service extension is being rolled out from Mumbai to begin with, and shall be expanded to all locations in near future."></TextView>
 
 
                 </LinearLayout>

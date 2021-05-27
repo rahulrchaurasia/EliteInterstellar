@@ -548,6 +548,9 @@ public class BaseActivity extends AppCompatActivity {
         intent.setData(uri);
         startActivityForResult(intent, Constants.REQUEST_PERMISSION_SETTING);
     }
+
+
+
 }
 
 

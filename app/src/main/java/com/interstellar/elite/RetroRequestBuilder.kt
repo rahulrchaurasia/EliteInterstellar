@@ -14,6 +14,8 @@ open class RetroRequestBuilder {
 
     internal var restAdapter: Retrofit? = null
 
+    val url = ""
+
     protected fun build(): Retrofit {
         if (restAdapter == null) {
 

@@ -3,7 +3,7 @@ package com.interstellar.elite.login
 import BaseActivityKotlin
 import ServiceName
 import ServiceRequest
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -28,11 +28,10 @@ import com.interstellar.elite.databinding.ActivityLoginBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.content_login.*
+
 import kotlinx.android.synthetic.main.content_login.etMobile
 import kotlinx.android.synthetic.main.content_login.etPassword
-import kotlinx.android.synthetic.main.content_sign_up.*
+
 
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
@@ -66,7 +65,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        @Suppress("DEPRECATION")
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -110,13 +109,13 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         binding.includedLayout.etMobile.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilLogin.error = null
+                binding.includedLayout.tilLogin.error = null
             }
         }
         binding.includedLayout.etPassword.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilPassword.error = null
+                binding.includedLayout.tilPassword.error = null
             }
         }
 
@@ -140,19 +139,19 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
     //region Event
     override fun onClick(view: View?) {
 
-        hideKeyBoard(btnSignIn)
+        hideKeyBoard( binding.includedLayout.btnSignIn)
         when (view?.id) {
 
             R.id.btnSignIn -> {
                 if (!isEmpty(etMobile)) {
 
-                    tilLogin.error = "Enter Mobile"
+                    binding.includedLayout.tilLogin.error = "Enter Mobile"
 
                     return
                 }
                 if (!isEmpty(etPassword)) {
 
-                    tilPassword.error = "Enter Password"
+                    binding.includedLayout.tilPassword.error = "Enter Password"
 
                     return
                 }
@@ -216,7 +215,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
     override fun OnFailure(error: String) {
 
         dismissDialog()
-        hideKeyBoard(btnSignIn)
+        hideKeyBoard( binding.includedLayout.btnSignIn)
         //Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
         getCustomToast(error)
     }
@@ -251,6 +250,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
         if (SDK_INT >= Build.VERSION_CODES.R) {
             try {
+                ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
                 val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                 intent.addCategory("android.intent.category.DEFAULT")
                 intent.data = Uri.parse(String.format("package:%s", applicationContext.packageName))

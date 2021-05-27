@@ -24,6 +24,7 @@ import com.interstellar.elite.core.response.TataLandmarkResponse
 import com.interstellar.elite.core.response.TataResponse
 import com.interstellar.elite.databinding.ActivityWalletBinding
 import com.interstellar.elite.facade.PrefManager
+import com.interstellar.elite.utility.Utility
 
 
 class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcriber {
@@ -118,12 +119,17 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                 var tataEntity: TataEntity = apiResponse.Data.get(0)
                // getExecutor(tataEntity.PolicyLink, "EliteWallet")
 
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
-                startActivity(browserIntent)
+                tataEntity.PolicyLink.let {
 
-                downloadPdf(tataEntity.PolicyLink, "ElitePolicy")
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                    startActivity(browserIntent)
 
-            }else{
+                    downloadPdf(tataEntity.PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
+                }
+
+
+            }
+            else{
 
                  showDialog("Loading Pdf..")
                 loginEntity.let {
@@ -137,21 +143,23 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                 }
             }
 
-
         }
 
         else if (apiResponse is TataLandmarkResponse) {
 
-              cancelDialog()
+
           //   getLandmarkEliteTataPee :  hit from Landmark db
             if (apiResponse.EliteTataPeepResult.EliteTataPeepdetails != null) {
 
                var tataEntity: TataEntity = apiResponse.EliteTataPeepResult.EliteTataPeepdetails.get(0)
 
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
-                startActivity(browserIntent)
+                tataEntity.PolicyLink.let {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
+                    startActivity(browserIntent)
 
-                downloadPdf(tataEntity.PolicyLink, "ElitePolicy")
+                    downloadPdf(tataEntity.PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
+                }
+
                  //Todo : insert in our db when got success from landmark url
 
                // showLoading("Loading Pdf..")
@@ -167,29 +175,32 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                 }
 
             }
-//            else{
-//                   // showAlert("Data is null")
-//
-//                   // temp data added
-//
-//                var tataEntity: TataEntity = getTempJson().EliteTataPeepResult.EliteTataPeepdetails.get(0)
-//
-//               // showLoading("Loading Pdf..")
-//              //  getExecutor(tataEntity.PolicyLink, "EliteWallet")
-//
-//                tataEntity.let {
-//
-//                    authenticationController.insertTataPeep(
-//                            it!!.MobileNo.toString(),
-//                            it!!.RegistrationNo,
-//                            "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf",
-//                            this@WalletActivity
-//                    )
-//
-//                }
-//
-//
-//            }
+            else{
+
+
+                   // temp data added
+
+                var tataEntity: TataEntity = getTempJson().EliteTataPeepResult.EliteTataPeepdetails.get(0)
+
+               var PolicyLink = "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf"
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(PolicyLink))
+                startActivity(browserIntent)
+
+                downloadPdf(PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
+
+                tataEntity.let {
+
+                    authenticationController.insertTataPeep(
+                            it!!.MobileNo.toString(),
+                            it!!.RegistrationNo,
+                            "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf",
+                            this@WalletActivity
+                    )
+
+                }
+
+
+            }
 
         }
 

@@ -1,10 +1,12 @@
 package com.interstellar.elite.welcome;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 
@@ -22,6 +24,7 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
     Button btnAgree, btnDisAgree;
     PrefManager prefManager;
     WebView webView;
+    public static boolean isActive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +84,62 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
         settings.setJavaScriptEnabled(true);
 
 
-        MyWebViewClient webViewClient = new MyWebViewClient(this);
-        webView.setWebViewClient(webViewClient);
+//        MyWebViewClient webViewClient = new MyWebViewClient(this);
+//        webView.setWebViewClient(webViewClient);
+
+        webView.setWebViewClient(new WebViewClient() {
+
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // TODO show you progress image
+                if (isActive)
+                    showDialog();
+                // new ProgressAsync().execute();
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // TODO hide your progress image
+                cancelDialog();
+                super.onPageFinished(view, url);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                /*if (url.endsWith(".pdf")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(url), "application/pdf");
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        //user does not have a pdf viewer installed
+                        String googleDocs = "https://docs.google.com/viewer?url=";
+                        webView.loadUrl(googleDocs + url);
+                    }
+                }*/
+                return false;
+            }
+        });
 
         webView.getSettings().setBuiltInZoomControls(true);
        /* Log.d("URL", url);
         //webView.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=" + url);
         webView.loadUrl(url);*/
-        webView.loadUrl("http://elite.rupeeboss.com/elitetnc.html");
+        webView.loadUrl("http://elite.interstellar.co.in/elite_gold/slider/elitetnc.html");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isActive = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActive = false;
+
     }
 }
