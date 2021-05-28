@@ -235,6 +235,7 @@
                                 app:startIconDrawable="@drawable/ic_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:endIconMode="none"
                                 android:hint="Email">
 
                                 <EditText

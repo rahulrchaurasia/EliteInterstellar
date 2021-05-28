@@ -41,6 +41,7 @@ import org.json.JSONObject;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 public class PaymentRazorActivity extends BaseActivity implements PaymentResultListener, IResponseSubcriber, View.OnClickListener {
 
@@ -50,8 +51,13 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
     String PRODUCT_NAME = "";
     UserEntity loginEntity;
     PrefManager prefManager;
-    TextView txtprdName, txtAmount,txtName;
-    Button btnSubmit;
+    TextView txtprdName, txtAmount,txtName ,txtSuccessMessage,txtpaymentstatus;
+    Button btnSubmit,btnCancel,btnContinue, btnHomeContinue;
+
+
+    CardView cvBuy, cvSuccess, cvFailure;
+
+
     InsertOrderRequestEntity orderRequestEntity;
 
     String REQUEST_TYPE = "";
@@ -82,6 +88,12 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         OrderID = 0;
 
         initialize();
+
+        setListner();
+
+        cvBuy.setVisibility(View.VISIBLE);
+        cvSuccess.setVisibility(View.GONE);
+        cvFailure.setVisibility(View.GONE);
 
        txtName.setText(""+loginEntity.getName());
 
@@ -168,15 +180,36 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         Checkout.preload(getApplicationContext());
 
 
-        btnSubmit.setOnClickListener(this);
+
     }
 
     private void initialize() {
+
+        cvBuy = (CardView) findViewById(R.id.cvBuy);
+        cvSuccess = (CardView) findViewById(R.id.cvSuccess);
+        cvFailure = (CardView) findViewById(R.id.cvFailure);
+
+        btnContinue = (Button) findViewById(R.id.btnContinue);
+        btnHomeContinue = (Button) findViewById(R.id.btnHomeContinue);
+
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnCancel = (Button) findViewById(R.id.btnCancel);
         txtprdName = (TextView) findViewById(R.id.txtprdName);
         txtAmount = (TextView) findViewById(R.id.txtAmount);
         txtName  = (TextView) findViewById(R.id.txtName);
 
+        txtSuccessMessage = (TextView) findViewById(R.id.txtSuccessMessage);
+        txtpaymentstatus = (TextView) findViewById(R.id.txtpaymentstatus);
+
+
+    }
+
+    private void setListner(){
+
+        btnSubmit.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+        btnContinue.setOnClickListener(this);
+        btnHomeContinue.setOnClickListener(this);
     }
 
     public void startPayment() {
@@ -191,11 +224,10 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         try {
             JSONObject options = new JSONObject();
             options.put("name", PRODUCT_NAME);
-            options.put("description", "");
-            //You can omit the image option to fetch the image from dashboard
-            //  options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            options.put("description", ""+ String.valueOf(loginEntity.getUser_id()));
+
             options.put("currency", "INR");
-         //   options.put("amount", AMOUNT_PAYMENT * 100);
+         //   options.put("amount", AMOUNT_PAYMENT * 100);   // temp added 05
              options.put("amount", "100");
 
             JSONObject preFill = new JSONObject();
@@ -301,10 +333,16 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
 
         // 05 temp below commented
         try {
-           // Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
-            Log.d(TAG,  response.toString());
+
+            cvFailure.setVisibility(View.VISIBLE);
+            cvBuy.setVisibility(View.GONE);
+            cvSuccess.setVisibility(View.GONE);
+
+            txtpaymentstatus.setText("FAILED");
+
+            Log.d(TAG, "Payment failed: " + code + " " + response);
         } catch (Exception e) {
-            Log.e(TAG, "Exception in onPaymentError", e);
+            Log.d(TAG, "Exception in onPaymentError " + e.toString());
         }
 
 //        String razorpayPaymentID = "";
@@ -319,6 +357,16 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         if (view.getId() == R.id.btnSubmit) {
 
             startPayment();
+
+        }
+        else if (view.getId() == R.id.btnCancel) {
+
+            PaymentRazorActivity.this.finish();
+        } else if (view.getId() == R.id.btnContinue) {
+            PaymentRazorActivity.this.finish();
+
+        } else if (view.getId() == R.id.btnHomeContinue) {
+            PaymentRazorActivity.this.finish();
 
         }
     }
@@ -348,7 +396,14 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         if (response instanceof ProvideClaimAssResponse) {
             if (response.getStatus_code() == 0) {
 
-                showPaymentAlert(btnSubmit, response.getMessage().toString(),((ProvideClaimAssResponse) response).getData().get(0));
+               // showPaymentAlert(btnSubmit, response.getMessage().toString(),((ProvideClaimAssResponse) response).getData().get(0));
+
+                cvBuy.setVisibility(View.GONE);
+                cvFailure.setVisibility(View.GONE);
+
+                cvSuccess.setVisibility(View.VISIBLE);
+
+                txtSuccessMessage.setText(response.getMessage().toString());
 
             }
 

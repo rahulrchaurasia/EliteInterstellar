@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".payment.PaymentRazorActivity"
+    android:background="@drawable/background_pay"
+    tools:showIn="@layout/activity_payment_razor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="#E2E2E2"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#E2E2E2"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="0dp"
+                        android:textSize="18sp"
+                        android:text=""
+                        />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/elite_logo"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="15dp"
+                android:background="#f2f2f2"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/txtprdName"
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textSize="15sp"
+                    android:text="Razorpay T-Shirt"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/txtAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextViewStyle.Large"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/description_text"
+                    android:text=""
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="0dp"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:text=""
+                    />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:background="@drawable/green_button"
+                    android:textSize="14sp"
+                    android:textColor="#fcfcfc"
+                    android:text="BUY NOW"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/secured_by_bg"
+                android:textSize="12sp"
+                android:textColor="#a1ddee"
+                android:textStyle="italic"
+                android:text="Secure Payment"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

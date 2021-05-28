@@ -626,14 +626,14 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     }
 
     // Wheather recod already exist or not
-    fun IsEligibilityExsist() : Boolean{
-
-        if(prefManager.getUserEligibility() != null){
-            return true
-        }else{
-            return  false
-        }
-    }
+//    fun IsEligibilityExsist() : Boolean{
+//
+//        if(prefManager.getUserEligibility() != null){
+//            return true
+//        }else{
+//            return  false
+//        }
+//    }
     override fun OnSuccess(apiResponse: APIResponse, message: String) {
 
         dismissDialog()
@@ -655,22 +655,15 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
                 // temp added 05
                // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
 
+                 // Todo : Commented
                 if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")){
 
 
                     getEligibilityCall()
 
-                }else{
-
-
-                    if(!IsEligibilityExsist()){
-
-                        authenticationAlert("Authentication!!", getString(R.string.userAuth))
-
-                    }else{
-                        checkEligibility()
-                    }
                 }
+
+                // Todo : till here
 
 
 
