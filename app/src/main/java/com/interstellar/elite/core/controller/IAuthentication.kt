@@ -11,6 +11,10 @@ interface IAuthentication {
 
     fun getLandmarkEliteTataPee( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
+    fun getLandmarkEliteGlobalAssure( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
+
+    fun getLandmarkEliteActivationCode( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
+
     fun getUserConstatnt(userid: String,iResponseSubcriber: IResponseSubcriber)
 
      fun getCityState(pincode: String, iResponseSubcriber: IResponseSubcriber)
@@ -45,4 +49,23 @@ interface IAuthentication {
 
     fun getTataPeep(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
 
+    fun insertGlobalAssure(
+        MobileNo: String,
+        RegistrationNo: String,
+        CertificateNo: String,
+        CertificateFile: String,
+        iResponseSubcriber: IResponseSubcriber
+    )
+
+    fun getGlobalAssure(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
+
+
+    fun insertActivationCode(
+        MobileNo: String,
+        RegistrationNo: String,
+        ActivationCode: String,
+        iResponseSubcriber: IResponseSubcriber
+    )
+
+    fun getActivationCode(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
 }

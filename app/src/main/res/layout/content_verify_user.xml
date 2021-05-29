@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/fab_margin"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lyLogo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+
+            app:srcCompat="@drawable/elite_logo"
+            >
+        </ImageView>
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:id="@+id/svParent"
+            android:layout_below="@+id/lyLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarStyle="insideOverlay">
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/eight"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="30sp"
+                                android:fontFamily="@font/bungee"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="-20dp"
+                                android:text="Welcome"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_marginTop="-20dp"
+                                android:text="Please Enter Your Activation Code"/>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/eight"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilName"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Activation Code"
+                                app:endIconMode="clear_text"
+                                app:endIconTint="@color/color_close"
+                                app:startIconDrawable="@drawable/ic_verified_user_24">
+
+                                <EditText
+                                    android:id="@+id/etFullName"
+                                    style="@style/Style.edittext"
+                                    android:inputType="text"
+                                    android:maxLength="100"
+                                    android:text="" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+
+                        <Button
+                            android:id="@+id/btnSubmit"
+                            style="@style/ButtonStyle"
+                            android:layout_marginTop="@dimen/fab_margin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+
+                            android:layout_marginLeft="@dimen/fab_margin"
+                            android:layout_marginRight="@dimen/fab_margin"
+                            android:text="SUBMIT"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -153,13 +153,19 @@ public class SplashScreenActivity extends BaseActivity implements IResponseSubcr
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        UserEntity loginEntity = prefManager.getUserData();
-                        if (loginEntity != null) {
-                            startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
 
-                        } else {
-                            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                        }
+                        //Todo comment :  For Direct Openenig of Home
+                        //region commented
+//                        UserEntity loginEntity = prefManager.getUserData();
+//                        if (loginEntity != null) {
+//                            startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
+//
+//                        } else {
+//                            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+//                        }
+                        //endregion
+
+                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
 
                     }
                 }, SPLASH_DISPLAY_LENGTH);

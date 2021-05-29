@@ -45,6 +45,13 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
         @GET()
         fun getLandmarkEliteTataPee(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<TataLandmarkResponse>
 
+        @GET()
+        fun getLandmarkEliteGlobalAssure(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<GlobalAssureLandmarkResponse>
+
+        @GET()
+        fun getLandmarkEliteActivationCode(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<ActivationCodeLandmarkResponse>
+
+
         @POST("/api/get-user-constant")
         fun getUserConstant(@Body body: HashMap<String, String>): Call<UserConsttantResponse>
 
@@ -65,6 +72,22 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
 
         @POST("/api/insertTataPeep")
         fun insertTataPeep(@Body  body: HashMap<String, String>): Call<CommonResponse>
+
+
+
+        @POST("/api/insertGlobalAssure")
+        fun insertGlobalAssure(@Body  body: HashMap<String, String>): Call<CommonResponse>
+
+        @POST("/api/load-Global-Assure")
+        fun getGlobalAssure(@Body body: HashMap<String, String>): Call<GlobalAssureResponse>
+
+
+        @POST("/api/insert-activation-code")
+        fun insertActivationCode(@Body  body: HashMap<String, String>): Call<CommonResponse>
+
+        @POST("/api/load-activation-code")
+        fun getActivationCode(@Body body: HashMap<String, String>): Call<ActivationCodeResponse>
+
 
 
     }

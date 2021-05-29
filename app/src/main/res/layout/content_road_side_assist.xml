@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:cardCornerRadius="@dimen/eight"
+        android:elevation="@dimen/eight">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/four"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@drawable/circularbg_yellow"
+                    android:layout_width="@dimen/four"
+                    android:layout_height="@dimen/four"/>
+
+                <TextView
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_marginLeft="@dimen/four"
+                    android:text="Vehicle Towing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/four"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@drawable/circularbg_yellow"
+                    android:layout_width="@dimen/four"
+                    android:layout_height="@dimen/four"/>
+
+                <TextView
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_marginLeft="@dimen/four"
+                    android:text="Onside Wheel Repair / Fuel Assistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/four"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@drawable/circularbg_yellow"
+                    android:layout_width="@dimen/four"
+                    android:layout_height="@dimen/four"/>
+
+                <TextView
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_marginLeft="@dimen/four"
+                    android:text="Key Assistance / Battery Services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/four"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@drawable/circularbg_yellow"
+                    android:layout_width="@dimen/four"
+                    android:layout_height="@dimen/four"/>
+
+                <TextView
+                    style="@style/TextViewStyle.Medium"
+                    android:layout_marginLeft="@dimen/four"
+                    android:text="Hotel Accommodation Services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnPolicy"
+       android:background="@drawable/bg_primary_rect"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="DOWNLOAD POLICY" />
+
+</LinearLayout>

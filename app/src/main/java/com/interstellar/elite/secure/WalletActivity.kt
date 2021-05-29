@@ -175,32 +175,35 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                 }
 
             }
-            else{
 
-
-                   // temp data added
-
-                var tataEntity: TataEntity = getTempJson().EliteTataPeepResult.EliteTataPeepdetails.get(0)
-
-               var PolicyLink = "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf"
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(PolicyLink))
-                startActivity(browserIntent)
-
-                downloadPdf(PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
-
-                tataEntity.let {
-
-                    authenticationController.insertTataPeep(
-                            it!!.MobileNo.toString(),
-                            it!!.RegistrationNo,
-                            "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf",
-                            this@WalletActivity
-                    )
-
-                }
-
-
-            }
+            //Todo commented
+            //region commented
+//            else{
+//
+//                   // temp data added
+//
+//                var tataEntity: TataEntity = getTempJson().EliteTataPeepResult.EliteTataPeepdetails.get(0)
+//
+//               var PolicyLink = "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf"
+//                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(PolicyLink))
+//                startActivity(browserIntent)
+//
+//                downloadPdf(PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
+//
+//                tataEntity.let {
+//
+//                    authenticationController.insertTataPeep(
+//                            it!!.MobileNo.toString(),
+//                            it!!.RegistrationNo,
+//                            "http://elite.landmarkinsurance.in/TataPeepDocs/Elite_50MH.pdf",
+//                            this@WalletActivity
+//                    )
+//
+//                }
+//
+//
+//            }
+            //endregin
 
         }
 

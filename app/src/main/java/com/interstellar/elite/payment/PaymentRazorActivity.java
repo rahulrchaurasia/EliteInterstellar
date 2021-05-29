@@ -53,7 +53,7 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
     PrefManager prefManager;
     TextView txtprdName, txtAmount,txtName ,txtSuccessMessage,txtpaymentstatus;
     Button btnSubmit,btnCancel,btnContinue, btnHomeContinue;
-
+    ProvideClaimAssEntity provideClaimAssEntity;
 
     CardView cvBuy, cvSuccess, cvFailure;
 
@@ -363,7 +363,13 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
 
             PaymentRazorActivity.this.finish();
         } else if (view.getId() == R.id.btnContinue) {
+
             PaymentRazorActivity.this.finish();
+            if(provideClaimAssEntity != null) {
+                startActivity(new Intent(PaymentRazorActivity.this, DocUploadActivity.class)
+                        .putExtra("ORDER_ID", provideClaimAssEntity.getId()));
+            }
+
 
         } else if (view.getId() == R.id.btnHomeContinue) {
             PaymentRazorActivity.this.finish();
@@ -398,12 +404,13 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
 
                // showPaymentAlert(btnSubmit, response.getMessage().toString(),((ProvideClaimAssResponse) response).getData().get(0));
 
+                provideClaimAssEntity = ((ProvideClaimAssResponse) response).getData().get(0);
                 cvBuy.setVisibility(View.GONE);
-                cvFailure.setVisibility(View.GONE);
 
+                cvFailure.setVisibility(View.GONE);
                 cvSuccess.setVisibility(View.VISIBLE);
 
-                txtSuccessMessage.setText(response.getMessage().toString());
+                txtSuccessMessage.setText(provideClaimAssEntity.getDisplaymessage());
 
             }
 

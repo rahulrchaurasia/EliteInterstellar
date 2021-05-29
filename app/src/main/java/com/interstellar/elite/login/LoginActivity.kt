@@ -3,7 +3,6 @@ package com.interstellar.elite.login
 import BaseActivityKotlin
 import ServiceName
 import ServiceRequest
-
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -28,10 +27,7 @@ import com.interstellar.elite.databinding.ActivityLoginBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
-
-import kotlinx.android.synthetic.main.content_login.etMobile
-import kotlinx.android.synthetic.main.content_login.etPassword
-
+import kotlinx.android.synthetic.main.content_login.*
 
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
@@ -43,9 +39,9 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
 
     var perms = arrayOf(
-            "android.permission.CAMERA",
-            "android.permission.WRITE_EXTERNAL_STORAGE",
-            "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE",
     )
 
 
@@ -70,8 +66,8 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
             window.setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
         initialize()
@@ -80,8 +76,8 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
         setTextChangeListener()
         authenticationController = ServiceRequest.getService(
-                ServiceName.AUTHENTICATION.value,
-                this
+            ServiceName.AUTHENTICATION.value,
+            this
         ) as AuthenticationController
 
         if (!checkPermission()) {
@@ -139,7 +135,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
     //region Event
     override fun onClick(view: View?) {
 
-        hideKeyBoard( binding.includedLayout.btnSignIn)
+        hideKeyBoard(binding.includedLayout.btnSignIn)
         when (view?.id) {
 
             R.id.btnSignIn -> {
@@ -165,8 +161,14 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
 
                 showLoading("Please wait..")
-                //  authenticationController.getLogin("9833797088", "123", "", "", this)
-                authenticationController.getLogin(etMobile.text.toString(), etPassword.text.toString(), "", "", this)
+
+                authenticationController.getLogin(
+                    etMobile.text.toString(),
+                    etPassword.text.toString(),
+                    "",
+                    "",
+                    this
+                )
 //                val homeActivity = Intent(this@LoginActivity, TestActivity::class.java)
 //                startActivity(homeActivity)
 //                this.finish()
@@ -205,9 +207,20 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
             if (apiResponse.status_code == 0) {
 
-                val homeActivity = Intent(this@LoginActivity, HomeActivity::class.java)
-                startActivity(homeActivity)
-                this.finish()
+                var loginEntity   = prefManager.getUserData()
+
+                if(loginEntity?.isgoldverify?: "" == ("")){
+
+                    val homeActivity = Intent(this@LoginActivity, VerifyUserActivity::class.java)
+                    startActivity(homeActivity)
+
+                }
+                else {
+
+                    val homeActivity = Intent(this@LoginActivity, HomeActivity::class.java)
+                    startActivity(homeActivity)
+                    this.finish()
+                }
             }
         }
     }
@@ -215,7 +228,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
     override fun OnFailure(error: String) {
 
         dismissDialog()
-        hideKeyBoard( binding.includedLayout.btnSignIn)
+        hideKeyBoard(binding.includedLayout.btnSignIn)
         //Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
         getCustomToast(error)
     }

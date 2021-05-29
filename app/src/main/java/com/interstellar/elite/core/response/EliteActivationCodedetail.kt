@@ -1,7 +1,7 @@
 package com.interstellar.elite.core.response
 
-data class Data(
+data class EliteActivationCodedetail(
+    val ActivationCode: String,
     val MobileNo: String,
-    val PolicyLink: String,
     val RegistrationNo: String
 )

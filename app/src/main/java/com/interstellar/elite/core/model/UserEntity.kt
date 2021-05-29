@@ -11,5 +11,6 @@ data class UserEntity(
     val seriesno: String,
     val user_id: Int,
     val user_type_id: Int,
-    val vehicleno: String
+    val vehicleno: String,
+    val isgoldverify : String
 )

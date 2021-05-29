@@ -12,7 +12,6 @@ import com.interstellar.elite.facade.PrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Url
 
 
 open class AuthenticationController(mCxt: Context) : BaseController(), IAuthentication {
@@ -115,6 +114,87 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<TataLandmarkResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun getLandmarkEliteGlobalAssure(
+        MobileNo: String,
+        RegistrationNo: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/GlobalAssure"
+
+
+
+        authenticationBuilder.getLandmarkEliteGlobalAssure(url,MobileNo,RegistrationNo).enqueue(object :
+            Callback<GlobalAssureLandmarkResponse> {
+            override fun onResponse(
+                call: Call<GlobalAssureLandmarkResponse>,
+                landmarkResponse: Response<GlobalAssureLandmarkResponse>
+            ) {
+
+                if (landmarkResponse!!.isSuccessful) {
+
+                    printLog(Gson().toJson(landmarkResponse.body()))
+
+                    if (landmarkResponse.body() != null) {
+
+                        // default success
+                        iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
+
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(landmarkResponse.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun getLandmarkEliteActivationCode(
+        MobileNo: String,
+        RegistrationNo: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/EliteActivationCode"
+
+
+        authenticationBuilder.getLandmarkEliteActivationCode(url,MobileNo,RegistrationNo).enqueue(object :
+            Callback<ActivationCodeLandmarkResponse> {
+            override fun onResponse(
+                call: Call<ActivationCodeLandmarkResponse>,
+                landmarkResponse: Response<ActivationCodeLandmarkResponse>
+            ) {
+
+                if (landmarkResponse!!.isSuccessful) {
+
+                    printLog(Gson().toJson(landmarkResponse.body()))
+
+                    if (landmarkResponse.body() != null) {
+
+                        // default success
+                        iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
+
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(landmarkResponse.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ActivationCodeLandmarkResponse>, t: Throwable) {
                 iResponseSubcriber.OnFailure("" + t.message.toString())
             }
         })
@@ -470,6 +550,184 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
         })
     }
 
+
+    override fun insertGlobalAssure(
+        MobileNo: String,
+        RegistrationNo: String,
+        CertificateNo: String,
+        CertificateFile: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+        map.put("RegistrationNo", RegistrationNo)
+        map.put("CertificateNo", CertificateNo)
+        map.put("CertificateFile", CertificateFile)
+
+
+
+        authenticationBuilder.insertGlobalAssure(map).enqueue(object : Callback<CommonResponse> {
+            override fun onResponse(
+                call: Call<CommonResponse>,
+                response: Response<CommonResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnFailure(response.body()?.message!!)
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+
+    }
+
+    override fun getGlobalAssure(MobileNo: String, iResponseSubcriber: IResponseSubcriber) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+
+
+
+        authenticationBuilder.getGlobalAssure(map).enqueue(object : Callback<GlobalAssureResponse> {
+            override fun onResponse(
+                call: Call<GlobalAssureResponse>,
+                response: Response<GlobalAssureResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun insertActivationCode(
+        MobileNo: String,
+        RegistrationNo: String,
+        ActivationCode: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+        map.put("RegistrationNo", RegistrationNo)
+        map.put("ActivationCode", ActivationCode)
+
+
+
+
+        authenticationBuilder.insertActivationCode(map).enqueue(object : Callback<CommonResponse> {
+            override fun onResponse(
+                call: Call<CommonResponse>,
+                response: Response<CommonResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnFailure(response.body()?.message!!)
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+
+    }
+    override fun getActivationCode(MobileNo: String, iResponseSubcriber: IResponseSubcriber) {
+
+        var map = hashMapOf<String, String>()
+        map.put("MobileNo", MobileNo)
+
+
+
+        authenticationBuilder.getActivationCode(map).enqueue(object : Callback<ActivationCodeResponse> {
+            override fun onResponse(
+                call: Call<ActivationCodeResponse>,
+                response: Response<ActivationCodeResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ActivationCodeResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
 
 
 }
