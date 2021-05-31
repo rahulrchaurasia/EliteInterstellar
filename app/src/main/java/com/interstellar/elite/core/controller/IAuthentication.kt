@@ -39,6 +39,10 @@ interface IAuthentication {
         iResponseSubcriber: IResponseSubcriber
     )
 
+    fun updateGolduser(
+        user_id: String,
+        iResponseSubcriber: IResponseSubcriber
+    )
 
     fun insertTataPeep(
         MobileNo: String,

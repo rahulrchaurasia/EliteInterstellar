@@ -14,12 +14,17 @@ import com.interstellar.elite.core.model.DashProductEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.product.ProductMainActivity
+import com.interstellar.elite.secure.RoadSideAssistActivity
 import com.interstellar.elite.secure.WalletActivity
 import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.webview.CommonWebViewActivity
 import com.interstellar.elite.webview.WebViewHtmlActivity
 import kotlinx.android.synthetic.main.custom_toolbar.*
+import kotlinx.android.synthetic.main.custom_toolbar.imglogo
+import kotlinx.android.synthetic.main.custom_toolbar.txtName
+import kotlinx.android.synthetic.main.custom_toolbar.txtTitle
 import kotlinx.android.synthetic.main.fragment_secure_list.*
+import kotlinx.android.synthetic.main.layout_dashboard_banner.*
 import java.util.*
 
 
@@ -62,24 +67,45 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
     }
 
     fun setUserEligibility() {
-        if (prefManager.getUserEligibility() != null) {
-            val eligibilityEntity = prefManager.getUserEligibility()
 
-            if (eligibilityEntity?.eligible?.toUpperCase().equals("YES")) {
-                imglogo.setImageDrawable(
-                        ContextCompat.getDrawable(
-                                applicationContext,
-                                R.drawable.elite_gold
-                        )
-                )
-            } else {
-                imglogo.setImageDrawable(
-                        ContextCompat.getDrawable(
-                                applicationContext,
-                                R.drawable.elite_plus
-                        )
-                )
+        //region Commented
+//        if (prefManager.getUserEligibility() != null) {
+//            val eligibilityEntity = prefManager.getUserEligibility()
+//
+//            if (eligibilityEntity?.eligible?.toUpperCase().equals("YES")) {
+//                imglogo.setImageDrawable(
+//                        ContextCompat.getDrawable(
+//                                applicationContext,
+//                                R.drawable.elite_gold
+//                        )
+//                )
+//            } else {
+//                imglogo.setImageDrawable(
+//                        ContextCompat.getDrawable(
+//                                applicationContext,
+//                                R.drawable.elite_plus
+//                        )
+//                )
+//            }
+//
+//        }
+        //endregion
+
+        var isGolduser = loginEntity?.isgoldverify?: ""
+
+        isGolduser.let {
+
+            if(it!!.toUpperCase().equals("Y")){
+
+                //Gold
+                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
+
+            }else{
+
+               imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
+
             }
+
 
         }
     }
@@ -97,16 +123,18 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
         when (dbProductType) {
             Constants.Secure_List -> {
 
+//                bindData(
+//                        DBPersistanceController.getSecureList( prefManager.getUserEligibility()?.eligible ?: ""), dbProductType
+//                )
+
                 bindData(
-                        DBPersistanceController.getSecureList(
-                                prefManager.getUserEligibility()?.eligible ?: ""
-                        ), dbProductType
+                    DBPersistanceController.getSecureList( loginEntity?.isgoldverify?: ""), dbProductType
                 )
             }
             Constants.Assure_List -> {
                 bindData(
                         DBPersistanceController.getAssureList(
-                                prefManager.getUserEligibility()?.eligible ?: ""
+                            loginEntity?.isgoldverify?: ""
                         ), dbProductType
                 )
             }
@@ -144,6 +172,12 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
         }else if(entity.ProductCode.equals("401")){
 
             val intent = Intent(this, WalletActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+
+        } else if(entity.ProductCode.equals("402")){
+
+            val intent = Intent(this, RoadSideAssistActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
 

@@ -22,12 +22,12 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
     var authenticationBuilder: AuthenticationBuilder.AuthenticationNetworkService
     var mContext: Context
     //var loginEntity: UserEntity
-    var prefManager: PrefManager
+   // var prefManager: PrefManager
     init {
         authenticationBuilder = AuthenticationBuilder().getService()
         mContext = mCxt
 
-        prefManager = PrefManager(mContext)
+       //prefManager = PrefManager(mContext)
         //loginEntity = prefManager.getUserData()!!
     }
 
@@ -458,6 +458,48 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun updateGolduser(user_id: String, iResponseSubcriber: IResponseSubcriber) {
+
+
+        var map = hashMapOf<String, String>()
+        map.put("user_id", user_id)
+
+
+        authenticationBuilder.updateGolduser(map).enqueue(object :
+            Callback<UpladeGoldResponse> {
+            override fun onResponse(
+                call: Call<UpladeGoldResponse>,
+                response: Response<UpladeGoldResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnFailure(response.body()?.message!!)
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<UpladeGoldResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+
             }
         })
     }

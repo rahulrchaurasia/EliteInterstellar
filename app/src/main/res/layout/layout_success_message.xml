@@ -24,12 +24,14 @@
 
             <TextView
                 android:id="@+id/txtHdr"
+                android:layout_marginTop="@dimen/fab_margin"
                 style="@style/TextViewStyle.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="18dp"
+                android:padding="0dp"
                 android:text="Order Placed Successfully!!"
+                android:fontFamily="@font/bungee"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -44,6 +46,7 @@
             <TextView
                 android:id="@+id/txtMessage"
                 style="@style/TextViewStyle.Large"
+                android:fontFamily="@font/muli"
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

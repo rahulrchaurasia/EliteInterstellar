@@ -20,8 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.VerifyUserActivity"></activity>
-        <activity android:name=".secure.RoadSideAssistActivity" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
@@ -32,8 +30,22 @@
             android:label="Wallet/ATM/Key Cover"
             android:parentActivityName=".home.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+
+        <activity android:name=".login.VerifyUserActivity"
+            android:parentActivityName=".login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+
+        <activity android:name=".secure.RoadSideAssistActivity"
+            android:parentActivityName=".home.HomeActivity"
+            android:label="Road Side Assistance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+
         <activity
             android:name=".webview.WebViewHtmlActivity"
             android:screenOrientation="portrait"

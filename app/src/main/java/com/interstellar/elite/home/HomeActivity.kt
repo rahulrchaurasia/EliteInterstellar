@@ -78,17 +78,17 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         setUserData()
 
-        showLoading("Please wait..")
-
-        loginEntity.let {
-
-            authenticationController.getUserEligibility(
-                    it!!.mobile.toString(),
-                    it!!.vehicleno,
-                    this@HomeActivity
-            )
-            //
-        }
+//        showLoading("Please wait..")
+//
+//        loginEntity.let {
+//
+//            authenticationController.getUserEligibility(
+//                    it!!.mobile.toString(),
+//                    it!!.vehicleno,
+//                    this@HomeActivity
+//            )
+//            //
+//        }
 
 
 
@@ -131,6 +131,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         init_headers()
 
+        checkEligibility()
+
     }
 
     // Temp added for Showing the value
@@ -165,54 +167,111 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     fun checkEligibility(){
 
-       prefManager.getUserEligibility()?.let {
 
-                   if(it!!.eligible.toUpperCase().equals("YES")){
+        //region commented
+//       prefManager.getUserEligibility()?.let {
+//
+//                   if(it!!.eligible.toUpperCase().equals("YES")){
+//
+//                       //Gold
+//                       imglogo.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_gold
+//                               )
+//                       )
+//                       imglogoDashboard.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_gold
+//                               )
+//                       )
+//                       imglogo1.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_gold
+//                               )
+//                       )
+//
+//                   }
+//                   else{
+//                       //Plus
+//                       imglogo.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_plus
+//                               )
+//                       )
+//                       imglogo1.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_plus
+//                               )
+//                       )
+//                       imglogoDashboard.setImageDrawable(
+//                               ContextCompat.getDrawable(
+//                                       applicationContext,
+//                                       R.drawable.elite_plus
+//                               )
+//                       )
+//                   }
+//
+//
+//               }
 
-                       //Gold
-                       imglogo.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_gold
-                               )
-                       )
-                       imglogoDashboard.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_gold
-                               )
-                       )
-                       imglogo1.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_gold
-                               )
-                       )
+        //endregion
 
-                   }else{
-                       //Plus
-                       imglogo.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_plus
-                               )
-                       )
-                       imglogo1.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_plus
-                               )
-                       )
-                       imglogoDashboard.setImageDrawable(
-                               ContextCompat.getDrawable(
-                                       applicationContext,
-                                       R.drawable.elite_plus
-                               )
-                       )
-                   }
+        var isGolduser = loginEntity?.isgoldverify?: ""
+
+        isGolduser.let {
+
+            if(it!!.toUpperCase().equals("Y")){
+
+                //Gold
+                imglogo.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_gold
+                    )
+                )
+                imglogoDashboard.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_gold
+                    )
+                )
+                imglogo1.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_gold
+                    )
+                )
+
+            }else{
+
+                imglogo.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_plus
+                    )
+                )
+                imglogo1.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_plus
+                    )
+                )
+                imglogoDashboard.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.elite_plus
+                    )
+                )
+
+            }
 
 
-               }
+        }
 
     }
 
@@ -640,37 +699,39 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
 // authenticationController.getUserConstatnt(it!!.user_id.toString(), this@HomeActivity)
 
-        if (apiResponse is EligibilityUserResponse) {
-            if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
+//        if (apiResponse is EligibilityUserResponse) {
+//            if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
+//
+//                prefManager.storeUserEligibility(
+//                        apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
+//                )
+//
+//                checkEligibility()
+//
+//            }
+//            else{
+//
+//                // temp added 05
+//               // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
+//
+//                 // Todo : Commented
+//                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")){
+//
+//
+//                    getEligibilityCall()
+//
+//                }
+//
+//                // Todo : till here
+//
+//
+//
+//            }
+//
+//        }
 
-                prefManager.storeUserEligibility(
-                        apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
-                )
 
-                checkEligibility()
-
-            }
-            else{
-
-                // temp added 05
-               // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
-
-                 // Todo : Commented
-                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")){
-
-
-                    getEligibilityCall()
-
-                }
-
-                // Todo : till here
-
-
-
-            }
-
-        }
-        else if (apiResponse is UserConsttantResponse) {
+         if (apiResponse is UserConsttantResponse) {
             if (apiResponse.status_code == 0) {
 
 

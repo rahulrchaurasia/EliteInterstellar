@@ -11,6 +11,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
@@ -18,16 +19,21 @@ import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import com.google.gson.Gson
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
+import com.interstellar.elite.core.model.EligibilityEntity
+import com.interstellar.elite.core.model.UserEntity
+import com.interstellar.elite.core.response.EligibilityUserResponse
 import com.interstellar.elite.core.response.LoginResponse
 import com.interstellar.elite.databinding.ActivityLoginBinding
+
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
-import kotlinx.android.synthetic.main.content_login.*
+//import kotlinx.android.synthetic.main.content_login.*
 
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
@@ -36,6 +42,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
     lateinit var prefManager: PrefManager
 
     lateinit var binding : ActivityLoginBinding
+    var loginEntity: UserEntity? = null
 
 
     var perms = arrayOf(
@@ -62,7 +69,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         setContentView(binding.root)
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
             window.setFlags(
@@ -91,6 +98,10 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
         prefManager = PrefManager(this)
 
+        binding.includedLayout.etMobile.setText(""+prefManager.getMobile())
+        binding.includedLayout.etPassword.setText(""+ prefManager.getPassword())
+
+
     }
 
     private fun setListener() {
@@ -117,6 +128,19 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
     }
 
+   fun moveToVerifyCode(){
+
+       val homeActivity = Intent(this@LoginActivity, VerifyUserActivity::class.java)
+       startActivity(homeActivity)
+
+    }
+
+    fun moveToHome(){
+
+        val homeActivity = Intent(this@LoginActivity, HomeActivity::class.java)
+        startActivity(homeActivity)
+        this.finish()
+    }
 
 //    private fun initialize() {
 //        etPassword = findViewById(R.id.etPassword) as EditText
@@ -139,39 +163,39 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         when (view?.id) {
 
             R.id.btnSignIn -> {
-                if (!isEmpty(etMobile)) {
+                if (!isEmpty(binding.includedLayout.etMobile)) {
 
                     binding.includedLayout.tilLogin.error = "Enter Mobile"
 
                     return
                 }
-                if (!isEmpty(etPassword)) {
+                if (!isEmpty(binding.includedLayout.etPassword)) {
 
                     binding.includedLayout.tilPassword.error = "Enter Password"
 
                     return
                 }
 
-                strToken = prefManager.getToken()
-                strToken = if (prefManager.getToken() != null) {
-                    prefManager.getToken()
-                } else {
-                    ""
-                }
+                prefManager.setMobile(binding.includedLayout.etMobile.text.toString())
+                prefManager.setPassword(binding.includedLayout.etPassword.text.toString())
+
+ //               strToken = prefManager.getToken()
+//                strToken = if (prefManager.getToken() != null) {
+//                    prefManager.getToken()
+//                } else {
+//                    ""
+//                }
 
 
                 showLoading("Please wait..")
 
                 authenticationController.getLogin(
-                    etMobile.text.toString(),
-                    etPassword.text.toString(),
+                    binding.includedLayout.etMobile.text.toString(),
+                    binding.includedLayout.etPassword.text.toString(),
                     "",
                     "",
                     this
                 )
-//                val homeActivity = Intent(this@LoginActivity, TestActivity::class.java)
-//                startActivity(homeActivity)
-//                this.finish()
 
 
             }
@@ -183,45 +207,95 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             R.id.tvForgotPassword -> {
 
                 startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+
             }
 
 
         }
     }
 
-    // Not in Used
-    private  fun registrationDecision() {
-        if (prefManager.getCompanyID()!!.trim().equals("0")) {
-            startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
-        } else {
-            startActivity(Intent(this@LoginActivity, ClientDeclareActivity::class.java))
-        }
-    }
+
 
     override fun OnSuccess(apiResponse: APIResponse, message: String) {
 
 
-        dismissDialog()
+
 
         if (apiResponse is LoginResponse) {
 
             if (apiResponse.status_code == 0) {
 
-                var loginEntity   = prefManager.getUserData()
+                 loginEntity   = prefManager.getUserData()
 
                 if(loginEntity?.isgoldverify?: "" == ("")){
 
-                    val homeActivity = Intent(this@LoginActivity, VerifyUserActivity::class.java)
-                    startActivity(homeActivity)
+                   // showLoading("Verifying User..")
+
+                    loginEntity.let {
+
+                        authenticationController.getUserEligibility(
+                            it!!.mobile.toString(),
+                            it!!.vehicleno,
+                            this@LoginActivity
+                        )
+                        //
+                    }
 
                 }
                 else {
 
+                    dismissDialog()
                     val homeActivity = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(homeActivity)
                     this.finish()
                 }
+
             }
+        }
+
+        else if (apiResponse is EligibilityUserResponse) {
+
+            dismissDialog()
+            if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
+
+                prefManager.storeUserEligibility(
+                    apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
+                )
+
+                // Todo : Eligibility Response Success hence Verify for Elite Gold
+
+                moveToVerifyCode()
+
+
+            }
+            else{
+                /************************ real code (Below code temp )*******************************
+                // Todo : Response Failed hence Directly Open Elite Plus
+               //   moveToHome()
+             ********************************************************/
+
+
+                // temp added 05   loginEntity!!.mobile.equals("9403834308") 167815
+                // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
+                // Todo : Commented : Suppose below mob no success response
+
+                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")  || loginEntity!!.mobile.equals("9412365852")){
+
+
+                    moveToVerifyCode()
+
+                }else{
+
+                    // For Elite Plus
+                    moveToHome()
+                }
+
+                // Todo : till here
+
+
+
+            }
+
         }
     }
 
@@ -243,40 +317,20 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         val camera = ContextCompat.checkSelfPermission(applicationContext, perms.get(0))
 
 
-//        val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
-//        val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
-//
-//        return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
+        val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
+        val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
 
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-          return  Environment.isExternalStorageManager()  && camera == PackageManager.PERMISSION_GRANTED
-        } else {
-            val write_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(1))
-             val read_external = ContextCompat.checkSelfPermission(applicationContext, perms.get(2))
-            return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
+        return camera == PackageManager.PERMISSION_GRANTED && write_external == PackageManager.PERMISSION_GRANTED && read_external == PackageManager.PERMISSION_GRANTED
 
-        }
     }
 
     private fun requestPermission() {
 
 
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                intent.addCategory("android.intent.category.DEFAULT")
-                intent.data = Uri.parse(String.format("package:%s", applicationContext.packageName))
-                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
-            } catch (e: Exception) {
-                val intent = Intent()
-                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
-                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
-            }
-        } else {
+
             //below android 11
             ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
-        }
+
     }
 
 }

@@ -5,4 +5,7 @@ data class GloabalAssureEntity(
     val CertificateNo: String,
     val MobileNo: String,
     val RegistrationNo: String
+
 )
+
+

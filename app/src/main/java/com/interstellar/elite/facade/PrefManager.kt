@@ -138,7 +138,7 @@ class PrefManager(context: Context) {
 
 //    //endregion
 
-
+      // "Yes" : for gold user
     fun storeUserEligibility(entity: EligibilityEntity?):Boolean {
         editor!!.putString(USER_ELIGIBILITY, Gson().toJson(entity))
         return editor!!.commit()
@@ -422,8 +422,8 @@ class PrefManager(context: Context) {
 //
 //    //endregion
     fun clearUserCache() {
-        editor!!.remove(PASSWORD)
-        editor!!.remove(MOBILE)
+//        editor!!.remove(PASSWORD)
+//        editor!!.remove(MOBILE)
         editor!!.remove(USER_CONSTATNT)
         editor!!.remove(USER_DATA)
         editor!!.remove(USER_ELIGIBILITY)

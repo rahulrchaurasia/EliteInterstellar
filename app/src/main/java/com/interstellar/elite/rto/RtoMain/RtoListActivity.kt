@@ -43,17 +43,33 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
 
 
     fun setUserEligibility() {
-        if (prefManager.getUserEligibility() != null) {
-            val eligibilityEntity = prefManager.getUserEligibility()
 
-            if (eligibilityEntity?.eligible?.toUpperCase().equals("YES")) {
+        //region Commented
+//        if (prefManager.getUserEligibility() != null) {
+//            val eligibilityEntity = prefManager.getUserEligibility()
+//
+//            if (eligibilityEntity?.eligible?.toUpperCase().equals("YES")) {
+//                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
+//            } else {
+//                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
+//            }
+//
+//        }
+ //endregion
+
+        var isGolduser = loginEntity?.isgoldverify?: ""
+
+        isGolduser.let {
+
+            if (it!!.toUpperCase().equals("Y")) {
                 imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
-            } else {
+            }else{
                 imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
             }
 
         }
-    }
+   }
+
     private fun setListener() {
 
         cvRcBook.setOnClickListener(this)

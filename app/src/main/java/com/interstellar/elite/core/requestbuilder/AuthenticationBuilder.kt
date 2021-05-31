@@ -58,6 +58,9 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
         @POST("/api/login")
         fun getLogin(@Body body: HashMap<String, String>): Call<LoginResponse>
 
+        @POST("/api/update-is-gold")
+        fun updateGolduser(@Body  body: HashMap<String, String>): Call<UpladeGoldResponse>
+
         @POST("/api/check-user-registration")
         fun verifyOTPTegistration(@Body body: HashMap<String, String>): Call<VerifyUserOTPRegisterResponse>
 

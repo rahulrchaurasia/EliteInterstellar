@@ -128,7 +128,7 @@ open class DBPersistanceController {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
-            if(type.toUpperCase().equals("YES")) {
+            if(type.toUpperCase().equals("Y")) {
                 productList.add(DashProductEntity(1, "401", R.drawable.cover, "Wallet/ATM/Key Cover"))
                 productList.add(DashProductEntity(2, "402", R.drawable.rsa, "Road Side Assistancer"))
             }
@@ -164,7 +164,7 @@ open class DBPersistanceController {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
-            if(type.toUpperCase().equals("YES")) {
+            if(type.toUpperCase().equals("Y")) {
                 productList.add(DashProductEntity(11, "501", R.drawable.pit_stop, "Pit Stop"))
                 productList.add(DashProductEntity(10, "500", R.drawable.finpeace, "FinPeace"))
             }
