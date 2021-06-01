@@ -220,22 +220,22 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         ivLogo = (ImageView) view.findViewById(R.id.ivLogo);
         ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
 
-        etDOB = view.findViewById(R.id.etDOB);
+        etDOB = (EditText) view.findViewById(R.id.etDOB);
 
         // region Floater
-        radioGroup = view.findViewById(R.id.radioGroup);
-        rbIndividual = view.findViewById(R.id.rbIndividual);
-        rbFloater = view.findViewById(R.id.rbFloater);
+        radioGroup = (RadioGroup)view.findViewById(R.id.radioGroup);
+        rbIndividual = (RadioButton)view.findViewById(R.id.rbIndividual);
+        rbFloater = (RadioButton)view.findViewById(R.id.rbFloater);
 
-        lyFamily = view.findViewById(R.id.lyFamily);
-        spNoOfFamily = view.findViewById(R.id.spNoOfFamily);
+        lyFamily = (LinearLayout)view.findViewById(R.id.lyFamily);
+        spNoOfFamily = (Spinner)view.findViewById(R.id.spNoOfFamily);
 
-        tilNameOfProposer = view.findViewById(R.id.tilNameOfProposer);
-        tilSumAssured = view.findViewById(R.id.tilSumAssured);
-        tilDOB  = view.findViewById(R.id.tilDOB);
-        txtFamilyError = view.findViewById(R.id.txtFamilyError);
-        tilCity = view.findViewById(R.id.tilCity);
-        tilPincode = view.findViewById(R.id.tilPincode);
+        tilNameOfProposer = (TextInputLayout)view.findViewById(R.id.tilNameOfProposer);
+        tilSumAssured = (TextInputLayout)view.findViewById(R.id.tilSumAssured);
+        tilDOB  = (TextInputLayout)view.findViewById(R.id.tilDOB);
+        txtFamilyError = (TextView)view.findViewById(R.id.txtFamilyError);
+        tilCity = (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode = (TextInputLayout)view.findViewById(R.id.tilPincode);
 
 
 
@@ -250,11 +250,11 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         etNameOfProposer.addTextChangedListener(getTextWatcher(tilNameOfProposer));
 
        // etNameOfProposer.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilNameOfProposer));
-        etSumAssured.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilSumAssured));
-        etDOB.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilDOB));
+        etSumAssured.addTextChangedListener(getTextWatcher( tilSumAssured));
+        etDOB.addTextChangedListener(getTextWatcher(tilDOB));
 
-        etCity.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilCity));
-        etPincode.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilPincode));
+        etCity.addTextChangedListener(getTextWatcher(tilCity));
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
     }
 
     private void setOnClickListener() {

@@ -154,20 +154,20 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
         cvClient  = (CardView) view.findViewById(R.id.cvClient);
 
 
-        txtCharges =  view.findViewById(R.id.txtCharges);
-        txtPrdName =  view.findViewById(R.id.txtPrdName);
-        txtDoc =  view.findViewById(R.id.txtDoc);
-        txtClientName =  view.findViewById(R.id.txtClientName);
-        txtTAT = view.findViewById(R.id.txtTAT);
+        txtCharges =  (TextView) view.findViewById(R.id.txtCharges);
+        txtPrdName =  (TextView)view.findViewById(R.id.txtPrdName);
+        txtDoc =  (TextView)view.findViewById(R.id.txtDoc);
+        txtClientName =  (TextView)view.findViewById(R.id.txtClientName);
+        txtTAT = (TextView)view.findViewById(R.id.txtTAT);
 
-        rlDoc =  view.findViewById(R.id.rlDoc);
-        lvLogo =  view.findViewById(R.id.lvLogo);
-        lyTAT =  view.findViewById(R.id.lyTAT);
-        ivLogo = view.findViewById(R.id.ivLogo);
-        ivClientLogo =  view.findViewById(R.id.ivClientLogo);
+        rlDoc =  (RelativeLayout)view.findViewById(R.id.rlDoc);
+        lvLogo =  (LinearLayout) view.findViewById(R.id.lvLogo);
+        lyTAT =  (LinearLayout) view.findViewById(R.id.lyTAT);
+        ivLogo = (ImageView)view.findViewById(R.id.ivLogo);
+        ivClientLogo =  (ImageView)view.findViewById(R.id.ivClientLogo);
 
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
    }
 

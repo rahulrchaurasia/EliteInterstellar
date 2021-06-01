@@ -33,6 +33,7 @@ import com.interstellar.elite.facade.PrefManager;
 import com.interstellar.elite.home.HomeActivity;
 import com.interstellar.elite.login.LoginActivity;
 import com.interstellar.elite.utility.Constants;
+import com.interstellar.elite.welcome.EulaActivity;
 import com.interstellar.elite.welcome.WelcomeActivity;
 
 
@@ -147,7 +148,9 @@ public class SplashScreenActivity extends BaseActivity implements IResponseSubcr
 
         } else {
             if (prefManager.isFirstTimeLaunch()) {
-                startActivity(new Intent(this, WelcomeActivity.class));
+              //  startActivity(new Intent(this, WelcomeActivity.class));
+                startActivity(new Intent(this, EulaActivity.class));
+
             } else {
 
                 new Handler().postDelayed(new Runnable() {

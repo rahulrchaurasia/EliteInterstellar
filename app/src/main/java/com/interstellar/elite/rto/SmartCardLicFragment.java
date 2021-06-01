@@ -113,7 +113,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
     RtoMainAdapter rtoMainAdapter;
 
     //endregion
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilRTO ,tilPincode;
 
 
       //region bottomSheetDialog
@@ -259,8 +259,9 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
         etLicOwnerName = (EditText) view.findViewById(R.id.etLicOwnerName);
         etLicOwnerDob = (EditText) view.findViewById(R.id.etLicOwnerDob);
 
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilRTO  =  (TextInputLayout)view.findViewById(R.id.tilRTO);
 
 
 
@@ -311,10 +312,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
             etLicOwnerDob.setError("Enter DOB");
             return false;
         }
-        else if (!validatePinCode(etPincode,tilPincode)) {
 
-            return false;
-        }
         else if (!validateCity(etCity,tilCity)) {
 
             return false;
@@ -324,6 +322,10 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
             return false;
         }
 
+        else if (!validatePinCode(etPincode,tilPincode)) {
+
+            return false;
+        }
 
         return true;
     }

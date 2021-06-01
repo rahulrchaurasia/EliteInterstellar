@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-      android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
 
 
@@ -47,13 +48,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextInputMaterialStyle"
+         app:endIconDrawable="@drawable/vector_date"
+            app:endIconMode="custom"
+            app:endIconTint="@color/header_text_color"
             android:hint="Driving Licence Owner Dob">
 
             <EditText
                 android:id="@+id/etLicOwnerDob"
                 style="@style/Style.edittext"
                 android:focusableInTouchMode="true"
-                android:drawableRight="@drawable/vector_date"
+
                android:drawablePadding="5dp"
                 android:inputType="text"
                 android:maxLength="30"

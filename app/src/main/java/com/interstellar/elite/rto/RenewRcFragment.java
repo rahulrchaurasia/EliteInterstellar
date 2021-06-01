@@ -238,7 +238,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
 
         ivLogo = (ImageView) view.findViewById(R.id.ivLogo);
         ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
         acMake = (AutoCompleteTextView) view.findViewById(R.id.acMake);
         acModel = (AutoCompleteTextView) view.findViewById(R.id.acModel);

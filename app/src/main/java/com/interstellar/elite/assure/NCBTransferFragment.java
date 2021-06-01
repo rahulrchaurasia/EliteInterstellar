@@ -219,8 +219,8 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
 
         acMake = view.findViewById(R.id.acMake);
 
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
     }
 

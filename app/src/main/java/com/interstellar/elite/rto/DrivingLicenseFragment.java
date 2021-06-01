@@ -339,8 +339,8 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
         ivTick = (TextView) view.findViewById(R.id.ivTick);
 
         cvClient  = (CardView) view.findViewById(R.id.cvClient);
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
     }
 
     private void setOnClickListener() {

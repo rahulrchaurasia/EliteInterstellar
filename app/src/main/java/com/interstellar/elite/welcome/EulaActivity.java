@@ -60,7 +60,8 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.btnDisAgree:
-                finish();
+                //finish();
+                showAlertAction(view,"To Continue,Please Accept the License Agreement ");
                 break;
         }
     }

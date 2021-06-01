@@ -303,8 +303,8 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
 
         etLic.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(30)});
 
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout) view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
 
     }

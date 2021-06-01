@@ -160,7 +160,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         AlertDialog.Builder builder = new AlertDialog.Builder(DocUploadActivity.this, R.style.CustomDialog);
 
         // TouchImageView ivDocFile;
-        ImageView ivDocFile;
+        ImageView ivDocFile,ivClose;
         Button btnClose;
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView;
@@ -172,6 +172,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         final AlertDialog alertDialog = builder.create();
         // set the custom dialog components - text, image and button
         btnClose = (Button) dialogView.findViewById(R.id.btnClose);
+        ivClose = (ImageView) dialogView.findViewById(R.id.ivClose);
 //        ivDocFile = (TouchImageView) dialogView.findViewById(R.id.ivDocFile);
         ivDocFile = (ImageView) dialogView.findViewById(R.id.ivDocFile);
 
@@ -191,6 +192,12 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             }
         });
 
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
         alertDialog.setCancelable(false);
         alertDialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogAnimation;
         alertDialog.show();

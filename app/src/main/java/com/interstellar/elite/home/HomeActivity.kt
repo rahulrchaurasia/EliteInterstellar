@@ -3,9 +3,16 @@ package com.interstellar.elite.home
 import BaseActivityKotlin
 import ServiceName
 import ServiceRequest
+import android.Manifest.permission
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +23,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -25,6 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.interstellar.elite.BuildConfig
+//import com.interstellar.elite.BuildConfig
 import com.interstellar.elite.R
 import com.interstellar.elite.TermsCondtion.TermsConditionFragment
 import com.interstellar.elite.aboutUs.AboutUsFragment
@@ -41,8 +50,8 @@ import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.dashboard.DashboardFragment
 import com.interstellar.elite.login.LoginActivity
 import com.interstellar.elite.notification.NotificationFragment
-import com.interstellar.elite.request.OrderDetailFragment
 import com.interstellar.elite.profile.ProfileFragment
+import com.interstellar.elite.request.OrderDetailFragment
 import com.interstellar.elite.utility.Constants
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_rto_list.*
@@ -78,6 +87,11 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         setUserData()
 
+        if (!checkPermission()) {
+            requestPermission()
+        }
+
+        //region Comment
 //        showLoading("Please wait..")
 //
 //        loginEntity.let {
@@ -89,6 +103,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 //            )
 //            //
 //        }
+
+        //endregion
 
 
 
@@ -103,11 +119,11 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         // Note : toolbar replace by null bec here using custom icon
         val drawerToggle :ActionBarDrawerToggle  = object : ActionBarDrawerToggle(
-                this,
-                drawer_layout,
-                null,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            this,
+            drawer_layout,
+            null,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         ){}
 
         drawerToggle.isDrawerIndicatorEnabled = true
@@ -125,8 +141,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
 
         authenticationController = ServiceRequest.getService(
-                ServiceName.AUTHENTICATION.value,
-                this
+            ServiceName.AUTHENTICATION.value,
+            this
         ) as AuthenticationController
 
         init_headers()
@@ -150,7 +166,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         val objResponse =  Gson().fromJson(eligibleJson, EligibilityUserResponse::class.java)
 
         var objEligibility :EligibilityEntity = objResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(
-                0
+            0
         )
         prefManager.storeUserEligibility(objEligibility)
         checkEligibility()
@@ -370,10 +386,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                        AppCompatResources.getColorStateList(
-                                fabHome.context,
-                                R.color.button_color
-                        )
+                    AppCompatResources.getColorStateList(
+                        fabHome.context,
+                        R.color.button_color
+                    )
                 )
             }
         } else if(type.equals("HomeChild")){
@@ -384,10 +400,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                        AppCompatResources.getColorStateList(
-                                fabHome.context,
-                                R.color.button_color
-                        )
+                    AppCompatResources.getColorStateList(
+                        fabHome.context,
+                        R.color.button_color
+                    )
                 )
             }
         }else{
@@ -399,10 +415,10 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
-                        AppCompatResources.getColorStateList(
-                                fabHome.context,
-                                R.color.gray_primary_color
-                        )
+                    AppCompatResources.getColorStateList(
+                        fabHome.context,
+                        R.color.gray_primary_color
+                    )
                 )
             }
         }
@@ -412,8 +428,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     // region Dialog
     fun authenticationAlert(
-            strhdr: String,
-            strBody: String
+        strhdr: String,
+        strBody: String
     ) {
         val builder = AlertDialog.Builder(this@HomeActivity, R.style.CustomDialog)
         val btnClose: Button
@@ -454,33 +470,33 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         builder.setMessage("Do you want to exit the application?")
         builder.setCancelable(false)
         builder.setPositiveButton(
-                "YES"
+            "YES"
         ) { dialog, _ ->
             dialog.cancel()
             this.finish()
         }
 
         builder.setNegativeButton(
-                "NO",
-                object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface, id: Int) {
-                        dialog.cancel()
-                    }
-                })
+            "NO",
+            object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface, id: Int) {
+                    dialog.cancel()
+                }
+            })
         val exitdialog = builder.create()
         exitdialog.show()
 
         exitdialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(
-                ContextCompat.getColor(
-                        this,
-                        R.color.header_text_color
-                )
+            ContextCompat.getColor(
+                this,
+                R.color.header_text_color
+            )
         )
         exitdialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(
-                ContextCompat.getColor(
-                        this,
-                        R.color.sub_text_color
-                )
+            ContextCompat.getColor(
+                this,
+                R.color.sub_text_color
+            )
         )
 
     }
@@ -622,6 +638,44 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     }
 
+    private fun checkPermission(): Boolean {
+        return if (VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        } else {
+            val result = ContextCompat.checkSelfPermission(
+                this@HomeActivity,
+                permission.READ_EXTERNAL_STORAGE
+            )
+            val result1 = ContextCompat.checkSelfPermission(
+                this@HomeActivity,
+                permission.WRITE_EXTERNAL_STORAGE
+            )
+            result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    private fun requestPermission() {
+        if (VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                intent.addCategory("android.intent.category.DEFAULT")
+                intent.data =
+                    Uri.parse(java.lang.String.format("package:%s", applicationContext.packageName))
+                startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT)
+            } catch (e: Exception) {
+                val intent = Intent()
+                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT)
+            }
+        } else {
+            //below android 11
+            ActivityCompat.requestPermissions(
+                this@HomeActivity,
+                arrayOf(permission.WRITE_EXTERNAL_STORAGE),
+                Constants.PERMISSION_CAMERA_STORACGE_CONSTANT
+            )
+        }
+    }
 
     fun verifyNetwork()
     {
@@ -666,6 +720,24 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         // alertDialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogAnimation;
         alertDialog.show()
     }
+    fun dialogStorage() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Permission Required..!")
+        builder.setMessage("Please allow the storage permission")
+        builder.setCancelable(false)
+        builder.setPositiveButton(
+            "Allow"
+        ) { dialog, id ->
+            dialog.cancel()
+            if (!checkPermission()) {
+                requestPermission()
+            }
+        }
+        val exitdialog = builder.create()
+        exitdialog.show()
+        val positive = exitdialog.getButton(DialogInterface.BUTTON_POSITIVE)
+        positive.setTextColor(resources.getColor(R.color.black))
+    }
 
     override fun onBackPressed() {
 
@@ -684,19 +756,12 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         }
     }
 
-    // Wheather recod already exist or not
-//    fun IsEligibilityExsist() : Boolean{
-//
-//        if(prefManager.getUserEligibility() != null){
-//            return true
-//        }else{
-//            return  false
-//        }
-//    }
+
     override fun OnSuccess(apiResponse: APIResponse, message: String) {
 
         dismissDialog()
 
+        //region comment
 // authenticationController.getUserConstatnt(it!!.user_id.toString(), this@HomeActivity)
 
 //        if (apiResponse is EligibilityUserResponse) {
@@ -730,6 +795,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 //
 //        }
 
+        //endregion
+
 
          if (apiResponse is UserConsttantResponse) {
             if (apiResponse.status_code == 0) {
@@ -751,4 +818,18 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     //endregion
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Constants.PERMISSION_CAMERA_STORACGE_CONSTANT) {
+            if (VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    // perform action when allow permission success
+                } else {
+                    // Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    dialogStorage()
+                }
+            }
+        }
+    }
 }

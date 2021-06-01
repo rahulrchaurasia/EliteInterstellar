@@ -178,8 +178,8 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
         ivLogo = (ImageView) view.findViewById(R.id.ivLogo);
         //ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
 
-        tilCity  =  view.findViewById(R.id.tilCity);
-        tilPincode  =  view.findViewById(R.id.tilPincode);
+        tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
+        tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
         etVehicle.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(20)});
 
 

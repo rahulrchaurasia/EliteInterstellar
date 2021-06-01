@@ -111,7 +111,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:hint="Password"
-
+                    app:startIconDrawable="@drawable/change_password"
                     app:endIconMode="password_toggle"
                     >
 

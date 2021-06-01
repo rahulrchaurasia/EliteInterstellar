@@ -122,7 +122,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/acMake"
-                    style="@style/Style.edittext"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/make_logo"
@@ -154,7 +154,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/acModel"
-                    style="@style/Style.edittext"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
