@@ -206,7 +206,15 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
             R.id.tvForgotPassword -> {
 
-                startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+               // startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+              var a : String = String()
+
+                if(a != null && a != ""){
+                    showAlert("Y")
+                }else{
+
+                    showAlert("N")
+                }
 
             }
 
@@ -271,24 +279,26 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             else{
                 /************************ real code (Below code temp )*******************************
                 // Todo : Response Failed hence Directly Open Elite Plus
-               //   moveToHome()
+
              ********************************************************/
+
+                moveToHome()
 
 
                 // temp added 05   loginEntity!!.mobile.equals("9403834308") 167815
                 // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
                 // Todo : Commented : Suppose below mob no success response
 
-                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")  || loginEntity!!.mobile.equals("9412365852")){
-
-
-                    moveToVerifyCode()
-
-                }else{
-
-                    // For Elite Plus
-                    moveToHome()
-                }
+//                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")  || loginEntity!!.mobile.equals("9412365852")){
+//
+//
+//                    moveToVerifyCode()
+//
+//                }else{
+//
+//                    // For Elite Plus
+//                    moveToHome()
+//                }
 
                 // Todo : till here
 

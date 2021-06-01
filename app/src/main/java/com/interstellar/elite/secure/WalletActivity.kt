@@ -175,25 +175,33 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                var tataEntity: TataEntity = apiResponse.EliteTataPeepResult.EliteTataPeepdetails.get(0)
 
 
-                tataEntity.PolicyLink.let {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
-                    startActivity(browserIntent)
+                if(tataEntity.PolicyLink != null && tataEntity.PolicyLink  != "") {
+                    tataEntity.PolicyLink.let {
+                        val browserIntent =
+                            Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
+                        startActivity(browserIntent)
 
-                    downloadPdf(tataEntity.PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
-                }
+                        downloadPdf(
+                            tataEntity.PolicyLink,
+                            "Elite_TataPeepDocs" + Utility.currentDateTime()
+                        )
+                    }
 
-                 //Todo : insert in our db when got success from landmark url
+                    //Todo : insert in our db when got success from landmark url
 
-               // showLoading("Loading Pdf..")
-                tataEntity.let {
+                    // showLoading("Loading Pdf..")
+                    tataEntity.let {
 
-                    authenticationController.insertTataPeep(
+                        authenticationController.insertTataPeep(
                             it!!.MobileNo.toString(),
                             it!!.PolicyLink,
                             it!!.RegistrationNo,
                             this@WalletActivity
-                    )
+                        )
 
+                    }
+                }else{
+                    showAlert("Pdf Not Found.\nContact Landmark Admin")
                 }
 
             }

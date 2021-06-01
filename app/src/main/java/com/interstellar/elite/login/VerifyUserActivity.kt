@@ -257,7 +257,17 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
         else if(apiResponse is UpladeGoldResponse){
 
             cancelDialog()
+
+//             loginEntity!!.copy(isgoldverify = "Y")
+//             prefManager.storeUserData(loginEntity)
+//            authenticationAlert("Congratulation!!",getString(R.string.ActivationMessage))
+
+
+            var modifyLogin =  loginEntity!!.copy(isgoldverify = "Y")
+            prefManager.storeUserData(modifyLogin)
+
             authenticationAlert("Congratulation!!",getString(R.string.ActivationMessage))
+
         }
     }
 

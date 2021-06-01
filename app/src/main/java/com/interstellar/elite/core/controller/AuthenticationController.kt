@@ -312,7 +312,8 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
                             // ApplicationPersistance(mContext).saveUser(response.body()!!)
                             iResponseSubcriber.OnSuccess(response.body()!!, response.message())
                         } else {
-                            iResponseSubcriber.OnFailure(response.body()?.message!!)
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
                         }
                     } else {
 
@@ -466,7 +467,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
         var map = hashMapOf<String, String>()
-        map.put("user_id", user_id)
+        map.put("id", user_id)
 
 
         authenticationBuilder.updateGolduser(map).enqueue(object :

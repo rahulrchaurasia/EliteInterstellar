@@ -452,9 +452,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:hint="Confirm Password"
-                                    app:passwordToggleContentDescription="Password"
-                                    app:passwordToggleEnabled="true"
-                                    app:passwordToggleTint="@color/color_close"
+                                    app:endIconMode="password_toggle"
                                     app:startIconDrawable="@drawable/change_password">
 
                                     <EditText

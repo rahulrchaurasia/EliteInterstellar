@@ -18,6 +18,8 @@ import com.interstellar.elite.core.controller.register.RegisterController;
 import com.interstellar.elite.core.model.UserEntity;
 import com.interstellar.elite.core.response.CommonResponse;
 import com.interstellar.elite.facade.PrefManager;
+import com.interstellar.elite.utility.Constants;
+import com.interstellar.elite.utility.Utility;
 
 import androidx.fragment.app.Fragment;
 
@@ -62,6 +64,8 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
 
     @Override
     public void onClick(View view) {
+
+        Constants.hideKeyBoard(view,requireContext());
         if (view.getId() == R.id.btnSubmit)
         {
 

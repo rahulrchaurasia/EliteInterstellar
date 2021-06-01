@@ -169,11 +169,12 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
 
         else if(apiResponse is GlobalAssureLandmarkResponse){
 
-            if(apiResponse.GlobalAssureResult.CertificateFile != null){
+            if(apiResponse.GlobalAssureResult.CertificateFile != null && apiResponse.GlobalAssureResult.CertificateFile != ""   ){
 
                 var globalAssureResult : GlobalAssureResult = apiResponse.GlobalAssureResult;
 
                 globalAssureResult.CertificateFile.let {
+
 
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
                     startActivity(browserIntent)
@@ -197,7 +198,7 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
 
                 // temp 05
                // tempAdded()
-                 cancelDialog()
+               cancelDialog()
                 showAlert("Pdf Not Found.\nContact Landmark Admin")
             }
 

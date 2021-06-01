@@ -184,7 +184,7 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
         }
         if (!isValideEmailID(etEmail)) {
             etEmail.requestFocus()
-            tilVehicle.error = "Enter Valid Email"
+            tilEmail.error = "Enter Valid Email"
             return false
         }
         if (!isEmpty(etVehicle)) {
@@ -251,9 +251,6 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                             mobile = etMobile.text.toString(),
                             this
                     )
-
-                    showOtpAlert()
-
                 }
             }
 
@@ -278,9 +275,15 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 if (verifyOTPEntity.SavedStatus === 1 ) {
                     OTP = verifyOTPEntity.OTP
 
+                    showOtpAlert()
+
+
                 } else if (verifyOTPEntity.SavedStatus === 2) {
                     getCustomToast(apiResponse.message)
                 }
+            }else{
+
+                showOtpAlert()
             }
         }else if (apiResponse is UserRegistrationResponse) {
 
