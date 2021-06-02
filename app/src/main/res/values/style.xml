@@ -65,6 +65,14 @@
 
     </style>
 
+    <style name="customTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
+
     <style name="AppTheme.ELITE" parent="AppTheme.NoActionBar">
 
     </style>

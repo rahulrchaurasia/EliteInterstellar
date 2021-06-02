@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/four"
+
         style="@style/CardStyle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:orientation="vertical">
 
             <TextView
@@ -65,19 +67,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="@dimen/fab_margin"
                     android:layout_marginTop="8dp"
                     android:visibility="visible"
                     android:text="Please Select Number Of Family Member :" />
 
 
                 <Spinner
-
+                    android:layout_marginLeft="@dimen/fab_margin"
+                    android:layout_marginRight="@dimen/fab_margin"
                     android:id="@+id/spNoOfFamily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/four"
-                    android:background="@drawable/style_spinner"
+                    android:background="@drawable/custom_spinner"
+
                     android:entries="@array/FamilyMemNo"
                     android:gravity="center"
                     android:padding="@dimen/activity_horizontal_margin"

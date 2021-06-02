@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.BaseFragment;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
@@ -79,6 +80,8 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
     ImageView ivLogo, ivClientLogo;
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
+    TextInputLayout tilDate, tilCity , tilPincode;
+
 
     String PRODUCT_NAME = "";
     String PRODUCT_CODE = "";
@@ -135,7 +138,9 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
         ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
 
         etDate = view.findViewById(R.id.etDate);
-
+        tilDate = (TextInputLayout) view.findViewById(R.id.tilDate);
+        tilCity = (TextInputLayout) view.findViewById(R.id.tilCity);
+        tilPincode = (TextInputLayout) view.findViewById(R.id.tilPincode);
 
         etVehicle.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(20)});
 
@@ -196,6 +201,7 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
 
         setOnClickListener();
 
+        setTextChangeListener();
 
         loginEntity = prefManager.getUserData();
         userConstatntEntity = prefManager.getUserConstatnt();
@@ -231,6 +237,13 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
 
     }
 
+    private void setTextChangeListener(){
+
+
+
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+
+    }
 
     private boolean validate() {
         if (!isEmpty(etVehicle)) {
@@ -239,16 +252,16 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
             return false;
         } else if (!isEmpty(etDate)) {
             etDate.requestFocus();
-            etDate.setError("Enter Accident Date");
+            tilDate.setError("Enter Accident Date");
             return false;
         } else if (!isEmpty(etCity)) {
             etCity.requestFocus();
-            etCity.setError("Enter City");
+            tilCity.setError("Enter City");
             return false;
         }
-        if (!isEmpty(etPincode) && etPincode.getText().toString().length() != 6) {
+        if (!isEmpty(etPincode) || etPincode.getText().toString().length() != 6) {
             etPincode.requestFocus();
-            etPincode.setError("Enter Pincode");
+            tilPincode.setError("Enter Pincode");
             return false;
         }
         return true;
@@ -317,6 +330,7 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
                             calendar.set(year, monthOfYear, dayOfMonth);
                             String currentDay = simpleDateFormat.format(calendar.getTime());
                             etDate.setText(currentDay);
+                            tilDate.setError(null);
                         }
                     }
                 });

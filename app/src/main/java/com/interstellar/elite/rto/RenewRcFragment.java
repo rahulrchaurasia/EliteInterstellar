@@ -85,7 +85,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
     Button btnBooked, btnGo;
     ScrollView scrollView;
 
-    TextInputLayout tilPincode;
+    TextInputLayout tilCity ,tilPincode;
 
     DashProductEntity dashProductEntity;
 
@@ -97,6 +97,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
     ImageView ivLogo, ivClientLogo;
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
+
 
     AutoCompleteTextView acMake, acModel;
 
@@ -239,6 +240,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
         ivLogo = (ImageView) view.findViewById(R.id.ivLogo);
         ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilCity = (TextInputLayout) view.findViewById(R.id.tilCity);
 
         acMake = (AutoCompleteTextView) view.findViewById(R.id.acMake);
         acModel = (AutoCompleteTextView) view.findViewById(R.id.acModel);
@@ -539,7 +541,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
 //        }
         if ((etCity.getText().toString().trim().length() == 0)) {
             etCity.requestFocus();
-            etCity.setError("Selct City");
+            tilCity.setError("Enter City");
             return false;
         }
 
@@ -737,7 +739,7 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
-
+                tilCity.setError(null);
                 showDialog();
 
                 //region call Price Controller

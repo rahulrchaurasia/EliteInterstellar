@@ -92,17 +92,17 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         }
 
         //region Comment
-//        showLoading("Please wait..")
-//
-//        loginEntity.let {
-//
-//            authenticationController.getUserEligibility(
-//                    it!!.mobile.toString(),
-//                    it!!.vehicleno,
-//                    this@HomeActivity
-//            )
-//            //
-//        }
+        showLoading("Please wait..")
+
+        loginEntity.let {
+
+            authenticationController.getUserEligibility(
+                    it!!.mobile.toString(),
+                    it!!.vehicleno,
+                    this@HomeActivity
+            )
+            //
+        }
 
         //endregion
 
@@ -761,19 +761,17 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         dismissDialog()
 
-        //region comment
-// authenticationController.getUserConstatnt(it!!.user_id.toString(), this@HomeActivity)
 
-//        if (apiResponse is EligibilityUserResponse) {
-//            if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
-//
-//                prefManager.storeUserEligibility(
-//                        apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
-//                )
-//
-//                checkEligibility()
-//
-//            }
+        if (apiResponse is EligibilityUserResponse) {
+            if (apiResponse.EliteEligibilityCheckResult.status_code == 0) {
+
+                prefManager.storeUserEligibility(
+                        apiResponse.EliteEligibilityCheckResult.EliteEligibilityCheckdetails.get(0)
+                )
+
+
+
+            }
 //            else{
 //
 //                // temp added 05
@@ -793,7 +791,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 //
 //            }
 //
-//        }
+        }
 
         //endregion
 

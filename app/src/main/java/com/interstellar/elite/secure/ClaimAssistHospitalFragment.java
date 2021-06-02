@@ -335,7 +335,7 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
             etCity.setError("Enter City");
             return false;
         }
-        if (!isEmpty(etPincode) && etPincode.getText().toString().length() != 6) {
+        if (!isEmpty(etPincode) || etPincode.getText().toString().length() != 6) {
             etPincode.requestFocus();
             etPincode.setError("Enter Pincode");
             return false;

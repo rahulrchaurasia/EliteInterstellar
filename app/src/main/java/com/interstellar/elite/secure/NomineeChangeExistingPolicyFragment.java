@@ -54,7 +54,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
     PrefManager prefManager;
     UserConstatntEntity userConstatntEntity;
 
-    EditText etPincode,  etCity ,   etNomineeName , etRelationNominee ,  etInsCompanyName   ;
+    EditText etPincode,  etCity ,   etNomineeName , etRelationNominee ,  etInsCompanyName ;
 
     UserEntity loginEntity;
     Button btnBooked;
@@ -66,7 +66,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
     LinearLayout lvLogo, lyTAT;
     RelativeLayout rlDoc ;
     ImageView ivLogo, ivClientLogo;
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilPincode ,tilNomineeName , tilRelationNominee , tilInsCompanyName;
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
 
@@ -103,7 +103,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
         initialize(view);
 
         setOnClickListener();
-
+        setTextChangeListener();
 
         loginEntity = prefManager.getUserData();
         userConstatntEntity = prefManager.getUserConstatnt();
@@ -169,8 +169,23 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
         tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
+        tilNomineeName  =  (TextInputLayout)view.findViewById(R.id.tilNomineeName);
+        tilRelationNominee  =  (TextInputLayout)view.findViewById(R.id.tilRelationNominee);
+        tilInsCompanyName  =  (TextInputLayout)view.findViewById(R.id.tilInsCompanyName);
+
    }
 
+    private void setTextChangeListener(){
+
+
+        etNomineeName.addTextChangedListener(getTextWatcher(tilNomineeName));
+
+        etRelationNominee.addTextChangedListener(getTextWatcher( tilRelationNominee));
+        etInsCompanyName.addTextChangedListener(getTextWatcher(tilInsCompanyName));
+
+        //etCity.addTextChangedListener(getTextWatcher(tilCity));
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+    }
     private void setOnClickListener() {
 
         etCity.setFocusable(false);
@@ -202,15 +217,16 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
     }
 
     private boolean validate() {
-         if (!validateNominee(etNomineeName)) {
+         if (!validateNominee(etNomineeName,tilNomineeName)) {
 
             return false;
         }
-        else if (!validateNomineeRel(etRelationNominee)) {
+
+        else if (!validateNomineeRel(etRelationNominee,tilRelationNominee)) {
 
             return false;
         }
-        else if (!validateInsCompName(etInsCompanyName)) {
+        else if (!validateInsCompName(etInsCompanyName,tilInsCompanyName)) {
 
             return false;
         }
@@ -218,9 +234,10 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
 
             return false;
         }
-        else if (!validatePinCode(etPincode,tilPincode)) {
-            return false;
-        }
+         else if (!validatePinCode(etPincode,tilPincode)) {
+             return false;
+         }
+
         return true;
     }
 
@@ -310,6 +327,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
                 CITY_ID =  String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
+                tilCity.setError(null);
 
                 showDialog();
 

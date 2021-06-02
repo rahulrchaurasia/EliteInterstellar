@@ -200,6 +200,55 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
         })
     }
 
+    override fun getPolicyBossVehicleInfo(
+        RegistrationNumber: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+        var url = "http://horizon.policyboss.com:5000/quote/vehicle_info"
+
+        var map = hashMapOf<String, String>()
+        map.put("RegistrationNumber", RegistrationNumber)
+        map.put("client_key", "CLIENT-CNTP6NYE-CU9N-DUZW-CSPI-SH1IS4DOVHB9")
+        map.put("product_id", "1")
+        map.put("secret_key", "SECRET-HZ07QRWY-JIBT-XRMQ-ZP95-J0RWP3DYRACW")
+        map.put("ss_id", "8067")
+
+
+
+        authenticationBuilder.getPolicyBossVehicleInfo(url,map).enqueue(object :
+            Callback<PolicyBossVehicleInfoResponse> {
+            override fun onResponse(
+                call: Call<PolicyBossVehicleInfoResponse>,
+                response: Response<PolicyBossVehicleInfoResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+
+                            // ApplicationPersistance(mContext).saveUser(response.body()!!)
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<PolicyBossVehicleInfoResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+
+            }
+        })
+    }
+
+
     override fun getUserConstatnt(userid: String, iResponseSubcriber: IResponseSubcriber) {
         var map = hashMapOf<String, String>()
         map.put("userid", userid)

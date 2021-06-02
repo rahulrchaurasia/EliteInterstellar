@@ -62,7 +62,7 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
     UserEntity loginEntity;
     Button btnBooked;
     CardView cvClient;
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilPincode,tilFinance;
     DashProductEntity dashProductEntity;
 
 
@@ -105,6 +105,7 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
         initialize(view);
 
         setOnClickListener();
+        setTextChangeListener();
         prefManager = new PrefManager(getActivity());
 
         loginEntity = prefManager.getUserData();
@@ -177,6 +178,7 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
         ivClientLogo = (ImageView) view.findViewById(R.id.ivClientLogo);
         tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilFinance  =  (TextInputLayout)view.findViewById(R.id.tilFinance);
         etVehicle.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(20)});
 
 
@@ -194,6 +196,16 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
         etCity.setOnClickListener(this);
 
 
+
+    }
+
+    private void setTextChangeListener(){
+
+
+
+        etFinance.addTextChangedListener(getTextWatcher(tilFinance));
+
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
 
     }
 
@@ -283,7 +295,7 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
         }
         else if (!isEmpty(etFinance)) {
             etFinance.requestFocus();
-            etFinance.setError("Enter Vehicle Finanace From");
+            tilFinance.setError("Enter Vehicle Finanace From");
             return false;
         }
         else if (!validateCity(etCity,tilCity)) {
@@ -358,7 +370,7 @@ public class HypotheticalFragment extends BaseFragment implements View.OnClickLi
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
-
+                tilCity.setError(null);
                 showDialog();
 
                 //region call Price Controller

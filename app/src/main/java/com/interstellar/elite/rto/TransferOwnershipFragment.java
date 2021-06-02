@@ -61,7 +61,7 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
     UserEntity loginEntity;
     Button btnBooked;
 
-   TextInputLayout tilCity ,tilPincode;
+   TextInputLayout tilCity ,tilPincode,tilNewOwner;
 
     DashProductEntity dashProductEntity;
 
@@ -107,7 +107,7 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
         initialize(view);
 
         setOnClickListener();
-
+        setTextChangeListener();
 
         loginEntity = prefManager.getUserData();
         userConstatntEntity = prefManager.getUserConstatnt();
@@ -180,6 +180,8 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
 
         tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilNewOwner  =  (TextInputLayout)view.findViewById(R.id.tilNewOwner);
+
         etVehicle.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(20)});
 
 
@@ -199,6 +201,16 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
 
 
     }
+    private void setTextChangeListener(){
+
+
+
+        etNewOwner.addTextChangedListener(getTextWatcher(tilNewOwner));
+
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+
+    }
+
 
     private void bindData() {
 
@@ -298,7 +310,7 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
         }
         else if (!isEmpty(etNewOwner)) {
             etNewOwner.requestFocus();
-            etNewOwner.setError("Enter New Owner");
+            tilNewOwner.setError("Enter New Owner");
             return false;
         }
         else if (!validateCity(etCity,tilCity)) {
@@ -361,6 +373,7 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
+                tilCity.setError(null);
 
                 showDialog();
 

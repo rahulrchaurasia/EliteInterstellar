@@ -87,7 +87,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
     EditText etName, etDOB, etAddress;
     CheckBox chkName, chkDOB, chkAddress;
     RadioButton rbfour ,rbtwo;
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilPincode,tilRTO,tilLic;
     TextView ivTick;
 
 
@@ -341,6 +341,8 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
         cvClient  = (CardView) view.findViewById(R.id.cvClient);
         tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilRTO  =  (TextInputLayout)view.findViewById(R.id.tilRTO);
+        tilLic  =  (TextInputLayout)view.findViewById(R.id.tilLic);
     }
 
     private void setOnClickListener() {
@@ -365,6 +367,9 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
         chkAddress.setOnCheckedChangeListener(this);
 
 
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+        etLic.addTextChangedListener(getTextWatcher( tilLic));
+
     }
 
     private void bindData() {
@@ -378,20 +383,20 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
         if ((etLic.getText().toString().trim().length() == 0) && (lyLic.getVisibility() == View.VISIBLE)) {
             etLic.requestFocus();
-            etLic.setError("Enter Driving Licence");
+            tilLic.setError("Enter Driving Licence");
             return false;
         }
 
 
         else if ((etCity.getText().toString().trim().length() == 0)) {
             etCity.requestFocus();
-            etCity.setError("Selct City");
+            tilCity.setError("Enter City");
             return false;
         }
 
         else  if ((etRTO.getText().toString().trim().length() == 0)) {
             etRTO.requestFocus();
-            etRTO.setError("Selct RTO");
+            tilRTO.setError("Enter RTO");
             return false;
         }
         else  if (!validatePinCode(etPincode,tilPincode)) {
@@ -559,6 +564,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
                 if (!etCity.getText().toString().equalsIgnoreCase("")) {
 
                      etRTO.setError(null);
+                     tilRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
                     getCustomToast("Select City");
@@ -636,6 +642,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
+                tilCity.setError(null);
 
                 showDialog();
 

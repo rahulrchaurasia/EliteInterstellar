@@ -15,6 +15,8 @@ interface IAuthentication {
 
     fun getLandmarkEliteActivationCode( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
+    fun getPolicyBossVehicleInfo(RegistrationNumber : String ,iResponseSubcriber: IResponseSubcriber)
+
     fun getUserConstatnt(userid: String,iResponseSubcriber: IResponseSubcriber)
 
      fun getCityState(pincode: String, iResponseSubcriber: IResponseSubcriber)

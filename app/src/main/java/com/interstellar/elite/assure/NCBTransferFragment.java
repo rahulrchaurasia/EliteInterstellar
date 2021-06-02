@@ -110,7 +110,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
     RtoCityMain rtoMainEntity;
 
     RtoMainAdapter rtoMainAdapter;
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilPincode,tilInsCompanyName;
 
     //endregion
 
@@ -221,6 +221,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
 
         tilCity  =  (TextInputLayout)view.findViewById(R.id.tilCity);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
+        tilInsCompanyName =   (TextInputLayout)view.findViewById(R.id.tilInsCompanyName);
 
     }
 
@@ -336,7 +337,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
         } else if (!validateMake(acMake, IsMakeValid)) {
 
             return false;
-        } else if (!validateInsCompName(etInsCompanyName)) {
+        } else if (!validateInsCompName(etInsCompanyName,tilInsCompanyName)) {
 
             return false;
         } else if (!validateCity(etCity,tilCity)) {

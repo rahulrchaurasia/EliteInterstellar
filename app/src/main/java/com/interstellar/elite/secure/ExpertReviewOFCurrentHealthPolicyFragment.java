@@ -164,9 +164,10 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
                 if(pos == 0){
-                    txtFamilyError.setVisibility(View.VISIBLE);
+                   // txtFamilyError.setVisibility(View.VISIBLE);
                 }else{
                     txtFamilyError.setVisibility(View.GONE);
+                    spNoOfFamily.setBackgroundResource(R.drawable.custom_spinner);
                 }
             }
 
@@ -253,7 +254,7 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         etSumAssured.addTextChangedListener(getTextWatcher( tilSumAssured));
         etDOB.addTextChangedListener(getTextWatcher(tilDOB));
 
-        etCity.addTextChangedListener(getTextWatcher(tilCity));
+        //etCity.addTextChangedListener(getTextWatcher(tilCity));
         etPincode.addTextChangedListener(getTextWatcher( tilPincode));
     }
 
@@ -296,6 +297,8 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         }else if(rbFloater.isChecked()  && spNoOfFamily.getSelectedItemPosition() == 0){
 
             txtFamilyError.setVisibility(View.VISIBLE);
+            spNoOfFamily.setBackgroundResource(R.drawable.custom_rect_spinner);
+
             return false;
 
 //            if(spNoOfFamily.getSelectedItemPosition() == 0){

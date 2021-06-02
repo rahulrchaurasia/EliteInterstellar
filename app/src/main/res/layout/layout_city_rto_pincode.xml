@@ -31,6 +31,8 @@
             app:endIconMode="custom"
 
             app:endIconTint="@color/sub_text_color"
+
+
             >
 
         <EditText

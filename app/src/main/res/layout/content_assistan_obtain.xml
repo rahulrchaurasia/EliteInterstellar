@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:orientation="vertical">
 
@@ -41,19 +41,43 @@
                 android:src="@drawable/star_img"
                 android:textSize="18sp"
                 android:visibility="gone" />
+
+
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etLic"
-            style="@style/EditTextStyle"
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
+            android:orientation="horizontal">
 
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:minLines="1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/TextInputMaterialStyle"
+                app:startIconDrawable="@drawable/ic_garage_24"
+                android:hint="Driving License">
+
+                <EditText
+                    android:id="@+id/etLic"
+                    style="@style/Style.edittext"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:inputType="text"
+                     />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -61,6 +85,7 @@
         android:id="@+id/lyVehicleType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/four"
         android:orientation="vertical">
 
 
@@ -166,8 +191,8 @@
     <LinearLayout
         android:id="@+id/llCorrection"
         style="@style/LinearLayoutStyle"
-        android:animateLayoutChanges="true"
         android:layout_margin="4dp"
+        android:animateLayoutChanges="true"
         android:background="@drawable/custom_white"
 
         android:visibility="visible">
@@ -194,21 +219,21 @@
                 android:layout_height="match_parent" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextInputMaterialStyle"
                 android:hint="Correction in Name">
 
 
                 <EditText
                     android:id="@+id/etName"
                     style="@style/Style.edittext"
-                    android:inputType="text"
                     android:focusableInTouchMode="true"
-                    android:padding="@dimen/input_label_vertical_spacing"
+                    android:inputType="text"
                     android:lines="1"
                     android:maxLength="30"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:padding="@dimen/input_label_vertical_spacing" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -227,20 +252,20 @@
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextInputMaterialStyle"
                 android:hint="Correction in DOB">
 
 
                 <EditText
                     android:id="@+id/etDOB"
                     style="@style/Style.edittext"
-                    android:focusableInTouchMode="true"
-                    android:padding="@dimen/input_label_vertical_spacing"
-
                     android:drawableRight="@drawable/vector_date"
-                    android:focusable="false" />
+                    android:focusable="false"
+
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/input_label_vertical_spacing" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -259,21 +284,21 @@
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextInputMaterialStyle"
                 android:hint="Correction in Address">
 
 
                 <EditText
                     android:id="@+id/etAddress"
                     style="@style/Style.edittext"
-                    android:inputType="text"
                     android:focusableInTouchMode="true"
-                    android:padding="@dimen/input_label_vertical_spacing"
+                    android:inputType="text"
                     android:lines="1"
                     android:maxLength="40"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:padding="@dimen/input_label_vertical_spacing" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -282,8 +307,6 @@
     </LinearLayout>
 
     <include layout="@layout/layout_city_rto_pincode" />
-
-
 
 
 </LinearLayout>

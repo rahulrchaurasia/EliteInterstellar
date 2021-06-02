@@ -507,47 +507,47 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public boolean validateInsCompName (EditText etInsComName)
+    public boolean validateInsCompName (EditText etInsComName,TextInputLayout textInputLayout)
     {
 
         if (!isEmpty(etInsComName)){
             etInsComName.requestFocus();
-            etInsComName.setError("Enter Insurer Company Name");
+            textInputLayout.setError("Enter Insurer Company Name");
             return false;
         }else{
             return  true;
         }
     }
 
-    public boolean validateProposerName (EditText etName)
+    public boolean validateProposerName (EditText etName,TextInputLayout textInputLayout)
     {
 
         if (!isEmpty(etName)){
             etName.requestFocus();
-            etName.setError("Enter Proposer Name");
+            textInputLayout.setError("Enter Proposer Name");
             return false;
         }else{
             return  true;
         }
     }
 
-    public boolean validateNominee (EditText etName)
+    public boolean validateNominee (EditText etName,TextInputLayout textInputLayout)
     {
 
         if (!isEmpty(etName)){
             etName.requestFocus();
-            etName.setError("Enter Nominee Name");
+            textInputLayout.setError("Enter Nominee Name");
             return false;
         }else{
             return  true;
         }
     }
-    public boolean validateNomineeRel (EditText etName)
+    public boolean validateNomineeRel (EditText etName ,TextInputLayout textInputLayout)
     {
 
         if (!isEmpty(etName)){
             etName.requestFocus();
-            etName.setError("Enter Relation with Nominee");
+            textInputLayout.setError("Enter Relation with Nominee");
             return false;
         }else{
             return  true;
@@ -578,7 +578,7 @@ public class BaseFragment extends Fragment {
     }
 
     public boolean validatePinCode (EditText etPincode,TextInputLayout textInputLayout) {
-        if (!isEmpty(etPincode) && etPincode.getText().toString().length() != 6) {
+        if (!isEmpty(etPincode) || etPincode.getText().toString().length() != 6) {
             etPincode.requestFocus();
             textInputLayout.setError("Enter Pincode");
             return false;

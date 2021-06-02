@@ -51,6 +51,8 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
         @GET()
         fun getLandmarkEliteActivationCode(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<ActivationCodeLandmarkResponse>
 
+        @POST()
+        fun getPolicyBossVehicleInfo(@Url url :String, @Body body: HashMap<String, String>): Call<PolicyBossVehicleInfoResponse>
 
         @POST("/api/get-user-constant")
         fun getUserConstant(@Body body: HashMap<String, String>): Call<UserConsttantResponse>

@@ -63,7 +63,7 @@ open class BaseFragmentKotlin : Fragment() {
     //endregion
 
     open fun validatePinCode(etPincode: EditText): Boolean {
-        return if (!BaseFragment.isEmpty(etPincode) && etPincode.text.toString().length != 6) {
+        return if (!BaseFragment.isEmpty(etPincode) || etPincode.text.toString().length != 6) {
             etPincode.requestFocus()
             etPincode.error = "Enter Pincode"
             false

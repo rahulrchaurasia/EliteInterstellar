@@ -81,9 +81,11 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TextInputMaterialStyle"
+        app:endIconMode="none"
         app:startIconDrawable="@drawable/ic_calendar_24"
         android:hint="PUC Expiry Date">
 

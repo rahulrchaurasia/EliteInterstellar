@@ -5,34 +5,24 @@ import ServiceName
 import ServiceRequest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.os.Environment
-import android.provider.Settings
-import android.util.Log
-import android.view.View
-import android.view.Window
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import com.google.gson.Gson
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
-import com.interstellar.elite.core.model.EligibilityEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.response.EligibilityUserResponse
 import com.interstellar.elite.core.response.LoginResponse
 import com.interstellar.elite.databinding.ActivityLoginBinding
-
 import com.interstellar.elite.facade.PrefManager
-import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
+
 //import kotlinx.android.synthetic.main.content_login.*
 
 
@@ -69,14 +59,16 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         setContentView(binding.root)
 
 
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
+//        if (SDK_INT >= Build.VERSION_CODES.R) {
+//            window.insetsController?.hide(WindowInsets.Type.statusBars())
+//        } else {
+//            window.setFlags(
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN
+//            )
+//        }
+
+
         initialize()
 
         setListener()
@@ -98,8 +90,8 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
         prefManager = PrefManager(this)
 
-        binding.includedLayout.etMobile.setText(""+prefManager.getMobile())
-        binding.includedLayout.etPassword.setText(""+ prefManager.getPassword())
+        binding.includedLayout.etMobile.setText("" + prefManager.getMobile())
+        binding.includedLayout.etPassword.setText("" + prefManager.getPassword())
 
 
     }
@@ -179,7 +171,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
                 prefManager.setMobile(binding.includedLayout.etMobile.text.toString())
                 prefManager.setPassword(binding.includedLayout.etPassword.text.toString())
 
- //               strToken = prefManager.getToken()
+                //               strToken = prefManager.getToken()
 //                strToken = if (prefManager.getToken() != null) {
 //                    prefManager.getToken()
 //                } else {
@@ -206,12 +198,12 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
             R.id.tvForgotPassword -> {
 
-               // startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
-              var a : String = String()
+                // startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+                var a: String = String()
 
-                if(a != null && a != ""){
+                if (a != null && a != "") {
                     showAlert("Y")
-                }else{
+                } else {
 
                     showAlert("N")
                 }
