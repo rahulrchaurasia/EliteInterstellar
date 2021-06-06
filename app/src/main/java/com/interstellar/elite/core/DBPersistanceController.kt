@@ -3,7 +3,8 @@ package com.interstellar.elite.core
 import com.interstellar.elite.R
 import com.interstellar.elite.core.model.DashProductEntity
 import com.interstellar.elite.core.model.InsuranceCompany
-import kotlinx.android.synthetic.main.fragment_secure_list.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 open class DBPersistanceController {
 
@@ -124,17 +125,31 @@ open class DBPersistanceController {
 
         //Secure List
         @JvmStatic
-        fun getSecureList(type : String): List<DashProductEntity> {
+        fun getSecureList(type: String): List<DashProductEntity> {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
             if(type.toUpperCase().equals("Y")) {
-                productList.add(DashProductEntity(1, "401", R.drawable.cover, "Wallet/ATM/Key Cover"))
-                productList.add(DashProductEntity(2, "402", R.drawable.rsa, "Road Side Assistancer"))
+                productList.add(
+                    DashProductEntity(
+                        1,
+                        "401",
+                        R.drawable.cover,
+                        "Wallet/ATM/Key Cover"
+                    )
+                )
+                productList.add(
+                    DashProductEntity(
+                        2,
+                        "402",
+                        R.drawable.rsa,
+                        "Road Side Assistancer"
+                    )
+                )
             }
             productList.add(
                 DashProductEntity(
-                        134,
+                    134,
                     "10",
                     R.drawable.claim_assistance,
                     "Claim Assistance in Case of Hospitalization"
@@ -160,7 +175,7 @@ open class DBPersistanceController {
 
         //Assure List
         @JvmStatic
-        fun getAssureList(type : String): List<DashProductEntity> {
+        fun getAssureList(type: String): List<DashProductEntity> {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
@@ -169,8 +184,22 @@ open class DBPersistanceController {
                 productList.add(DashProductEntity(10, "500", R.drawable.finpeace, "FinPeace"))
             }
 
-            productList.add(DashProductEntity(131, "11", R.drawable.puc, "PUC Expiry Renewal Reminder"))
-            productList.add(DashProductEntity(132, "13", R.drawable.ncb, "No Claim Bonus (NCB) Transfer"))
+            productList.add(
+                DashProductEntity(
+                    131,
+                    "11",
+                    R.drawable.puc,
+                    "PUC Expiry Renewal Reminder"
+                )
+            )
+            productList.add(
+                DashProductEntity(
+                    132,
+                    "13",
+                    R.drawable.ncb,
+                    "No Claim Bonus (NCB) Transfer"
+                )
+            )
 
             return productList
         }
@@ -182,8 +211,16 @@ open class DBPersistanceController {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
-            productList.add(DashProductEntity(145, "1.2", R.drawable.rc_book, "RC Book for New Private Car"))
-            productList.add(DashProductEntity(
+            productList.add(
+                DashProductEntity(
+                    145,
+                    "1.2",
+                    R.drawable.rc_book,
+                    "RC Book for New Private Car"
+                )
+            )
+            productList.add(
+                DashProductEntity(
                     146, "1.3",
                     R.drawable.rc_renewal,
                     "RC Book Renewal for Existing Private Car"
@@ -269,7 +306,7 @@ open class DBPersistanceController {
             )
             productList.add(
                 DashProductEntity(
-                        161, "7",
+                    161, "7",
                     R.drawable.paper_to_smartcard,
                     "Paper to Smart Card Driving License"
                 )
@@ -277,6 +314,24 @@ open class DBPersistanceController {
 
 
             return productList
+        }
+
+
+        fun getYearOfManufacture() :List<String> {
+
+          val maxYear =  Calendar.getInstance().get(Calendar.YEAR)
+
+            val manuYear: ArrayList<String> = ArrayList()
+
+            for( i in  maxYear downTo  1960 ){
+
+                manuYear.add(""+ i)
+            }
+
+
+
+            return manuYear
+
         }
     }
 }

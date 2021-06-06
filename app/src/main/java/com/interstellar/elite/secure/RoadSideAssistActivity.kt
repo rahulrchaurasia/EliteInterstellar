@@ -1,19 +1,23 @@
 package com.interstellar.elite.secure
 
+import ServiceName
+import ServiceRequest
 import android.app.DownloadManager
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
 import com.interstellar.elite.BaseActivity
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
+import com.interstellar.elite.core.DBPersistanceController
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
 import com.interstellar.elite.core.model.GloabalAssureEntity
@@ -22,31 +26,39 @@ import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.response.CommonResponse
 import com.interstellar.elite.core.response.GlobalAssureLandmarkResponse
 import com.interstellar.elite.core.response.GlobalAssureResponse
-import com.interstellar.elite.core.response.TataLandmarkResponse
 import com.interstellar.elite.databinding.ActivityRoadSideAssistBinding
 import com.interstellar.elite.facade.PrefManager
+import com.interstellar.elite.utility.Constants
+import com.interstellar.elite.utility.DateTimePicker
 import com.interstellar.elite.utility.Utility
+
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponseSubcriber {
 
 
+    var simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
     lateinit var authenticationController: AuthenticationController
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
+    var YEAR_MANUFACTURE = ""
 
     lateinit var binding: ActivityRoadSideAssistBinding
-   override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_road_side_assist)
+        // setContentView(R.layout.activity_road_side_assist)
 
-       binding = ActivityRoadSideAssistBinding.inflate(layoutInflater)
-       setContentView(binding.root)
-       setSupportActionBar(binding.toolbar)
-       supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-       supportActionBar!!.setDisplayShowHomeEnabled(true)
+        binding = ActivityRoadSideAssistBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-       init()
-       setListner()
+        init()
+        setListner()
+        bindData()
     }
 
     private fun init() {
@@ -59,21 +71,58 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
             this
         ) as AuthenticationController
 
+
+        val yearOFList: List<String> = DBPersistanceController.getYearOfManufacture()
+
+        //Create adapter
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            this@RoadSideAssistActivity, R.layout.dropdown_item, yearOFList
+        )
+
+        binding.includedRSA.acYearManufacture.setAdapter(adapter)
+
+        binding.includedRSA.acYearManufacture.setOnItemClickListener(
+            OnItemClickListener { parent, arg1, pos, id ->
+
+                Constants.hideKeyBoard(binding.includedRSA.acYearManufacture, this)
+                YEAR_MANUFACTURE = adapter.getItem(pos) ?: ""
+                binding.includedRSA.tilYearManufacture.error = null
+
+            })
+
     }
 
-    private fun setListner(){
+    private fun setListner() {
 
         binding.includedRSA.btnPolicy.setOnClickListener(this)
+        binding.includedRSA.acYearManufacture.setOnClickListener(this)
+        binding.includedRSA.etDate.setOnClickListener(this)
+
+
     }
 
-    fun getPdfFile(gloabalAssureEntity : GloabalAssureEntity){
+    fun bindData() {
+
+        binding.includedRSA.apply {
+
+            acMake.setText(prefManager.getMakeFromEligibility())
+            acModel.setText(prefManager.getModelFromEligibility())
+            etFullName.setText(loginEntity!!.name)
+            etVehicle.setText(loginEntity!!.vehicleno)
+        }
+    }
+
+
+
+
+    fun getPdfFile(gloabalAssureEntity: GloabalAssureEntity){
 
         gloabalAssureEntity.CertificateFile.let {
 
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
             startActivity(browserIntent)
 
-            downloadPdf(it, "Elite_GlobalAssureDocs"+ Utility.currentDateTime())
+            downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
 
         }
     }
@@ -82,7 +131,8 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
 
         Gson().fromJson(
             "{\"GlobalAssureResult\":{\"CertificateFile\":\"\",\"CertificateNo\":\"HA2905210000000006\",\"ErrorCode\":\"\",\"ErrorMessage\":\"\",\"ErrorMessageDetail\":\"\",\"PaymentLink\":\"\",\"TransId\":\"12345\",\"status\":\"Success\"}}",
-              GlobalAssureLandmarkResponse::class.java)
+            GlobalAssureLandmarkResponse::class.java
+        )
 
     fun tempAdded(){
 
@@ -93,7 +143,7 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(CertificateFile))
         startActivity(browserIntent)
 
-        downloadPdf(CertificateFile, "Elite_GlobalAssureDocs"+ Utility.currentDateTime())
+        downloadPdf(CertificateFile, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
 
 
 
@@ -110,25 +160,92 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
 
     }
 
+    private fun validate(): Boolean {
+
+        if (!isEmpty(binding.includedRSA.etFullName)) {
+            binding.includedRSA.etFullName.requestFocus()
+
+            return false
+        }
+
+
+        else if (!isEmpty(binding.includedRSA.etVehicle)) {
+            binding.includedRSA.etVehicle.requestFocus()
+
+            return false
+        }
+        else if (!isEmpty(binding.includedRSA.acMake)) {
+            binding.includedRSA.acMake.requestFocus()
+
+            return false
+        }
+
+        else if (!isEmpty(binding.includedRSA.acModel)) {
+            binding.includedRSA.acModel.requestFocus()
+
+            return false
+        }
+        else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
+            binding.includedRSA.tilYearManufacture.error = "Select Year Of Manufacture"
+
+            return false
+        }
+        else if (YEAR_MANUFACTURE.equals("")) {
+            binding.includedRSA.tilYearManufacture.error = "Select Year Of Manufacture"
+
+            return false
+        }
+
+        else if (!isEmpty(binding.includedRSA.etDate)) {
+            binding.includedRSA.tilDate.error = "Enter Date"
+
+            return false
+        }
+
+
+
+        return true
+    }
+
     override fun onClick(view: View?) {
 
+        Constants.hideKeyBoard(view, this)
         when (view?.id) {
 
             R.id.btnPolicy -> {
 
+                if (validate()) {
 
-                showDialog("Please wait..")
+                    showAlert("Done")
 
-                loginEntity.let {
-                    authenticationController.getGlobalAssure(
-                        it!!.mobile.toString(),
-                        this@RoadSideAssistActivity)
+                    //       showDialog("Please wait..")
 
-
+//                    loginEntity.let {
+//                        authenticationController.getGlobalAssure(
+//                            it!!.mobile.toString(),
+//                            this@RoadSideAssistActivity
+//                        )
+//                    }
                 }
 
+            }
+
+            R.id.etDate -> {
+
+                DateTimePicker.showOpenDatePickerDialog(
+                    view.context
+                ) { view1, year, monthOfYear, dayOfMonth ->
+                    if (view1.isShown) {
+                        val calendar = Calendar.getInstance()
+                        calendar[year, monthOfYear] = dayOfMonth
+                        val currentDay: String = simpleDateFormat.format(calendar.time)
+                        binding.includedRSA.etDate.setText(currentDay)
+                        binding.includedRSA.tilDate.setError(null)
+                    }
+                }
 
             }
+
         }
     }
 
@@ -179,7 +296,7 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
                     startActivity(browserIntent)
 
-                    downloadPdf(it, "Elite_GlobalAssureDocs"+ Utility.currentDateTime())
+                    downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
 
                 }
 

@@ -26,6 +26,7 @@
     <string name="ActivationMessage">Your Activity Code Verify Successfully.\nPlease click on Continue button to move further</string>
 
     <string name="VehicleExample">Example : MH01DE4131</string>
+    <string name="ExpDate">Hint : YYYY-MM-DD</string>
     <string name="userAuth">  User is Not Authenticated.\nPlease Contact to Admin Person</string>
 
 

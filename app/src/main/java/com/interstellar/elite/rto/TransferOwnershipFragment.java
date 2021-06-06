@@ -217,9 +217,9 @@ public class TransferOwnershipFragment extends BaseFragment implements View.OnCl
 
         cvClient.setVisibility(View.GONE);
 
-        if(userConstatntEntity.getVehicleno().length() >0)
+        if(loginEntity.getVehicleno().length() >0)
         {
-            etVehicle.setText(userConstatntEntity.getVehicleno());
+            etVehicle.setText(loginEntity.getVehicleno());
             etVehicle.setEnabled(false);
           //  rlEditVehicle.setVisibility(View.VISIBLE);
             lyVehicle.setBackgroundColor(getResources().getColor(R.color.bg_edit));

@@ -22,6 +22,9 @@ import com.interstellar.elite.core.response.LoginResponse
 import com.interstellar.elite.databinding.ActivityLoginBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.HomeActivity
+import com.interstellar.elite.payment.DemoRazorActivity
+import com.interstellar.elite.payment.PaymentActivity
+import com.interstellar.elite.payment.PaymentRazorActivity
 
 //import kotlinx.android.synthetic.main.content_login.*
 
@@ -193,21 +196,21 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             }
             R.id.tvRegistration -> {
 
-                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+                // 05 temp55555
+             //   startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+
+                startActivity(Intent(this@LoginActivity, PaymentActivity::class.java))
             }
 
             R.id.tvForgotPassword -> {
 
+                //05 temp
                 // startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
-                var a: String = String()
 
-                if (a != null && a != "") {
-                    showAlert("Y")
-                } else {
 
-                    showAlert("N")
-                }
+               //
 
+                startActivity(Intent(this@LoginActivity, DemoRazorActivity::class.java))
             }
 
 
@@ -280,7 +283,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
                 // temp added 05   loginEntity!!.mobile.equals("9403834308") 167815
                 // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
                 // Todo : Commented : Suppose below mob no success response
-
+//                 7400445766
 //                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")  || loginEntity!!.mobile.equals("9412365852")){
 //
 //

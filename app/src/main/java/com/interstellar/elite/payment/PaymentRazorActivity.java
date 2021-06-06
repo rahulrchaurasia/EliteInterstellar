@@ -219,16 +219,30 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         final Activity activity = this;
 
         final Checkout co = new Checkout();
-       // co.setKeyID("<KEY_ID>");           // we can add key here and in Manifest also
+       // co.setKeyID("rzp_live_DFxDFYDslN2DIq");           // we can add key here and in Manifest also
 
+        co.setKeyID("rzp_live_DFxDFYDslN2DIq");
+       // co.setImage(R.drawable.elite_logo);
+
+       // co.setFullScreenDisable(true);
         try {
             JSONObject options = new JSONObject();
             options.put("name", PRODUCT_NAME);
             options.put("description", ""+ String.valueOf(loginEntity.getUser_id()));
+            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            options.put("theme.color", "#3F51B5");
 
             options.put("currency", "INR");
          //   options.put("amount", AMOUNT_PAYMENT * 100);   // temp added 05
-             options.put("amount", "100");
+             options.put("amount", "10000");
+
+
+            JSONObject checkout = new JSONObject();
+            JSONObject method = new JSONObject();
+            method.put("netbanking", 1);
+            method.put("card", 0);
+
+            checkout.put("checkout",method);
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", loginEntity.getEmail());

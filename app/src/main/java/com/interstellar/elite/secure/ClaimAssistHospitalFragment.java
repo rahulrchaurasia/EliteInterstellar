@@ -239,8 +239,8 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
 
         cvClient.setVisibility(View.GONE);
 
-        if (userConstatntEntity.getVehicleno().length() > 0) {
-            etVehicle.setText(userConstatntEntity.getVehicleno());
+        if (loginEntity.getVehicleno().length() > 0) {
+            etVehicle.setText(loginEntity.getVehicleno());
             etVehicle.setEnabled(false);
            // rlEditVehicle.setVisibility(View.VISIBLE);
             lyVehicle.setBackgroundColor(getResources().getColor(R.color.bg_edit));

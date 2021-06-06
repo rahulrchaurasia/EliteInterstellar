@@ -420,7 +420,7 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
                     return;
                 } else {
 
-                   // saveData();
+                    saveData();
                 }
 
                 break;
@@ -446,6 +446,7 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
+                tilCity.setError(null);
 
                 showDialog();
 

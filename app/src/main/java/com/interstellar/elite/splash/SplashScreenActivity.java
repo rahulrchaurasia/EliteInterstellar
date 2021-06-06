@@ -84,7 +84,7 @@ public class SplashScreenActivity extends BaseActivity implements IResponseSubcr
 
     }
     private void fetchCar() {
-        new RegisterController(this).getCarVehicleMaster(this);
+      //  new RegisterController(this).getCarVehicleMaster(this);
     }
 
     private void fetchCity() {

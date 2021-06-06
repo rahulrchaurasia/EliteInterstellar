@@ -62,6 +62,8 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+// Not In Used
 public class NCBTransferFragment extends BaseFragment implements View.OnClickListener, IResponseSubcriber, IRTOCity {
 
     // Service 13
@@ -311,8 +313,8 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
     private void bindData() {
         cvClient.setVisibility(View.GONE);
 
-        if (userConstatntEntity.getVehicleno().length() > 0) {
-            etVehicle.setText(userConstatntEntity.getVehicleno());
+        if (loginEntity.getVehicleno().length() > 0) {
+            etVehicle.setText(loginEntity.getVehicleno());
             etVehicle.setEnabled(false);
           //  rlEditVehicle.setVisibility(View.VISIBLE);
             lyVehicle.setBackgroundColor(getResources().getColor(R.color.bg_edit));

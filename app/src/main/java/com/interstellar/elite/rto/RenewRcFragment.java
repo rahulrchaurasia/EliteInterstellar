@@ -432,20 +432,22 @@ public class RenewRcFragment extends BaseFragment implements View.OnClickListene
         cvClient.setVisibility(View.GONE);
 
 
-        if (userConstatntEntity.getVehicleno().length() > 0) {
-            etVehicle.setText(userConstatntEntity.getVehicleno());
+        if (loginEntity.getVehicleno().length() > 0) {
+            etVehicle.setText(loginEntity.getVehicleno());
             etVehicle.setEnabled(false);
            // rlEditMakeModel.setVisibility(View.VISIBLE);
             lyVehicle.setBackgroundColor(getResources().getColor(R.color.bg_edit));
             btnGo.setVisibility(View.GONE);
 
-        } else {
+        }
+        else {
            // rlEditMakeModel.setVisibility(View.GONE);
+            // btnGo.setVisibility(View.VISIBLE);
             etVehicle.setText("");
             etVehicle.setEnabled(true);
             lyVehicle.setBackgroundColor(getResources().getColor(R.color.bg_dashboard));
 
-            btnGo.setVisibility(View.VISIBLE);
+
 
         }
 

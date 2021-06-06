@@ -223,8 +223,6 @@
                                     android:id="@+id/lyVehicle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_toLeftOf="@+id/btnGo"
                                     android:visibility="visible">
 
                                     <com.google.android.material.textfield.TextInputLayout

@@ -461,7 +461,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
 
                 //region call Price Controller
                 ProductPriceRequestEntity entity = new ProductPriceRequestEntity();
-                entity.setVehicleno(userConstatntEntity.getVehicleno());
+                entity.setVehicleno(loginEntity.getVehicleno());
                 entity.setCityid(CITY_ID);
                 entity.setProduct_id(String.valueOf(PRODUCT_ID));
                 entity.setProductcode(PRODUCT_CODE);

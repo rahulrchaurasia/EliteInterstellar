@@ -153,11 +153,11 @@ open class BaseActivityKotlin : AppCompatActivity() {
     //region session five min
 
 
-    private val disconnectHandler = Handler(object : Handler.Callback {
-        override fun handleMessage(msg: Message): Boolean {
-            return true
-        }
-    })
+//    private val disconnectHandler = Handler(object : Handler.Callback {
+//        override fun handleMessage(msg: Message): Boolean {
+//            return true
+//        }
+//    })
 
 
     open fun validatePinCode(etPincode: EditText): Boolean {
