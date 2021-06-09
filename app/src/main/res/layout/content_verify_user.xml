@@ -9,132 +9,179 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
     <RelativeLayout
-       android:layout_marginTop="@dimen/fab_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin">
 
         <LinearLayout
             android:id="@+id/lyLogo"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
 
+            android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="vertical">
+            android:paddingRight="20dp">
 
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
 
-            app:srcCompat="@drawable/ic_verified_user_24"
-            >
-        </ImageView>
+                app:srcCompat="@drawable/ic_verified_user_24"></ImageView>
 
         </LinearLayout>
 
 
         <ScrollView
             android:id="@+id/svParent"
-            android:layout_below="@+id/lyLogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/lyLogo"
             android:overScrollMode="ifContentScrolls"
             android:scrollbarStyle="insideOverlay">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/eight"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-20dp"
+                        android:fontFamily="@font/bungee"
+                        android:text="CODE\nVERIFICATION"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        style="@style/TextViewStyle.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-20dp"
+                        android:text="Please Enter Your Activation Code" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/eight"
-                        android:animateLayoutChanges="true"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:layout_marginTop="@dimen/eight"
+                        android:orientation="horizontal">
 
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="30sp"
-                                android:fontFamily="@font/bungee"
-                                android:textColor="@color/black"
-                                android:layout_marginTop="-20dp"
-                                android:text="CODE\nVERIFICATION"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                style="@style/TextViewStyle.Medium"
-                                android:layout_marginTop="-20dp"
-                                android:text="Please Enter Your Activation Code"/>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilCode"
+                            style="@style/TextInputMaterialStyle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/eight"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:hint="Activation Code"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/color_close"
+                            app:startIconDrawable="@drawable/ic_verified_user_24">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/tilCode"
-                                style="@style/TextInputMaterialStyle"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:hint="Activation Code"
-                                app:endIconMode="clear_text"
-                                app:endIconTint="@color/color_close"
-                                app:startIconDrawable="@drawable/ic_verified_user_24">
+                            <EditText
+                                android:id="@+id/etCode"
+                                style="@style/Style.edittext"
+                                android:inputType="text"
+                                android:maxLength="100"
+                                android:text="" />
 
-                                <EditText
-                                    android:id="@+id/etCode"
-                                    style="@style/Style.edittext"
-                                    android:inputType="text"
-                                    android:maxLength="100"
-                                    android:text="" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-
-                        <Button
-                            android:id="@+id/btnSubmit"
-                            android:layout_marginTop="@dimen/fab_margin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/bg_primary_rect"
-                            android:layout_marginLeft="@dimen/fab_margin"
-                            android:layout_marginRight="@dimen/fab_margin"
-                            android:text="SUBMIT"
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:id="@+id/txtMessage"
-                            android:fontFamily="@font/muli"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/red_color"
-                            style="@style/TextViewStyle.Medium"
-                            android:layout_marginTop="20dp"
-
-                            android:text=""/>
-
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        style="@style/ButtonStyle"
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:layout_gravity="center"
+                        android:text="SUBMIT"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/txtMessage"
+                        style="@style/TextViewStyle.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:text=""
+                        android:visibility="gone"
+                        android:textColor="@color/red_color" />
 
 
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.6dp"
+                    android:background="@color/dashboard_header"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/eight"
+                    android:layout_marginTop="@dimen/eight"
+                    android:layout_marginRight="@dimen/eight"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewStyle.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/black"
+                        android:text="OR"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        style="@style/ButtonStyle"
+                        android:id="@+id/btnContinue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginTop="@dimen/four"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:layout_gravity="center"
+                        android:text="Continue With Elite+"
+                        android:visibility="visible" />
+
+                    <TextView
+                        style="@style/TextViewStyle.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/black"
+                        android:text="Note: If You Don't Have Activation Code. You Can Continue With Elite+" />
+
+                </LinearLayout>
+            </LinearLayout>
 
 
         </ScrollView>

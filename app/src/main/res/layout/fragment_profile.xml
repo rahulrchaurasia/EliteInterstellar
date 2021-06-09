@@ -242,6 +242,8 @@
                                     android:id="@+id/etEmail"
                                     style="@style/Style.edittext"
                                     android:inputType="textEmailAddress"
+                                    android:background="@color/disable_color"
+                                    android:enabled="false"
                                     android:maxLength="100" />
 
                             </com.google.android.material.textfield.TextInputLayout>

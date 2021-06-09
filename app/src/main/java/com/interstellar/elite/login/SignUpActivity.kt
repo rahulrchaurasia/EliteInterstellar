@@ -14,10 +14,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
@@ -27,19 +24,17 @@ import com.interstellar.elite.core.model.*
 import com.interstellar.elite.core.requestmodel.RegisterRequest
 import com.interstellar.elite.core.response.UserRegistrationResponse
 import com.interstellar.elite.core.response.VerifyUserOTPRegisterResponse
+import com.interstellar.elite.databinding.ActivitySignUpBinding
 import com.interstellar.elite.facade.PrefManager
-import com.interstellar.elite.makemodel.MakeActivity
-import com.interstellar.elite.makemodel.ModelActivity
 import com.interstellar.elite.utility.Constants
-import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.content_login.*
-import kotlinx.android.synthetic.main.content_sign_up.*
-import kotlinx.android.synthetic.main.content_sign_up.etMobile
-import kotlinx.android.synthetic.main.content_sign_up.etPassword
-import kotlinx.android.synthetic.main.otp_dialog.*
+
+
 
 
 class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubcriber  {
+
+    lateinit var binding :ActivitySignUpBinding
+
     lateinit var authenticationController: AuthenticationController
     lateinit var prefManager: PrefManager
 
@@ -52,22 +47,10 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
     var OTP = "000000"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        //region used whern refer code Used
-//        if (intent.hasExtra("POLICY_DATA")) {
-//            policyEntity?.let {
-//                policyEntity = intent.extras!!.getParcelable("POLICY_DATA")
-//                bindDetails()
-//            }
-//
-//        } else {
-//            lyMake.visibility = View.GONE
-//            lyModel.visibility = View.GONE
-//            lyVehicle.visibility = View.GONE
-//        }
-        //endregion
 
         initialize()
 
@@ -75,51 +58,52 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
         setOnTextChangeListner()
 
+
     }
 
     fun setOnTextChangeListner(){
 
         //region TextChange
 
-        etFullName.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etFullName.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilName.error = null
+                binding.includedSignup.tilName.error = null
             }
         }
 
-        etMobile.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etMobile.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilMobile.error = null
+                binding.includedSignup.tilMobile.error = null
             }
         }
 
-        etEmail.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etEmail.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilEmail.error = null
+                binding.includedSignup.tilEmail.error = null
             }
         }
 
-        etVehicle.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etVehicle.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilVehicle.error = null
+                binding.includedSignup.tilVehicle.error = null
             }
         }
 
-        etPassword.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etPassword.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilPwd.error = null
+                binding.includedSignup.tilPwd.error = null
             }
         }
 
-        etconfirmPassword.doOnTextChanged { text, start, before, count ->
+        binding.includedSignup.etconfirmPassword.doOnTextChanged { text, start, before, count ->
 
             if(text!!.length >0){
-                tilConfPwd.error = null
+                binding.includedSignup.tilConfPwd.error = null
             }
         }
 
@@ -128,11 +112,11 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
     }
     private fun initialize() {
 
-        etVehicle.setFilters(arrayOf(AllCaps(), LengthFilter(10)))
+        binding.includedSignup.etVehicle.setFilters(arrayOf(AllCaps(), LengthFilter(10)))
         prefManager = PrefManager(this)
         authenticationController = ServiceRequest.getService(
-                ServiceName.AUTHENTICATION.value,
-                this
+            ServiceName.AUTHENTICATION.value,
+            this
         ) as AuthenticationController
 
 
@@ -140,76 +124,76 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
     }
 
     // Not in Used
-    private fun bindDetails() {
-        lyMake.visibility = View.VISIBLE
-        lyModel.visibility = View.VISIBLE
-        lyVehicle.visibility = View.VISIBLE
-        etFullName.isEnabled = false
-        etVehicle.isEnabled = false
-        acMake.isEnabled = false
-        acModel.isEnabled = false
-        etFullName.setText(policyEntity?.InsuredName ?: "")
-        etVehicle.setText(policyEntity?.VehicleNumber ?: "")
-        acMake.setText(policyEntity?.Make ?: "")
-        acModel.setText(policyEntity?.Model ?: "")
-    }
+//    private fun bindDetails() {
+//        lyMake.visibility = View.VISIBLE
+//        lyModel.visibility = View.VISIBLE
+//        lyVehicle.visibility = View.VISIBLE
+//        etFullName.isEnabled = false
+//        etVehicle.isEnabled = false
+//        acMake.isEnabled = false
+//        acModel.isEnabled = false
+//        etFullName.setText(policyEntity?.InsuredName ?: "")
+//        etVehicle.setText(policyEntity?.VehicleNumber ?: "")
+//        acMake.setText(policyEntity?.Make ?: "")
+//        acModel.setText(policyEntity?.Model ?: "")
+//    }
 
     fun setListner() {
-        btnSubmit.setOnClickListener(this)
-        imgClose.setOnClickListener(this)
+        binding.includedSignup.btnSubmit.setOnClickListener(this)
+        binding.imgClose.setOnClickListener(this)
     }
 
     private fun validateRegistration(): Boolean {
-        if (!isEmpty(etFullName)) {
-            etFullName.requestFocus()
-            tilName.error = "Enter Name"
+        if (!isEmpty(binding.includedSignup.etFullName)) {
+            binding.includedSignup.etFullName.requestFocus()
+            binding.includedSignup.tilName.error = "Enter Name"
             return false
         }
 
 
-        if (!isEmpty(etMobile)) {
-           etMobile.requestFocus()
-            tilMobile.error = "Enter Mobile"
+        if (!isEmpty(binding.includedSignup.etMobile)) {
+            binding.includedSignup.etMobile.requestFocus()
+            binding.includedSignup.tilMobile.error = "Enter Mobile"
             return false
         }
-        if ((etMobile.text.toString().length < 10)) {
-            etMobile.requestFocus()
-            tilMobile.error = "Enter Mobile"
+        if ((binding.includedSignup.etMobile.text.toString().length < 10)) {
+            binding.includedSignup.etMobile.requestFocus()
+            binding.includedSignup.tilMobile.error = "Enter Mobile"
             return false
         }
-        if (!isEmpty(etEmail)) {
-            etEmail.requestFocus()
-            tilEmail.error = "Enter Email"
+        if (!isEmpty(binding.includedSignup.etEmail)) {
+            binding.includedSignup.etEmail.requestFocus()
+            binding.includedSignup.tilEmail.error = "Enter Email"
             return false
         }
-        if (!isValideEmailID(etEmail)) {
-            etEmail.requestFocus()
-            tilEmail.error = "Enter Valid Email"
+        if (!isValideEmailID(binding.includedSignup.etEmail)) {
+            binding.includedSignup.etEmail.requestFocus()
+            binding.includedSignup.tilEmail.error = "Enter Valid Email"
             return false
         }
-        if (!isEmpty(etVehicle)) {
-            etVehicle.requestFocus()
-            tilVehicle.error = "Enter Vehicle Number"
+        if (!isEmpty(binding.includedSignup.etVehicle)) {
+            binding.includedSignup.etVehicle.requestFocus()
+            binding.includedSignup.tilVehicle.error = "Enter Vehicle Number"
             return false
         }
-        if (!isEmpty(etPassword)) {
-            etPassword.requestFocus()
-            tilPwd.error = "Enter Password"
+        if (!isEmpty(binding.includedSignup.etPassword)) {
+            binding.includedSignup.etPassword.requestFocus()
+            binding.includedSignup.tilPwd.error = "Enter Password"
             return false
         }
-        if (etPassword.text.toString().trim { it <= ' ' }.length < 3) {
-            etPassword.requestFocus()
-            tilPwd.error = "Minimum length should be 3"
+        if (binding.includedSignup.etPassword.text.toString().trim { it <= ' ' }.length < 3) {
+            binding.includedSignup.etPassword.requestFocus()
+            binding.includedSignup.tilPwd.error = "Minimum length should be 3"
             return false
         }
-        if (!isEmpty(etconfirmPassword)) {
-            etconfirmPassword.requestFocus()
-            tilConfPwd.error = "Confirm Password"
+        if (!isEmpty(binding.includedSignup.etconfirmPassword)) {
+            binding.includedSignup.etconfirmPassword.requestFocus()
+            binding.includedSignup.tilConfPwd.error = "Confirm Password"
             return false
         }
-        if (etPassword.text.toString() != etconfirmPassword.text.toString()) {
-            etconfirmPassword.requestFocus()
-            tilConfPwd.error = "Password Mismatch"
+        if (binding.includedSignup.etPassword.text.toString() != binding.includedSignup.etconfirmPassword.text.toString()) {
+            binding.includedSignup.etconfirmPassword.requestFocus()
+            binding.includedSignup.tilConfPwd.error = "Password Mismatch"
             return false
         }
         return true
@@ -236,20 +220,23 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
     //makeEntity
     override fun onClick(view: View?) {
-        hideKeyBoard(btnSubmit)
+        hideKeyBoard(binding.includedSignup.btnSubmit)
         when (view?.id) {
 
             R.id.btnSubmit -> {
 
                 if (validateRegistration() == true) {
+
+
+                    showOtpAlert()
                     showLoading("")
 
 
                     showLoading("Please wait..")
                     authenticationController.verifyOTPTegistration(
-                            email = etEmail.text.toString(),
-                            mobile = etMobile.text.toString(),
-                            this
+                        email = binding.includedSignup.etEmail.text.toString(),
+                        mobile = binding.includedSignup.etMobile.text.toString(),
+                        this
                     )
                 }
             }
@@ -275,16 +262,17 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 if (verifyOTPEntity.SavedStatus === 1 ) {
                     OTP = verifyOTPEntity.OTP
 
-                    showOtpAlert()
+                   // showOtpAlert()
 
 
                 } else if (verifyOTPEntity.SavedStatus === 2) {
                     getCustomToast(apiResponse.message)
                 }
-            }else{
-
-                showOtpAlert()
             }
+//            else{
+//
+//                showOtpAlert()
+//            }
         }else if (apiResponse is UserRegistrationResponse) {
 
             if (apiResponse.status_code === 0 ) {
@@ -333,32 +321,32 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
 
         val registerRequest = RegisterRequest(
-                otp = ("" + strOTP),
-                name = ("" + etFullName.text),
-                emailid = ("" + etEmail.text),
-                mobile = ("" + etMobile.text),
+            otp = ("" + strOTP),
+            name = ("" + binding.includedSignup.etFullName.text),
+            emailid = ("" + binding.includedSignup.etEmail.text),
+            mobile = ("" + binding.includedSignup.etMobile.text),
 
-                password = ("" + etPassword.getText()),
-                company_id = prefManager.getCompanyID()!!,
-                lat = "0",
-                lon = "0",
-                pincode = (""),
-                city = (""),
-                state = (""),
-                area = (""),
-                ProductCode = ProductCode,
-                RiskEndDate = RiskEndDate,
-                RiskStartDate = RiskStartDate,
-                InsuredName = InsuredName,
+            password = ("" + binding.includedSignup.etPassword.getText()),
+            company_id = prefManager.getCompanyID()!!,
+            lat = "0",
+            lon = "0",
+            pincode = (""),
+            city = (""),
+            state = (""),
+            area = (""),
+            ProductCode = ProductCode,
+            RiskEndDate = RiskEndDate,
+            RiskStartDate = RiskStartDate,
+            InsuredName = InsuredName,
 
-                policy_no = policy_no,
-                PolicyStatus = PolicyStatus,
-                ResponseStatus = ResponseStatus,
+            policy_no = policy_no,
+            PolicyStatus = PolicyStatus,
+            ResponseStatus = ResponseStatus,
 
-                vehicle_no = etVehicle.text.toString(),
-                Make = Make,
-                Model = Model,
-                user_id = ""
+            vehicle_no = binding.includedSignup.etVehicle.text.toString(),
+            Make = Make,
+            Model = Model,
+            user_id = ""
         )
 
 
@@ -382,7 +370,8 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
             val txtOTPMessage = dialog.findViewById<View>(R.id.txtOTPMessage) as TextView?
             val tvTime = dialog.findViewById<View>(R.id.tvTime) as TextView?
             val tvTitle = dialog.findViewById<View>(R.id.tvTitle) as TextView?
-            tvTitle!!.text = "Enter OTP sent on : " + etMobile.text.toString()
+            val ivCross  =  dialog.findViewById<View>(R.id.ivCross) as ImageView?
+            tvTitle!!.text = "Enter OTP sent on : " + binding.includedSignup.etMobile.text.toString()
 
             val etOtp = dialog.findViewById<View>(R.id.etOtp) as EditText?
             dialog.setCancelable(true)
@@ -425,19 +414,27 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 showLoading("Re-sending otp...")
 
                 authenticationController.verifyOTPTegistration(
-                        etEmail.text.toString(),
-                        etMobile.text.toString(),
-                        this
+                    binding.includedSignup.etEmail.text.toString(),
+                    binding.includedSignup.etMobile.text.toString(),
+                    this
                 )
             }
-            object : CountDownTimer(60000, 1000) {
+            ivCross!!.setOnClickListener{
+
+                dialog.dismiss()
+            }
+            object : CountDownTimer(120000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    tvTime!!.text = (millisUntilFinished / 1000).toString() + " seconds remaining"
+
+                    val minutes: Long = millisUntilFinished / 1000 / 60
+                    val seconds = (millisUntilFinished / 1000 % 60)
+                  //  tvTime!!.text = (millisUntilFinished / 1000).toString() + " seconds remaining"
+                    tvTime!!.text = ""+ minutes +":"+ seconds
                 }
 
                 override fun onFinish() {
                     tvTime!!.text = ""
-                    // dialog.dismiss();
+                     dialog.dismiss();
                 }
             }.start()
         } catch (e: Exception) {
@@ -450,9 +447,9 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
     var pincodeTextWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             if (start < 6) {
-                etCity.setText("")
-                etState.setText("")
-                etArea.setText("")
+                binding.includedSignup.etCity.setText("")
+                binding.includedSignup.etState.setText("")
+                binding.includedSignup.etArea.setText("")
             }
         }
 
@@ -463,7 +460,10 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 //                    etPincode.text.toString(),
 //                    this@SignUpActivity
 //                )
-                authenticationController.getCityState(etPincode.getText().toString(), this@SignUpActivity)
+                authenticationController.getCityState(
+                    binding.includedSignup.etPincode.getText().toString(),
+                    this@SignUpActivity
+                )
             }
         }
 
@@ -477,13 +477,13 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
         if (requestCode == Constants.SEARCH_MAKE_CODE) {
             if (data != null) {
              makeEntity  = data.getParcelableExtra(Constants.SEARCH_MAKE_DATA)!!
-                acMake.setText(makeEntity.make)
+                binding.includedSignup.acMake.setText(makeEntity.make)
 
             }
         }else if (requestCode == Constants.SEARCH_MODEL_CODE){
             if (data != null) {
                  modelEntity  = data.getParcelableExtra(Constants.SEARCH_MODEL_DATA)!!
-                acModel.setText(modelEntity.model)
+                binding.includedSignup.acModel.setText(modelEntity.model)
 
             }
         }

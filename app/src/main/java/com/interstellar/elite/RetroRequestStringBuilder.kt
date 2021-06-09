@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-open class RetroRequestBuilder {
+open class RetroRequestStringBuilder {
 
     internal var restAdapter: Retrofit? = null
 
@@ -39,6 +39,7 @@ open class RetroRequestBuilder {
             restAdapter = Retrofit.Builder()
                 .baseUrl(BuildConfig.URL)
                 .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 

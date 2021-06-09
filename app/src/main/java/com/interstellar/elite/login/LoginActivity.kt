@@ -5,8 +5,6 @@ import ServiceName
 import ServiceRequest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.*
 import androidx.core.app.ActivityCompat
@@ -21,12 +19,11 @@ import com.interstellar.elite.core.response.EligibilityUserResponse
 import com.interstellar.elite.core.response.LoginResponse
 import com.interstellar.elite.databinding.ActivityLoginBinding
 import com.interstellar.elite.facade.PrefManager
+import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
-import com.interstellar.elite.payment.DemoRazorActivity
-import com.interstellar.elite.payment.PaymentActivity
-import com.interstellar.elite.payment.PaymentRazorActivity
+import com.interstellar.elite.payment.demo.DemoRazorActivity
 
-//import kotlinx.android.synthetic.main.content_login.*
+
 
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
@@ -196,21 +193,20 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             }
             R.id.tvRegistration -> {
 
-                // 05 temp55555
-             //   startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
 
-                startActivity(Intent(this@LoginActivity, PaymentActivity::class.java))
+                // 05 temp55555
+               startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+
+
             }
 
             R.id.tvForgotPassword -> {
 
-                //05 temp
-                // startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+
+                 startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
 
 
-               //
 
-                startActivity(Intent(this@LoginActivity, DemoRazorActivity::class.java))
             }
 
 

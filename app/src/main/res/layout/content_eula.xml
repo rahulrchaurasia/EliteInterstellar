@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".welcome.EulaActivity"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/bg_light_gradient"
     tools:showIn="@layout/activity_eula">
 
     <LinearLayout
@@ -20,7 +20,8 @@
             android:layout_width="120dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/elite_logo" />
+
+            android:src="@drawable/elite_plus" />
 
         <TextView
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:padding="4dp"
             android:text="END-USER LICENCE AGREEMENT – ELITE"
             android:textAllCaps="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             style="@style/TextViewStyle.Large"/>
 
     </LinearLayout>

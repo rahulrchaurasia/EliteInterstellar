@@ -23,7 +23,7 @@
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-
+    <color name="orange_button">#f66c4f</color>
 
 
     <color name ="yellow_color">#f9bf22</color>
@@ -53,6 +53,7 @@
 
 
 
+
 <!--    <color name="colorPrimary">#D32F2F</color>-->
 <!--    <color name="colorPrimaryDark">#F44336</color>-->
 
@@ -69,8 +70,11 @@
     <color name="header_text_color1">#3c4651</color>
 <!--    <color name="secondary_text_color">#9ba0a6</color>-->
     <color name="tab_color">#00476e</color>
+    <color name="black_light">#3b3b3b</color>
+<!--   For 30 percent of Opacity  : link https://stackoverflow.com/questions/11285961/how-to-make-a-background-20-transparent-on-android-->
+    <color name="bg_transparent">#4Dffffff</color>
 
-
+    <color name="bg_transparent1">#90656565</color>
 
 
     <color name="blue">#005faf</color>

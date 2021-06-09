@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".login.SignUpActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -24,9 +25,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_sign_up" />
+    <include layout="@layout/content_sign_up"
+        android:id="@+id/included_signup"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgClose"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -34,7 +36,7 @@
         android:layout_marginTop="@dimen/eight"
         android:layout_marginRight="@dimen/eight"
         android:fitsSystemWindows="true"
-        app:srcCompat="@drawable/ic_close" />
+        app:srcCompat="@drawable/ic_close_24" />
 
 
 

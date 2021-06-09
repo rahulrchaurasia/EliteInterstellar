@@ -105,7 +105,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
-        android:background="@drawable/elite_logo"
+       android:src="@drawable/elite_logo"
         android:scaleType="center" />
 
 

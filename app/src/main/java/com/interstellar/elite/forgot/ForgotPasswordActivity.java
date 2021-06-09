@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.BaseActivity;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
@@ -16,13 +17,15 @@ import com.interstellar.elite.core.controller.register.RegisterController;
 import com.interstellar.elite.core.response.CommonResponse;
 import com.interstellar.elite.utility.Constants;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
 public class ForgotPasswordActivity extends BaseActivity implements IResponseSubcriber, View.OnClickListener {
 
     EditText etMobile;
-    Button btnSubmit;
+    AppCompatButton btnSubmit;
     ImageView imgClose;
+    TextInputLayout tilMobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +37,14 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         etMobile = (EditText) findViewById(R.id.etMobile);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnSubmit = (AppCompatButton) findViewById(R.id.btnSubmit);
         imgClose = (ImageView) findViewById(R.id.imgClose);
-
+        tilMobile  = (TextInputLayout) findViewById(R.id.tilMobile);
 
         btnSubmit.setOnClickListener(this);
         imgClose.setOnClickListener(this);
+        etMobile.addTextChangedListener(getTextWatcher(tilMobile));
+
     }
 
 
@@ -52,7 +57,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
             case R.id.btnSubmit:
                 if (!isEmpty(etMobile)) {
                     etMobile.requestFocus();
-                    etMobile.setError("Enter Mobile");
+                    tilMobile.setError("Enter Mobile");
                     return;
                 }
 

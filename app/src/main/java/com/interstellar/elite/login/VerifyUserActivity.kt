@@ -43,17 +43,17 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
 
         setListner()
 
-        showDialog()
-
-        loginEntity.let {
-
-            authenticationController.getLandmarkEliteActivationCode(
-                it!!.mobile.toString(),
-                it!!.vehicleno,
-                this@VerifyUserActivity
-            )
-
-        }
+//        showDialog()
+//
+//        loginEntity.let {
+//
+//            authenticationController.getLandmarkEliteActivationCode(
+//                it!!.mobile.toString(),
+//                it!!.vehicleno,
+//                this@VerifyUserActivity
+//            )
+//
+//        }
     }
     private fun initialize(){
 
@@ -69,6 +69,7 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
     private fun setListner(){
 
         binding.includedVerify.btnSubmit.setOnClickListener(this)
+        binding.includedVerify.btnContinue.setOnClickListener(this)
         binding.imgClose.setOnClickListener(this)
 
         binding.includedVerify.etCode.doOnTextChanged { text, start, before, count ->
@@ -76,6 +77,7 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
             if(text!!.length >0){
                 binding.includedVerify.tilCode.error = null
                 binding.includedVerify.txtMessage.text = ""
+                binding.includedVerify.txtMessage.visibility = View.GONE
             }
         }
     }
@@ -116,12 +118,14 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
             showDialog()
             authenticationController.updateGolduser(
                 user_id = loginEntity!!.user_id.toString(),
+                ActivationCode = binding.includedVerify.etCode.text.toString(),
                 this@VerifyUserActivity
             )
 
 
         }else{
 
+            binding.includedVerify.txtMessage.visibility = View.VISIBLE
             binding.includedVerify.txtMessage.text = "Activation Code Mismatch!!.Please try with Valid Code"
         }
 
@@ -178,6 +182,14 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
 
                 verifyUser()
 
+            }
+
+            R.id.btnContinue ->{
+
+
+                val homeActivity = Intent(this@VerifyUserActivity, HomeActivity::class.java)
+                startActivity(homeActivity)
+                this.finish()
             }
 
             R.id.imgClose -> {
@@ -258,9 +270,7 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
 
             cancelDialog()
 
-//             loginEntity!!.copy(isgoldverify = "Y")
-//             prefManager.storeUserData(loginEntity)
-//            authenticationAlert("Congratulation!!",getString(R.string.ActivationMessage))
+
 
 
             var modifyLogin =  loginEntity!!.copy(isgoldverify = "Y")

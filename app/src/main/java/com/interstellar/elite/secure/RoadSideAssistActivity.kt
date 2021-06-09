@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
@@ -21,25 +22,29 @@ import com.interstellar.elite.core.DBPersistanceController
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
 import com.interstellar.elite.core.model.GloabalAssureEntity
-import com.interstellar.elite.core.model.GlobalAssureResult
 import com.interstellar.elite.core.model.UserEntity
-import com.interstellar.elite.core.response.CommonResponse
+import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
+import com.interstellar.elite.core.requestmodel.RoadSideRequestEntityItem
+import com.interstellar.elite.core.response.EliteGlobalAssuredetail
 import com.interstellar.elite.core.response.GlobalAssureLandmarkResponse
-import com.interstellar.elite.core.response.GlobalAssureResponse
 import com.interstellar.elite.databinding.ActivityRoadSideAssistBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.utility.DateTimePicker
 import com.interstellar.elite.utility.Utility
-
+import java.io.BufferedWriter
+import java.io.OutputStream
+import java.io.OutputStreamWriter
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.net.ssl.HttpsURLConnection
 
 
-class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponseSubcriber {
+class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSubcriber {
 
 
-    var simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+    var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     lateinit var authenticationController: AuthenticationController
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
@@ -113,9 +118,7 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
     }
 
 
-
-
-    fun getPdfFile(gloabalAssureEntity: GloabalAssureEntity){
+    fun getPdfFile(gloabalAssureEntity: GloabalAssureEntity) {
 
         gloabalAssureEntity.CertificateFile.let {
 
@@ -127,38 +130,6 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
         }
     }
 
-    fun getTempJson(): GlobalAssureLandmarkResponse  =
-
-        Gson().fromJson(
-            "{\"GlobalAssureResult\":{\"CertificateFile\":\"\",\"CertificateNo\":\"HA2905210000000006\",\"ErrorCode\":\"\",\"ErrorMessage\":\"\",\"ErrorMessageDetail\":\"\",\"PaymentLink\":\"\",\"TransId\":\"12345\",\"status\":\"Success\"}}",
-            GlobalAssureLandmarkResponse::class.java
-        )
-
-    fun tempAdded(){
-
-
-         var globalAssureResult :GlobalAssureResult  = getTempJson().GlobalAssureResult
-        var CertificateNo = globalAssureResult.CertificateNo
-        var CertificateFile = "http://newuatrsa.globalassure.com:8011/Temp/PDF/HA2905210000000006.pdf"
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(CertificateFile))
-        startActivity(browserIntent)
-
-        downloadPdf(CertificateFile, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
-
-
-
-        authenticationController.insertGlobalAssure(
-
-            loginEntity!!.mobile,
-            loginEntity!!.vehicleno,
-            CertificateNo,
-            CertificateFile,
-            this@RoadSideAssistActivity
-
-        )
-
-
-    }
 
     private fun validate(): Boolean {
 
@@ -166,37 +137,27 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
             binding.includedRSA.etFullName.requestFocus()
 
             return false
-        }
-
-
-        else if (!isEmpty(binding.includedRSA.etVehicle)) {
+        } else if (!isEmpty(binding.includedRSA.etVehicle)) {
             binding.includedRSA.etVehicle.requestFocus()
 
             return false
-        }
-        else if (!isEmpty(binding.includedRSA.acMake)) {
+        } else if (!isEmpty(binding.includedRSA.acMake)) {
             binding.includedRSA.acMake.requestFocus()
 
             return false
-        }
-
-        else if (!isEmpty(binding.includedRSA.acModel)) {
+        } else if (!isEmpty(binding.includedRSA.acModel)) {
             binding.includedRSA.acModel.requestFocus()
 
             return false
-        }
-        else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
+        } else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
             binding.includedRSA.tilYearManufacture.error = "Select Year Of Manufacture"
 
             return false
-        }
-        else if (YEAR_MANUFACTURE.equals("")) {
+        } else if (YEAR_MANUFACTURE.equals("")) {
             binding.includedRSA.tilYearManufacture.error = "Select Year Of Manufacture"
 
             return false
-        }
-
-        else if (!isEmpty(binding.includedRSA.etDate)) {
+        } else if (!isEmpty(binding.includedRSA.etDate)) {
             binding.includedRSA.tilDate.error = "Enter Date"
 
             return false
@@ -216,16 +177,53 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
 
                 if (validate()) {
 
-                    showAlert("Done")
 
-                    //       showDialog("Please wait..")
+                    var roadSideRequestEntityItem = RoadSideRequestEntityItem(
+                        City = binding.includedRSA.etCitye.text.toString(),
+                        ClientName = binding.includedRSA.etFullName.text.toString(),
+                        ExpiryDate = binding.includedRSA.etDate.text.toString(),
+                        Make = binding.includedRSA.acMake.text.toString(),
+                        Model = binding.includedRSA.acModel.text.toString(),
+                        MobileNo = binding.includedRSA.etMobile.text.toString(),
+                        ReferenceNo = loginEntity?.activation_code ?: "",
+                        RegistrationNo = binding.includedRSA.etVehicle.text.toString(),
+                        YOM = YEAR_MANUFACTURE
+                    )
 
+
+                    var mitem = RoadSideRequestEntity()
+
+                    mitem.add(roadSideRequestEntityItem)
+
+                    var RsaRequestString = Gson().toJson(mitem)
+
+                    Log.i("MYDATA", Gson().toJson(mitem).toString())
+
+                    ////////////////////////////////////////
+
+                    //  getHttpRequest()
+
+                    showDialog("Loading Pdf..")
+
+                    authenticationController.getLandmarkEliteGlobalAssureQuery(
+                        strBody = RsaRequestString,
+                        iResponseSubcriber = this@RoadSideAssistActivity
+                    )
+
+
+                    //region OLD One
 //                    loginEntity.let {
-//                        authenticationController.getGlobalAssure(
-//                            it!!.mobile.toString(),
-//                            this@RoadSideAssistActivity
+//
+//                        authenticationController.getLandmarkEliteGlobalAssure(
+//                            strBody = RsaRequestString,
+//                            iResponseSubcriber = this@RoadSideAssistActivity
 //                        )
+//
 //                    }
+
+                    //endregion
+
+
                 }
 
             }
@@ -249,85 +247,121 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
         }
     }
 
-    // Todo :Note   :1> we check first data is in our db  if present dn show pdf () : getGlobalAssure
-    //               2> if not in our db than hit from Landmark db and its response we have to save in our db : getLandmarkEliteGlobalAssure
-    //              3> hence Landmark response data we have to Insert Api for our db called  :insertGlobalAssure
-
 
     override fun OnSuccess(apiResponse: APIResponse, message: String) {
 
 
+        //region comment
+//        if(apiResponse is GlobalAssureResponse) {
+//
+//            cancelDialog()
+//
+//            if(apiResponse.status_code == 0){
+//
+//                var gloabalAssureEntity : GloabalAssureEntity = apiResponse.Data.get(0)
+//
+//                getPdfFile(gloabalAssureEntity)
+//
+//            }
+//            else{
+//
+//                showDialog("Loading Pdf..")
+//                loginEntity.let {
+//
+//                    authenticationController.getLandmarkEliteGlobalAssure(
+//                        it!!.mobile.toString(),
+//                        it!!.vehicleno,
+//                        this@RoadSideAssistActivity
+//                    )
+//
+//                }
+//            }
+//        }
+//
+//        else if(apiResponse is GlobalAssureLandmarkResponse){
+//
+//            if(apiResponse.GlobalAssureResult.CertificateFile != null && apiResponse.GlobalAssureResult.CertificateFile != ""   ){
+//
+//                var globalAssureResult : GlobalAssureResult = apiResponse.GlobalAssureResult;
+//
+//                globalAssureResult.CertificateFile.let {
+//
+//
+//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+//                    startActivity(browserIntent)
+//
+//                    downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
+//
+//                }
+//
+//
+//                authenticationController.insertGlobalAssure(
+//
+//                    loginEntity!!.mobile,
+//                    loginEntity!!.vehicleno,
+//                    globalAssureResult.CertificateNo,
+//                    globalAssureResult.CertificateFile,
+//                    this@RoadSideAssistActivity
+//
+//                )
+//
+//            }else{
+//
+//                // temp 05
+//               // tempAdded()
+//               cancelDialog()
+//                showAlert("Pdf Not Found.\nContact Landmark Admin")
+//            }
+//
+//
+//        }
+//
+//        else  if (apiResponse is CommonResponse) {
+//            // :insertGlobalAssure : Result after Insert Response of local db.
+//            cancelDialog()
+//            // getCustomToast(" Insertde in Our db")
+//
+//        }
 
-        if(apiResponse is GlobalAssureResponse) {
+        //endregion
+
+        if (apiResponse is GlobalAssureLandmarkResponse) {
 
             cancelDialog()
 
-            if(apiResponse.status_code == 0){
-
-                var gloabalAssureEntity : GloabalAssureEntity = apiResponse.Data.get(0)
-
-                getPdfFile(gloabalAssureEntity)
-
-            }
-            else{
-
-                showDialog("Loading Pdf..")
-                loginEntity.let {
-
-                    authenticationController.getLandmarkEliteGlobalAssure(
-                        it!!.mobile.toString(),
-                        it!!.vehicleno,
-                        this@RoadSideAssistActivity
-                    )
-
-                }
-            }
-        }
-
-        else if(apiResponse is GlobalAssureLandmarkResponse){
-
-            if(apiResponse.GlobalAssureResult.CertificateFile != null && apiResponse.GlobalAssureResult.CertificateFile != ""   ){
-
-                var globalAssureResult : GlobalAssureResult = apiResponse.GlobalAssureResult;
-
-                globalAssureResult.CertificateFile.let {
+            if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult != null) {
 
 
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                    startActivity(browserIntent)
+                if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult != null) {
 
-                    downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
+
+                    if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult.status_code.equals("0")) {
+
+
+                        var eliteGlobalAssuredetail: EliteGlobalAssuredetail =
+                            apiResponse.InsertOtherCustDetailsForGlobalAssureResult.EliteGlobalAssuredetails.get(
+                                0
+                            )
+
+                        eliteGlobalAssuredetail.PolicyLink.let {
+
+
+                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                            startActivity(browserIntent)
+
+                            downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
+
+                        }
+
+                    }
+
 
                 }
 
 
-                authenticationController.insertGlobalAssure(
-
-                    loginEntity!!.mobile,
-                    loginEntity!!.vehicleno,
-                    globalAssureResult.CertificateNo,
-                    globalAssureResult.CertificateFile,
-                    this@RoadSideAssistActivity
-
-                )
-
-            }else{
-
-                // temp 05
-               // tempAdded()
-               cancelDialog()
-                showAlert("Pdf Not Found.\nContact Landmark Admin")
             }
-
-
         }
 
-        else  if (apiResponse is CommonResponse) {
-            // :insertGlobalAssure : Result after Insert Response of local db.
-            cancelDialog()
-            // getCustomToast(" Insertde in Our db")
-
-        }
 
     }
 
@@ -344,6 +378,7 @@ class RoadSideAssistActivity : BaseActivity() , View.OnClickListener , IResponse
         }
         return super.onOptionsItemSelected(item)
     }
+
     override fun onBackPressed() {
         this.finish()
         super.onBackPressed()

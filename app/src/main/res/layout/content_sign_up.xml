@@ -1,95 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/fab_margin"
-
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
-    <RelativeLayout
+    <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/lyLogo"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
+            <ImageView
+                android:id="@+id/imglogo"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:backgroundTint="@color/white"
+                android:scaleType="fitStart"
+                android:src="@drawable/elite_plus" />
 
-            app:srcCompat="@drawable/elite_logo"
-            >
-        </ImageView>
 
         </LinearLayout>
 
 
         <ScrollView
             android:id="@+id/svParent"
-            android:layout_below="@+id/lyLogo"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btnSubmit"
 
             android:overScrollMode="ifContentScrolls"
             android:scrollbarStyle="insideOverlay">
 
-            <LinearLayout
-
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:orientation="vertical">
 
 
-                <androidx.cardview.widget.CardView
-                    style="@style/CardView"
+                <androidx.appcompat.widget.AppCompatImageView
+                   android:layout_centerInParent="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/ten"
-                    android:orientation="vertical"
-                    app:cardCornerRadius="@dimen/eight"
-                    android:elevation="2dp"
-                    android:paddingBottom="5dp">
+                    android:scaleType="fitXY"
+                    android:src="@drawable/elite_bg">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/eight"
+
+                    android:background="@drawable/bg_light_main"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <LinearLayout
+
+                       android:layout_marginLeft="@dimen/eight"
+                        android:layout_marginRight="@dimen/eight"
+                        android:layout_marginBottom="@dimen/fab_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/eight"
+
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
+
                         android:visibility="visible">
 
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="30sp"
-                                android:fontFamily="@font/bungee"
-                                android:textColor="@color/black"
-                                android:layout_marginTop="-20dp"
-                                android:text="Welcome"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                style="@style/TextViewStyle.Medium"
-                                android:layout_marginTop="-20dp"
-                                android:text="SignUp to start your Journey"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/muli"
+                            android:gravity="center"
+                            android:text="Sign Up"
+                            android:textColor="@color/white"
+                            android:textSize="30sp" />
+                        <!--                            <TextView-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="match_parent"-->
+                        <!--                                style="@style/TextViewStyle.Medium"-->
+                        <!--                                android:layout_marginTop="-20dp"-->
+                        <!--                                android:text="SignUp to start your Journey"/>-->
 
                         <LinearLayout
                             android:id="@+id/llOtherInfo"
@@ -113,18 +124,20 @@
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/tilName"
-                                        style="@style/TextInputMaterialStyle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:hint="Name"
                                         app:endIconMode="clear_text"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
+
                                         app:startIconDrawable="@drawable/ic_name">
 
                                         <EditText
                                             android:id="@+id/etFullName"
                                             style="@style/Style.edittext"
+                                            android:textColor="@color/white"
                                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
                                             android:inputType="text"
@@ -166,13 +179,13 @@
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/tilMobile"
-                                        style="@style/TextInputMaterialStyle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:hint="Mobile"
                                         app:endIconMode="clear_text"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
                                         app:startIconDrawable="@drawable/ic_mobile">
 
                                         <EditText
@@ -181,7 +194,7 @@
 
                                             android:inputType="number"
                                             android:maxLength="10"
-
+                                            android:textColor="@color/white"
                                             android:text="" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -197,12 +210,12 @@
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/tilEmail"
-                                        style="@style/TextInputMaterialStyle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="Email"
                                         app:endIconMode="clear_text"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
                                         app:startIconDrawable="@drawable/ic_email">
 
                                         <EditText
@@ -211,7 +224,7 @@
                                             android:drawablePadding="10dp"
                                             android:inputType="textEmailAddress"
                                             android:maxLength="200"
-
+                                            android:textColor="@color/white"
                                             android:text="" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -226,14 +239,15 @@
                                     android:visibility="visible">
 
                                     <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/TextInputMaterialStyle"
                                         android:id="@+id/tilVehicle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:hint="Vehicle Number"
                                         app:endIconMode="clear_text"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
+                                        app:helperTextTextColor="@color/white"
                                         app:helperText="@string/VehicleExample"
                                         app:startIconDrawable="@drawable/ic_vehicle">
 
@@ -244,7 +258,8 @@
                                             android:inputType="textCapCharacters"
                                             android:maxLength="10"
                                             android:maxLines="1"
-                                            android:text= "" />
+                                            android:textColor="@color/white"
+                                            android:text="" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -261,7 +276,7 @@
 
                                     <com.google.android.material.textfield.TextInputLayout
 
-                                        style="@style/TextInputMaterialStyle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -269,7 +284,7 @@
 
                                         app:endIconDrawable="@drawable/ic_right"
                                         app:endIconMode="custom"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
                                         app:startIconDrawable="@drawable/ic_policy">
 
                                         <EditText
@@ -300,14 +315,14 @@
 
                                     <com.google.android.material.textfield.TextInputLayout
 
-                                        style="@style/TextInputMaterialStyle"
+                                        style="@style/TextInputMaterialOthStyle"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:hint="Model"
                                         app:endIconDrawable="@drawable/ic_right"
                                         app:endIconMode="custom"
-                                        app:endIconTint="@color/color_close"
+                                        app:endIconTint="@color/white"
                                         app:startIconDrawable="@drawable/ic_policy">
 
                                         <EditText
@@ -414,7 +429,7 @@
                                         android:id="@+id/etArea"
                                         style="@style/Style.edittext"
 
-                                        android:editable="false" />
+                                        />
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
 
@@ -424,28 +439,28 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.textfield.TextInputLayout
-                                    style="@style/TextInputMaterialStyle"
                                     android:id="@+id/tilPwd"
+                                    style="@style/TextInputMaterialOthStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:hint="Password"
                                     app:endIconMode="clear_text"
-                                    app:endIconTint="@color/color_close"
+                                    app:endIconTint="@color/white"
                                     app:startIconDrawable="@drawable/change_password">
 
                                     <EditText
                                         android:id="@+id/etPassword"
                                         style="@style/Style.edittext"
-
+                                        android:textColor="@color/white"
                                         android:inputType="textPassword"
                                         android:maxLength="30" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
                                 <com.google.android.material.textfield.TextInputLayout
-                                    style="@style/TextInputMaterialStyle"
                                     android:id="@+id/tilConfPwd"
+                                    style="@style/TextInputMaterialOthStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -456,6 +471,7 @@
                                     <EditText
                                         android:id="@+id/etconfirmPassword"
                                         style="@style/Style.edittext"
+                                        android:textColor="@color/white"
                                         android:inputType="textPassword" />
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
@@ -463,27 +479,27 @@
 
 
                     </LinearLayout>
+                </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
 
-
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </ScrollView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSubmit"
             style="@style/ButtonStyle"
-            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
 
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
-            android:text="SUBMIT"
+            android:text="SIGN UP"
             android:visibility="visible" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

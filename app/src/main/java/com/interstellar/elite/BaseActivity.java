@@ -14,6 +14,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.core.model.DocProductEnity;
 import com.interstellar.elite.product.ProductDocAdapter;
 import com.interstellar.elite.utility.Constants;
@@ -550,6 +553,28 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+    public TextWatcher getTextWatcher(final TextInputLayout textInputLayout) {
+
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // do what you want with your EditText
+                if(charSequence.toString().length() >0){
+                    textInputLayout.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
 
 }
 

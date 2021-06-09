@@ -7,8 +7,14 @@ import com.interstellar.elite.core.BaseController
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.requestbuilder.AuthenticationBuilder
 import com.interstellar.elite.core.requestmodel.RegisterRequest
+import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 import com.interstellar.elite.core.response.*
 import com.interstellar.elite.facade.PrefManager
+import com.squareup.okhttp.MediaType
+import com.squareup.okhttp.RequestBody
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +47,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
 
-        authenticationBuilder.getUserEligibility(url,MobileNo,RegistrationNo).enqueue(object :
+        authenticationBuilder.getUserEligibility(url, MobileNo, RegistrationNo).enqueue(object :
             Callback<EligibilityUserResponse> {
             override fun onResponse(
                 call: Call<EligibilityUserResponse>,
@@ -85,7 +91,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
 
-        authenticationBuilder.getLandmarkEliteTataPee(url,MobileNo,RegistrationNo).enqueue(object :
+        authenticationBuilder.getLandmarkEliteTataPee(url, MobileNo, RegistrationNo).enqueue(object :
             Callback<TataLandmarkResponse> {
             override fun onResponse(
                 call: Call<TataLandmarkResponse>,
@@ -120,44 +126,103 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
     }
 
     override fun getLandmarkEliteGlobalAssure(
-        MobileNo: String,
-        RegistrationNo: String,
+        strBody: String,
         iResponseSubcriber: IResponseSubcriber
     ) {
-        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/GlobalAssure"
+        //  Old ONE
+        // var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/GlobalAssure"
+
+        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/InsertOtherCustDetailsForGlobalAssure"
 
 
 
-        authenticationBuilder.getLandmarkEliteGlobalAssure(url,MobileNo,RegistrationNo).enqueue(object :
-            Callback<GlobalAssureLandmarkResponse> {
-            override fun onResponse(
-                call: Call<GlobalAssureLandmarkResponse>,
-                landmarkResponse: Response<GlobalAssureLandmarkResponse>
-            ) {
+        authenticationBuilder.getLandmarkEliteGlobalAssure(url, strBody ).enqueue(
+            object :
+                Callback<GlobalAssureLandmarkResponse> {
+                override fun onResponse(
+                    call: Call<GlobalAssureLandmarkResponse>,
+                    landmarkResponse: Response<GlobalAssureLandmarkResponse>
+                ) {
 
-                if (landmarkResponse!!.isSuccessful) {
+                    if (landmarkResponse!!.isSuccessful) {
 
-                    printLog(Gson().toJson(landmarkResponse.body()))
+                        printLog(Gson().toJson(landmarkResponse.body()))
 
-                    if (landmarkResponse.body() != null) {
+                        if (landmarkResponse.body() != null) {
 
-                        // default success
-                        iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
+                            // default success
+                            iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
 
+                        } else {
+
+                            iResponseSubcriber.OnFailure(MESSAGE)
+                        }
                     } else {
-
-                        iResponseSubcriber.OnFailure(MESSAGE)
+                        iResponseSubcriber.OnFailure(
+                            errorStatus(
+                                landmarkResponse.code().toString()
+                            )
+                        )
                     }
-                } else {
-                    iResponseSubcriber.OnFailure(errorStatus(landmarkResponse.code().toString()))
+
                 }
 
-            }
+                override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
+            })
+    }
 
-            override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
-            }
-        })
+    override fun getLandmarkEliteGlobalAssureQuery(
+        strBody: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+
+
+        var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/InsertOtherCustDetailsForGlobalAssure?js="
+
+        url = url + strBody
+        Log.i("MYDATA",url.toString())
+
+
+        var map = hashMapOf<String, String>()
+        map.put("Mobile", "")
+
+        authenticationBuilder.getLandmarkEliteGlobalAssureQuery(url, map ).enqueue(
+            object :
+                Callback<GlobalAssureLandmarkResponse> {
+                override fun onResponse(
+                    call: Call<GlobalAssureLandmarkResponse>,
+                    landmarkResponse: Response<GlobalAssureLandmarkResponse>
+                ) {
+
+                    if (landmarkResponse!!.isSuccessful) {
+
+                        printLog(Gson().toJson(landmarkResponse.body()))
+
+                        if (landmarkResponse.body() != null) {
+
+                            // default success
+                            iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
+
+                        } else {
+
+                            iResponseSubcriber.OnFailure(MESSAGE)
+                        }
+                    } else {
+                        iResponseSubcriber.OnFailure(
+                            errorStatus(
+                                landmarkResponse.code().toString()
+                            )
+                        )
+                    }
+
+                }
+
+                override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
+            })
     }
 
     override fun getLandmarkEliteActivationCode(
@@ -168,36 +233,41 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
         var url = "http://elite.landmarkinsurance.in/EliteAppService.svc/EliteActivationCode"
 
 
-        authenticationBuilder.getLandmarkEliteActivationCode(url,MobileNo,RegistrationNo).enqueue(object :
-            Callback<ActivationCodeLandmarkResponse> {
-            override fun onResponse(
-                call: Call<ActivationCodeLandmarkResponse>,
-                landmarkResponse: Response<ActivationCodeLandmarkResponse>
-            ) {
+        authenticationBuilder.getLandmarkEliteActivationCode(url, MobileNo, RegistrationNo).enqueue(
+            object :
+                Callback<ActivationCodeLandmarkResponse> {
+                override fun onResponse(
+                    call: Call<ActivationCodeLandmarkResponse>,
+                    landmarkResponse: Response<ActivationCodeLandmarkResponse>
+                ) {
 
-                if (landmarkResponse!!.isSuccessful) {
+                    if (landmarkResponse!!.isSuccessful) {
 
-                    printLog(Gson().toJson(landmarkResponse.body()))
+                        printLog(Gson().toJson(landmarkResponse.body()))
 
-                    if (landmarkResponse.body() != null) {
+                        if (landmarkResponse.body() != null) {
 
-                        // default success
-                        iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
+                            // default success
+                            iResponseSubcriber.OnSuccess(landmarkResponse.body()!!, "")
 
+                        } else {
+
+                            iResponseSubcriber.OnFailure(MESSAGE)
+                        }
                     } else {
-
-                        iResponseSubcriber.OnFailure(MESSAGE)
+                        iResponseSubcriber.OnFailure(
+                            errorStatus(
+                                landmarkResponse.code().toString()
+                            )
+                        )
                     }
-                } else {
-                    iResponseSubcriber.OnFailure(errorStatus(landmarkResponse.code().toString()))
+
                 }
 
-            }
-
-            override fun onFailure(call: Call<ActivationCodeLandmarkResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<ActivationCodeLandmarkResponse>, t: Throwable) {
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
+            })
     }
 
     override fun getPolicyBossVehicleInfo(
@@ -215,7 +285,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
 
-        authenticationBuilder.getPolicyBossVehicleInfo(url,map).enqueue(object :
+        authenticationBuilder.getPolicyBossVehicleInfo(url, map).enqueue(object :
             Callback<PolicyBossVehicleInfoResponse> {
             override fun onResponse(
                 call: Call<PolicyBossVehicleInfoResponse>,
@@ -228,8 +298,8 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
                     if (response.body() != null) {
 
-                            // ApplicationPersistance(mContext).saveUser(response.body()!!)
-                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        // ApplicationPersistance(mContext).saveUser(response.body()!!)
+                        iResponseSubcriber.OnSuccess(response.body()!!, response.message())
 
                     } else {
 
@@ -512,11 +582,16 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
         })
     }
 
-    override fun updateGolduser(user_id: String, iResponseSubcriber: IResponseSubcriber) {
+    override fun updateGolduser(
+        user_id: String,
+        ActivationCode: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
 
 
         var map = hashMapOf<String, String>()
         map.put("id", user_id)
+        map.put("activation_code", ActivationCode)
 
 
         authenticationBuilder.updateGolduser(map).enqueue(object :
@@ -788,7 +863,8 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
 
-        authenticationBuilder.getActivationCode(map).enqueue(object : Callback<ActivationCodeResponse> {
+        authenticationBuilder.getActivationCode(map).enqueue(object :
+            Callback<ActivationCodeResponse> {
             override fun onResponse(
                 call: Call<ActivationCodeResponse>,
                 response: Response<ActivationCodeResponse>

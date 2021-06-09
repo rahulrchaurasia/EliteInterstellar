@@ -22,6 +22,8 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
 
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rto_list)

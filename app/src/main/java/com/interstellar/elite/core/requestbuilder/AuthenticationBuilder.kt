@@ -2,7 +2,9 @@ package com.interstellar.elite.core.requestbuilder
 
 import com.interstellar.elite.RetroRequestBuilder
 import com.interstellar.elite.core.requestmodel.RegisterRequest
+import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 import com.interstellar.elite.core.response.*
+import com.squareup.okhttp.RequestBody
 
 import retrofit2.Call
 import retrofit2.http.*
@@ -45,8 +47,15 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
         @GET()
         fun getLandmarkEliteTataPee(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<TataLandmarkResponse>
 
-        @GET()
-        fun getLandmarkEliteGlobalAssure(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<GlobalAssureLandmarkResponse>
+//        @GET()
+//        fun getLandmarkEliteGlobalAssure(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<GlobalAssureLandmarkResponse>
+
+        @POST()
+        fun getLandmarkEliteGlobalAssure(@Url url: String, @Body body: String) : Call<GlobalAssureLandmarkResponse>
+
+        @POST()
+        fun getLandmarkEliteGlobalAssureQuery(@Url url :String, @Body body: HashMap<String, String> ) : Call<GlobalAssureLandmarkResponse>
+
 
         @GET()
         fun getLandmarkEliteActivationCode(@Url url: String, @Query("MobileNo") MobileNo: String? = null , @Query("RegistrationNo") RegistrationNo: String? = null ): Call<ActivationCodeLandmarkResponse>

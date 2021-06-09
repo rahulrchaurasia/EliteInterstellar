@@ -221,8 +221,23 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         final Checkout co = new Checkout();
        // co.setKeyID("rzp_live_DFxDFYDslN2DIq");           // we can add key here and in Manifest also
 
-        co.setKeyID("rzp_live_DFxDFYDslN2DIq");
-       // co.setImage(R.drawable.elite_logo);
+
+        if(loginEntity.getIsgoldverify()!= null)
+        {
+
+            if(loginEntity.getIsgoldverify().equals("Y") ){
+
+                co.setImage(R.drawable.elite_gold);
+            }else {
+
+                co.setImage(R.drawable.elite_plus);
+            }
+
+
+        }else{
+            co.setImage(R.drawable.elite_plus);
+        }
+
 
        // co.setFullScreenDisable(true);
         try {
@@ -358,9 +373,6 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         } catch (Exception e) {
             Log.d(TAG, "Exception in onPaymentError " + e.toString());
         }
-
-//        String razorpayPaymentID = "";
-//        ServiceAfterPayment(razorpayPaymentID);
 
 
     }

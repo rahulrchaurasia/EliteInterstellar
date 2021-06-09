@@ -1,6 +1,8 @@
 package com.interstellar.elite.core.requestmodel
 
-class RegisterRequest (
+import com.interstellar.elite.core.APIResponse
+
+data class RegisterRequest (
 
 
 

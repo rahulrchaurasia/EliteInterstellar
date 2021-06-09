@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -9,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/dashboard_header">
 
         <TextView
             android:id="@+id/txtPlanName"
@@ -26,13 +27,14 @@
 
         <ImageView
             android:id="@+id/ivCross"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:visibility="gone" />
+            app:srcCompat="@drawable/ic_close_24"
+            android:visibility="visible" />
 
 
     </RelativeLayout>
@@ -44,15 +46,31 @@
         android:src="@drawable/clock"
         />
 
-    <TextView
-        android:id="@+id/tvTime"
-        style="@style/TextViewStyle.Large"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+
         android:layout_marginTop="10dp"
-        android:text="Time remaining " />
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvTime"
+            style="@style/TextViewStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/primary_color"
+            android:text=" " />
+
+        <TextView
+            style="@style/TextViewStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=" remaining time" />
+
+    </LinearLayout>
 
     <TextView
         style="@style/TextViewStyle.MediumRegular"
@@ -125,7 +143,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:minHeight="35dp"
+
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:text="VERIFY OTP" />
@@ -140,8 +158,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="5dp"
-        android:minHeight="35dp"
+        android:layout_marginTop="@dimen/fab_margin"
+
         android:paddingLeft="25dp"
         android:paddingRight="25dp" />
 </LinearLayout>

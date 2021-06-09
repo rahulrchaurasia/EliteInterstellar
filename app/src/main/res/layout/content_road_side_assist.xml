@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,12 +28,12 @@
                 app:cardCornerRadius="@dimen/eight">
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/eight"
-                    android:layout_marginBottom="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/eight"
-                    android:layout_marginLeft="@dimen/eight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/eight"
+                    android:layout_marginTop="@dimen/eight"
+                    android:layout_marginRight="@dimen/eight"
+                    android:layout_marginBottom="@dimen/fab_margin"
 
                     android:orientation="vertical">
 
@@ -125,8 +126,6 @@
                     </LinearLayout>
 
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -139,21 +138,49 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@color/bg_edit"
                             android:hint="Name"
                             app:endIconMode="none"
-                            android:background="@color/bg_edit"
                             app:startIconDrawable="@drawable/ic_name">
 
                             <EditText
                                 android:id="@+id/etFullName"
                                 style="@style/Style.edittext"
                                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                               android:enabled="false"
+                                android:enabled="false"
                                 android:inputType="text"
                                 android:maxLength="100"
 
                                 android:text="" />
 
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/four"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilLogin"
+                            style="@style/TextInputMaterialOthStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile No."
+
+                            android:background="@color/bg_edit"
+                            app:startIconDrawable="@drawable/ic_mobile">
+
+                            <EditText
+                                android:id="@+id/etMobile"
+                                style="@style/Style.edittext"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:text=""
+                                 />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -172,9 +199,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:hint="Vehicle Number"
-                            app:endIconMode="none"
                             android:background="@color/bg_edit"
+                            android:hint="Vehicle Number"
+                            app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_vehicle">
 
                             <EditText
@@ -203,9 +230,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="3dp"
                             android:layout_weight="1"
-                            android:hint="Make"
-                            app:endIconMode="none"
                             android:background="@color/bg_edit"
+                            android:hint="Make"
+                            app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_policy">
 
                             <EditText
@@ -237,9 +264,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:layout_weight="1"
-                            android:hint="Model"
-                            app:endIconMode="none"
                             android:background="@color/bg_edit"
+                            android:hint="Model"
+                            app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_policy">
 
                             <EditText
@@ -257,7 +284,29 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilCity"
+                            style="@style/TextInputMaterialStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="City"
+                            app:endIconMode="clear_text"
+                            app:startIconDrawable="@drawable/ic_city_24">
+
+                            <EditText
+                                android:id="@+id/etCitye"
+                                style="@style/Style.edittext"
+                                android:layout_width="match_parent"
+                                android:drawableRight="@drawable/vector_date"
+                                android:inputType="textCapCharacters"
+                                android:maxLines="1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
 
 
                     <LinearLayout
@@ -271,17 +320,17 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Year Of Manufacture">
+                            android:hint="Year Of Manufacture"
+                            app:startIconDrawable="@drawable/ic_city_24">
 
                             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                                 android:id="@+id/acYearManufacture"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none"
                                 android:focusable="false"
+                                android:inputType="none"
                                 tools:ignore="KeyboardInaccessibleWidget" />
                         </com.google.android.material.textfield.TextInputLayout>
-
 
 
                     </LinearLayout>
@@ -289,48 +338,43 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/tilDate"
+                            style="@style/TextInputMaterialStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/TextInputMaterialStyle"
-                            app:endIconMode="none"
+                            android:hint="Expiry Date"
+                            app:endIconMode="clear_text"
                             app:helperText="@string/ExpDate"
-                            app:startIconDrawable="@drawable/ic_calendar_24"
-                            android:hint="Expiry Date">
+                            app:startIconDrawable="@drawable/ic_calendar_24">
 
                             <EditText
                                 android:id="@+id/etDate"
                                 style="@style/Style.edittext"
                                 android:layout_width="match_parent"
-                                android:focusable="false"
                                 android:drawableRight="@drawable/vector_date"
-                                />
+                                android:focusable="false" />
 
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
 
-
-
                 </LinearLayout>
-
-
 
 
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnPolicy"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/eight"
-                android:background="@drawable/bg_primary_rect"
+
                 android:text="DOWNLOAD POLICY" />
 
         </LinearLayout>

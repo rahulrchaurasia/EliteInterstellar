@@ -12,6 +12,7 @@ import com.interstellar.elite.R
 import com.interstellar.elite.core.DBPersistanceController
 import com.interstellar.elite.core.model.DashProductEntity
 import com.interstellar.elite.core.model.UserEntity
+import com.interstellar.elite.databinding.ActivityDashBoardProductListBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.product.ProductMainActivity
 import com.interstellar.elite.secure.RoadSideAssistActivity
@@ -19,12 +20,7 @@ import com.interstellar.elite.secure.WalletActivity
 import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.webview.CommonWebViewActivity
 import com.interstellar.elite.webview.WebViewHtmlActivity
-import kotlinx.android.synthetic.main.custom_toolbar.*
-import kotlinx.android.synthetic.main.custom_toolbar.imglogo
-import kotlinx.android.synthetic.main.custom_toolbar.txtName
-import kotlinx.android.synthetic.main.custom_toolbar.txtTitle
-import kotlinx.android.synthetic.main.fragment_secure_list.*
-import kotlinx.android.synthetic.main.layout_dashboard_banner.*
+
 import java.util.*
 
 
@@ -35,10 +31,14 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
    // private var strTitle: String? = null
+    lateinit var  binding : ActivityDashBoardProductListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dash_board_product_list)
+
+        binding = ActivityDashBoardProductListBinding.inflate(layoutInflater)
+       // setContentView(R.layout.activity_dash_board_product_list)
+        setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.toolbar)).apply {
             title = ""
 
@@ -47,7 +47,7 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-        txtTitle.text =  intent.getStringExtra("Title").toString()
+        binding.includedToolbar.txtTitle.text =  intent.getStringExtra("Title").toString()
 
 
 
@@ -98,11 +98,11 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             if(it!!.toUpperCase().equals("Y")){
 
                 //Gold
-                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
+                binding.includedToolbar.imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
 
             }else{
 
-               imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
+                binding.includedToolbar.imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
 
             }
 
@@ -114,7 +114,7 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
 
         loginEntity.let {
 
-            txtName.text = "Welcome "+it?.name ?:""
+            binding.includedToolbar.txtName.text = "Welcome "+it?.name ?:""
 
         }
     }
@@ -140,11 +140,11 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             }
             Constants.RTO_RC_BOOK_List -> {
                 bindData(DBPersistanceController.getRtoRcBookAssistList(), dbProductType)
-                txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17F);
+                binding.includedToolbar.txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17F);
             }
             Constants.RTO_DRIVING_LICENSE_List -> {
                 bindData(DBPersistanceController.getRtoDrivingLicAssistList(), dbProductType)
-                txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17F);
+                binding.includedToolbar.txtTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17F);
             }
         }
 
@@ -152,14 +152,14 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
 
     fun bindData(productList: List<DashProductEntity>, dbProductType: String?) {
 
-            rvDashboardProduct.layoutManager =
+        binding.includedDashBoardProduct.rvDashboardProduct.layoutManager =
                 LinearLayoutManager(this@DashBoardProductListActivity)
 
             //creating our adapter
             mAdapter = DashBoardProdListAdapter(productList, this, dbProductType!!)
 
             //now adding the adapter to recyclerview
-            rvDashboardProduct.adapter = mAdapter
+        binding.includedDashBoardProduct.rvDashboardProduct.adapter = mAdapter
         }
 
     fun getProduct(entity: DashProductEntity) {

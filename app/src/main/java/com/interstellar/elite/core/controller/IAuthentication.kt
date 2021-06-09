@@ -2,6 +2,7 @@ package com.interstellar.elite.core.controller
 
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.requestmodel.RegisterRequest
+import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 
 
 interface IAuthentication {
@@ -11,7 +12,9 @@ interface IAuthentication {
 
     fun getLandmarkEliteTataPee( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
-    fun getLandmarkEliteGlobalAssure( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
+    fun getLandmarkEliteGlobalAssure(strBody : String, iResponseSubcriber: IResponseSubcriber)
+
+    fun getLandmarkEliteGlobalAssureQuery(MobileNo :String , iResponseSubcriber: IResponseSubcriber)
 
     fun getLandmarkEliteActivationCode( MobileNo :String ,RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
@@ -43,6 +46,7 @@ interface IAuthentication {
 
     fun updateGolduser(
         user_id: String,
+        ActivationCode : String,
         iResponseSubcriber: IResponseSubcriber
     )
 
