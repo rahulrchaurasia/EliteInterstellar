@@ -33,6 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.interstellar.elite.BuildConfig
+import com.interstellar.elite.BuildConfig.VERSION_NAME
 //import com.interstellar.elite.BuildConfig
 import com.interstellar.elite.R
 import com.interstellar.elite.TermsCondtion.TermsConditionFragment
@@ -46,6 +47,7 @@ import com.interstellar.elite.core.model.UserConstatntEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.response.EligibilityUserResponse
 import com.interstellar.elite.core.response.UserConsttantResponse
+import com.interstellar.elite.databinding.ActivityHomeBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.dashboard.DashboardFragment
 import com.interstellar.elite.login.LoginActivity
@@ -53,11 +55,11 @@ import com.interstellar.elite.notification.NotificationFragment
 import com.interstellar.elite.profile.ProfileFragment
 import com.interstellar.elite.request.OrderDetailFragment
 import com.interstellar.elite.utility.Constants
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_rto_list.*
-import kotlinx.android.synthetic.main.app_bar_navigation.*
-import kotlinx.android.synthetic.main.layout_dashboard_banner.*
-import kotlinx.android.synthetic.main.layout_dashboard_banner.view.*
+//import kotlinx.android.synthetic.main.activity_home.*
+//import kotlinx.android.synthetic.main.activity_rto_list.*
+//import kotlinx.android.synthetic.main.app_bar_navigation.*
+//import kotlinx.android.synthetic.main.layout_dashboard_banner.*
+//import kotlinx.android.synthetic.main.layout_dashboard_banner.view.*
 
 
 class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.OnNavigationItemSelectedListener ,IResponseSubcriber {
@@ -71,13 +73,16 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
      var userConstatntEntity: UserConstatntEntity? = null
 
 
+    lateinit var binding :ActivityHomeBinding
 
     lateinit var changePasswordFragment: ChangePasswordFragment
     lateinit var termsConditionFragment: TermsConditionFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         prefManager = PrefManager(this)
         loginEntity = prefManager.getUserData()
@@ -114,30 +119,30 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     fun init(){
 
-        txtName.text = ""
-        txtNameOth.text = ""
+        binding.includeAppBar.dashboardBanner.txtName.text = ""
+        binding.includeAppBar.dashboardBanner.txtNameOth.text = ""
 
         // Note : toolbar replace by null bec here using custom icon
         val drawerToggle :ActionBarDrawerToggle  = object : ActionBarDrawerToggle(
             this,
-            drawer_layout,
+           binding.drawerLayout,
             null,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         ){}
 
         drawerToggle.isDrawerIndicatorEnabled = true
-        drawer_layout.addDrawerListener(drawerToggle)
+        binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
-        navigationView = nav_view
+        navigationView = binding.navView
         navigationView.setNavigationItemSelectedListener(this)
         navigationView.itemIconTintList = null
         fabHome = findViewById<FloatingActionButton>(R.id.fab)
-        bottomNavigationView.setBackground(null)
-        bottomNavigationView.menu.getItem(2).isEnabled = false
+        binding.includeAppBar.bottomNavigationView.setBackground(null)
+        binding.includeAppBar.bottomNavigationView.menu.getItem(2).isEnabled = false
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding.includeAppBar.bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
 
         authenticationController = ServiceRequest.getService(
@@ -155,12 +160,13 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     fun getEligibilityCall(){
 
         var eligibleJson = ""
-        if( loginEntity!!.mobile.equals("8779909962")  ||  loginEntity!!.mobile.equals("9833797088") ) {
-             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"YES\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
-        }else{
-             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"N\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
-
+        if( loginEntity!!.mobile.equals("9898147711")  ||  loginEntity!!.mobile.equals("9833797088") ) {
+             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"Honda\",\"MobileNo\":\"\",\"Model\":\"Brio\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"YES\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
         }
+//        else{
+//             eligibleJson = "{\"EliteEligibilityCheckResult\":{\"EliteEligibilityCheckdetails\":[{\"Make\":\"HONDA\",\"MobileNo\":\"\",\"Model\":\"ACCORD\",\"Premium\":\"\",\"RegistrationNo\":\"\",\"eligible\":\"N\"}],\"message\":\"Vehicle is already registered\",\"status\":\"Failed\",\"status_code\":0}}"
+
+   //     }
 
 
         val objResponse =  Gson().fromJson(eligibleJson, EligibilityUserResponse::class.java)
@@ -174,8 +180,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     }
 
     fun setListener(){
-        imgHamburger.setOnClickListener(this)
-        imgHamburgerOth.setOnClickListener(this)
+        binding.includeAppBar.dashboardBanner.imgHamburger.setOnClickListener(this)
+        binding.includeAppBar.dashboardBanner.imgHamburgerOth.setOnClickListener(this)
         fabHome.setOnClickListener(this)
         fabHome.performClick()
     }
@@ -244,19 +250,19 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             if(it!!.toUpperCase().equals("Y")){
 
                 //Gold
-                imglogo.setImageDrawable(
+                binding.includeAppBar.dashboardBanner. imglogo.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_gold
                     )
                 )
-                imglogoDashboard.setImageDrawable(
+                binding.includeAppBar.dashboardBanner.imglogoDashboard.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_gold
                     )
                 )
-                imglogo1.setImageDrawable(
+                binding.includeAppBar.dashboardBanner.imglogo1.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_gold
@@ -265,19 +271,19 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
             }else{
 
-                imglogo.setImageDrawable(
+                binding.includeAppBar.dashboardBanner.imglogo.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_plus
                     )
                 )
-                imglogo1.setImageDrawable(
+                binding.includeAppBar.dashboardBanner.imglogo1.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_plus
                     )
                 )
-                imglogoDashboard.setImageDrawable(
+                binding.includeAppBar.dashboardBanner.imglogoDashboard.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.elite_plus
@@ -305,7 +311,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             txtHeaderName.text = "" + loginEntity?.name
             txtHeaderVehicle.setText("" + loginEntity?.vehicleno)
 
-            txtHeaderVersion.setText("Version " + BuildConfig.VERSION_NAME)
+            txtHeaderVersion.setText("Version " + VERSION_NAME)
         } else {
             txtHeaderName.text = ""
             txtHeaderVehicle.setText("")
@@ -337,7 +343,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             openFragment(dashFragment, "HOME")
 
             // for Reset the bottom Navigation Menu
-            bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+            binding.includeAppBar.bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
         }
     }
 
@@ -345,15 +351,15 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         loginEntity.let {
 
-            txtName.text = "Welcome "+it?.name ?:""
-            txtNameOth.text =  "Welcome " + it?.name ?:""
+            binding.includeAppBar.dashboardBanner.txtName.text = "Welcome "+it?.name ?:""
+            binding.includeAppBar.dashboardBanner.txtNameOth.text =  "Welcome " + it?.name ?:""
         }
     }
 
      fun resetBottomNavigationMenu(){
 
          // for Reset the bottom Navigation Menu
-         bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+         binding.includeAppBar.bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
      }
 
 
@@ -379,8 +385,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         if(type.equals("HOME")){
             fabHome.tag = "HOME"
 
-            dashboardBanner.visibility = View.VISIBLE
-            otherBanner.visibility = View.GONE
+            binding.includeAppBar.dashboardBanner.dashboardBanner.visibility = View.VISIBLE
+            binding.includeAppBar.dashboardBanner.otherBanner.visibility = View.GONE
 
           //  bottomNavigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_primary_color))
 
@@ -395,8 +401,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         } else if(type.equals("HomeChild")){
             fabHome.tag = "HomeChild"
 
-            dashboardBanner.visibility = View.GONE
-            otherBanner.visibility = View.VISIBLE
+            binding.includeAppBar.dashboardBanner.dashboardBanner.visibility = View.GONE
+            binding.includeAppBar.dashboardBanner.otherBanner.visibility = View.VISIBLE
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 fabHome.setSupportBackgroundTintList(
@@ -409,8 +415,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         }else{
             fabHome.tag = "OTHER"
 
-            dashboardBanner.visibility = View.GONE
-            otherBanner.visibility = View.VISIBLE
+           binding.includeAppBar.dashboardBanner.dashboardBanner.visibility = View.GONE
+            binding.includeAppBar.dashboardBanner.otherBanner.visibility = View.VISIBLE
             // bottomNavigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary_color))
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -506,11 +512,11 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
     //region Navigation Menu
 
     private fun closeDrawer() {
-        drawer_layout.closeDrawer(GravityCompat.START)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     fun openDrawer() {
-        drawer_layout.openDrawer(GravityCompat.START, true)
+        binding.drawerLayout.openDrawer(GravityCompat.START, true)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
@@ -525,7 +531,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             }
             R.id.nav_change_pwd -> {
 
-                txtTitle.text = "Change Password"
+                binding.includeAppBar.dashboardBanner.txtTitle.text = "Change Password"
 
                 changePasswordFragment = ChangePasswordFragment()
                 openFragment(changePasswordFragment, "HomeChild")
@@ -533,7 +539,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             }
             R.id.nav_terms -> {
 
-                txtTitle.text = "Terms and  Condition"
+                binding.includeAppBar.dashboardBanner.txtTitle.text = "Terms and  Condition"
                 termsConditionFragment = TermsConditionFragment()
 
                 openFragment(termsConditionFragment, "HomeChild")
@@ -570,7 +576,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             R.id.bottom_nav_aboutUS -> {
                 // toolbar.title = "About Us"
                 if (currFragment !is AboutUsFragment) {
-                    txtTitle.text = "About Us"
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "About Us"
                     item.isCheckable = true
 
                     val aboutUsFragment = AboutUsFragment.newInstance()
@@ -583,7 +589,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             R.id.bottom_nav_profile -> {
                 //  toolbar.title = "Profile"
                 if (currFragment !is ProfileFragment) {
-                    txtTitle.text = "Profile"
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "Profile"
                     item.isCheckable = true
                     val profileFragment = ProfileFragment.newInstance()
                     openFragment(profileFragment, "")
@@ -593,7 +599,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             R.id.bottom_nav_request -> {
                 //  toolbar.title = "Request"
                 if (currFragment !is OrderDetailFragment) {
-                    txtTitle.text = "Request"
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "Request"
                     item.isCheckable = true
                     val requestFragment = OrderDetailFragment.newInstance()
                     openFragment(requestFragment, "")
@@ -603,7 +609,7 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
             R.id.bottom_nav_notification -> {
                 //  toolbar.title = "Notification"
                 if (currFragment !is NotificationFragment) {
-                    txtTitle.text = "Notification"
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "Notification"
                     item.isCheckable = true
                     val artistsFragment = NotificationFragment.newInstance()
                     openFragment(artistsFragment, "")
@@ -741,8 +747,8 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
     override fun onBackPressed() {
 
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)){
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if( binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
         else if(!fabHome.tag.equals("HOME")  ){
             fabHome.performClick()
@@ -772,25 +778,25 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
 
             }
-//            else{
-//
-//                // temp added 05
-//               // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
-//
-//                 // Todo : Commented
-//                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")){
-//
-//
-//                    getEligibilityCall()
-//
-//                }
-//
-//                // Todo : till here
-//
-//
-//
-//            }
-//
+            else{
+
+                // temp added 05
+               // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
+
+                 // Todo : Commented
+                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("9898147711")){
+
+
+                    getEligibilityCall()
+
+                }
+
+                // Todo : till here
+
+
+
+            }
+
         }
 
         //endregion

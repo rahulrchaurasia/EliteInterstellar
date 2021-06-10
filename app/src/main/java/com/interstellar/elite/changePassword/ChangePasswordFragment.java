@@ -114,7 +114,7 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
                // Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
 
                 getCustomToast( response.getMessage());
-
+                 prefManager.clearPassword();
                 clear();
 
             }

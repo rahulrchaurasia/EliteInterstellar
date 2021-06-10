@@ -12,11 +12,13 @@ import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
 import com.interstellar.elite.core.model.LoginEntity
 import com.interstellar.elite.core.model.UserEntity
+import com.interstellar.elite.databinding.FragmentDashboardBinding
+import com.interstellar.elite.databinding.FragmentProfileBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.dashboardPrdList.DashBoardProductListActivity
 import com.interstellar.elite.rto.RtoMain.RtoListActivity
 import com.interstellar.elite.utility.Constants
-import kotlinx.android.synthetic.main.fragment_dashboard.*
+//import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 
 class DashboardFragment :BaseFragmentKotlin(), View.OnClickListener, IResponseSubcriber {
@@ -24,6 +26,8 @@ class DashboardFragment :BaseFragmentKotlin(), View.OnClickListener, IResponseSu
     lateinit var authenticationController: AuthenticationController
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
+
+    lateinit var binding : FragmentDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,10 @@ class DashboardFragment :BaseFragmentKotlin(), View.OnClickListener, IResponseSu
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        //return inflater.inflate(R.layout.fragment_dashboard, container, false)
+
+        binding =  FragmentDashboardBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +65,7 @@ class DashboardFragment :BaseFragmentKotlin(), View.OnClickListener, IResponseSu
 
         loginEntity.let {
 
-          txtVehicle.text =  it?.vehicleno?: ""
+          binding.txtVehicle.text =  it?.vehicleno?: ""
         }
 
 
@@ -70,9 +77,9 @@ class DashboardFragment :BaseFragmentKotlin(), View.OnClickListener, IResponseSu
     }
     private fun setListener() {
 
-        cvAssure.setOnClickListener(this)
-        cvRto.setOnClickListener(this)
-        cvSecure.setOnClickListener(this)
+        binding.cvAssure.setOnClickListener(this)
+        binding.cvRto.setOnClickListener(this)
+        binding.cvSecure.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {

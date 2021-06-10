@@ -2,6 +2,8 @@ package com.interstellar.elite.core.controller
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import com.interstellar.elite.core.BaseController
 import com.interstellar.elite.core.IResponseSubcriber
@@ -10,6 +12,7 @@ import com.interstellar.elite.core.requestmodel.RegisterRequest
 import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 import com.interstellar.elite.core.response.*
 import com.interstellar.elite.facade.PrefManager
+import com.interstellar.elite.utility.Constants
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.RequestBody
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -18,6 +21,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.UnknownHostException
 
 
 open class AuthenticationController(mCxt: Context) : BaseController(), IAuthentication {
@@ -35,7 +39,10 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
        //prefManager = PrefManager(mContext)
         //loginEntity = prefManager.getUserData()!!
+
+
     }
+
 
 
     override fun getUserEligibility(
@@ -577,7 +584,14 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
+
             }
         })
     }

@@ -43,17 +43,17 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
 
         setListner()
 
-//        showDialog()
-//
-//        loginEntity.let {
-//
-//            authenticationController.getLandmarkEliteActivationCode(
-//                it!!.mobile.toString(),
-//                it!!.vehicleno,
-//                this@VerifyUserActivity
-//            )
-//
-//        }
+        showDialog()
+
+        loginEntity.let {
+
+            authenticationController.getLandmarkEliteActivationCode(
+                it!!.mobile.toString(),
+                it!!.vehicleno,
+                this@VerifyUserActivity
+            )
+
+        }
     }
     private fun initialize(){
 

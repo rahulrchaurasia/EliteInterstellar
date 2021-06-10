@@ -13,11 +13,13 @@
 
         <include
             layout="@layout/custom_toolbar"
+            android:id="@+id/include_rto_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_rto_list" />
+    <include layout="@layout/content_rto_list"
+        android:id="@+id/include_rto_list"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

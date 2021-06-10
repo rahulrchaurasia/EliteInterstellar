@@ -183,6 +183,8 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
 
     }
 
+    // region init and listner
+
     private void initialize() {
 
         cvBuy = (CardView) findViewById(R.id.cvBuy);
@@ -211,6 +213,10 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
         btnContinue.setOnClickListener(this);
         btnHomeContinue.setOnClickListener(this);
     }
+
+    //endregion
+
+    // region Razorpay Method
 
     public void startPayment() {
         /*
@@ -273,8 +279,6 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
             e.printStackTrace();
         }
     }
-
-
 
     public void ServiceAfterPayment(String razorpayPaymentID){
 
@@ -348,6 +352,10 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
             Log.e(TAG, "Exception in onPaymentSuccess", e);
         }
     }
+
+    //endregion
+
+    // region Event
 
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
@@ -448,6 +456,8 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
 
         cancelDialog();
     }
+
+    // endregion
 
 
 

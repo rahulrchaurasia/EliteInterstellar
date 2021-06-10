@@ -431,4 +431,17 @@ class PrefManager(context: Context) {
     }
 
 
+    fun clearLoginData() {
+        editor!!.remove(PASSWORD)
+        editor!!.remove(MOBILE)
+
+        editor!!.commit()
+    }
+
+
+    fun clearPassword() {
+        editor!!.remove(PASSWORD)
+        editor!!.commit()
+    }
+
 }

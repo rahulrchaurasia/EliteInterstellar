@@ -157,11 +157,16 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             R.id.btnSignIn -> {
                 if (!isEmpty(binding.includedLayout.etMobile)) {
 
-                    binding.includedLayout.tilLogin.error = "Enter Mobile"
+                    binding.includedLayout.tilLogin.error = "Enter Mobile No."
 
                     return
                 }
-                if (!isEmpty(binding.includedLayout.etPassword)) {
+                else if ((binding.includedLayout.etMobile.text.toString().length < 10)) {
+                    binding.includedLayout.etMobile.requestFocus()
+                    binding.includedLayout.tilLogin.error = "Enter Valid Mobile No."
+                    return
+                }
+                else if (!isEmpty(binding.includedLayout.etPassword)) {
 
                     binding.includedLayout.tilPassword.error = "Enter Password"
 
@@ -194,7 +199,6 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             R.id.tvRegistration -> {
 
 
-                // 05 temp55555
                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
 
 
@@ -279,7 +283,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
                 // temp added 05   loginEntity!!.mobile.equals("9403834308") 167815
                 // later we have to remove  getEligibilityCall()and directly check   checkEligibility() 8779909962
                 // Todo : Commented : Suppose below mob no success response
-//                 7400445766
+//                 7400445766  9898147711
 //                if(loginEntity!!.mobile.equals("9833797088")   || loginEntity!!.mobile.equals("8779909962")  || loginEntity!!.mobile.equals("9412365852")){
 //
 //

@@ -72,6 +72,7 @@
                                 style="@style/TextInputMaterialStyle"
                                 app:endIconMode="none"
                                 app:startIconDrawable="@drawable/ic_name"
+                                android:background="@color/disable_color"
                                 android:hint="Name">
 
                                 <EditText
@@ -79,7 +80,7 @@
                                     android:enabled="false"
                                     style="@style/Style.edittext"
                                     android:inputType="textCapWords"
-                                    android:background="@color/disable_color"
+
                                     android:maxLength="100" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -93,18 +94,19 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="@dimen/four"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 style="@style/TextInputMaterialStyle"
                                 app:endIconMode="none"
                                 app:startIconDrawable="@drawable/ic_mobile"
+                                android:background="@color/disable_color"
                                 android:hint="Mobile">
 
                                 <EditText
                                     android:id="@+id/etMobile"
                                     style="@style/Style.edittext"
-                                    android:background="@color/disable_color"
                                     android:inputType="number"
                                     android:enabled="false"
                                     android:maxLength="10" />
@@ -121,6 +123,7 @@
                             <LinearLayout
 
                                 android:id="@+id/lyVehicle"
+                                android:layout_marginTop="@dimen/four"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -134,12 +137,14 @@
                                     style="@style/TextInputMaterialStyle"
                                     app:endIconMode="none"
                                     app:startIconDrawable="@drawable/ic_vehicle"
+                                    android:background="@color/disable_color"
+
                                     android:hint="Vehicle Number">
 
                                     <EditText
                                         android:id="@+id/etVehicle"
                                         style="@style/Style.edittext"
-                                        android:background="@color/disable_color"
+
                                         android:maxLength="15"
                                         android:inputType="text"
                                         android:maxLines="1"
@@ -170,6 +175,7 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/four"
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -179,12 +185,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginRight="3dp"
+                                android:background="@color/disable_color"
                                 app:endIconMode="none"
                                 android:hint="Make">
 
                                 <EditText
                                     android:id="@+id/acMake"
-                                    android:background="@color/disable_color"
+
                                     style="@style/Style.edittext"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -203,6 +210,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 app:endIconMode="none"
+                                android:background="@color/disable_color"
                                 android:hint="Model">
 
                                 <EditText
@@ -210,7 +218,6 @@
                                     style="@style/Style.edittext"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/disable_color"
                                     android:inputType="text"
                                     android:maxLines="1"
                                     android:lines="1"
@@ -228,6 +235,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/four"
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -235,6 +243,7 @@
                                 app:startIconDrawable="@drawable/ic_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:background="@color/disable_color"
                                 app:endIconMode="none"
                                 android:hint="Email">
 
@@ -242,7 +251,7 @@
                                     android:id="@+id/etEmail"
                                     style="@style/Style.edittext"
                                     android:inputType="textEmailAddress"
-                                    android:background="@color/disable_color"
+
                                     android:enabled="false"
                                     android:maxLength="100" />
 

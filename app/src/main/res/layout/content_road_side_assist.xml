@@ -138,16 +138,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/bg_edit"
+                           
                             android:hint="Name"
-                            app:endIconMode="none"
+                            app:endIconMode="clear_text"
+
+                            app:endIconContentDescription="dcdcdcdcdcdcdcdcdcd"
                             app:startIconDrawable="@drawable/ic_name">
 
                             <EditText
                                 android:id="@+id/etFullName"
                                 style="@style/Style.edittext"
                                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                android:enabled="false"
                                 android:inputType="text"
                                 android:maxLength="100"
 
@@ -165,13 +166,13 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilLogin"
-                            style="@style/TextInputMaterialOthStyle"
+                            android:id="@+id/tilMobile"
+                            style="@style/TextInputMaterialStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Mobile No."
-
-                            android:background="@color/bg_edit"
+                               app:endIconMode="clear_text"
+                           
                             app:startIconDrawable="@drawable/ic_mobile">
 
                             <EditText
@@ -199,7 +200,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/bg_edit"
+                           
                             android:hint="Vehicle Number"
                             app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_vehicle">
@@ -207,7 +208,7 @@
                             <EditText
                                 android:id="@+id/etVehicle"
                                 style="@style/Style.edittext"
-                                android:enabled="false"
+                               
                                 android:inputType="textCapCharacters"
 
                                 android:maxLines="1"
@@ -226,11 +227,12 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/TextInputMaterialStyle"
+                            android:id="@+id/tilMake"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="3dp"
                             android:layout_weight="1"
-                            android:background="@color/bg_edit"
+                           
                             android:hint="Make"
                             app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_policy">
@@ -241,7 +243,7 @@
                                 style="@style/Style.edittext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="false"
+                               
                                 android:inputType="text"
                                 android:lines="1"
                                 android:maxLines="1" />
@@ -261,10 +263,11 @@
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/TextInputMaterialStyle"
                             android:layout_width="0dp"
+                            android:id="@+id/tilModel"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:layout_weight="1"
-                            android:background="@color/bg_edit"
+                           
                             android:hint="Model"
                             app:endIconMode="clear_text"
                             app:startIconDrawable="@drawable/ic_policy">
@@ -275,7 +278,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
-                                android:enabled="false"
+                               
                                 android:inputType="text"
                                 android:lines="1"
                                 android:maxLines="1" />
@@ -294,7 +297,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="City"
-                            app:endIconMode="clear_text"
+                            app:endIconMode="none"
                             app:startIconDrawable="@drawable/ic_city_24">
 
                             <EditText
@@ -346,7 +349,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Expiry Date"
-                            app:endIconMode="clear_text"
+                            app:endIconMode="none"
                             app:helperText="@string/ExpDate"
                             app:startIconDrawable="@drawable/ic_calendar_24">
 

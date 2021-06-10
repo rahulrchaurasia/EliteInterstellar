@@ -24,8 +24,8 @@ import com.interstellar.elite.core.response.ProfileResponse
 import com.interstellar.elite.core.response.UserRegistrationResponse
 import com.interstellar.elite.databinding.FragmentProfileBinding
 import com.interstellar.elite.facade.PrefManager
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
+//import kotlinx.android.synthetic.main.fragment_profile.*
+//import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
 class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickListener{
@@ -127,11 +127,11 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
     private fun setRegisterRequest() {
         val registerRequest = RegisterRequest(
             otp = "",
-            emailid = etEmail.text.toString(),
-            mobile = etMobile.text.toString(),
-            name = etFullName.text.toString(),
+            emailid = binding.etEmail.text.toString(),
+            mobile = binding.etMobile.text.toString(),
+            name = binding.etFullName.text.toString(),
 
-            vehicle_no = etVehicle.text.toString(),
+            vehicle_no = binding.etVehicle.text.toString(),
             pincode = binding.etPincode.text.toString(),
             city = binding.etCity.text.toString(),
             state = binding.etState.text.toString(),
@@ -152,8 +152,8 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
             PolicyStatus = "",
             ResponseStatus = "",
 
-            Make = "",
-            Model = ""
+            Make =  binding.acMake.text.toString(),
+            Model = binding.acModel.text.toString(),
 
         )
 
@@ -217,7 +217,7 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
     }
 
     override fun OnSuccess(apiResponse: APIResponse, message: String) {
-        hideKeyBoard(etEmail)
+        hideKeyBoard(binding.etEmail)
         dismissDialog()
         if (apiResponse is ProfileResponse) {
             if (apiResponse.status_code == 0) {
@@ -237,7 +237,7 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
         } else if (apiResponse is UserRegistrationResponse) {
             if (apiResponse.status_code === 0) {
 
-                val snack = Snackbar.make(etEmail, apiResponse.message, Snackbar.LENGTH_LONG)
+                val snack = Snackbar.make(binding.etEmail, apiResponse.message, Snackbar.LENGTH_LONG)
                 snack.show()
                 //Toast.makeText(requireActivity(), apiResponse.message, Toast.LENGTH_LONG)
             }
@@ -245,9 +245,9 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
             if (apiResponse.status_code === 0) {
                 pincodeEntity = apiResponse.Data.get(0)
                 if (pincodeEntity != null) {
-                    etArea.setText("" + pincodeEntity?.postname ?: "")
-                    etCity.setText("" + pincodeEntity?.cityname ?: "")
-                    etState.setText("" + pincodeEntity?.state_name ?: "")
+                    binding.etArea.setText("" + pincodeEntity?.postname ?: "")
+                    binding.etCity.setText("" + pincodeEntity?.cityname ?: "")
+                    binding.etState.setText("" + pincodeEntity?.state_name ?: "")
                 }
 
             }

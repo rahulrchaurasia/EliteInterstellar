@@ -11,22 +11,26 @@ import androidx.core.content.ContextCompat
 
 import com.interstellar.elite.R
 import com.interstellar.elite.core.model.UserEntity
+import com.interstellar.elite.databinding.ActivityRtoListBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.home.dashboardPrdList.DashBoardProductListActivity
 import com.interstellar.elite.utility.Constants
-import kotlinx.android.synthetic.main.activity_rto_list.*
-import kotlinx.android.synthetic.main.content_rto_list.*
-import kotlinx.android.synthetic.main.custom_toolbar.*
+
 
 class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
 
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
 
+    lateinit var binding : ActivityRtoListBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rto_list)
+
+        binding = ActivityRtoListBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -39,7 +43,7 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
         setListener()
 
 
-        txtTitle.text = "RTO+"
+        binding.includeRtoToolbar.txtTitle.text = "RTO+"
 
     }
 
@@ -64,9 +68,9 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
         isGolduser.let {
 
             if (it!!.toUpperCase().equals("Y")) {
-                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
+                binding.includeRtoToolbar.imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_gold))
             }else{
-                imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
+                binding.includeRtoToolbar.imglogo.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.elite_plus))
             }
 
         }
@@ -74,8 +78,8 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
 
     private fun setListener() {
 
-        cvRcBook.setOnClickListener(this)
-        cvDlAssistance.setOnClickListener(this)
+        binding.includeRtoList.cvRcBook.setOnClickListener(this)
+        binding.includeRtoList.cvDlAssistance.setOnClickListener(this)
 
     }
 
@@ -84,7 +88,7 @@ class RtoListActivity : BaseActivityKotlin() , View.OnClickListener{
 
         loginEntity.let {
 
-            txtName.text = "Welcome "+it?.name ?:""
+            binding.includeRtoToolbar.txtName.text = "Welcome "+it?.name ?:""
 
         }
     }

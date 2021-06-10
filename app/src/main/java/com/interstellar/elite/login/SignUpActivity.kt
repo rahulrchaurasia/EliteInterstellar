@@ -228,16 +228,20 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 if (validateRegistration() == true) {
 
 
-                    showOtpAlert()
-                    showLoading("")
+
+                    if (!Constants.checkInternetStatus(this@SignUpActivity)){
 
 
-                    showLoading("Please wait..")
-                    authenticationController.verifyOTPTegistration(
-                        email = binding.includedSignup.etEmail.text.toString(),
-                        mobile = binding.includedSignup.etMobile.text.toString(),
-                        this
-                    )
+                        showAlert("Check Your Internet Connection!!")
+                    }else{
+                        showLoading("Please wait..")
+                        authenticationController.verifyOTPTegistration(
+                            email = binding.includedSignup.etEmail.text.toString(),
+                            mobile = binding.includedSignup.etMobile.text.toString(),
+                            this
+                        )
+                    }
+
                 }
             }
 
@@ -262,21 +266,22 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                 if (verifyOTPEntity.SavedStatus === 1 ) {
                     OTP = verifyOTPEntity.OTP
 
-                   // showOtpAlert()
+                    showOtpAlert()
 
 
                 } else if (verifyOTPEntity.SavedStatus === 2) {
                     getCustomToast(apiResponse.message)
                 }
             }
-//            else{
-//
-//                showOtpAlert()
-//            }
+            else{
+
+                showOtpAlert()
+            }
         }else if (apiResponse is UserRegistrationResponse) {
 
             if (apiResponse.status_code === 0 ) {
                 getCustomToast(apiResponse.message)
+                prefManager.clearLoginData()
                 finish()
             }else{
                 getCustomToast(apiResponse.message)

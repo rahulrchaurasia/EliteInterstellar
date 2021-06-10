@@ -7,24 +7,28 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.interstellar.elite.R
 import com.razorpay.Checkout
-import kotlinx.android.synthetic.main.activity_payment.*
+
 import org.json.JSONObject
 
 class DemoPaymentActivity : AppCompatActivity()  {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
+
         Checkout.preload(applicationContext)
 
-        btnSubmit.setOnClickListener(View.OnClickListener {
-
-            startPayment()
-
-        })
+//        btnSubmit.setOnClickListener(View.OnClickListener {
+//
+//            startPayment()
+//
+//        })
     }
 
 

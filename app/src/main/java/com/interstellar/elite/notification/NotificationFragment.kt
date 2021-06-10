@@ -17,10 +17,11 @@ import com.interstellar.elite.core.controller.product.ProductController
 import com.interstellar.elite.core.model.NotificationEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.response.NotificationResponse
+import com.interstellar.elite.databinding.FragmentNotificationBinding
 import com.interstellar.elite.document.DocUploadActivity
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.request.OrderActivity
-import kotlinx.android.synthetic.main.content_notification.*
+//import kotlinx.android.synthetic.main.content_notification.*
 import java.util.*
 
 
@@ -33,6 +34,8 @@ class NotificationFragment : BaseFragment() ,IResponseSubcriber {
     var NotificationLst: List<NotificationEntity>? = null
     var mAdapter: NotificationAdapter? = null
 
+    lateinit var binding : FragmentNotificationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,7 +47,9 @@ class NotificationFragment : BaseFragment() ,IResponseSubcriber {
     ): View? {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        binding = FragmentNotificationBinding.inflate(inflater,container,false)
+        return binding.root
+       // return inflater.inflate(R.layout.fragment_notification, container, false)
 
 
     }
@@ -70,9 +75,9 @@ class NotificationFragment : BaseFragment() ,IResponseSubcriber {
     private fun initialize() {
         NotificationLst = ArrayList()
         prefManager.setNotificationCounter(0)
-        rvNotify!!.setHasFixedSize(true)
+        binding.includeNotification.rvNotify!!.setHasFixedSize(true)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireActivity())
-        rvNotify!!.layoutManager = layoutManager
+        binding.includeNotification.rvNotify!!.layoutManager = layoutManager
     }
 
     fun redirectToMain(notifyEntity: NotificationEntity) {
@@ -93,10 +98,10 @@ class NotificationFragment : BaseFragment() ,IResponseSubcriber {
                 //Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
                 NotificationLst = (response as NotificationResponse).data
                 mAdapter = NotificationAdapter(this, NotificationLst)
-                rvNotify.adapter = mAdapter
+                binding.includeNotification.rvNotify.adapter = mAdapter
             } else {
-                rvNotify.adapter = null
-                Snackbar.make(rvNotify, "No Notification  Data Available", Snackbar.LENGTH_SHORT).show()
+                binding.includeNotification.rvNotify.adapter = null
+                Snackbar.make(binding.includeNotification.rvNotify, "No Notification  Data Available", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

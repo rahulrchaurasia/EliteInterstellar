@@ -14,6 +14,7 @@ import android.webkit.MimeTypeMap
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import com.google.gson.Gson
 import com.interstellar.elite.BaseActivity
 import com.interstellar.elite.R
@@ -63,6 +64,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         init()
         setListner()
+        setOnTextChangeListner()
         bindData()
     }
 
@@ -106,6 +108,37 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
     }
 
+    fun setOnTextChangeListner(){
+
+        //region TextChange
+
+        binding.includedRSA.etFullName.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                binding.includedRSA.tilName.error = null
+            }
+        }
+
+        binding.includedRSA.etMobile.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                binding.includedRSA.tilMobile.error = null
+            }
+        }
+
+
+        binding.includedRSA.etVehicle.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                binding.includedRSA.tilVehicle.error = null
+            }
+        }
+
+
+        //endregion
+
+    }
+
     fun bindData() {
 
         binding.includedRSA.apply {
@@ -114,6 +147,8 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
             acModel.setText(prefManager.getModelFromEligibility())
             etFullName.setText(loginEntity!!.name)
             etVehicle.setText(loginEntity!!.vehicleno)
+            etMobile.setText(loginEntity!!.mobile)
+            //etCitye.setText(loginEntity?.c)
         }
     }
 
@@ -135,18 +170,31 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         if (!isEmpty(binding.includedRSA.etFullName)) {
             binding.includedRSA.etFullName.requestFocus()
-
+            binding.includedRSA.tilName.error = "Enter Name"
             return false
-        } else if (!isEmpty(binding.includedRSA.etVehicle)) {
+        }
+        if (!isEmpty(binding.includedRSA.etMobile)) {
+            binding.includedRSA.etMobile.requestFocus()
+            binding.includedRSA.tilMobile.error = "Enter Mobile No."
+            return false
+        }
+        if ((binding.includedRSA.etMobile.text.toString().length < 10)) {
+            binding.includedRSA.etMobile.requestFocus()
+            binding.includedRSA.tilMobile.error = "Enter Valid Mobile No."
+            return false
+        }else if (!isEmpty(binding.includedRSA.etVehicle)) {
             binding.includedRSA.etVehicle.requestFocus()
+            binding.includedRSA.tilVehicle.error ="Enter Vehicle Number"
 
             return false
         } else if (!isEmpty(binding.includedRSA.acMake)) {
             binding.includedRSA.acMake.requestFocus()
+            binding.includedRSA.tilMake.error = "Enter Make"
 
             return false
         } else if (!isEmpty(binding.includedRSA.acModel)) {
             binding.includedRSA.acModel.requestFocus()
+            binding.includedRSA.tilModel.error = "Enter Model"
 
             return false
         } else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
@@ -230,7 +278,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
             R.id.etDate -> {
 
-                DateTimePicker.showOpenDatePickerDialog(
+                DateTimePicker.showNextPickerDialog(
                     view.context
                 ) { view1, year, monthOfYear, dayOfMonth ->
                     if (view1.isShown) {
@@ -335,7 +383,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                 if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult != null) {
 
 
-                    if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult.status_code.equals("0")) {
+                    if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult.status.toUpperCase().contentEquals("SUCCESS")) {
 
 
                         var eliteGlobalAssuredetail: EliteGlobalAssuredetail =
@@ -343,16 +391,26 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                                 0
                             )
 
-                        eliteGlobalAssuredetail.PolicyLink.let {
+                        if( eliteGlobalAssuredetail.PolicyLink.trim().length >0 ) {
+                            eliteGlobalAssuredetail.PolicyLink.let {
 
 
-                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                            startActivity(browserIntent)
+                                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                                startActivity(browserIntent)
 
-                            downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
+                                downloadPdf(
+                                    it,
+                                    "Elite_GlobalAssureDocs" + Utility.currentDateTime()
+                                )
 
+                            }
+                        }else{
+                            getCustomToast("No PDF Found at Server!!")
                         }
 
+                    }else{
+
+                        getCustomToast("No Data Found at Server!!")
                     }
 
 

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.interstellar.elite.R
-import kotlinx.android.synthetic.main.content_test.*
+
 
 
 class TestActivity : AppCompatActivity() {
