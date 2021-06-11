@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dashboard_title"
     tools:context="splash.SplashScreenActivity">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/elite_logo" />
+        android:src="@drawable/elite_plus" />
 
     <TextView
         android:id="@+id/txtGroup"
@@ -21,6 +22,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="@string/copyright_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="italic" />
 </RelativeLayout>

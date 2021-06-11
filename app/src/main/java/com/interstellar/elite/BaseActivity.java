@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.core.model.DocProductEnity;
 import com.interstellar.elite.product.ProductDocAdapter;
@@ -50,6 +53,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -138,6 +142,16 @@ public class BaseActivity extends AppCompatActivity {
         return outFile;
     }
 
+    public boolean validatePinCode (EditText etPincode,TextInputLayout textInputLayout) {
+        if (!isEmpty(etPincode) || etPincode.getText().toString().length() != 6) {
+            etPincode.requestFocus();
+            textInputLayout.setError("Enter Pincode");
+            return false;
+        }else{
+            return  true;
+        }
+    }
+
     public File saveImageToStorage(Bitmap bitmap, String name) {
         FileOutputStream outStream = null;
 
@@ -224,21 +238,37 @@ public class BaseActivity extends AppCompatActivity {
 
     public void getCustomToast(String strMessage) {
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.layout_custom_toast,
-                (ViewGroup) findViewById(R.id.toast_layout_root));
+            Toast.makeText(getApplicationContext(),  HtmlCompat.fromHtml("<font color='#000000' ><b>" + strMessage + "</b></font>",  HtmlCompat.FROM_HTML_MODE_LEGACY
+            ), Toast.LENGTH_LONG).show();
+
+        }else {
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.layout_custom_toast,
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
 
 
-        TextView text = (TextView) layout.findViewById(R.id.txtMessage);
-        text.setText("" + strMessage);
+            TextView text = (TextView) layout.findViewById(R.id.txtMessage);
+            text.setText("" + strMessage);
 
-        Toast toast = new Toast(getApplicationContext());
-        // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setGravity(Gravity.BOTTOM, 0, 200);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+            Toast toast = new Toast(getApplicationContext());
+            // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }
+    }
+
+
+    public void getSnakeBar(View view, String strMessage){
+
+        Snackbar snackbar = Snackbar
+                .make(view, strMessage, Snackbar.LENGTH_LONG)
+                .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
     }
 
     public void openPopUp(final View view, String title, String desc, String positiveButtonName, String negativeButtonName, boolean isNegativeVisible, boolean isCancelable) {

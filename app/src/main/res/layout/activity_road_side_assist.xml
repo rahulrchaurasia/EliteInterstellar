@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ParentLayout"
     tools:context=".secure.RoadSideAssistActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,6 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_road_side_assist"
-        android:id="@+id/included_RSA"/>
+    <include
+        android:id="@+id/included_RSA"
+        layout="@layout/content_road_side_assist" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

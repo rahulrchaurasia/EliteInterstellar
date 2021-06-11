@@ -323,7 +323,7 @@ open class DBPersistanceController {
 
             val manuYear: ArrayList<String> = ArrayList()
 
-            for( i in  maxYear downTo  1960 ){
+            for( i in  maxYear downTo  2000 ){
 
                 manuYear.add(""+ i)
             }

@@ -7,6 +7,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -22,12 +24,13 @@ import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.DBPersistanceController
 import com.interstellar.elite.core.IResponseSubcriber
 import com.interstellar.elite.core.controller.AuthenticationController
+import com.interstellar.elite.core.controller.register.RegisterController
 import com.interstellar.elite.core.model.GloabalAssureEntity
+import com.interstellar.elite.core.model.PincodeEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 import com.interstellar.elite.core.requestmodel.RoadSideRequestEntityItem
-import com.interstellar.elite.core.response.EliteGlobalAssuredetail
-import com.interstellar.elite.core.response.GlobalAssureLandmarkResponse
+import com.interstellar.elite.core.response.*
 import com.interstellar.elite.databinding.ActivityRoadSideAssistBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.utility.Constants
@@ -50,6 +53,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
     var YEAR_MANUFACTURE = ""
+
 
     lateinit var binding: ActivityRoadSideAssistBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,6 +106,8 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
     private fun setListner() {
 
         binding.includedRSA.btnPolicy.setOnClickListener(this)
+        binding.includedRSA.etPincode.addTextChangedListener(pincodeTextWatcher)
+        binding.includedRSA.btnGetMakeModel.setOnClickListener(this)
         binding.includedRSA.acYearManufacture.setOnClickListener(this)
         binding.includedRSA.etDate.setOnClickListener(this)
 
@@ -153,6 +159,29 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
     }
 
 
+
+
+    private var pincodeTextWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            if (start < 6) {
+                binding.includedRSA.etCity.setText("")
+
+            }
+        }
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (s.length == 6 ) {
+                showDialog("Fetching City...")
+                RegisterController(this@RoadSideAssistActivity).getCityState(
+                    binding.includedRSA.etPincode.getText().toString(),
+                    this@RoadSideAssistActivity
+                )
+            }
+        }
+
+        override fun afterTextChanged(s: Editable) {}
+    }
+
     fun getPdfFile(gloabalAssureEntity: GloabalAssureEntity) {
 
         gloabalAssureEntity.CertificateFile.let {
@@ -197,7 +226,12 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
             binding.includedRSA.tilModel.error = "Enter Model"
 
             return false
-        } else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
+        }
+        else if (!validatePinCode(binding.includedRSA.etPincode,binding.includedRSA.tilPincode)) {
+
+            return false
+        }
+        else if (binding.includedRSA.acYearManufacture.text.toString().trim().equals("")) {
             binding.includedRSA.tilYearManufacture.error = "Select Year Of Manufacture"
 
             return false
@@ -227,7 +261,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
 
                     var roadSideRequestEntityItem = RoadSideRequestEntityItem(
-                        City = binding.includedRSA.etCitye.text.toString(),
+                        City = binding.includedRSA.etCity.text.toString(),
                         ClientName = binding.includedRSA.etFullName.text.toString(),
                         ExpiryDate = binding.includedRSA.etDate.text.toString(),
                         Make = binding.includedRSA.acMake.text.toString(),
@@ -274,6 +308,24 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
                 }
 
+            }
+
+            R.id.btnGetMakeModel ->{
+
+                if (!isEmpty(binding.includedRSA.etVehicle)) {
+                    binding.includedRSA.etVehicle.requestFocus()
+                    binding.includedRSA.tilVehicle.error ="Enter Vehicle Number"
+
+                    return
+                }else{
+
+                    showDialog("Please Wait..")
+
+                    authenticationController.getPolicyBossVehicleInfo(
+                        RegistrationNumber = binding.includedRSA.etVehicle.text.toString(),
+                        iResponseSubcriber = this@RoadSideAssistActivity
+                    )
+                }
             }
 
             R.id.etDate -> {
@@ -373,7 +425,22 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         //endregion
 
-        if (apiResponse is GlobalAssureLandmarkResponse) {
+        if (apiResponse is PincodeResponse) {
+
+            if (apiResponse.status_code === 0) {
+
+                var pincodeEntity : PincodeEntity?  = apiResponse.Data.get(0)
+                if (pincodeEntity != null) {
+
+                    binding.includedRSA.etCity.setText("" + pincodeEntity?.cityname ?: "")
+
+                }
+
+            }
+
+        }
+
+        else if (apiResponse is GlobalAssureLandmarkResponse) {
 
             cancelDialog()
 
@@ -417,6 +484,27 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                 }
 
 
+            }
+        }
+
+        else if(apiResponse is PolicyBossVehicleInfoResponse){
+
+            cancelDialog()
+
+            if(apiResponse.Make_Name != null  && apiResponse.Model_Name != null){
+
+
+                if(!apiResponse.Make_Name.equals(""))
+                {
+                     binding.includedRSA.acMake.setText( apiResponse.Make_Name)
+                     binding.includedRSA.acModel.setText( apiResponse.Model_Name)
+                }else{
+
+                    getSnakeBar(binding.ParentLayout,"No Data Found!!")
+                }
+
+            }else{
+                getSnakeBar(binding.ParentLayout,"No Data Found!!")
             }
         }
 

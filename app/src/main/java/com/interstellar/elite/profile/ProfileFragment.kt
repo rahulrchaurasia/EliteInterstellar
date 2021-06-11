@@ -182,6 +182,7 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
 
         override fun afterTextChanged(s: Editable) {}
     }
+
     private fun setProfile(profile: ProfileEntity) {
 
         binding.apply {

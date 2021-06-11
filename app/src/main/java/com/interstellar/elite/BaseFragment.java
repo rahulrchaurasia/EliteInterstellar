@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -43,6 +44,7 @@ import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -264,21 +266,30 @@ public class BaseFragment extends Fragment {
 
     public void getCustomToast(String strMessage) {
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.layout_custom_toast,
-                (ViewGroup) getActivity().findViewById(R.id.toast_layout_root));
+            Toast.makeText(getActivity(),  HtmlCompat.fromHtml("<font color='#000000' ><b>" + strMessage + "</b></font>",  HtmlCompat.FROM_HTML_MODE_LEGACY
+            ), Toast.LENGTH_LONG).show();
 
 
-        TextView text = (TextView) layout.findViewById(R.id.txtMessage);
-        text.setText("" + strMessage);
+        }else {
 
-        Toast toast = new Toast(getActivity().getApplicationContext());
-        // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setGravity(Gravity.BOTTOM, 0, 200);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.layout_custom_toast,
+                    (ViewGroup) getActivity().findViewById(R.id.toast_layout_root));
+
+
+            TextView text = (TextView) layout.findViewById(R.id.txtMessage);
+            text.setText("" + strMessage);
+
+            Toast toast = new Toast(getActivity().getApplicationContext());
+            // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }
     }
 
     public void reqDocPopUp(List<DocProductEnity> lstDoc) {
