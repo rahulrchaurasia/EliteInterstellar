@@ -84,7 +84,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
 
     ScrollView scrollView;
     LinearLayout lyVehicle, lvLogo, lyTAT;
-    RelativeLayout rlDoc, rlEditVehicle;
+    RelativeLayout rlDoc, rlEditVehicle , lyParent;
 
     ImageView ivLogo, ivClientLogo;
 
@@ -169,7 +169,10 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
             mBottomSheetDialog.show();
 
         } else {
-            getCustomToast("No RTO Available");
+          //  getCustomToast("No RTO Available");
+
+            getSnakeBar(lyParent,"No RTO Available");
+
 
         }
     }
@@ -208,6 +211,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
 
         rlDoc = view.findViewById(R.id.rlDoc);
         rlEditVehicle = view.findViewById(R.id.rlEditVehicle);
+        lyParent = view.findViewById(R.id.lyParent);
 
         lyVehicle = view.findViewById(R.id.lyVehicle);
         lvLogo = view.findViewById(R.id.lvLogo);

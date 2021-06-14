@@ -79,9 +79,14 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
     ScrollView scrollView;
     LinearLayout lvLogo, llDocumentUpload, lyRTO, lyTAT;
-    RelativeLayout rlDoc, rlCorrect;
+    RelativeLayout lyParent ,rlDoc, rlCorrect;
     LinearLayout lyLic, llCorrection, lyName, lyDOB, lyAddress, lyVehicleType;
     ImageView ivLogo, ivClientLogo, ivArrow, ivLic;
+    TextInputLayout  tilName,tilDOB,tilAddress;
+
+
+
+
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
     EditText etName, etDOB, etAddress;
@@ -133,6 +138,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
                             calendar.set(year, monthOfYear, dayOfMonth);
                             String currentDay = simpleDateFormat.format(calendar.getTime());
                             etDOB.setText(currentDay);
+                            tilDOB.setError(null);
                         }
                     }
                 });
@@ -201,6 +207,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
                 } else if (PRODUCT_CODE.equalsIgnoreCase("2.4")) {
                     lyLic.setVisibility(View.VISIBLE);
                     rlCorrect.setVisibility(View.VISIBLE);
+                    rlCorrect.performClick();
 
                 }
 
@@ -267,7 +274,8 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
 
         }else{
-            getCustomToast("No RTO Available");
+           // getCustomToast("No RTO Available");
+            getSnakeBar(lyParent,"No RTO Available");
 
         }
 
@@ -315,6 +323,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
         rbtwo  =  view.findViewById(R.id.rbtwo);
 
 
+        lyParent =  view.findViewById(R.id.lyParent);
         rlDoc = (RelativeLayout) view.findViewById(R.id.rlDoc);
         rlCorrect = (RelativeLayout) view.findViewById(R.id.rlCorrect);
 
@@ -343,6 +352,11 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
         tilRTO  =  (TextInputLayout)view.findViewById(R.id.tilRTO);
         tilLic  =  (TextInputLayout)view.findViewById(R.id.tilLic);
+
+        tilName =  (TextInputLayout)view.findViewById(R.id.tilName);
+        tilDOB =  (TextInputLayout)view.findViewById(R.id.tilDOB);
+        tilAddress =  (TextInputLayout)view.findViewById(R.id.tilAddress);
+
     }
 
     private void setOnClickListener() {
@@ -369,6 +383,10 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
         etPincode.addTextChangedListener(getTextWatcher( tilPincode));
         etLic.addTextChangedListener(getTextWatcher( tilLic));
+
+        etName.addTextChangedListener(getTextWatcher( tilName));
+        etAddress.addTextChangedListener(getTextWatcher( tilAddress));
+
 
     }
 
@@ -407,26 +425,32 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
         else if (PRODUCT_CODE.equalsIgnoreCase("2.4")) {
             if ((chkAddress.isChecked() == false) && (chkDOB.isChecked() == false) && (chkName.isChecked() == false)) {
-                getCustomToast("Please Select Atlease One Field");
+               // getCustomToast("Please Select Atlease One Field");
+
+                getSnakeBar(lyParent, "Please Select At Least One Field");
                 llCorrection.setVisibility(View.VISIBLE);
 
                 return false;
             }
 
             if (chkName.isChecked() && (etName.getText().toString().trim().length() == 0)) {
-                getCustomToast("Please Enter Correction In Name");
+              //  getCustomToast("Please Enter Correction In Name");
+
+                tilName.setError("Please Enter Correction In Name");
                 llCorrection.setVisibility(View.VISIBLE);
 
                 return false;
             }
             if (chkDOB.isChecked() && (etDOB.getText().toString().trim().length() == 0)) {
-                getCustomToast("Please Enter Correction In DOB");
+               // getCustomToast("Please Enter Correction In DOB");
+                tilDOB.setError("Please Enter Correction In DOB");
                 llCorrection.setVisibility(View.VISIBLE);
 
                 return false;
             }
             if (chkAddress.isChecked() && (etAddress.getText().toString().trim().length() == 0)) {
-                getCustomToast("Please Enter Correction In Address");
+              //  getCustomToast("Please Enter Correction In Address");
+                tilAddress.setError("Please Enter Correction In Address");
                 llCorrection.setVisibility(View.VISIBLE);
                 return false;
             }
@@ -567,7 +591,8 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
                      tilRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
-                    getCustomToast("Select City");
+                   // getCustomToast("Select City");
+                    getSnakeBar(lyParent,"Select City");
                 }
                 break;
         }

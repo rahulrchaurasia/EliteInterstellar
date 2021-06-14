@@ -222,7 +222,8 @@
                 style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correction in Name">
+                android:hint="Correction in Name"
+                android:id="@+id/tilName">
 
 
                 <EditText
@@ -255,7 +256,8 @@
                 style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correction in DOB">
+                android:hint="Correction in DOB"
+                android:id="@+id/tilDOB">
 
 
                 <EditText
@@ -287,7 +289,8 @@
                 style="@style/TextInputMaterialStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correction in Address">
+                android:hint="Correction in Address"
+                android:id="@+id/tilAddress">
 
 
                 <EditText

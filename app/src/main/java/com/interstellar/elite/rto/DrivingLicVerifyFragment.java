@@ -79,7 +79,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
     DashProductEntity dashProductEntity;
     ScrollView scrollView;
     LinearLayout lvLogo, llDocumentUpload, lyRTO, lyTAT;
-    RelativeLayout rlDoc, rlCorrect;
+    RelativeLayout lyParent, rlDoc, rlCorrect;
     LinearLayout llCorrection ;
     ImageView ivLogo, ivClientLogo, ivArrow, ivLic, ivTick;
     TextInputLayout tilCity ,tilPincode;
@@ -244,8 +244,9 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
             mBottomSheetDialog.setCanceledOnTouchOutside(true);
             mBottomSheetDialog.show();
         }else{
-            getCustomToast("No RTO Available");
+           // getCustomToast("No RTO Available");
 
+          getSnakeBar(lyParent,"No RTO Available");
         }
 
 
@@ -263,6 +264,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
     private void initialize(View view) {
 
         prefManager = new PrefManager(getActivity());
+
 
         scrollView = (ScrollView) view.findViewById(R.id.scrollView);
         btnBooked = (Button) view.findViewById(R.id.btnBooked);
@@ -282,6 +284,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
         etDOB = (EditText) view.findViewById(R.id.etDOB);
         etLic = (EditText) view.findViewById(R.id.etLic);
 
+        lyParent = view.findViewById(R.id.lyParent);
 
         rlDoc = (RelativeLayout) view.findViewById(R.id.rlDoc);
         rlCorrect = (RelativeLayout) view.findViewById(R.id.rlCorrect);
@@ -486,7 +489,9 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
                     etRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
-                    getCustomToast("Select City");
+
+                   // getCustomToast("Select City");
+                    getSnakeBar(lyParent,"Select City");
                 }
                 break;
         }

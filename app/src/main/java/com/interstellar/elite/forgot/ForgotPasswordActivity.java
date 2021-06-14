@@ -19,6 +19,7 @@ import com.interstellar.elite.utility.Constants;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 public class ForgotPasswordActivity extends BaseActivity implements IResponseSubcriber, View.OnClickListener {
 
@@ -26,6 +27,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
     AppCompatButton btnSubmit;
     ImageView imgClose;
     TextInputLayout tilMobile;
+    CoordinatorLayout lyParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        lyParent =  (CoordinatorLayout) findViewById(R.id.lyParent);
         etMobile = (EditText) findViewById(R.id.etMobile);
         btnSubmit = (AppCompatButton) findViewById(R.id.btnSubmit);
         imgClose = (ImageView) findViewById(R.id.imgClose);
@@ -57,7 +60,11 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
             case R.id.btnSubmit:
                 if (!isEmpty(etMobile)) {
                     etMobile.requestFocus();
-                    tilMobile.setError("Enter Mobile");
+                    tilMobile.setError("Enter Mobile No.");
+                    return;
+                }else if(etMobile.getText().toString().trim().length() < 10){
+                    etMobile.requestFocus();
+                    tilMobile.setError("Enter Valid Mobile No.");
                     return;
                 }
 
@@ -78,8 +85,9 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
         cancelDialog();
         if (response instanceof CommonResponse) {
             if (response.getStatus_code() == 0) {
-                //Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
-                getCustomToast( response.getMessage());
+
+              //  getCustomToast( response.getMessage());
+                getSnakeBar(lyParent,response.getMessage());
                 etMobile.setText("");
 
             }
@@ -89,6 +97,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IResponseSub
     @Override
     public void OnFailure(String Error ) {
         cancelDialog();
-        Toast.makeText(this, Error, Toast.LENGTH_SHORT).show();
+
+        getSnakeBar(lyParent,Error);
     }
 }

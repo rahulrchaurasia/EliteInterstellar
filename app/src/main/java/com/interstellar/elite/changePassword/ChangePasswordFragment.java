@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -32,6 +33,7 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
     EditText etoldpswd  , etnewpswd, etconfirmpswd;
     TextInputLayout tilOldpswd,tilNewpswd, tilConfirmpswd;
     Button btnSubmit;
+    LinearLayout lyParent;
 
     PrefManager prefManager;
     UserEntity loginEntity;
@@ -54,6 +56,7 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
 
     private void initialize_Widgets(View view) {
 
+        lyParent =  (LinearLayout) view.findViewById(R.id.lyParent);
         etoldpswd = (EditText) view.findViewById(R.id.etoldpswd);
         etnewpswd = (EditText) view.findViewById(R.id.etnewpswd);
         etconfirmpswd = (EditText) view.findViewById(R.id.etconfirmpswd);
@@ -130,7 +133,8 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
             if (response.getStatus_code() == 0) {
                // Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
 
-                getCustomToast( response.getMessage());
+                //getCustomToast( response.getMessage());
+                 getSnakeBar(lyParent, response.getMessage());
                  prefManager.clearPassword();
                 clear();
 
@@ -148,6 +152,6 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
     @Override
     public void OnFailure(String error) {
         cancelDialog();
-        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        getSnakeBar(lyParent, error);
     }
 }

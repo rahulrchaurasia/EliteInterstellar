@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:layout_marginBottom="5dp"
+    android:id="@+id/lyParent"
     tools:context="rto.DrivingLicVerifyFragment">
 
     <!-- TODO: Update blank fragment layout -->

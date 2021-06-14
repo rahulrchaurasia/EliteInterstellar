@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -265,9 +266,19 @@ public class BaseActivity extends AppCompatActivity {
 
     public void getSnakeBar(View view, String strMessage){
 
+
         Snackbar snackbar = Snackbar
                 .make(view, strMessage, Snackbar.LENGTH_LONG)
                 .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+
+               snackbar.setAction("Ok", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                      snackbar.dismiss();
+                    }
+                });
+
         snackbar.show();
     }
 

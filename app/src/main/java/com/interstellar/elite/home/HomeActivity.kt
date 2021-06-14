@@ -32,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
-import com.interstellar.elite.BuildConfig
+
 import com.interstellar.elite.BuildConfig.VERSION_NAME
 //import com.interstellar.elite.BuildConfig
 import com.interstellar.elite.R
@@ -110,7 +110,6 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
         }
 
         //endregion
-
 
 
     }

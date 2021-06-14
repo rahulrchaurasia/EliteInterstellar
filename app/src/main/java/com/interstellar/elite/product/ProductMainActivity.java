@@ -27,6 +27,7 @@ import com.interstellar.elite.webview.CommonWebViewActivity;
 import com.interstellar.elite.webview.WebViewHtmlActivity;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -34,6 +35,7 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
 
     String SERVICE_TYPE;
     DashProductEntity productEntity;
+    CoordinatorLayout lyParent;
 
 
     @Override
@@ -43,6 +45,8 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        lyParent = findViewById(R.id.lyParent);
 
 
         Bundle extras = getIntent().getExtras();
@@ -68,7 +72,8 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
                 }
 
             else
-                getCustomToast("Under construction..");
+               // getCustomToast("Under construction..");
+            getSnakeBar(lyParent,"Under construction..");
 
 
         }
@@ -193,7 +198,8 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
             ft.replace(R.id.frame_layout, fragment);
             ft.commitAllowingStateLoss();
         } else {
-            getCustomToast("Under Construction...");
+            //getCustomToast("Under Construction...");
+            getSnakeBar(lyParent,"Under construction..");
         }
     }
 
@@ -210,7 +216,8 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
                     reqDocPopUp(((ProductDocumentResponse) response).getData());
                 } else {
 
-                    getCustomToast("No Data Available");
+                   // getCustomToast("No Data Available");
+                    getSnakeBar(lyParent,"No Data Available");
                 }
             }
         }

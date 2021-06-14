@@ -143,7 +143,7 @@ open class DBPersistanceController {
                         2,
                         "402",
                         R.drawable.rsa,
-                        "Road Side Assistancer"
+                        "Road Side Assistance"
                     )
                 )
             }

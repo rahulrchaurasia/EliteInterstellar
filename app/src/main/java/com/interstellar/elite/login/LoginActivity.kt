@@ -5,11 +5,15 @@ import ServiceName
 import ServiceRequest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.interstellar.elite.R
 import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.IResponseSubcriber
@@ -21,9 +25,6 @@ import com.interstellar.elite.databinding.ActivityLoginBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.forgot.ForgotPasswordActivity
 import com.interstellar.elite.home.HomeActivity
-import com.interstellar.elite.payment.demo.DemoRazorActivity
-
-
 
 
 class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubcriber {
@@ -160,13 +161,11 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
                     binding.includedLayout.tilLogin.error = "Enter Mobile No."
 
                     return
-                }
-                else if ((binding.includedLayout.etMobile.text.toString().length < 10)) {
+                } else if ((binding.includedLayout.etMobile.text.toString().trim().length < 10)) {
                     binding.includedLayout.etMobile.requestFocus()
                     binding.includedLayout.tilLogin.error = "Enter Valid Mobile No."
                     return
-                }
-                else if (!isEmpty(binding.includedLayout.etPassword)) {
+                } else if (!isEmpty(binding.includedLayout.etPassword)) {
 
                     binding.includedLayout.tilPassword.error = "Enter Password"
 
@@ -184,9 +183,6 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 //                }
 
 
-
-
-
                 showLoading("Please wait..")
 
                 authenticationController.getLogin(
@@ -202,16 +198,16 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             R.id.tvRegistration -> {
 
 
-               startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
 
 
             }
 
             R.id.tvForgotPassword -> {
 
+                //05 temp
 
-                 startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
-
+                startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
 
 
             }
@@ -233,7 +229,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
                  loginEntity   = prefManager.getUserData()
 
-                if(loginEntity?.isgoldverify?: "" == ("")){
+                if(loginEntity?.isgoldverify?: "" == ("") ){
 
                    // showLoading("Verifying User..")
 
@@ -312,7 +308,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
         dismissDialog()
         hideKeyBoard(binding.includedLayout.btnSignIn)
         //Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
-        getCustomToast(error)
+        getSnakeBar(binding.lyParent,error)
     }
 
     //endregion
@@ -340,5 +336,7 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             ActivityCompat.requestPermissions(this, perms, PERMISSION_REQUEST_CODE)
 
     }
+
+
 
 }

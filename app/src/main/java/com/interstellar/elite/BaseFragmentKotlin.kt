@@ -2,6 +2,7 @@
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.interstellar.elite.BaseFragment
@@ -45,6 +47,46 @@ open class BaseFragmentKotlin : Fragment() {
         builder.setView(dialogView)
         builder.setCancelable(false)
         dialog = builder.create()
+    }
+
+    fun getSnakeBar(view: View, strMessage: String) {
+
+        // inflate the custom_snackbar_view created previously
+        // inflate the custom_snackbar_view created previously
+        val snackbar = Snackbar
+            .make(view, "", Snackbar.LENGTH_INDEFINITE)
+            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+
+        val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)
+
+        snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+
+
+        val snackbarLayout :Snackbar.SnackbarLayout = snackbar.getView() as Snackbar.SnackbarLayout
+        snackbarLayout.setPadding(0,0,0,0)
+        snackbarLayout.addView(customSnackView)
+
+        val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage)
+        txtMessage.setText(strMessage)
+
+        val txtAction : TextView = customSnackView.findViewById(R.id.txtAction)
+
+        txtAction.setOnClickListener{
+
+            snackbar.dismiss()
+        }
+
+        snackbar.show()
+
+
+//        val snackbar = Snackbar
+//            .make(view!!, strMessage!!, Snackbar.LENGTH_INDEFINITE)
+//            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+//
+//        snackbar.setAction("ok", View.OnClickListener { v ->
+//            snackbar.dismiss()
+//        })
+//        snackbar.show()
     }
 
     fun showLoading(message: CharSequence) {

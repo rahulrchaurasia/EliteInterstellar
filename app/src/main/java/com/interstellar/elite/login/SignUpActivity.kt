@@ -270,7 +270,8 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
 
 
                 } else if (verifyOTPEntity.SavedStatus === 2) {
-                    getCustomToast(apiResponse.message)
+                    //getCustomToast(apiResponse.message)
+                    getSnakeBar(binding.lyParent, apiResponse.message)
                 }
             }
             else{
@@ -280,11 +281,14 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
         }else if (apiResponse is UserRegistrationResponse) {
 
             if (apiResponse.status_code === 0 ) {
-                getCustomToast(apiResponse.message)
+
+              //  getCustomToast(apiResponse.message)
+                getSnakeBar(binding.lyParent, apiResponse.message)
                 prefManager.clearLoginData()
                 finish()
             }else{
-                getCustomToast(apiResponse.message)
+                //getCustomToast(apiResponse.message)
+                getSnakeBar(binding.lyParent, apiResponse.message)
             }
         }
     }

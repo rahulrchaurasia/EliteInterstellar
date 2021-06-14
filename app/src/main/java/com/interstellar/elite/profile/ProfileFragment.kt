@@ -238,8 +238,12 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
         } else if (apiResponse is UserRegistrationResponse) {
             if (apiResponse.status_code === 0) {
 
-                val snack = Snackbar.make(binding.etEmail, apiResponse.message, Snackbar.LENGTH_LONG)
-                snack.show()
+//                val snack = Snackbar.make(binding.etEmail, apiResponse.message, Snackbar.LENGTH_LONG)
+//                snack.show()
+
+                getSnakeBar(binding.lyParent, apiResponse.message )
+
+
                 //Toast.makeText(requireActivity(), apiResponse.message, Toast.LENGTH_LONG)
             }
         } else if (apiResponse is PincodeResponse) {
@@ -275,22 +279,6 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
 
         }
 
-    }
-
-    fun onSNACK(view: View){
-        //Snackbar(view)
-        val snackbar = Snackbar.make(
-            view, "Replace with your own action",
-            Snackbar.LENGTH_LONG
-        ).setAction("Action", null)
-        snackbar.setActionTextColor(Color.BLUE)
-        val snackbarView = snackbar.view
-        snackbarView.setBackgroundColor(Color.LTGRAY)
-        val textView =
-                snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-        textView.setTextColor(Color.BLUE)
-        textView.textSize = 28f
-        snackbar.show()
     }
 
 

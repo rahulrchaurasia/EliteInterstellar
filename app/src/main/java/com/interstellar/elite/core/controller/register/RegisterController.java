@@ -180,7 +180,7 @@ public class RegisterController  extends BaseController implements IRegister {
                         iResponseSubcriber.OnSuccess(response.body(), response.body().getMessage());
                     } else {
                         //failure
-                        iResponseSubcriber.OnFailure(MESSAGE);
+                        iResponseSubcriber.OnFailure(response.body().getMessage());
                     }
 
 
@@ -217,7 +217,7 @@ public class RegisterController  extends BaseController implements IRegister {
                         iResponseSubcriber.OnSuccess(response.body(), response.body().getMessage());
                     } else {
                         //failure
-                        iResponseSubcriber.OnFailure(MESSAGE);
+                        iResponseSubcriber.OnFailure(response.body().getMessage());
                     }
 
 
@@ -250,7 +250,7 @@ public class RegisterController  extends BaseController implements IRegister {
                         iResponseSubcriber.OnSuccess(response.body(), response.body().getMessage());
                     } else {
                         //failure
-                        iResponseSubcriber.OnFailure(MESSAGE);
+                        iResponseSubcriber.OnFailure(response.body().getMessage());
                     }
 
 
@@ -455,7 +455,7 @@ public class RegisterController  extends BaseController implements IRegister {
                         iResponseSubcriber.OnSuccess(response.body(), response.body().getMessage());
                     } else {
                         //failure
-                        iResponseSubcriber.OnFailure(MESSAGE);
+                        iResponseSubcriber.OnFailure(response.body().getMessage());
                     }
 
 

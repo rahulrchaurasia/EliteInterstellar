@@ -3,6 +3,7 @@ package com.interstellar.elite.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -159,6 +160,7 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
         }
         alertDialog.setCancelable(false)
         alertDialog.show()
+        alertDialog.getWindow()!!.setGravity(Gravity.CENTER);
 
     }
 
@@ -235,7 +237,7 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
 //                tempVerifyActiveCode()
 
 
-                // Todo : 05 temp Requied below code
+                // Todo :  Requied below code
 
                 loginEntity.let {
                     authenticationController.getActivationCode(
@@ -269,9 +271,6 @@ class VerifyUserActivity : BaseActivity() ,View.OnClickListener,IResponseSubcrib
         else if(apiResponse is UpladeGoldResponse){
 
             cancelDialog()
-
-
-
 
             var modifyLogin =  loginEntity!!.copy(isgoldverify = "Y")
             prefManager.storeUserData(modifyLogin)

@@ -80,7 +80,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
 
     ScrollView scrollView;
     LinearLayout lvLogo, lyTAT;
-    RelativeLayout rlDoc ;
+    RelativeLayout lyParent ,rlDoc ;
     ImageView ivLogo, ivClientLogo;
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
@@ -157,7 +157,9 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
             mBottomSheetDialog.setCanceledOnTouchOutside(true);
             mBottomSheetDialog.show();
         }else{
-            getCustomToast("No RTO Available");
+           // getCustomToast("No RTO Available");
+
+            getSnakeBar(lyParent,"No RTO Available");
         }
 
 
@@ -244,6 +246,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
         txtTAT = (TextView) view.findViewById(R.id.txtTAT);
 
         rlDoc = (RelativeLayout) view.findViewById(R.id.rlDoc);
+        lyParent =  view.findViewById(R.id.lyParent);
         lvLogo = (LinearLayout) view.findViewById(R.id.lvLogo);
 
         lyTAT = (LinearLayout) view.findViewById(R.id.lyTAT);
@@ -440,7 +443,8 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
                     etRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
-                    getCustomToast("Select City");
+                   // getCustomToast("Select City");
+                    getSnakeBar(lyParent,"Select City");
                 }
                 break;
         }

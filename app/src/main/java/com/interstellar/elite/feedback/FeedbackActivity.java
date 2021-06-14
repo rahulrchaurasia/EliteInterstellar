@@ -34,6 +34,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +53,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     List<CompleteOrderEntity> lstCompOrderDetail;
     UserEntity loginEntity;
     LinearLayout lyReqID;
+    CoordinatorLayout lyParent;
 
     AlertDialog alertDialog;
     int OrderId;
@@ -112,6 +114,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     private void initialize() {
 
+        lyParent = findViewById(R.id.lyParent);
         lyReqID = findViewById(R.id.lyReqID);
         btnSubmit = findViewById(R.id.btnSubmit);
         txtReqestID = findViewById(R.id.txtReqestID);
@@ -164,7 +167,10 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             mBottomSheetDialog.setCanceledOnTouchOutside(true);
             mBottomSheetDialog.show();
         } else {
-            getCustomToast("No Data Available");
+            //getCustomToast("No Data Available");
+
+            getSnakeBar(lyParent,"No Data Available" );
+
         }
 
 
@@ -286,7 +292,9 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
                 etBody.setText("");
                 new RegisterController(this).displayFeedBack(loginEntity.getUser_id(), this);
-                getCustomToast(((FeedbackResponse) response).getMessage());
+                //getCustomToast(((FeedbackResponse) response).getMessage());
+
+                getSnakeBar(lyParent,((FeedbackResponse) response).getMessage());
 
 
             }

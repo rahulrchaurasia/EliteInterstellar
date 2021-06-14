@@ -496,12 +496,14 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
                             }
                         }else{
-                            getCustomToast("No PDF Found at Server!!")
+                            //getCustomToast("No PDF Found at Server!!")
+                            getSnakeBar(binding.ParentLayout,"No PDF Found at Server!!")
                         }
 
                     }else{
 
-                        getCustomToast("No Data Found at Server!!")
+                      //  getCustomToast("No Data Found at Server!!")
+                        getSnakeBar(binding.ParentLayout,"No Data Found at Server!!")
                     }
 
 

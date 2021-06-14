@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.core.model.DocProductEnity;
 import com.interstellar.elite.core.model.miscNonRto.ProvideClaimAssEntity;
@@ -239,6 +241,91 @@ public class BaseFragment extends Fragment {
     //endregion
 
 
+    public void getSnakeBar(View view ,String strMessage){
+
+
+        // create an instance of the snackbar
+        final Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+
+        // inflate the custom_snackbar_view created previously
+        View customSnackView = getLayoutInflater().inflate(R.layout.layout_custom_snackbar, null);
+
+        // set the background of the default snackbar as transparent
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+
+        // now change the layout of the snackbar
+        Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
+
+        // set padding of the all corners as 0
+        snackbarLayout.setPadding(0, 0, 0, 0);
+
+        // register the button from the custom_snackbar_view layout file
+
+        TextView txtMessage = customSnackView.findViewById(R.id.txtMessage);
+        txtMessage.setText( ""+strMessage);
+
+        TextView txtAction = customSnackView.findViewById(R.id.txtAction);
+
+        // now handle the same button with onClickListener
+        txtAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                snackbar.dismiss();
+            }
+        });
+
+        // add the custom snack bar layout to snackbar layout
+        snackbarLayout.addView(customSnackView, 0);
+
+        snackbar.show();
+
+    }
+
+
+//    fun getSnakeBar(view: View, strMessage: String) {
+//
+//        // inflate the custom_snackbar_view created previously
+//        // inflate the custom_snackbar_view created previously
+//        val snackbar = Snackbar
+//                .make(view!!, "", Snackbar.LENGTH_INDEFINITE)
+//            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+//
+//        val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)
+//
+//        snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+//
+//
+//        val snackbarLayout :Snackbar.SnackbarLayout = snackbar.getView() as Snackbar.SnackbarLayout
+//        snackbarLayout.setPadding(0,0,0,0)
+//        snackbarLayout.addView(customSnackView)
+//
+//        val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage)
+//        txtMessage.setText(strMessage)
+//
+//        val txtAction : TextView = customSnackView.findViewById(R.id.txtAction)
+//
+//        txtAction.setOnClickListener{
+//
+//            showAlert("Data")
+//        }
+//
+//        snackbar.show()
+//
+//
+////        val snackbar = Snackbar
+////            .make(view!!, strMessage!!, Snackbar.LENGTH_INDEFINITE)
+////            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+////
+////        snackbar.setAction("ok", View.OnClickListener { v ->
+////            snackbar.dismiss()
+////        })
+////        snackbar.show()
+//    }
+
+
+
 
     public void showAlert(String strBody) {
         try {
@@ -263,6 +350,9 @@ public class BaseFragment extends Fragment {
             Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
     public void getCustomToast(String strMessage) {
 

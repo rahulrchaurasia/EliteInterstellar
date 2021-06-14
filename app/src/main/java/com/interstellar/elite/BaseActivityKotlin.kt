@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.*
 import android.provider.Settings
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.text.HtmlCompat
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.interstellar.elite.BaseFragment
 import com.interstellar.elite.R
@@ -92,6 +94,47 @@ open class BaseActivityKotlin : AppCompatActivity() {
             Toast.makeText(context, "Please try again..", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+
+    fun getSnakeBar(view: View, strMessage: String) {
+
+        // inflate the custom_snackbar_view created previously
+        // inflate the custom_snackbar_view created previously
+        val snackbar = Snackbar
+            .make(view!!, "", Snackbar.LENGTH_INDEFINITE)
+            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+
+        val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)
+
+        snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+
+
+        val snackbarLayout :Snackbar.SnackbarLayout = snackbar.getView() as Snackbar.SnackbarLayout
+        snackbarLayout.setPadding(0,0,0,0)
+        snackbarLayout.addView(customSnackView)
+
+        val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage)
+        txtMessage.setText(strMessage)
+
+        val txtAction : TextView = customSnackView.findViewById(R.id.txtAction)
+
+        txtAction.setOnClickListener{
+
+            showAlert("Data")
+        }
+
+        snackbar.show()
+
+
+//        val snackbar = Snackbar
+//            .make(view!!, strMessage!!, Snackbar.LENGTH_INDEFINITE)
+//            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+//
+//        snackbar.setAction("ok", View.OnClickListener { v ->
+//            snackbar.dismiss()
+//        })
+//        snackbar.show()
     }
 
     protected fun showMessage(
