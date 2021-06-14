@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.BaseFragment;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
@@ -29,6 +30,7 @@ import androidx.fragment.app.Fragment;
 public class ChangePasswordFragment extends BaseFragment implements View.OnClickListener , IResponseSubcriber {
 
     EditText etoldpswd  , etnewpswd, etconfirmpswd;
+    TextInputLayout tilOldpswd,tilNewpswd, tilConfirmpswd;
     Button btnSubmit;
 
     PrefManager prefManager;
@@ -57,10 +59,28 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
         etconfirmpswd = (EditText) view.findViewById(R.id.etconfirmpswd);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
 
+        tilOldpswd = (TextInputLayout) view.findViewById(R.id.tilOldpswd);
+        tilNewpswd = (TextInputLayout) view.findViewById(R.id.tilNewpswd);
+        tilConfirmpswd = (TextInputLayout) view.findViewById(R.id.tilConfirmpswd);
+
         btnSubmit.setOnClickListener(this);
+        setTextChangeListener();
 
 
     }
+
+    private void setTextChangeListener(){
+
+
+
+        etoldpswd.addTextChangedListener(getTextWatcher( tilOldpswd));
+        etnewpswd.addTextChangedListener(getTextWatcher( tilNewpswd));
+
+        etconfirmpswd.addTextChangedListener(getTextWatcher( tilConfirmpswd));
+
+
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -70,31 +90,28 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
         {
 
             if (etoldpswd.getText().toString().matches("")) {
-                // Snackbar.make(etEmpCode, "Enter valid input", Snackbar.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), "ENTER PASSWORD", Toast.LENGTH_SHORT).show();
+
                 etoldpswd.requestFocus();
-             //   etoldpswd.setError("Enter Password");
+                tilOldpswd.setError("Enter Old Password");
+
                 return;
             }
             if (etnewpswd.getText().toString().matches("")) {
-                // Snackbar.make(etEmpCode, "Enter valid input", Snackbar.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), "Enter New Password", Toast.LENGTH_SHORT).show();
+
                 etnewpswd.requestFocus();
-//                etnewpswd.setError("Enter New Password");
+               tilNewpswd.setError("Enter New Password");
                 return;
             }
             if (etconfirmpswd.getText().toString().matches("")) {
-                // Snackbar.make(etEmpCode, "Enter valid input", Snackbar.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), "RE-Enter Password", Toast.LENGTH_SHORT).show();
+
                 etconfirmpswd.requestFocus();
-//                etconfirmpswd.setError("RE-Enter Password");
+                tilConfirmpswd.setError("Enter Confirm Password");
                 return;
             }
             if (!etconfirmpswd.getText().toString().matches(etnewpswd.getText().toString())) {
 
-                Toast.makeText(getActivity(), "Password Not Matched", Toast.LENGTH_SHORT).show();
                 etconfirmpswd.requestFocus();
-//                etconfirmpswd.setError("Password Not Matched");
+                tilConfirmpswd.setError("Password Not Matched");
                 return;
             }
 

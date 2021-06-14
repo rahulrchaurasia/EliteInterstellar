@@ -38,7 +38,7 @@ class DemoPaymentActivity : AppCompatActivity()  {
         * */
         val activity: Activity = this
         val co = Checkout()
-        co.setImage(R.drawable.elite_launcher)
+        co.setImage(R.drawable.elite_gold)
 
         try {
             val options = JSONObject()

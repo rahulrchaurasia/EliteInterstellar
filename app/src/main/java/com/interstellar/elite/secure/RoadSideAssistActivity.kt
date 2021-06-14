@@ -27,6 +27,7 @@ import com.interstellar.elite.core.controller.AuthenticationController
 import com.interstellar.elite.core.controller.register.RegisterController
 import com.interstellar.elite.core.model.GloabalAssureEntity
 import com.interstellar.elite.core.model.PincodeEntity
+import com.interstellar.elite.core.model.ProfileEntity
 import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.core.requestmodel.RoadSideRequestEntity
 import com.interstellar.elite.core.requestmodel.RoadSideRequestEntityItem
@@ -53,6 +54,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
     lateinit var prefManager: PrefManager
     var loginEntity: UserEntity? = null
     var YEAR_MANUFACTURE = ""
+    var isDataUploaded = true
 
 
     lateinit var binding: ActivityRoadSideAssistBinding
@@ -70,6 +72,9 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
         setListner()
         setOnTextChangeListner()
         bindData()
+
+        showDialog("Please Wait")
+        RegisterController(this).getUserProfile(this@RoadSideAssistActivity)
     }
 
     private fun init() {
@@ -170,7 +175,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
         }
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (s.length == 6 ) {
+            if (s.length == 6 && isDataUploaded) {
                 showDialog("Fetching City...")
                 RegisterController(this@RoadSideAssistActivity).getCityState(
                     binding.includedRSA.etPincode.getText().toString(),
@@ -425,7 +430,27 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         //endregion
 
-        if (apiResponse is PincodeResponse) {
+        cancelDialog()
+        if (apiResponse is ProfileResponse) {
+            if (apiResponse.status_code == 0) {
+
+              var  profileEntity : ProfileEntity?   = apiResponse.data?.get(0)
+
+                isDataUploaded = false
+                profileEntity.let {
+
+                    binding.includedRSA.etPincode.setText("" + it?.pincode)
+                    binding.includedRSA.etCity.setText("" + it?.city_id)
+
+                    isDataUploaded = true
+                }
+
+            }
+
+        }
+
+        else if (apiResponse is PincodeResponse) {
+
 
             if (apiResponse.status_code === 0) {
 
@@ -442,7 +467,6 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         else if (apiResponse is GlobalAssureLandmarkResponse) {
 
-            cancelDialog()
 
             if (apiResponse.InsertOtherCustDetailsForGlobalAssureResult != null) {
 
@@ -489,7 +513,6 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         else if(apiResponse is PolicyBossVehicleInfoResponse){
 
-            cancelDialog()
 
             if(apiResponse.Make_Name != null  && apiResponse.Model_Name != null){
 

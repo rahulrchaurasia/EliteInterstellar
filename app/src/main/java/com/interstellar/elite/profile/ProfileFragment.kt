@@ -86,7 +86,7 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
             binding.etEmail.setError("Enter Valid Email")
             return false
         }
-        if (!validatePinCode(binding.etPincode)) {
+        if (!validatePinCode(binding.etPincode,binding.tilPincode)) {
 
             return false
         }

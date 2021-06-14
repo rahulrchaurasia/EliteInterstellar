@@ -48,7 +48,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
-                    android:src="@drawable/elite_logo"
+                    android:src="@drawable/elite_plus"
                     android:visibility="visible" />
 
                 <ImageView

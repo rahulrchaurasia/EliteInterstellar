@@ -47,7 +47,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/elite_logo" />
+                    android:src="@drawable/elite_plus_black" />
 
 
             </LinearLayout>
@@ -194,7 +194,6 @@
                             style="@style/ButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#00bff3"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="BUY NOW"
@@ -209,7 +208,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:background="#00bff3"
+
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="CANCEL"
@@ -262,7 +261,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/elite_logo" />
+                    android:src="@drawable/elite_plus_black" />
 
 
             </LinearLayout>
@@ -433,7 +432,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/elite_logo"
+                    android:src="@drawable/elite_plus_black"
                     />
 
 

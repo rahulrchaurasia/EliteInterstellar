@@ -92,9 +92,9 @@ class HomeActivity : BaseActivityKotlin() ,View.OnClickListener, NavigationView.
 
         setUserData()
 
-        if (!checkPermission()) {
-            requestPermission()
-        }
+//        if (!checkPermission()) {
+//            ()
+//        }
 
         //region Comment
         showLoading("Please wait..")

@@ -228,21 +228,7 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
        // co.setKeyID("rzp_live_DFxDFYDslN2DIq");           // we can add key here and in Manifest also
 
 
-        if(loginEntity.getIsgoldverify()!= null)
-        {
-
-            if(loginEntity.getIsgoldverify().equals("Y") ){
-
-                co.setImage(R.drawable.elite_gold);
-            }else {
-
-                co.setImage(R.drawable.elite_plus);
-            }
-
-
-        }else{
-            co.setImage(R.drawable.elite_plus);
-        }
+        co.setImage(R.drawable.elite_plus_black);
 
 
        // co.setFullScreenDisable(true);

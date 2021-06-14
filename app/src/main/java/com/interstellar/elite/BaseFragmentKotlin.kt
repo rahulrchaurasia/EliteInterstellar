@@ -4,9 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.interstellar.elite.BaseFragment
 import com.interstellar.elite.R
 
@@ -62,20 +61,20 @@ open class BaseFragmentKotlin : Fragment() {
 
     //endregion
 
-    open fun validatePinCode(etPincode: EditText): Boolean {
+    open fun validatePinCode(etPincode: EditText, textInputLayout : TextInputLayout): Boolean {
         return if (!BaseFragment.isEmpty(etPincode) || etPincode.text.toString().length != 6) {
             etPincode.requestFocus()
-            etPincode.error = "Enter Pincode"
+            textInputLayout.setError("Enter Pincodee")
             false
         } else {
             true
         }
     }
     protected fun showMessage(
-            view: View,
-            message: String,
-            action: String,
-            onClickListener: View.OnClickListener?
+        view: View,
+        message: String,
+        action: String,
+        onClickListener: View.OnClickListener?
     ) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG)
             .setAction(action, onClickListener).show()
@@ -114,8 +113,12 @@ open class BaseFragmentKotlin : Fragment() {
         val alertDialog = builder.create()
         alertDialog.show()
 
-        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(requireActivity()!!,
-                R.color.hyperlink_color))
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(
+            ContextCompat.getColor(
+                requireActivity()!!,
+                R.color.hyperlink_color
+            )
+        )
     }
 
     open fun callConfirm(context: Context) {

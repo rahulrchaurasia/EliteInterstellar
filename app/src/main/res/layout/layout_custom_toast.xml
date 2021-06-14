@@ -29,7 +29,7 @@
              android:layout_width="40dp"
              android:layout_height="40dp"
              android:layout_marginLeft="5dp"
-             android:src="@drawable/elite_logo"/>
+             android:src="@drawable/elite_plus"/>
          <TextView
              android:id="@+id/txtMessage"
              style="@style/TextViewStyle.MediumRegular"

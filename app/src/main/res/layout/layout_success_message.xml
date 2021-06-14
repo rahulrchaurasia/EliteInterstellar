@@ -16,7 +16,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical"
             android:background="@drawable/custom_grey"
             android:padding="10dp">
@@ -99,14 +99,14 @@
 
     <ImageView
         android:id="@+id/ivClose"
-        android:layout_width="120dp"
-        android:layout_height="75dp"
+        android:layout_width="150dp"
+        android:layout_height="140dp"
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
-       android:src="@drawable/elite_logo"
-        android:scaleType="center" />
+       android:src="@drawable/elite_plus_black"
+        android:scaleType="centerInside" />
 
 
 </RelativeLayout>

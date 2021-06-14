@@ -12,6 +12,7 @@
     <string name="Rs">\u20B9</string>
     <string name="copyright">Copyright 2021</string>
 
+    <string name="camera_permission_denied">Camera permission request was denied.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

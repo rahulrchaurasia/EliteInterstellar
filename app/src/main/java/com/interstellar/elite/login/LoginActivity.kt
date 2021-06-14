@@ -79,9 +79,9 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             this
         ) as AuthenticationController
 
-        if (!checkPermission()) {
-            requestPermission()
-        }
+//        if (!checkPermission()) {
+//            requestPermission()
+//        }
 
 
     }

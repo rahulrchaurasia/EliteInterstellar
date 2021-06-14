@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.interstellar.elite.BaseActivity;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
@@ -47,7 +47,6 @@ import java.util.List;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,6 +80,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
     TextView txtDocVerify;
     RecyclerView rvProduct;
+    LinearLayout lyParent;
     DocumentAdapter mAdapter;
     PrefManager prefManager;
     List<DocumentViewEntity> lstDoc;
@@ -119,6 +119,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
     private void initialize() {
 
+        lyParent = (LinearLayout) findViewById(R.id.lyParent);
         txtDocVerify = (TextView) findViewById(R.id.txtDocVerify);
         rvProduct = (RecyclerView) findViewById(R.id.rvProduct);
         rvProduct.setHasFixedSize(true);
@@ -239,7 +240,10 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
             if (SDK_INT >= Build.VERSION_CODES.R) {
 
-                requestPermission();
+                  requestStoragePermissionV11();
+
+
+
             } else {
                 if (checkRationalePermission()) {
                     //Show Information about why you need the permission
@@ -444,6 +448,23 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
                     // perform action when allow permission success
+                    //0005
+                    if(!checkCameraPermissionV11()){
+
+                        if (checkCameraRationalePermissionV11()) {
+                            //Show Information about why you need the permission
+                            requestCameraPermissionV11();
+
+                        } else {
+                            //Previously Permission Request was cancelled with 'Dont Ask Again',
+                            // Redirect to Settings after showing Information about why you need the permission
+                            //  permissionAlert(navigationView,"Need Call Permission","This app needs Call permission.");
+                            openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
+
+
+                        }
+                    }
+
                 } else {
                     dialogStorage();
                 }
@@ -528,14 +549,21 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     // region permission
     private boolean checkPermission() {
 
-        int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
+            int camera = ActivityCompat.checkSelfPermission(this, perms[0]);
 
         if (SDK_INT >= Build.VERSION_CODES.R) {
+            //Note : version  11 and above first we take only storage permission once it get than we ask for camera permission
+           if(Environment.isExternalStorageManager() && camera == PackageManager.PERMISSION_GRANTED){
+               //05 temp
+               showAlert("True");
+           }else{
+               showAlert("False");
+           }
             return Environment.isExternalStorageManager() && camera == PackageManager.PERMISSION_GRANTED;
         } else {
-            int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
-            int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
+            int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(this, perms[1]);
+            int READ_EXTERNAL = ActivityCompat.checkSelfPermission(this, perms[2]);
 
 
             return camera == PackageManager.PERMISSION_GRANTED
@@ -544,6 +572,9 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         }
     }
+
+    //0005
+
 
     private boolean checkRationalePermission() {
 
@@ -557,15 +588,14 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
     }
 
-    private void requestPermission() {
+
+    private void requestStoragePermissionV11() {
 
 
-        if (SDK_INT >= Build.VERSION_CODES.R) {
 
+        //    ActivityCompat.requestPermissions(this, new String[]{CAMERA}, Constants.PERMISSION_CAMERA_V11_CONSTANT);
 
-                try {
-                ActivityCompat.requestPermissions(this, new String[]{CAMERA}, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
-
+            try {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
                 intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
@@ -575,14 +605,46 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
                 intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                 startActivityForResult(intent, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
             }
-        } else {
+
+    }
+
+    private boolean checkCameraPermissionV11(){
+
+
+        int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), CAMERA);
+
+        return camera == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean checkCameraRationalePermissionV11() {
+
+        boolean camera = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, CAMERA);
+
+
+        return camera ;
+
+
+    }
+
+    private void requestCameraPermissionV11() {
+
+        // For Version 11 seperately called Camera permission to storage permission
+        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, Constants.PERMISSION_CAMERA_V11_CONSTANT);
+
+    }
+
+    private void requestPermission() {
+
             //below android 11
             ActivityCompat.requestPermissions(this, perms, Constants.PERMISSION_CAMERA_STORACGE_CONSTANT);
-        }
+
     }
 
 
+
+
     public void dialogStorage() {
+
 
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
         builder.setTitle("Permission Required..!");
@@ -642,7 +704,20 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
                 }
                 break;
+            case Constants.PERMISSION_CAMERA_V11_CONSTANT:
 
+
+                if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission has been granted. Start camera preview Activity.
+
+                   showAlert("Camera permission Grant");
+                } else {
+                    // Permission request was denied.
+                    Snackbar.make(lyParent, R.string.camera_permission_denied,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                }
+                break;
 
         }
     }

@@ -57,6 +57,7 @@ public class Constants {
 
     public static String SEARCH_MODEL_DATA = "ELITE_SEARCH_MODEL_DATA";
     public static String SEARCH_MODEL_ID = "ELITE_SEARCH_MODEL_ID";
+    public static final int PERMISSION_CAMERA_V11_CONSTANT = 104;
     public static final int PERMISSION_CAMERA_STORACGE_CONSTANT = 103;
     public static final int PERMISSION_CALLBACK_CONSTANT = 100;
     public static final int REQUEST_PERMISSION_SETTING = 101;

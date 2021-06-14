@@ -240,6 +240,7 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/TextInputMaterialStyle"
+                                android:id="@+id/tilEmail"
                                 app:startIconDrawable="@drawable/ic_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -278,6 +279,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/TextInputMaterialStyle"
+                            android:id="@+id/tilPincode"
                             app:startIconDrawable="@drawable/ic_location"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

@@ -233,7 +233,7 @@
 
                         <TextView
                             android:id="@+id/txtMesageData"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             style="@style/TextViewStyle.MediumRegular"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -272,7 +272,7 @@
                             android:id="@+id/tilMake"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="3dp"
+
                             android:layout_weight="1"
                            
                             android:hint="Make"
@@ -307,7 +307,7 @@
                             android:layout_width="0dp"
                             android:id="@+id/tilModel"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
+
                             android:layout_weight="1"
                            
                             android:hint="Model"
