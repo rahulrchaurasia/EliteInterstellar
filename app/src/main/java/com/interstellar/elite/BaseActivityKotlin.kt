@@ -102,7 +102,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
         // inflate the custom_snackbar_view created previously
         // inflate the custom_snackbar_view created previously
         val snackbar = Snackbar
-            .make(view!!, "", Snackbar.LENGTH_INDEFINITE)
+            .make(view!!, "", Snackbar.LENGTH_LONG)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
 
         val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)

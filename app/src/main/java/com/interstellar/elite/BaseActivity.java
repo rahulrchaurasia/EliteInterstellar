@@ -264,7 +264,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    public void getSnakeBar(View view, String strMessage){
+    public void getSnakeBar1(View view, String strMessage){
 
 
         Snackbar snackbar = Snackbar
@@ -281,6 +281,49 @@ public class BaseActivity extends AppCompatActivity {
 
         snackbar.show();
     }
+
+    public void getSnakeBar(View view ,String strMessage){
+
+
+        // create an instance of the snackbar
+        final Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+
+        // inflate the custom_snackbar_view created previously
+        View customSnackView = getLayoutInflater().inflate(R.layout.layout_custom_snackbar, null);
+
+        // set the background of the default snackbar as transparent
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+
+        // now change the layout of the snackbar
+        Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
+
+        // set padding of the all corners as 0
+        snackbarLayout.setPadding(0, 0, 0, 0);
+
+        // register the button from the custom_snackbar_view layout file
+
+        TextView txtMessage = customSnackView.findViewById(R.id.txtMessage);
+        txtMessage.setText( ""+strMessage);
+
+        TextView txtAction = customSnackView.findViewById(R.id.txtAction);
+
+        // now handle the same button with onClickListener
+        txtAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                snackbar.dismiss();
+            }
+        });
+
+        // add the custom snack bar layout to snackbar layout
+        snackbarLayout.addView(customSnackView, 0);
+
+        snackbar.show();
+
+    }
+
 
     public void openPopUp(final View view, String title, String desc, String positiveButtonName, String negativeButtonName, boolean isNegativeVisible, boolean isCancelable) {
         try {
