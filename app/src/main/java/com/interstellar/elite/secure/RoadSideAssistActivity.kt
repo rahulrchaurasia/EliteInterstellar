@@ -71,10 +71,10 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
         init()
         setListner()
         setOnTextChangeListner()
-        bindData()
+       // bindData()
 
-        showDialog("Please Wait")
-        RegisterController(this).getUserProfile(this@RoadSideAssistActivity)
+//        showDialog("Please Wait")
+//        RegisterController(this).getUserProfile(this@RoadSideAssistActivity)
     }
 
     private fun init() {
@@ -486,8 +486,8 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                             eliteGlobalAssuredetail.PolicyLink.let {
 
 
-                                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                                startActivity(browserIntent)
+//                                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+//                                startActivity(browserIntent)
 
                                 downloadPdf(
                                     it,

@@ -142,8 +142,8 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
 
                 tataEntity.PolicyLink.let {
 
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                    startActivity(browserIntent)
+//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+//                    startActivity(browserIntent)
 
                     downloadPdf(tataEntity.PolicyLink, "Elite_TataPeepDocs"+Utility.currentDateTime())
                 }
@@ -177,9 +177,10 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
 
                 if(tataEntity.PolicyLink != null && tataEntity.PolicyLink  != "") {
                     tataEntity.PolicyLink.let {
-                        val browserIntent =
-                            Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
-                        startActivity(browserIntent)
+
+//                        val browserIntent =
+//                            Intent(Intent.ACTION_VIEW, Uri.parse(tataEntity.PolicyLink))
+//                        startActivity(browserIntent)
 
                         downloadPdf(
                             tataEntity.PolicyLink,
@@ -193,9 +194,9 @@ class WalletActivity : BaseActivity() , View.OnClickListener , IResponseSubcribe
                     tataEntity.let {
 
                         authenticationController.insertTataPeep(
-                            it!!.MobileNo.toString(),
-                            it!!.PolicyLink,
-                            it!!.RegistrationNo,
+                           MobileNo =  it!!.MobileNo.toString(),
+                           RegistrationNo =  it!!.RegistrationNo,
+                           PolicyLink  =    it!!.PolicyLink ,
                             this@WalletActivity
                         )
 

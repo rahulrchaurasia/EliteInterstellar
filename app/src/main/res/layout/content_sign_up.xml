@@ -140,7 +140,7 @@
                                             android:textColor="@color/white"
                                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-                                            android:inputType="text"
+                                            android:inputType="text|textCapWords"
                                             android:maxLength="100"
                                             android:text="" />
 
