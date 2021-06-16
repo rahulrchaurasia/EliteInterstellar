@@ -172,8 +172,6 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
                     return
                 }
 
-                prefManager.setMobile(binding.includedLayout.etMobile.text.toString())
-                prefManager.setPassword(binding.includedLayout.etPassword.text.toString())
 
                 //               strToken = prefManager.getToken()
 //                strToken = if (prefManager.getToken() != null) {
@@ -227,7 +225,10 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
             if (apiResponse.status_code == 0) {
 
-                 loginEntity   = prefManager.getUserData()
+                prefManager.setMobile(binding.includedLayout.etMobile.text.toString())
+                prefManager.setPassword(binding.includedLayout.etPassword.text.toString())
+
+                loginEntity   = prefManager.getUserData()
 
                 if(loginEntity?.isgoldverify?: "" == ("") ){
 

@@ -90,10 +90,17 @@ open class AuthenticationBuilder : RetroRequestBuilder() {
 
 
         @POST("/api/insertGlobalAssure")
-        fun insertGlobalAssure(@Body  body: HashMap<String, String>): Call<CommonResponse>
+        fun insertGlobalAssure(@Body  body: HashMap<String, String>): Call<GlobalAssureResponse>
 
+        // Not in Used
         @POST("/api/load-Global-Assure")
         fun getGlobalAssure(@Body body: HashMap<String, String>): Call<GlobalAssureResponse>
+
+        @POST("/api/Global-Assure-count")
+        fun getGlobalAssureCount(@Body body: HashMap<String, String>): Call<GlobalAssureResponse>
+
+        @POST("/api/load-Global-Assure")
+        fun getGlobalAssureVerification(@Body body: HashMap<String, String>): Call<VerifyGlobalAssureResponse>
 
 
         @POST("/api/insert-activation-code")

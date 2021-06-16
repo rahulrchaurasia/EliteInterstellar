@@ -733,6 +733,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
     override fun insertGlobalAssure(
+        LoginID: String ,
         MobileNo: String,
         RegistrationNo: String,
         CertificateNo: String,
@@ -741,6 +742,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
     ) {
 
         var map = hashMapOf<String, String>()
+        map.put("id", LoginID)
         map.put("MobileNo", MobileNo)
         map.put("RegistrationNo", RegistrationNo)
         map.put("CertificateNo", CertificateNo)
@@ -748,10 +750,10 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
 
 
-        authenticationBuilder.insertGlobalAssure(map).enqueue(object : Callback<CommonResponse> {
+        authenticationBuilder.insertGlobalAssure(map).enqueue(object : Callback<GlobalAssureResponse> {
             override fun onResponse(
-                call: Call<CommonResponse>,
-                response: Response<CommonResponse>
+                call: Call<GlobalAssureResponse>,
+                response: Response<GlobalAssureResponse>
             ) {
 
                 if (response!!.isSuccessful) {
@@ -775,7 +777,7 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
 
             }
 
-            override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
                 iResponseSubcriber.OnFailure("" + t.message.toString())
             }
         })
@@ -817,6 +819,89 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun getGlobalAssureCount(LoginID: String, iResponseSubcriber: IResponseSubcriber) {
+        var map = hashMapOf<String, String>()
+        map.put("id", LoginID)
+
+
+
+        authenticationBuilder.getGlobalAssureCount(map).enqueue(object : Callback<GlobalAssureResponse> {
+            override fun onResponse(
+                call: Call<GlobalAssureResponse>,
+                response: Response<GlobalAssureResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
+                iResponseSubcriber.OnFailure("" + t.message.toString())
+            }
+        })
+    }
+
+    override fun getGlobalAssureVerification(
+        LoginID: String,
+        RegistrationNo: String,
+        iResponseSubcriber: IResponseSubcriber
+    ) {
+        var map = hashMapOf<String, String>()
+        map.put("id", LoginID)
+        map.put("RegistrationNo", RegistrationNo)
+
+
+
+        authenticationBuilder.getGlobalAssureVerification(map).enqueue(object : Callback<VerifyGlobalAssureResponse> {
+            override fun onResponse(
+                call: Call<VerifyGlobalAssureResponse>,
+                response: Response<VerifyGlobalAssureResponse>
+            ) {
+
+                if (response!!.isSuccessful) {
+
+                    printLog(Gson().toJson(response.body()))
+
+                    if (response.body() != null) {
+                        if (response.body()?.status_code == 0) {
+
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        } else {
+                            iResponseSubcriber.OnSuccess(response.body()!!, response.message())
+                        }
+                    } else {
+
+                        iResponseSubcriber.OnFailure(MESSAGE)
+                    }
+                } else {
+                    iResponseSubcriber.OnFailure(errorStatus(response.code().toString()))
+                }
+
+            }
+
+            override fun onFailure(call: Call<VerifyGlobalAssureResponse>, t: Throwable) {
                 iResponseSubcriber.OnFailure("" + t.message.toString())
             }
         })

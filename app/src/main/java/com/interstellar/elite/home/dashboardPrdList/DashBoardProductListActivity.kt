@@ -15,11 +15,10 @@ import com.interstellar.elite.core.model.UserEntity
 import com.interstellar.elite.databinding.ActivityDashBoardProductListBinding
 import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.product.ProductMainActivity
-import com.interstellar.elite.secure.RoadSideAssistActivity
+import com.interstellar.elite.secure.RSA.RoadSideAssistActivity
 import com.interstellar.elite.secure.WalletActivity
 import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.webview.CommonWebViewActivity
-import com.interstellar.elite.webview.WebViewHtmlActivity
 
 import java.util.*
 

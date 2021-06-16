@@ -291,7 +291,10 @@ public class BaseActivity extends AppCompatActivity {
         // inflate the custom_snackbar_view created previously
         View customSnackView = getLayoutInflater().inflate(R.layout.layout_custom_snackbar, null);
 
+        snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+
         // set the background of the default snackbar as transparent
+
         snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
 
         // now change the layout of the snackbar

@@ -56,7 +56,10 @@ open class BaseFragmentKotlin : Fragment() {
         val snackbar = Snackbar
             .make(view, "", Snackbar.LENGTH_INDEFINITE)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+            .setAction("", View.OnClickListener {
 
+                dismissDialog()
+            })
         val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)
 
         snackbar.view.setBackgroundColor(Color.TRANSPARENT)

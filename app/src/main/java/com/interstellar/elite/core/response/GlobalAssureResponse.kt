@@ -4,6 +4,6 @@ import com.interstellar.elite.core.APIResponse
 import com.interstellar.elite.core.model.GloabalAssureEntity
 
 data class GlobalAssureResponse(
-    val Data: List<GloabalAssureEntity>,
+    val Data: MutableList<GloabalAssureEntity>,
 
     ):APIResponse()

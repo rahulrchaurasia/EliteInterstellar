@@ -10,6 +10,7 @@
 
 
     <ScrollView
+        android:id="@+id/svParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,432 +19,494 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/lyContainer"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/eight"
+                android:orientation="vertical">
 
-
-                android:elevation="@dimen/eight"
-                app:cardCornerRadius="@dimen/eight">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/eight"
-                    android:layout_marginTop="@dimen/eight"
-                    android:layout_marginRight="@dimen/eight"
-                    android:layout_marginBottom="@dimen/fab_margin"
+                    android:layout_margin="@dimen/eight"
 
-                    android:orientation="vertical">
+
+                    android:elevation="@dimen/eight"
+                    app:cardCornerRadius="@dimen/eight">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/four">
+                        android:layout_marginLeft="@dimen/eight"
+                        android:layout_marginTop="@dimen/eight"
+                        android:layout_marginRight="@dimen/eight"
+                        android:layout_marginBottom="@dimen/fab_margin"
 
-                        <TextView
-                            android:layout_width="@dimen/four"
-                            android:layout_height="@dimen/four"
-                            android:background="@drawable/circularbg_yellow" />
+                        android:orientation="vertical">
 
-                        <TextView
-                            style="@style/TextViewStyle.Medium"
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/four"
-                            android:text="Vehicle Towing" />
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/four">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="@dimen/four"
+                                android:layout_height="@dimen/four"
+                                android:background="@drawable/circularbg_yellow" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/four">
+                            <TextView
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/four"
+                                android:text="Vehicle Towing" />
 
-                        <TextView
-                            android:layout_width="@dimen/four"
-                            android:layout_height="@dimen/four"
-                            android:background="@drawable/circularbg_yellow" />
+                        </LinearLayout>
 
-                        <TextView
-                            style="@style/TextViewStyle.Medium"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/four"
-                            android:text="Onside Wheel Repair / Fuel Assistance" />
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/four">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="@dimen/four"
+                                android:layout_height="@dimen/four"
+                                android:background="@drawable/circularbg_yellow" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/four">
+                            <TextView
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/four"
+                                android:text="Onside Wheel Repair / Fuel Assistance" />
 
-                        <TextView
-                            android:layout_width="@dimen/four"
-                            android:layout_height="@dimen/four"
-                            android:background="@drawable/circularbg_yellow" />
+                        </LinearLayout>
 
-                        <TextView
-                            style="@style/TextViewStyle.Medium"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/four"
-                            android:text="Key Assistance / Battery Services" />
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/four">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="@dimen/four"
+                                android:layout_height="@dimen/four"
+                                android:background="@drawable/circularbg_yellow" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/four">
+                            <TextView
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/four"
+                                android:text="Key Assistance / Battery Services" />
 
-                        <TextView
-                            android:layout_width="@dimen/four"
-                            android:layout_height="@dimen/four"
-                            android:background="@drawable/circularbg_yellow" />
+                        </LinearLayout>
 
-                        <TextView
-                            style="@style/TextViewStyle.Medium"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/four"
-                            android:text="Hotel Accommodation Services" />
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/four">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="@dimen/four"
+                                android:layout_height="@dimen/four"
+                                android:background="@drawable/circularbg_yellow" />
 
+                            <TextView
+                                style="@style/TextViewStyle.Medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/four"
+                                android:text="Hotel Accommodation Services" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilName"
-                            style="@style/TextInputMaterialStyle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                           
-                            android:hint="Name"
-                            app:endIconMode="clear_text"
-
-                            app:endIconContentDescription="dcdcdcdcdcdcdcdcdcd"
-                            app:startIconDrawable="@drawable/ic_name">
-
-                            <EditText
-                                android:id="@+id/etFullName"
-                                style="@style/Style.edittext"
-                                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                android:inputType="text|textCapWords"
-                                android:maxLength="100"
-
-                                android:text="" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilMobile"
-                            style="@style/TextInputMaterialStyle"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Mobile No."
-                               app:endIconMode="clear_text"
-                           
-                            app:startIconDrawable="@drawable/ic_mobile">
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
 
-                            <EditText
-                                android:id="@+id/etMobile"
-                                style="@style/Style.edittext"
-                                android:inputType="number"
-                                android:maxLength="10"
-                                android:text=""
-                                 />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilName"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
 
-                    </LinearLayout>
+                                android:hint="Name"
+                                app:endIconMode="clear_text"
+
+                                app:startIconDrawable="@drawable/ic_name">
+
+                                <EditText
+                                    android:id="@+id/etFullName"
+                                    style="@style/Style.edittext"
+                                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:inputType="text|textCapWords"
+                                    android:maxLength="100"
+
+                                    android:text="" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
 
 
-                    <LinearLayout
-                        android:id="@+id/lyVehicle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-
-                        android:layout_marginTop="@dimen/four">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilVehicle"
-                            style="@style/TextInputMaterialStyle"
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            app:helperText="@string/VehicleExample"
-                            android:hint="Vehicle Number"
-                            app:endIconMode="clear_text"
-                            app:startIconDrawable="@drawable/ic_vehicle">
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
 
-                            <EditText
-                                android:id="@+id/etVehicle"
-                                style="@style/Style.edittext"
-                               
-                                android:inputType="textCapCharacters"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                                android:maxLength="10"
-                                android:maxLines="1"
-                                android:text="" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilMobile"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Mobile No."
+                                app:endIconMode="clear_text"
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                app:startIconDrawable="@drawable/ic_mobile">
+
+                                <EditText
+                                    android:id="@+id/etMobile"
+                                    style="@style/Style.edittext"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:text=""
+                                    />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
 
 
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rlEditVehicle"
-                        android:layout_marginTop="@dimen/four"
-                        android:visibility="visible"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:background="@color/seperator_white"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:id="@+id/txtMesageData"
-                            android:gravity="left|center_vertical"
-                            style="@style/TextViewStyle.MediumRegular"
+                        <LinearLayout
+                            android:id="@+id/lyVehicle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
-                            android:layout_toLeftOf="@+id/btnGetMakeModel"
-                            android:text="Get Make and Model using Vehicle Number"
 
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="@dimen/four">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilVehicle"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:helperText="@string/VehicleExample"
+                                android:hint="Vehicle Number"
+                                app:endIconMode="clear_text"
+                                app:startIconDrawable="@drawable/ic_vehicle">
+
+                                <EditText
+                                    android:id="@+id/etVehicle"
+                                    style="@style/Style.edittext"
+
+                                    android:inputType="textCapCharacters"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                                    android:maxLength="10"
+                                    android:maxLines="1"
+                                    android:text="" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
 
-                        <androidx.appcompat.widget.AppCompatButton
+                        </LinearLayout>
 
-                            android:id="@+id/btnGetMakeModel"
-                            android:text="APPLY"
-                             android:background="@drawable/bg_primary_rect"
-                            android:textColor="@color/white"
-                            android:textStyle="normal"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="28dp"
-                            android:layout_alignParentRight="true"
+                        <RelativeLayout
+                            android:id="@+id/rlEditVehicle"
+                            android:layout_marginTop="@dimen/four"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            />
+                            android:background="@color/seperator_white"
+                            android:padding="10dp">
 
-                    </RelativeLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/TextInputMaterialStyle"
-                            android:id="@+id/tilMake"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-
-                            android:layout_weight="1"
-                           
-                            android:hint="Make"
-                            app:endIconMode="clear_text"
-                            app:startIconDrawable="@drawable/ic_policy">
-
-                            <EditText
-                                android:id="@+id/acMake"
-
-                                style="@style/Style.edittext"
+                            <TextView
+                                android:id="@+id/txtMesageData"
+                                android:gravity="left|center_vertical"
+                                style="@style/TextViewStyle.MediumRegular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                               
-                                android:inputType="text|textCapCharacters|textNoSuggestions"
-                                android:lines="1"
-                                android:maxLines="1" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:layout_alignParentLeft="true"
+                                android:layout_toLeftOf="@+id/btnGetMakeModel"
+                                android:text="Get Make and Model using Vehicle Number"
+
+                                android:textColor="@color/black" />
 
 
-                    </LinearLayout>
+                            <androidx.appcompat.widget.AppCompatButton
 
-                    <LinearLayout
+                                android:id="@+id/btnGetMakeModel"
+                                android:text="APPLY"
+                                android:background="@drawable/bg_primary_rect"
+                                android:textColor="@color/white"
+                                android:textStyle="normal"
+                                android:textSize="12sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="28dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four"
-                        android:orientation="horizontal">
+                        </RelativeLayout>
 
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/TextInputMaterialStyle"
-                            android:layout_width="0dp"
-                            android:id="@+id/tilModel"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
 
-                            android:layout_weight="1"
-                           
-                            android:hint="Model"
-                            app:endIconMode="clear_text"
-                            app:startIconDrawable="@drawable/ic_policy">
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputMaterialStyle"
+                                android:id="@+id/tilMake"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
 
-                            <EditText
-                                android:id="@+id/acModel"
+                                android:layout_weight="1"
 
+                                android:hint="Make"
+                                app:endIconMode="clear_text"
+                                app:startIconDrawable="@drawable/ic_policy">
+
+                                <EditText
+                                    android:id="@+id/acMake"
+
+                                    style="@style/Style.edittext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:inputType="text|textCapCharacters|textNoSuggestions"
+                                    android:lines="1"
+                                    android:maxLines="1" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="0dp"
+                                android:id="@+id/tilModel"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="1"
+
+                                android:hint="Model"
+                                app:endIconMode="clear_text"
+                                app:startIconDrawable="@drawable/ic_policy">
+
+                                <EditText
+                                    android:id="@+id/acModel"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text|textCapCharacters|textNoSuggestions"
+                                    android:lines="1"
+                                    android:maxLines="1" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputMaterialStyle"
+                                app:startIconDrawable="@drawable/ic_location"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:id="@+id/tilPincode"
+                                android:hint="Pincode">
+
+                                <EditText
+                                    android:id="@+id/etPincode"
+                                    style="@style/Style.edittext"
+                                    android:inputType="number"
+                                    android:maxLength="6" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCity"
+                                style="@style/TextInputMaterialStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text|textCapCharacters|textNoSuggestions"
-                                android:lines="1"
-                                android:maxLines="1" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:hint="City"
+                                app:startIconDrawable="@drawable/ic_city_24">
+
+                                <EditText
+                                    android:id="@+id/etCity"
+                                    style="@style/Style.edittext"
+                                    android:layout_width="match_parent"
+                                    android:drawableRight="@drawable/vector_date"
+                                    android:inputType="textCapCharacters"
+                                    android:maxLines="1" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
 
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/TextInputMaterialStyle"
-                            app:startIconDrawable="@drawable/ic_location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:id="@+id/tilPincode"
-                            android:hint="Pincode">
-
-                            <EditText
-                                android:id="@+id/etPincode"
-                                style="@style/Style.edittext"
-                                android:inputType="number"
-                                android:maxLength="6" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilCity"
-                            style="@style/TextInputMaterialStyle"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="City"
-                            app:startIconDrawable="@drawable/ic_city_24">
-
-                            <EditText
-                                android:id="@+id/etCity"
-                                style="@style/Style.edittext"
-                                android:layout_width="match_parent"
-                                android:drawableRight="@drawable/vector_date"
-                                android:inputType="textCapCharacters"
-                                android:maxLines="1" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
+                            android:layout_marginTop="@dimen/four">
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/four">
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilYearManufacture"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Year Of Manufacture"
-                            app:startIconDrawable="@drawable/ic_city_24">
-
-                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                                android:id="@+id/acYearManufacture"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilYearManufacture"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusable="false"
-                                android:inputType="none"
-                                tools:ignore="KeyboardInaccessibleWidget" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:hint="Year Of Manufacture"
+                                app:startIconDrawable="@drawable/ic_city_24">
+
+                                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                    android:id="@+id/acYearManufacture"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="false"
+                                    android:inputType="none"
+                                    tools:ignore="KeyboardInaccessibleWidget" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilDate"
-                            style="@style/TextInputMaterialStyle"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilDate"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Expiry Date"
+                                app:endIconMode="none"
+                                app:helperText="@string/ExpDate"
+                                app:startIconDrawable="@drawable/ic_calendar_24">
+
+                                <EditText
+                                    android:id="@+id/etDate"
+                                    style="@style/Style.edittext"
+                                    android:layout_width="match_parent"
+                                    android:drawableRight="@drawable/vector_date"
+                                    android:focusable="false" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Expiry Date"
-                            app:endIconMode="none"
-                            app:helperText="@string/ExpDate"
-                            app:startIconDrawable="@drawable/ic_calendar_24">
+                            android:layout_marginTop="@dimen/four"
+                            android:orientation="horizontal">
 
-                            <EditText
-                                android:id="@+id/etDate"
-                                style="@style/Style.edittext"
-                                android:layout_width="match_parent"
-                                android:drawableRight="@drawable/vector_date"
-                                android:focusable="false" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCode"
+                                style="@style/TextInputMaterialStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:hint="Activation Code"
+                                app:endIconMode="clear_text"
+
+                                app:startIconDrawable="@drawable/ic_name">
+
+                                <EditText
+                                    android:id="@+id/etCode"
+                                    style="@style/Style.edittext"
+
+                                    android:inputType="text|textCapCharacters"
+                                    android:maxLength="100"
+
+                                    android:text="" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
 
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnPolicy"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/eight"
+
+                    android:text="DOWNLOAD POLICY" />
+            </LinearLayout>
 
 
-            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/txtSearchHistory"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginLeft="@dimen/eight"
+                style="@style/TextViewStyle.Large"
+                android:textColor="@color/black"
+                android:fontFamily="@font/muli"
+                android:text="@string/RSAList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btnPolicy"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/eight"
+                android:id="@+id/rvRSA"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="@dimen/eight"
+                android:layout_marginBottom="@dimen/fab_margin"/>
 
-                android:text="DOWNLOAD POLICY" />
 
         </LinearLayout>
     </ScrollView>

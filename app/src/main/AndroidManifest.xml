@@ -49,7 +49,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".secure.RoadSideAssistActivity"
+            android:name=".secure.RSA.RoadSideAssistActivity"
             android:label="Road Side Assistance"
             android:parentActivityName=".home.HomeActivity"
             android:screenOrientation="portrait"

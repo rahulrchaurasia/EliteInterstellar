@@ -104,6 +104,10 @@ open class BaseActivityKotlin : AppCompatActivity() {
         val snackbar = Snackbar
             .make(view!!, "", Snackbar.LENGTH_LONG)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+            .setAction("", View.OnClickListener {
+
+                dismissDialog()
+            })
 
         val customSnackView: View = layoutInflater.inflate(R.layout.layout_custom_snackbar, null)
 
@@ -114,14 +118,15 @@ open class BaseActivityKotlin : AppCompatActivity() {
         snackbarLayout.setPadding(0,0,0,0)
         snackbarLayout.addView(customSnackView)
 
-        val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage)
+        val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage) as TextView
         txtMessage.setText(strMessage)
 
-        val txtAction : TextView = customSnackView.findViewById(R.id.txtAction)
+        val txtAction : TextView = customSnackView.findViewById(R.id.txtAction) as TextView
 
         txtAction.setOnClickListener{
 
-            showAlert("Data")
+
+            snackbar.dismiss()
         }
 
         snackbar.show()

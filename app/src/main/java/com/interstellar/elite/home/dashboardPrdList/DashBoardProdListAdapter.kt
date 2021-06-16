@@ -32,7 +32,7 @@ class DashBoardProdListAdapter(val productList: List<DashProductEntity>, val con
     }
 
     override fun onBindViewHolder(holder: ProductClass, position: Int) {
-        var entity = productList.get(position);
+        var entity = productList.get(position)
 
         holder.txtProductName.setText(entity.title)
         holder.prodImage.setImageResource(entity.img)

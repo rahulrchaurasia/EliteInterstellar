@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.core.model.DocProductEnity;
@@ -249,6 +250,8 @@ public class BaseFragment extends Fragment {
 
         // inflate the custom_snackbar_view created previously
         View customSnackView = getLayoutInflater().inflate(R.layout.layout_custom_snackbar, null);
+
+        snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
 
         // set the background of the default snackbar as transparent
         snackbar.getView().setBackgroundColor(Color.TRANSPARENT);

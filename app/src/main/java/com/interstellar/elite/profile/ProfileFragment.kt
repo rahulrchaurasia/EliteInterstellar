@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.snackbar.Snackbar
 import com.interstellar.elite.BaseFragment.isValideEmailID
 import com.interstellar.elite.R
@@ -72,6 +73,14 @@ class ProfileFragment : BaseFragmentKotlin(),IResponseSubcriber ,View.OnClickLis
         binding.btnSubmit.setOnClickListener(this)
 
         binding.etPincode.addTextChangedListener(pincodeTextWatcher)
+
+        binding.etPincode.doOnTextChanged { text, start, before, count ->
+
+            if(text!!.length >0){
+                binding.tilPincode.error = null
+            }
+        }
+
     }
 
     private fun validateRegistration(): Boolean {

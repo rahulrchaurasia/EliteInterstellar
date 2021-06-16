@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/fab_margin"
+    android:paddingRight="@dimen/fab_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <LinearLayout
+
+                android:id="@+id/lyParent"
+           android:padding="12dp"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/customeborder_blue_thin"
+          >
+            <ImageView
+
+                app:srcCompat="@drawable/circularbg_yellow"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+
+                />
+
+            <TextView
+                android:id="@+id/txtVehicleNo"
+
+                android:layout_marginLeft="@dimen/four"
+                android:layout_alignParentLeft="true"
+
+                android:text="MJKPWWW344"
+                style="@style/TextViewStyle.Large"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txtDownload"
+
+                android:layout_marginLeft="@dimen/four"
+               android:fontFamily="@font/muli"
+
+                android:text="@string/download"
+                android:textColor="@color/blue_descent"
+                style="@style/TextViewStyle.Large"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+</LinearLayout>

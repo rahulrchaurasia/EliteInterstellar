@@ -60,6 +60,7 @@ interface IAuthentication {
     fun getTataPeep(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
 
     fun insertGlobalAssure(
+        LoginID: String,
         MobileNo: String,
         RegistrationNo: String,
         CertificateNo: String,
@@ -69,6 +70,9 @@ interface IAuthentication {
 
     fun getGlobalAssure(MobileNo: String, iResponseSubcriber: IResponseSubcriber)
 
+    fun getGlobalAssureCount(LoginID: String, iResponseSubcriber: IResponseSubcriber)
+
+    fun getGlobalAssureVerification(LoginID: String , RegistrationNo : String ,iResponseSubcriber: IResponseSubcriber)
 
     fun insertActivationCode(
         MobileNo: String,
