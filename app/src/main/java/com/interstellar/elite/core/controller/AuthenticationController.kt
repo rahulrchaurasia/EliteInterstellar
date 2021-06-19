@@ -83,7 +83,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<EligibilityUserResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -127,7 +133,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<TataLandmarkResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -175,7 +187,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
                 }
 
                 override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
+                     if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
                     iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
                 }
             })
     }
@@ -227,7 +245,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
                 }
 
                 override fun onFailure(call: Call<GlobalAssureLandmarkResponse>, t: Throwable) {
+                     if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
                     iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
                 }
             })
     }
@@ -272,7 +296,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
                 }
 
                 override fun onFailure(call: Call<ActivationCodeLandmarkResponse>, t: Throwable) {
+                     if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
                     iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
                 }
             })
     }
@@ -319,7 +349,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<PolicyBossVehicleInfoResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
 
             }
         })
@@ -364,7 +400,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<UserConsttantResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -404,7 +446,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<PincodeResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -452,7 +500,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<VerifyUserOTPRegisterResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
 
             }
         })
@@ -493,7 +547,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<UserRegistrationResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -531,7 +591,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<VersionCodeResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                 if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -637,7 +703,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<UpladeGoldResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
 
             }
         })
@@ -685,7 +757,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
 
@@ -726,7 +804,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<TataResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -778,7 +862,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
 
@@ -819,7 +909,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -858,7 +954,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<GlobalAssureResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -902,7 +1004,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<VerifyGlobalAssureResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
     }
@@ -950,7 +1058,13 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
             }
         })
 
@@ -991,7 +1105,14 @@ open class AuthenticationController(mCxt: Context) : BaseController(), IAuthenti
             }
 
             override fun onFailure(call: Call<ActivationCodeResponse>, t: Throwable) {
-                iResponseSubcriber.OnFailure("" + t.message.toString())
+                if(t is UnknownHostException){
+
+                    iResponseSubcriber.OnFailure("Check your internet connection")
+
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.message.toString())
+                }
+
             }
         })
     }

@@ -19,6 +19,7 @@ import com.interstellar.elite.core.response.RtoProductDisplayResponse;
 import com.interstellar.elite.facade.PrefManager;
 
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import okhttp3.MultipartBody;
@@ -101,7 +102,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<ClientCommonResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -133,7 +139,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<OrderDetailResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
 
@@ -167,7 +178,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<CompleteOrderResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -328,7 +344,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<RtoProductDisplayResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -365,7 +386,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<RtoProductDisplayResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -441,7 +467,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<ProductDocumentResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -474,7 +505,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<DocumentViewResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -509,7 +545,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<NotificationResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -538,7 +579,12 @@ public class ProductController extends BaseController implements IProduct {
 
             @Override
             public void onFailure(Call<DocumentResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }

@@ -23,6 +23,8 @@ import com.interstellar.elite.core.response.miscNonRto.ProductPriceResponse;
 import com.interstellar.elite.core.response.miscNonRto.ProvideClaimAssResponse;
 import com.interstellar.elite.facade.PrefManager;
 
+import java.net.UnknownHostException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +78,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -105,7 +112,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -135,7 +147,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -164,7 +181,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -193,7 +215,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<MotorInsuranceListResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -222,7 +249,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<MotorInsuranceListResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -251,7 +283,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -279,7 +316,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -308,7 +350,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -337,7 +384,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -366,7 +418,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -393,7 +450,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProductPriceResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });
@@ -422,7 +484,12 @@ public class MiscNonRTOController  extends BaseController implements INonRTO {
             @Override
             public void onFailure(Call<ProvideClaimAssResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
 
             }
         });

@@ -1,9 +1,11 @@
 package com.interstellar.elite.secure;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.BaseFragment;
 import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
@@ -70,6 +73,8 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
 
     private Context mContext;
     EditText etDate, etTime, etPlaceOfAccident, etInsCompanyName;
+    TextInputLayout tilDate , tilTime  , tilPlaceOfAccident , tilInsCompanyName, tilCity, tilPincode;
+
 
 
     // region Common Declaration
@@ -130,6 +135,7 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
 
         setOnClickListener();
 
+        setTextChangeListener();
 
         loginEntity = prefManager.getUserData();
         userConstatntEntity = prefManager.getUserConstatnt();
@@ -210,6 +216,17 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
         etTime = view.findViewById(R.id.etTime);
         etPlaceOfAccident = view.findViewById(R.id.etPlaceOfAccident);
         etInsCompanyName = view.findViewById(R.id.etInsCompanyName);
+
+
+        tilDate = view.findViewById(R.id.tilDate);
+        tilTime = view.findViewById(R.id.tilTime);
+        tilPlaceOfAccident = view.findViewById(R.id.tilPlaceOfAccident);
+        tilInsCompanyName = view.findViewById(R.id.tilInsCompanyName);
+
+        tilCity = view.findViewById(R.id.tilCity);
+        tilPincode = view.findViewById(R.id.tilPincode);
+
+
         etVehicle.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(20)});
 
     }
@@ -231,6 +248,20 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
         etInsCompanyName.setOnClickListener(this);
         etDate.setOnClickListener(this);
         etTime.setOnClickListener(this);
+
+
+    }
+
+    private void setTextChangeListener(){
+
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+
+        etDate.addTextChangedListener(getTextWatcher( tilDate));
+        etTime.addTextChangedListener(getTextWatcher( tilTime));
+
+        etPlaceOfAccident.addTextChangedListener(getTextWatcher( tilPlaceOfAccident));
+        etInsCompanyName.addTextChangedListener(getTextWatcher( tilInsCompanyName));
+
 
 
     }
@@ -316,28 +347,28 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
             return false;
         } else if (!isEmpty(etDate)) {
             etDate.requestFocus();
-            etDate.setError("Enter Accident Date");
+            tilDate.setError("Enter Accident Date");
             return false;
         } else if (!isEmpty(etTime)) {
             etTime.requestFocus();
-            etTime.setError("Enter Accident Time");
+            tilTime.setError("Enter Accident Time");
             return false;
         } else if (!isEmpty(etPlaceOfAccident)) {
             etPlaceOfAccident.requestFocus();
-            etPlaceOfAccident.setError("Enter Place Of Accident");
+            tilPlaceOfAccident.setError("Enter Place Of Accident");
             return false;
         } else if (!isEmpty(etInsCompanyName)) {
             etInsCompanyName.requestFocus();
-            etInsCompanyName.setError("Enter Insurer Company Name");
+            tilInsCompanyName.setError("Enter Insurer Company Name");
             return false;
         } else if (!isEmpty(etCity)) {
             etCity.requestFocus();
-            etCity.setError("Enter City");
+            tilCity.setError("Enter City");
             return false;
         }
         if (!isEmpty(etPincode) || etPincode.getText().toString().length() != 6) {
             etPincode.requestFocus();
-            etPincode.setError("Enter Pincode");
+            tilPincode.setError("Enter Pincode");
             return false;
         }
         return true;
@@ -390,6 +421,7 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
 
         new MiscNonRTOController(mContext).saveProvideClaimAssistance(requestEntity, this);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -452,7 +484,7 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
                     return;
                 } else {
 
-                    saveData();
+                    showConfirmAlert();
                 }
 
                 break;
@@ -460,6 +492,7 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
             case R.id.etInsCompanyName:
                 if (insuranceCompanyEntityList != null && insuranceCompanyEntityList.size() > 0) {
                     etInsCompanyName.setError(null);
+                    tilInsCompanyName.setError(null);
                     getBottomSheetDialog();
                 }
 
@@ -473,6 +506,8 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
                     etVehicle.setError("Enter Vehicle Number");
                     return;
                 }
+                etCity.setError(null);
+                tilCity.setError(null);
                 setScrollatBottom();
                 startActivityForResult(new Intent(getActivity(), SearchCityActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT), Constants.SEARCH_CITY_CODE);
 
@@ -482,6 +517,42 @@ public class ClaimAssistHospitalFragment extends BaseFragment implements View.On
         }
     }
 
+
+    public void showConfirmAlert() {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Elite");
+
+            builder.setMessage(getString(R.string.confirmMessage));
+            String positiveText = "Yes";
+            String negativeText = "No";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            saveData();
+
+                        }
+                    });
+
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            final AlertDialog dialog = builder.create();
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

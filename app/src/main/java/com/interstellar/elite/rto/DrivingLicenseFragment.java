@@ -401,7 +401,7 @@ public class DrivingLicenseFragment extends BaseFragment implements View.OnClick
 
         if ((etLic.getText().toString().trim().length() == 0) && (lyLic.getVisibility() == View.VISIBLE)) {
             etLic.requestFocus();
-            tilLic.setError("Enter Driving Licence");
+            tilLic.setError("Enter Driving License");
             return false;
         }
 

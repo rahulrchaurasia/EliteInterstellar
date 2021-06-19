@@ -1,7 +1,9 @@
 package com.interstellar.elite.assure;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -501,7 +503,8 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
                     return;
                 } else {
 
-                    saveData();
+                    showConfirmAlert();
+
                 }
 
                 break;
@@ -573,7 +576,7 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
-
+                tilCity.setError(null);
 
                 showDialog();
 
@@ -662,6 +665,44 @@ public class NCBTransferFragment extends BaseFragment implements View.OnClickLis
         }
         //
     }
+
+
+    public void showConfirmAlert() {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Elite");
+
+            builder.setMessage(getString(R.string.confirmMessage));
+            String positiveText = "Yes";
+            String negativeText = "No";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            saveData();
+
+                        }
+                    });
+
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            final AlertDialog dialog = builder.create();
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void OnFailure(String error) {

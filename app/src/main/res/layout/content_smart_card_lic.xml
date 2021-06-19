@@ -16,7 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextInputMaterialStyle"
-            android:hint="Driving Licence Number">
+            android:id="@+id/tilLicNo"
+            app:startIconDrawable="@drawable/ic_vehicle"
+            android:hint="Driving License Number">
 
             <EditText
                 android:id="@+id/etLicNo"
@@ -32,7 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextInputMaterialStyle"
-            android:hint="Driving Licence Owner Name">
+            android:id="@+id/tilLicOwnerName"
+            app:startIconDrawable="@drawable/ic_name"
+            android:hint="Driving License Owner Name">
 
             <EditText
                 android:id="@+id/etLicOwnerName"
@@ -48,10 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextInputMaterialStyle"
-         app:endIconDrawable="@drawable/vector_date"
+            android:id="@+id/tilLicOwnerDob"
+            app:startIconDrawable="@drawable/ic_calendar_24"
             app:endIconMode="custom"
-            app:endIconTint="@color/header_text_color"
-            android:hint="Driving Licence Owner Dob">
+            android:hint="Driving License Owner Dob">
 
             <EditText
                 android:id="@+id/etLicOwnerDob"

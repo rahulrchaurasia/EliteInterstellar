@@ -82,7 +82,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
     RelativeLayout lyParent, rlDoc, rlCorrect;
     LinearLayout llCorrection ;
     ImageView ivLogo, ivClientLogo, ivArrow, ivLic, ivTick;
-    TextInputLayout tilCity ,tilPincode;
+    TextInputLayout tilCity ,tilRTO,tilPincode;
 
     TextView txtCharges, txtPrdName, txtDoc, txtClientName, txtTAT;
     EditText etName, etDOB, etLic;
@@ -307,6 +307,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
         etLic.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(30)});
 
         tilCity  =  (TextInputLayout) view.findViewById(R.id.tilCity);
+        tilRTO  =  (TextInputLayout) view.findViewById(R.id.tilRTO);
         tilPincode  =  (TextInputLayout)view.findViewById(R.id.tilPincode);
 
 
@@ -356,14 +357,14 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
             return false;
         }else if (!isEmpty(etLic)) {
             etLic.requestFocus();
-            etLic.setError("Enter Driving Licence");
+            etLic.setError("Enter Driving License");
             llCorrection.setVisibility(View.VISIBLE);
             return false;
         }
         else if (!validateCity(etCity,tilCity)) {
 
             return false;
-        } else if (!validateRTO(etRTO)) {
+        } else if (!validateRTO(etRTO,tilRTO)) {
 
             return false;
         }
@@ -487,6 +488,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
                 if (!etCity.getText().toString().equalsIgnoreCase("")) {
 
                     etRTO.setError(null);
+                    tilRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
 
@@ -528,7 +530,7 @@ public class DrivingLicVerifyFragment extends BaseFragment implements View.OnCli
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
-
+                tilCity.setError(null);
                 showDialog();
 
                 //region call Price Controller

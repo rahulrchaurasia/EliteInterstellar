@@ -80,9 +80,9 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
             this
         ) as AuthenticationController
 
-//        if (!checkPermission()) {
-//            requestPermission()
-//        }
+        if (!checkPermission()) {
+            requestPermission()
+        }
 
 
     }
@@ -203,7 +203,6 @@ class LoginActivity :  BaseActivityKotlin(), View.OnClickListener ,IResponseSubc
 
             R.id.tvForgotPassword -> {
 
-                //05 temp
 
                 startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
 

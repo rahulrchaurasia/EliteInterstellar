@@ -240,8 +240,8 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
             options.put("theme.color", "#3F51B5");
 
             options.put("currency", "INR");
-         //   options.put("amount", AMOUNT_PAYMENT * 100);   // temp added 05
-             options.put("amount", "10000");
+         //   options.put("amount", AMOUNT_PAYMENT * 100);   // 05 temp added
+             options.put("amount", "100");
 
 
             JSONObject checkout = new JSONObject();

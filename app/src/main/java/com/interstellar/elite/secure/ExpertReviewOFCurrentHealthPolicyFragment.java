@@ -1,8 +1,10 @@
 package com.interstellar.elite.secure;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -69,8 +71,8 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
 
     private Context mContext;
     EditText etNameOfProposer, etSumAssured, etDOB;
-     TextView txtFamilyError;
-    TextInputLayout tilNameOfProposer ,tilSumAssured ,tilDOB,tilCity ,tilPincode;
+    TextView txtFamilyError;
+    TextInputLayout tilNameOfProposer, tilSumAssured, tilDOB, tilCity, tilPincode;
 
 
     Spinner spNoOfFamily;
@@ -158,14 +160,13 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         // endregion
 
 
-
         spNoOfFamily.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                if(pos == 0){
-                   // txtFamilyError.setVisibility(View.VISIBLE);
-                }else{
+                if (pos == 0) {
+                    // txtFamilyError.setVisibility(View.VISIBLE);
+                } else {
                     txtFamilyError.setVisibility(View.GONE);
                     spNoOfFamily.setBackgroundResource(R.drawable.custom_spinner);
                 }
@@ -181,8 +182,6 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         super.onViewCreated(view, savedInstanceState);
 
     }
-
-
 
 
     private void initialize(View view) {
@@ -224,20 +223,19 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         etDOB = (EditText) view.findViewById(R.id.etDOB);
 
         // region Floater
-        radioGroup = (RadioGroup)view.findViewById(R.id.radioGroup);
-        rbIndividual = (RadioButton)view.findViewById(R.id.rbIndividual);
-        rbFloater = (RadioButton)view.findViewById(R.id.rbFloater);
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        rbIndividual = (RadioButton) view.findViewById(R.id.rbIndividual);
+        rbFloater = (RadioButton) view.findViewById(R.id.rbFloater);
 
-        lyFamily = (LinearLayout)view.findViewById(R.id.lyFamily);
-        spNoOfFamily = (Spinner)view.findViewById(R.id.spNoOfFamily);
+        lyFamily = (LinearLayout) view.findViewById(R.id.lyFamily);
+        spNoOfFamily = (Spinner) view.findViewById(R.id.spNoOfFamily);
 
-        tilNameOfProposer = (TextInputLayout)view.findViewById(R.id.tilNameOfProposer);
-        tilSumAssured = (TextInputLayout)view.findViewById(R.id.tilSumAssured);
-        tilDOB  = (TextInputLayout)view.findViewById(R.id.tilDOB);
-        txtFamilyError = (TextView)view.findViewById(R.id.txtFamilyError);
-        tilCity = (TextInputLayout)view.findViewById(R.id.tilCity);
-        tilPincode = (TextInputLayout)view.findViewById(R.id.tilPincode);
-
+        tilNameOfProposer = (TextInputLayout) view.findViewById(R.id.tilNameOfProposer);
+        tilSumAssured = (TextInputLayout) view.findViewById(R.id.tilSumAssured);
+        tilDOB = (TextInputLayout) view.findViewById(R.id.tilDOB);
+        txtFamilyError = (TextView) view.findViewById(R.id.txtFamilyError);
+        tilCity = (TextInputLayout) view.findViewById(R.id.tilCity);
+        tilPincode = (TextInputLayout) view.findViewById(R.id.tilPincode);
 
 
         //endregion
@@ -245,17 +243,17 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
 
     }
 
-    private void setTextChangeListener(){
+    private void setTextChangeListener() {
 
 
         etNameOfProposer.addTextChangedListener(getTextWatcher(tilNameOfProposer));
 
-       // etNameOfProposer.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilNameOfProposer));
-        etSumAssured.addTextChangedListener(getTextWatcher( tilSumAssured));
+        // etNameOfProposer.addTextChangedListener(new addListenerOnTextChange(requireContext(), tilNameOfProposer));
+        etSumAssured.addTextChangedListener(getTextWatcher(tilSumAssured));
         etDOB.addTextChangedListener(getTextWatcher(tilDOB));
 
         //etCity.addTextChangedListener(getTextWatcher(tilCity));
-        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+        etPincode.addTextChangedListener(getTextWatcher(tilPincode));
     }
 
     private void setOnClickListener() {
@@ -286,15 +284,15 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
 
 
     private boolean validate() {
-        if (!validateProposer(etNameOfProposer,tilNameOfProposer)) {
+        if (!validateProposer(etNameOfProposer, tilNameOfProposer)) {
             return false;
 
-        } else if (!validateSumAssured(etSumAssured,tilSumAssured)) {
+        } else if (!validateSumAssured(etSumAssured, tilSumAssured)) {
             return false;
         } else if (!isEmpty(etDOB)) {
             tilDOB.setError("Enter  DOB");
             return false;
-        }else if(rbFloater.isChecked()  && spNoOfFamily.getSelectedItemPosition() == 0){
+        } else if (rbFloater.isChecked() && spNoOfFamily.getSelectedItemPosition() == 0) {
 
             txtFamilyError.setVisibility(View.VISIBLE);
             spNoOfFamily.setBackgroundResource(R.drawable.custom_rect_spinner);
@@ -304,17 +302,14 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
 //            if(spNoOfFamily.getSelectedItemPosition() == 0){
 //
 //            }
-        }
-        else if (!validateCity(etCity,tilCity)) {
+        } else if (!validateCity(etCity, tilCity)) {
 
             return false;
-        }
-        else if (!validatePinCode(etPincode,tilPincode)) {
+        } else if (!validatePinCode(etPincode, tilPincode)) {
             return false;
         }
         return true;
     }
-
 
 
     private void getTatData() {
@@ -325,7 +320,7 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
 
         } else {
             lvLogo.setVisibility(View.GONE);
-            }
+        }
     }
 
     private void setScrollatBottom() {
@@ -346,9 +341,9 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
         requestEntity.setCityid(String.valueOf(CITY_ID));
         requestEntity.setPayment_status("1");
         requestEntity.setProdid(String.valueOf(PRODUCT_ID));
-        if(productPriceEntity.getRto_id() != null){
+        if (productPriceEntity.getRto_id() != null) {
             requestEntity.setRto_id(productPriceEntity.getRto_id());
-        }else{
+        } else {
             requestEntity.setRto_id("");
         }
 
@@ -375,15 +370,14 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
     }
 
 
-
-    public void slideToBottom(View view,Boolean bln){
-        TranslateAnimation animate = new TranslateAnimation(0,0,0,view.getHeight());
+    public void slideToBottom(View view, Boolean bln) {
+        TranslateAnimation animate = new TranslateAnimation(0, 0, 0, view.getHeight());
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
-        if(bln){
+        if (bln) {
             view.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             view.setVisibility(View.GONE);
         }
 
@@ -420,7 +414,8 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
                     return;
                 } else {
 
-                    saveData();
+                    showConfirmAlert();
+
                 }
 
                 break;
@@ -488,6 +483,42 @@ public class ExpertReviewOFCurrentHealthPolicyFragment extends BaseFragment impl
             }
         }
         //
+    }
+
+    public void showConfirmAlert() {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Elite");
+
+            builder.setMessage(getString(R.string.confirmMessage));
+            String positiveText = "Yes";
+            String negativeText = "No";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            saveData();
+
+                        }
+                    });
+
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            final AlertDialog dialog = builder.create();
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

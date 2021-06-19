@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             style="@style/TextInputMaterialStyle"
             app:startIconDrawable="@drawable/ic_vehicle"
-            android:hint="Enter Driving Licence">
+            android:hint="Enter Driving License">
 
             <EditText
                 android:id="@+id/etLic"

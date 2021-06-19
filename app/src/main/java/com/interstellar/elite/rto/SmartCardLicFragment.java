@@ -19,7 +19,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.interstellar.elite.BaseFragment;
@@ -27,10 +26,8 @@ import com.interstellar.elite.R;
 import com.interstellar.elite.core.APIResponse;
 import com.interstellar.elite.core.IResponseSubcriber;
 import com.interstellar.elite.core.controller.miscNonRto.MiscNonRTOController;
-import com.interstellar.elite.core.controller.product.ProductController;
 import com.interstellar.elite.core.model.CityMainEntity;
 import com.interstellar.elite.core.model.DashProductEntity;
-import com.interstellar.elite.core.model.RTOServiceEntity;
 import com.interstellar.elite.core.model.RtoCityMain;
 import com.interstellar.elite.core.model.UserConstatntEntity;
 import com.interstellar.elite.core.model.UserEntity;
@@ -113,7 +110,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
     RtoMainAdapter rtoMainAdapter;
 
     //endregion
-    TextInputLayout tilCity ,tilRTO ,tilPincode;
+    TextInputLayout tilCity ,tilRTO ,tilPincode , tilLicNo ,tilLicOwnerName, tilLicOwnerDob;
 
 
       //region bottomSheetDialog
@@ -191,6 +188,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
         mContext = view.getContext();
         initialize(view);
         setOnClickListener();
+        setTextChangeListener();
         prefManager = new PrefManager(getActivity());
 
         loginEntity = prefManager.getUserData();
@@ -267,6 +265,11 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
         tilRTO  =  (TextInputLayout)view.findViewById(R.id.tilRTO);
 
 
+        tilLicNo  =  (TextInputLayout)view.findViewById(R.id.tilLicNo);
+        tilLicOwnerName  =  (TextInputLayout)view.findViewById(R.id.tilLicOwnerName);
+        tilLicOwnerDob =  (TextInputLayout)view.findViewById(R.id.tilLicOwnerDob);
+
+
 
         etLicNo.setFilters(new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(30)});
 
@@ -291,6 +294,17 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
 
     }
 
+    private void setTextChangeListener(){
+
+        etPincode.addTextChangedListener(getTextWatcher( tilPincode));
+
+        etLicNo.addTextChangedListener(getTextWatcher( tilLicNo));
+        etLicOwnerName.addTextChangedListener(getTextWatcher( tilLicOwnerName));
+
+
+
+    }
+
     private void bindData() {
 
         cvClient.setVisibility(View.GONE);
@@ -302,17 +316,17 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
 
         if (!isEmpty(etLicNo)) {
             etLicNo.requestFocus();
-            etLicNo.setError("Enter License Number");
+            tilLicNo.setError("Enter License Number");
             return false;
         }
        else if (!isEmpty(etLicOwnerName)) {
             etLicOwnerName.requestFocus();
-            etLicOwnerName.setError("Enter Owner Name");
+            tilLicOwnerName.setError("Enter Owner Name");
             return false;
         }
         else if (!isEmpty(etLicOwnerDob)) {
             etLicOwnerDob.requestFocus();
-            etLicOwnerDob.setError("Enter DOB");
+            tilLicOwnerDob.setError("Enter DOB");
             return false;
         }
 
@@ -320,7 +334,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
 
             return false;
         }
-        else if (!validateRTO(etRTO)) {
+        else if (!validateRTO(etRTO,tilRTO)) {
 
             return false;
         }
@@ -410,6 +424,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
                             String currentDay = simpleDateFormat.format(calendar.getTime());
                             etLicOwnerDob.setText(currentDay);
                             etLicOwnerDob.setError(null);
+                            tilLicOwnerDob.setError(null);
                         }
                     }
                 });
@@ -441,6 +456,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
                 if (!etCity.getText().toString().equalsIgnoreCase("")) {
 
                     etRTO.setError(null);
+                    tilRTO.setError(null);
                     getBottomSheetDialog();
                 } else {
                    // getCustomToast("Select City");
@@ -460,7 +476,7 @@ public class SmartCardLicFragment extends BaseFragment implements View.OnClickLi
                 CITY_ID = String.valueOf(cityMainEntity.getCity_id());
                 etCity.setText(cityMainEntity.getCityname());
                 etCity.setError(null);
-
+                tilCity.setError(null);
                 showDialog();
 
                 //region call Price Controller

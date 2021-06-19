@@ -153,7 +153,14 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<PincodeResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+
+                if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
+
             }
         });
     }
@@ -193,7 +200,12 @@ public class RegisterController  extends BaseController implements IRegister {
             @Override
             public void onFailure(Call<CommonResponse> call, Throwable t) {
 
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -229,7 +241,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<CommonResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -262,7 +279,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<UserRegistrationResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -295,7 +317,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -330,7 +357,12 @@ public class RegisterController  extends BaseController implements IRegister {
             @Override
             public void onFailure(Call<CityMainResponse> call, Throwable t) {
                 if (iResponseSubcriber != null) {
+                     if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
                     iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
                 }
             }
         });
@@ -367,7 +399,12 @@ public class RegisterController  extends BaseController implements IRegister {
             @Override
             public void onFailure(Call<VehicleMasterResponse> call, Throwable t) {
                 if (iResponseSubcriber != null) {
+                     if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
                     iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
                 }
             }
         });
@@ -404,7 +441,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<FeedbackResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -436,7 +478,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<DisplayFeedbackResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -467,7 +514,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<RateResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -499,7 +551,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<DisplayRateResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }
@@ -534,7 +591,12 @@ public class RegisterController  extends BaseController implements IRegister {
 
             @Override
             public void onFailure(Call<FastLaneDataResponse> call, Throwable t) {
-                iResponseSubcriber.OnFailure("" + t.getMessage());
+                 if (t instanceof UnknownHostException) {
+
+                    iResponseSubcriber.OnFailure("Check your internet connection");
+                }else{
+                    iResponseSubcriber.OnFailure("" + t.getMessage());
+                }
             }
         });
     }

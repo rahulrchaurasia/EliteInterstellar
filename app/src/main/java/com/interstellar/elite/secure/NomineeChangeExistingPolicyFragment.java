@@ -1,7 +1,9 @@
 package com.interstellar.elite.secure;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -252,6 +254,41 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
         }
     }
 
+    public void showConfirmAlert() {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Elite");
+
+            builder.setMessage(getString(R.string.confirmMessage));
+            String positiveText = "Yes";
+            String negativeText = "No";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            saveData();
+
+                        }
+                    });
+
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            final AlertDialog dialog = builder.create();
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
     private void saveData() {
@@ -301,7 +338,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
                     return;
                 } else {
 
-                    saveData();
+                    showConfirmAlert();
                 }
 
                 break;

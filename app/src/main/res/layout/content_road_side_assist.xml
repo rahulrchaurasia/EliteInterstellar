@@ -233,7 +233,7 @@
                         <RelativeLayout
                             android:id="@+id/rlEditVehicle"
                             android:layout_marginTop="@dimen/four"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -442,6 +442,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/four"
+                            android:visibility="gone"
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout

@@ -37,6 +37,7 @@ import com.interstellar.elite.facade.PrefManager
 import com.interstellar.elite.utility.Constants
 import com.interstellar.elite.utility.DateTimePicker
 import com.interstellar.elite.utility.Utility
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -168,7 +169,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
     fun bindData() {
 
-        // 05 temp comment some autofilled data
+
         binding.includedRSA.apply {
 
 //            acMake.setText(prefManager.getMakeFromEligibility())
@@ -177,7 +178,6 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 //            etVehicle.setText(loginEntity!!.vehicleno)
 //            etMobile.setText(loginEntity!!.mobile)
 
-            etCode.setText(loginEntity?.activation_code ?: "")
 
             txtSearchHistory.visibility = View.GONE
 
@@ -237,7 +237,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
             Make = binding.includedRSA.acMake.text.toString().trim(),
             Model = binding.includedRSA.acModel.text.toString().trim(),
             MobileNo = binding.includedRSA.etMobile.text.toString().trim(),
-            ReferenceNo = binding.includedRSA.etCode.text.toString().trim(),
+            ReferenceNo = loginEntity?.activation_code ?: "",
             RegistrationNo = binding.includedRSA.etVehicle.text.toString().trim(),
             YOM = YEAR_MANUFACTURE
         )
@@ -249,7 +249,16 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
         var RsaRequestString = Gson().toJson(mitem)
 
-        Log.d("URL", Gson().toJson(mitem).toString())
+        try {
+            Log.d(
+                "URL",
+                "http://elite.landmarkinsurance.in/EliteAppService.svc/InsertOtherCustDetailsForGlobalAssure?js=" + Gson().toJson(
+                    mitem
+                ).toString()
+            )
+        }catch( ex : Exception) {
+
+        }
 
 
 
@@ -587,7 +596,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                     ) {
 
 
-                        val lastIndex = apiResponse.InsertOtherCustDetailsForGlobalAssureResult.EliteGlobalAssuredetails.size - 1
+                        val lastIndex = apiResponse.InsertOtherCustDetailsForGlobalAssureResult.EliteGlobalAssuredetails.size -1
                         var eliteGlobalAssuredetail: EliteGlobalAssuredetail = apiResponse.InsertOtherCustDetailsForGlobalAssureResult.EliteGlobalAssuredetails.get(
                             lastIndex
                         )
@@ -609,8 +618,8 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                                 authenticationController.insertGlobalAssure(
 
                                     LoginID = loginEntity!!.user_id.toString(),
-                                    MobileNo = loginEntity!!.mobile,
-                                    RegistrationNo = loginEntity!!.vehicleno,
+                                    MobileNo = binding.includedRSA.etMobile.text.toString(),
+                                    RegistrationNo = binding.includedRSA.etVehicle.text.toString(),
                                     CertificateNo = "",
                                     CertificateFile = it,
                                     this@RoadSideAssistActivity
@@ -621,13 +630,13 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                             }
                         } else {
                             //getCustomToast("No PDF Found at Server!!")
-                            getSnakeBar(binding.ParentLayout, "No PDF Found at Server!!")
+                            getSnakeBar(binding.ParentLayout, "No PDF Found At Server!!")
                         }
 
                     } else {
 
                         //  getCustomToast("No Data Found at Server!!")
-                        getSnakeBar(binding.ParentLayout, "No Data Found at Server!!")
+                        getSnakeBar(binding.ParentLayout, "No Data Found At Server!!")
                     }
 
 

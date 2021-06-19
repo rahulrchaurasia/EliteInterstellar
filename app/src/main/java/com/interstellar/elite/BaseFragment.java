@@ -330,29 +330,6 @@ public class BaseFragment extends Fragment {
 
 
 
-    public void showAlert(String strBody) {
-        try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Elite");
-
-            builder.setMessage(strBody);
-            String positiveText = "Ok";
-            builder.setPositiveButton(positiveText,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-
-                        }
-                    });
-            final AlertDialog dialog = builder.create();
-            dialog.setCancelable(false);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-        } catch (Exception ex) {
-            Toast.makeText(getActivity(), "Please try again..", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
 
@@ -433,6 +410,8 @@ public class BaseFragment extends Fragment {
 
 
     }
+
+
 
 
     public void showMiscPaymentAlert(final View view, String strhdr, final ProvideClaimAssEntity provideClaimAssEntity) {
@@ -669,12 +648,12 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public boolean validateRTO (EditText etRTO)
+    public boolean validateRTO (EditText etRTO, TextInputLayout textInputLayout)
     {
 
         if (!isEmpty(etRTO)){
             etRTO.requestFocus();
-            etRTO.setError("Enter Nearest RTO");
+            textInputLayout.setError("Enter  RTO");
             return false;
         }else{
             return  true;
