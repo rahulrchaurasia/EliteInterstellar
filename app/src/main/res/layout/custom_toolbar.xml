@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 style="@style/CustomTitle.Header"
                 android:textStyle="bold"
-                android:text="Elite"
+                android:text="Elite+"
                 />
 
 

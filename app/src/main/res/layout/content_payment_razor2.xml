@@ -56,7 +56,7 @@
                     android:layout_height="60dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/elite_logo"
+                    android:src="@drawable/elite_plus_black"
                     />
 
             </RelativeLayout>

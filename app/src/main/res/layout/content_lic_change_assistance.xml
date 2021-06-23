@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         style="@style/TextInputMaterialStyle"
         app:startIconDrawable="@drawable/ic_baseline_relation_24"
-        android:hint="Proposal Relation with Nominee">
+        android:hint="Proposer Relation with Nominee">
 
         <EditText
             android:id="@+id/etRelationNominee"

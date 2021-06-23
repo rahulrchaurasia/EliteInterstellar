@@ -207,7 +207,7 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             Log.d("URL",finPeaceUrl);
             val intent = Intent(this, CommonWebViewActivity::class.java)
             intent.putExtra("URL", finPeaceUrl)
-            intent.putExtra("TITLE", "Finpeace")
+            intent.putExtra("TITLE", "My Wealth Protector")
             intent.putExtra("NAME", "FINPEACE")
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)

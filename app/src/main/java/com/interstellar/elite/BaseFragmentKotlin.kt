@@ -54,7 +54,7 @@ open class BaseFragmentKotlin : Fragment() {
         // inflate the custom_snackbar_view created previously
         // inflate the custom_snackbar_view created previously
         val snackbar = Snackbar
-            .make(view, "", Snackbar.LENGTH_INDEFINITE)
+            .make(view, "", Snackbar.LENGTH_LONG)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
             .setAction("", View.OnClickListener {
 

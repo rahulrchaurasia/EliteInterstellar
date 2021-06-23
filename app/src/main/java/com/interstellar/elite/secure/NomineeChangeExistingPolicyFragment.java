@@ -257,7 +257,7 @@ public class NomineeChangeExistingPolicyFragment extends BaseFragment implements
     public void showConfirmAlert() {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Elite");
+            builder.setTitle(getString(R.string.aboutUs_four));
 
             builder.setMessage(getString(R.string.confirmMessage));
             String positiveText = "Yes";

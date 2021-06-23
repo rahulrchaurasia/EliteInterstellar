@@ -174,7 +174,7 @@ public class BaseActivity extends AppCompatActivity {
     public void showAlert(String strBody) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
-            builder.setTitle("Elite");
+            builder.setTitle(getString(R.string.app_name));
 
             builder.setMessage(strBody);
             String positiveText = "Ok";
@@ -199,7 +199,7 @@ public class BaseActivity extends AppCompatActivity {
     public void showAlertAction(final View view, String strBody) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
-            builder.setTitle("Elite");
+            builder.setTitle(getString(R.string.app_name));
 
             builder.setMessage(strBody);
             String positiveText = "Ok";

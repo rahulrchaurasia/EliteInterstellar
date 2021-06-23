@@ -15,7 +15,7 @@
        style="@style/TextInputMaterialStyle"
         app:startIconDrawable="@drawable/ic_name"
          android:id="@+id/tilNameOfProposer"
-        android:hint="Proposal Name">
+        android:hint="Policy Holder Name">
 
         <EditText
             android:id="@+id/etNameOfProposer"

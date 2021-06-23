@@ -62,18 +62,18 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
                 productEntity = extras.getParcelable(Constants.SUB_PRODUCT_DATA);
             }
 
-            if (productEntity != null)
+            if (productEntity != null){
+                loadFragments(getFragmentFromProduct(productEntity));
+            }else{
 
-                if(productEntity.getProductCode().equals("500")  || productEntity.getProductCode().equals("501")  ){
+                // getCustomToast("Under construction..");
+                getSnakeBar(lyParent,"Under construction..");
+            }
 
-                    loadWeb(productEntity);
-                }else {
-                    loadFragments(getFragmentFromProduct(productEntity));
-                }
 
-            else
-               // getCustomToast("Under construction..");
-            getSnakeBar(lyParent,"Under construction..");
+
+
+
 
 
         }
@@ -85,7 +85,7 @@ public class ProductMainActivity extends BaseActivity implements IResponseSubcri
            if (productEntity.getProductCode().equalsIgnoreCase("500")) {
 
             Intent intent = new Intent(this, WebViewHtmlActivity.class);
-            intent.putExtra("title", "Finpeace");
+            intent.putExtra("title", "My Wealth Protector");
             intent.putExtra("type", "FINPEACE");
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);

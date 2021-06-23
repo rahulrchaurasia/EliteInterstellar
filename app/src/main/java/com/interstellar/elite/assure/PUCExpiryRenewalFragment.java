@@ -438,7 +438,7 @@ public class PUCExpiryRenewalFragment extends BaseFragment implements View.OnCli
     public void showConfirmAlert() {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Elite");
+            builder.setTitle(getString(R.string.app_name));
 
             builder.setMessage(getString(R.string.confirmMessage));
             String positiveText = "Yes";

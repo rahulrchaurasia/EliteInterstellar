@@ -75,8 +75,6 @@
                     android:layout_marginTop="10dp" />
 
 
-
-
             </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -96,7 +94,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/input_label_horizontal_spacing"
-        android:text="Book Now" />
+        android:text="SUBMIT" />
 
 </RelativeLayout>
 

@@ -181,7 +181,7 @@ open class DBPersistanceController {
             //adding some dummy data to the list
             if(type.toUpperCase().equals("Y")) {
                 productList.add(DashProductEntity(11, "501", R.drawable.pit_stop, "Pit Stop"))
-                productList.add(DashProductEntity(10, "500", R.drawable.finpeace, "FinPeace"))
+                productList.add(DashProductEntity(10, "500", R.drawable.ncb, "My Wealth Protector"))
             }
 
             productList.add(

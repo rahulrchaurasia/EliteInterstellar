@@ -253,10 +253,11 @@ public class CommonWebViewActivity extends BaseActivity {
             onBrowseClick(webView,str);
         }
         // For ios App
-//        public void moveToAppStore_fin(String str) {
-//
-//            onBrowseClick(webView,str);
-//        }
+        @JavascriptInterface
+        public void moveToAppStore_fin(String str) {
+
+            onBrowseClick(webView,str);
+        }
 
     }
 

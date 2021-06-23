@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.*
 import android.provider.Settings
-import android.text.Html
 import android.util.Patterns
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -115,7 +114,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
 
 
         val snackbarLayout :Snackbar.SnackbarLayout = snackbar.getView() as Snackbar.SnackbarLayout
-        snackbarLayout.setPadding(0,0,0,0)
+        snackbarLayout.setPadding(0, 0, 0, 0)
         snackbarLayout.addView(customSnackView)
 
         val txtMessage : TextView = customSnackView.findViewById(R.id.txtMessage) as TextView
@@ -359,7 +358,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
     open fun showAlert(strBody: String?) {
         try {
             val builder = AlertDialog.Builder(this@BaseActivityKotlin)
-            builder.setTitle("Elite")
+            builder.setTitle(getString(R.string.app_name))
             builder.setMessage(strBody)
             val positiveText = "Ok"
             builder.setPositiveButton(
@@ -378,7 +377,7 @@ open class BaseActivityKotlin : AppCompatActivity() {
     open fun showAlertAction(view: View?, strBody: String?) {
         try {
             val builder = AlertDialog.Builder(this@BaseActivityKotlin)
-            builder.setTitle("Elite")
+            builder.setTitle(getString(R.string.app_name))
             builder.setMessage(strBody)
             val positiveText = "Ok"
             builder.setPositiveButton(
@@ -423,8 +422,10 @@ open class BaseActivityKotlin : AppCompatActivity() {
 
             val toast = Toast.makeText(
                 applicationContext,
-                HtmlCompat.fromHtml("<font color='#000000' ><b>" + strMessage + "</b></font>",  HtmlCompat.FROM_HTML_MODE_LEGACY
-                ),Toast.LENGTH_LONG
+                HtmlCompat.fromHtml(
+                    "<font color='#000000' ><b>" + strMessage + "</b></font>",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                ), Toast.LENGTH_LONG
             )
 
             toast.setGravity(Gravity.BOTTOM, 0, 0)
