@@ -651,7 +651,6 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
 
     //endregion
 
-
     //region Event
 
     override fun onClick(view: View?) {
@@ -717,10 +716,11 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
 
             checkNetwork()
 
-        } else {
-
-            apiService()
         }
+//        else {
+//            // Note :--  User Constant are Required
+//            apiService()
+//        }
 
 
     }
@@ -843,7 +843,6 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
         // hideKeyBoard(nav_view)
     }
 
-    //endregion
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -860,4 +859,7 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
             }
         }
     }
+
+    //endregion
+
 }

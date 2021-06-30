@@ -275,7 +275,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         } else {
             openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
-            ;
+
 
         }
     }
