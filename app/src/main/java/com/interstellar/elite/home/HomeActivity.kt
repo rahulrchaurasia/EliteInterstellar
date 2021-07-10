@@ -552,6 +552,8 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
 
         resetBottomNavigationMenu() // for deselect Bottom Navigation Menu
 
+        val currFragment = supportFragmentManager.findFragmentById(R.id.container)
+
         when (menuItem.itemId) {
 
             R.id.nav_home -> {
@@ -560,18 +562,24 @@ class HomeActivity : BaseActivityKotlin(), View.OnClickListener,
             }
             R.id.nav_change_pwd -> {
 
-                binding.includeAppBar.dashboardBanner.txtTitle.text = "Change Password"
+                if (currFragment !is ChangePasswordFragment) {
 
-                changePasswordFragment = ChangePasswordFragment()
-                openFragment(changePasswordFragment, "HomeChild")
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "Change Password"
+
+                    changePasswordFragment = ChangePasswordFragment()
+                    openFragment(changePasswordFragment, "HomeChild")
+                }
 
             }
             R.id.nav_terms -> {
 
-                binding.includeAppBar.dashboardBanner.txtTitle.text = "Terms and  Condition"
-                termsConditionFragment = TermsConditionFragment()
+                if (currFragment !is TermsConditionFragment) {
 
-                openFragment(termsConditionFragment, "HomeChild")
+                    binding.includeAppBar.dashboardBanner.txtTitle.text = "Terms and  Condition"
+                    termsConditionFragment = TermsConditionFragment()
+
+                    openFragment(termsConditionFragment, "HomeChild")
+                }
 
             }
 

@@ -131,6 +131,8 @@ public class OrderDetailFragment extends BaseFragment implements IResponseSubcri
                 .putExtra(Constants.FEEDBACK_DATA, orderDetailEntity));
     }
 
+
+    // region Not in Used
     public void redirectToChat(OrderDetailEntity orderDetailEntity) {
 
 //        startActivity(new Intent(getActivity(), ChatActivity.class)
@@ -155,4 +157,6 @@ public class OrderDetailFragment extends BaseFragment implements IResponseSubcri
 //        Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(orderDetailEntity.getReceipt()));
 //        startActivity(intent);
     }
+
+    //endregion
 }

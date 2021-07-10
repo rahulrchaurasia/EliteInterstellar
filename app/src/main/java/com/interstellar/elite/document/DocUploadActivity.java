@@ -56,7 +56,7 @@ import okhttp3.MultipartBody;
 
 import static android.os.Build.VERSION.SDK_INT;
 
-public class DocUploadActivity extends BaseActivity implements IResponseSubcriber, BaseActivity.CustomPopUpListener {
+public class DocUploadActivity extends BaseActivity implements View.OnClickListener, IResponseSubcriber, BaseActivity.CustomPopUpListener {
 
 
     private static final int CAMERA_REQUEST = 1888;
@@ -70,7 +70,7 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     private Uri imageUri;
     private Uri cropImageUri;
     int OrderID;
-
+    Button btnSubmit;
 
     private String DOC1 = "ELITE_DOC";
 
@@ -114,6 +114,8 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
         loginEntity = prefManager.getUserData();
         initialize();
 
+        btnSubmit.setOnClickListener(this);
+
     }
 
 
@@ -121,7 +123,10 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
 
         lyParent = (LinearLayout) findViewById(R.id.lyParent);
         txtDocVerify = (TextView) findViewById(R.id.txtDocVerify);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         rvProduct = (RecyclerView) findViewById(R.id.rvProduct);
+
+
         rvProduct.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DocUploadActivity.this);
@@ -443,7 +448,6 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
                     if (checkAllFileUploaded()) {
 
                         txtDocVerify.setVisibility(View.GONE);
-                        ConfirmDocAlert("Document Uploaded", getResources().getString(R.string.doc_popup), "");
 
                     } else {
                         txtDocVerify.setVisibility(View.VISIBLE);
@@ -764,6 +768,31 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     }
 
     @Override
+    public void onClick(View view) {
+
+        if(view.getId() == R.id.btnSubmit){
+
+            if (lstDoc != null && lstDoc.size() > 0) {
+
+                if (checkAllFileUploaded()) {
+
+                    txtDocVerify.setVisibility(View.GONE);
+                    ConfirmDocAlert("Document Uploaded", getResources().getString(R.string.doc_popup), "");
+
+                } else {
+                    txtDocVerify.setVisibility(View.VISIBLE);
+
+                    getSnakeBar(lyParent,"Document upload is pending ");
+
+                }
+
+
+            }
+        }
+
+    }
+
+    @Override
     public void onPositiveButtonClick(Dialog dialog, View view) {
 
         dialog.cancel();
@@ -774,4 +803,6 @@ public class DocUploadActivity extends BaseActivity implements IResponseSubcribe
     public void onCancelButtonClick(Dialog dialog, View view) {
         dialog.cancel();
     }
+
+
 }

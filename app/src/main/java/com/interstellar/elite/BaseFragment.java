@@ -684,7 +684,7 @@ public class BaseFragment extends Fragment {
     {
         if (!isEmpty(etNameOfProposer)) {
 
-            textInputLayout.setError("Enter Policy Holder Name");
+            textInputLayout.setError("Enter Proposal Name");
             return false;
         } else{
             return  true;

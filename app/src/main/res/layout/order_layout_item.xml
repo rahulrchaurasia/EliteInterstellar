@@ -381,7 +381,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="50"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
 
@@ -390,15 +390,15 @@
                         style="@style/ButtonGreen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/buttonRedBackground"
+                        android:background="@color/primary_color"
                         android:drawableLeft="@drawable/ic_file_upload"
                         android:drawablePadding="8dp"
-                        android:gravity="center|center_vertical"
+
                         android:paddingBottom="5dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="5dp"
-                        android:text="Upload Document"
+                        android:text="View Details"
                         android:textColor="@color/white" />
 
 

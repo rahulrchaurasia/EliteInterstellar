@@ -74,4 +74,14 @@
         android:visibility="visible"
         android:text="Please Upload all required document"/>
 
+    <Button
+        android:id="@+id/btnSubmit"
+        android:text="Submit"
+        style="@style/ButtonStyle"
+        android:layout_margin="@dimen/twenty_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+
 </LinearLayout>
