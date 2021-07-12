@@ -33,6 +33,13 @@ android {
 //    }
 
 
+    /*
+       Release id and password
+
+       id : eliteinterstellar
+       pwd : eliteinterstellar
+    */
+
     buildTypes {
         release {
             minifyEnabled true

@@ -42,6 +42,7 @@ import org.json.JSONObject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 public class PaymentRazorActivity extends BaseActivity implements PaymentResultListener, IResponseSubcriber, View.OnClickListener {
 
@@ -236,20 +237,19 @@ public class PaymentRazorActivity extends BaseActivity implements PaymentResultL
             JSONObject options = new JSONObject();
             options.put("name", PRODUCT_NAME);
             options.put("description", ""+ String.valueOf(loginEntity.getUser_id()));
-            options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            //options.put("image", ContextCompat.getDrawable(this, R.drawable.elite_plus_black));
             options.put("theme.color", "#3F51B5");
 
             options.put("currency", "INR");
-         //   options.put("amount", AMOUNT_PAYMENT * 100);   // 05 temp added
-             options.put("amount", "100");
+            options.put("amount", AMOUNT_PAYMENT * 100);
+           //  options.put("amount", "100");  // 05 temp added  for 1rs
 
 
-            JSONObject checkout = new JSONObject();
-            JSONObject method = new JSONObject();
-            method.put("netbanking", 1);
-            method.put("card", 0);
-
-            checkout.put("checkout",method);
+//            JSONObject checkout = new JSONObject();
+//            JSONObject method = new JSONObject();
+//            method.put("netbanking", 1);
+//            method.put("card", 0);
+//            checkout.put("checkout",method);
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", loginEntity.getEmail());
