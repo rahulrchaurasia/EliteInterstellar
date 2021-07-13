@@ -622,7 +622,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
                                     RegistrationNo = binding.includedRSA.etVehicle.text.toString(),
                                     CertificateNo = "",
                                     CertificateFile = it,
-                                    this@RoadSideAssistActivity
+                                    iResponseSubcriber = this@RoadSideAssistActivity
 
                                 )
 

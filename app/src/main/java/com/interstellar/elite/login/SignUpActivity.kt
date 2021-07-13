@@ -238,7 +238,7 @@ class SignUpActivity : BaseActivityKotlin(), View.OnClickListener, IResponseSubc
                         authenticationController.verifyOTPTegistration(
                             email = binding.includedSignup.etEmail.text.toString(),
                             mobile = binding.includedSignup.etMobile.text.toString(),
-                            this
+                            iResponseSubcriber = this@SignUpActivity
                         )
                     }
 

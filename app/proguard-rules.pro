@@ -20,3 +20,21 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
+
+
+-ignorewarnings
+
+-keep class * {
+    public private *;
+}
+
+-keep class com.interstellar.elite.core.requestbuilder.** { *; }
+-keep class com.interstellar.elite.core.model.** { *; }
+
+
+-optimizationpasses 5
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontpreverify
+-verbose
