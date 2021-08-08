@@ -9,7 +9,6 @@ import kotlin.collections.ArrayList
 open class DBPersistanceController {
 
 
-
     companion object {
 
 
@@ -123,13 +122,14 @@ open class DBPersistanceController {
         }
         //endregion
 
+        // Product Id is redundant ie not in used Logic is totally baased on product_code
         //Secure List
         @JvmStatic
         fun getSecureList(type: String): List<DashProductEntity> {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
-            if(type.toUpperCase().equals("Y")) {
+            if (type.toUpperCase().equals("Y")) {
                 productList.add(
                     DashProductEntity(
                         1,
@@ -164,9 +164,17 @@ open class DBPersistanceController {
             )
             productList.add(
                 DashProductEntity(
-                    132, "15",
+                    133, "15",
                     R.drawable.nominee_change,
                     "Nominee Change for Existing Policy"
+                )
+            )
+
+            productList.add(
+                DashProductEntity(
+                    3, "403",
+                    R.drawable.claim_assistance,
+                    "OPD COVER"
                 )
             )
 
@@ -179,7 +187,7 @@ open class DBPersistanceController {
             val productList = ArrayList<DashProductEntity>()
 
             //adding some dummy data to the list
-            if(type.toUpperCase().equals("Y")) {
+            if (type.toUpperCase().equals("Y")) {
                 productList.add(DashProductEntity(11, "501", R.drawable.pit_stop, "Pit Stop"))
                 productList.add(DashProductEntity(10, "500", R.drawable.ncb, "My Wealth Protector"))
             }
@@ -317,15 +325,15 @@ open class DBPersistanceController {
         }
 
 
-        fun getYearOfManufacture() :List<String> {
+        fun getYearOfManufacture(): List<String> {
 
-          val maxYear =  Calendar.getInstance().get(Calendar.YEAR)
+            val maxYear = Calendar.getInstance().get(Calendar.YEAR)
 
             val manuYear: ArrayList<String> = ArrayList()
 
-            for( i in  maxYear downTo  2000 ){
+            for (i in maxYear downTo 2000) {
 
-                manuYear.add(""+ i)
+                manuYear.add("" + i)
             }
 
 

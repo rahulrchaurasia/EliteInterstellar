@@ -164,7 +164,7 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
     fun getProduct(entity: DashProductEntity) {
 
 
-        if(entity.ProductCode.equals("500") || entity.ProductCode.equals("501"))
+        if(entity.ProductCode.equals("500") || entity.ProductCode.equals("501")  || entity.ProductCode.equals("403"))
         {
 
             loadWeb(entity)
@@ -194,7 +194,9 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
 
 
     fun loadWeb(productEntity: DashProductEntity) {
-        if (productEntity.ProductCode.equals("500", ignoreCase = true)) {
+
+
+            if (productEntity.ProductCode.equals("500", ignoreCase = true)) {
 
 
 
@@ -225,6 +227,23 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             intent.putExtra("URL", pitShopUrl)
             intent.putExtra("TITLE", "Pit Stop ")
             intent.putExtra("NAME", "PIT")
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+        }else if (productEntity.ProductCode.equals("403", ignoreCase = true)) {
+
+            //http://elite.interstellar.co.in/MaxBupa/Index.html?fba_id=1976&sub_fba_id=&ss_id=1976
+            var opdShopUrl: String = "http://elite.interstellar.co.in/MaxBupa/Index.html?"
+
+
+            val append = "fba_id="+ loginEntity!!.user_id + "&sub_fba_id=1&ss_id=1"
+
+                opdShopUrl = opdShopUrl + append
+
+            Log.d("URL",opdShopUrl);
+            val intent = Intent(this, CommonWebViewActivity::class.java)
+            intent.putExtra("URL", opdShopUrl)
+            intent.putExtra("TITLE", "OPD COVER ")
+            intent.putExtra("NAME", "OPD COVER")
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         }
