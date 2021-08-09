@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,9 +16,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.ParcelFileDescriptor;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +44,14 @@ import com.interstellar.elite.utility.Constants;
 import com.interstellar.elite.utility.Utility;
 
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -141,6 +147,52 @@ public class BaseActivity extends AppCompatActivity {
         File outFile = new File(dir, fileName);
 
         return outFile;
+    }
+
+    public File createImageFile(String name)  {
+        // Create an image file name
+        File temp;
+        String timeStamp  =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File storageDir  = getAppSpecificAlbumStorageDir(this, Environment.DIRECTORY_PICTURES,"ElitePlus");
+        try {
+            temp =  File.createTempFile(name + timeStamp, /* prefix */
+                    ".jpg", /* suffix */
+                    storageDir /* directory */
+            );
+
+            Log.d("IMAGE_PATH","File Name"+ temp.getName() + "File Path" +temp.getAbsolutePath());
+            //  String  currentPhotoPath = temp.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return  null;
+        }
+        return  temp;
+    }
+
+    public File getAppSpecificAlbumStorageDir(Context context,String albumName ,  String subAlbumName) {
+        // Get the pictures directory that's inside the app-specific directory on
+        // external storage.
+        File file = new File(context.getExternalFilesDir(albumName), subAlbumName);
+        if (file.mkdirs()) {
+            Log.e("fssfsf", "Directory not created");
+        }
+
+        return file;
+    }
+
+    public Bitmap getBitmapFromContentResolver(Uri selectedFileUri) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(selectedFileUri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+            parcelFileDescriptor.close();
+            return  image;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return  null;
+        }
     }
 
     public boolean validatePinCode (EditText etPincode,TextInputLayout textInputLayout) {

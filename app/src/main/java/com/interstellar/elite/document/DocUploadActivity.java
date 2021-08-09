@@ -3,6 +3,7 @@ package com.interstellar.elite.document;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -218,9 +219,25 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
         String FileName = "EliteDoc";
 
 //
-        Docfile = createFile(FileName);
-        imageUri = FileProvider.getUriForFile(this,
-                getString(R.string.file_provider_authority), Docfile);
+//        Docfile = createFile(FileName);
+//        imageUri = FileProvider.getUriForFile(this,
+//                getString(R.string.file_provider_authority), Docfile);
+
+
+//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                imageUri);
+//        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+
+
+        Docfile = createImageFile(FileName);
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            imageUri = Uri.fromFile(Docfile);
+        } else {
+            imageUri = FileProvider.getUriForFile(DocUploadActivity.this,
+                    getString(R.string.file_provider_authority), Docfile);
+        }
 
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -232,32 +249,42 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
 
     private void openGallery() {
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
 
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+
+        String  mimeType = "image/*";
+
+        Uri collection ;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            collection =  MediaStore.Video.Media.getContentUri(
+                    MediaStore.VOLUME_EXTERNAL
+            );
+        } else {
+            collection =  MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+        }
+
+
+        try {
+            Intent intent = new  Intent(Intent.ACTION_PICK, collection);
+
+            intent.setType(mimeType);
+            intent.resolveActivity(getPackageManager());
+            startActivityForResult(intent, SELECT_PICTURE);
+
+        } catch (ActivityNotFoundException ex) {
+            Toast.makeText(this, ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void galleryCamPopUp() {
 
         if (!checkPermission()) {
 
-            if (SDK_INT >= Build.VERSION_CODES.R) {
-
-                if (!Environment.isExternalStorageManager()) {
-                    requestStoragePermissionV11();
-                }
-                else{
-
-                    checkRationalV11Above();
-
-                }
-
-
-            } else {
-                checkRationale();
-            }
+            checkRationale();
         } else {
 
             showCamerGalleryPopUp();
@@ -279,30 +306,6 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
             }).show();
 
         } else {
-            openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
-
-
-        }
-    }
-
-
-    private void checkRationalV11Above(){
-
-        if (checkCameraRationalePermissionV11()) {
-            //Show Information about why you need the permission
-
-            Snackbar.make(lyParent, R.string.camera_access_required,
-                    Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Request the permission
-                    requestCameraPermissionV11();
-                }
-            }).show();
-        } else {
-            //Previously Permission Request was cancelled with 'Dont Ask Again',
-            // Redirect to Settings after showing Information about why you need the permission
-            //  permissionAlert(navigationView,"Need Call Permission","This app needs Call permission.");
             openPopUp(rvProduct, "Need  Permission", "This app needs all permissions.", "GRANT", "DENNY", false, true);
 
 
@@ -487,21 +490,7 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (requestCode == Constants.PERMISSION_CAMMERA_STORAGE_V11_CONSTANT) {
-            if (SDK_INT >= Build.VERSION_CODES.R) {
-                if (Environment.isExternalStorageManager()) {
-                    // perform action when allow permission success
-                    //0005
-                    if(!checkCameraPermissionV11()){
 
-                       checkRationalV11Above();
-                    }
-
-                } else {
-                    dialogStorage();
-                }
-            }
-        }
 
         // Below For Cropping The Camera Image
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
@@ -524,7 +513,8 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
                     cropImageUri = result.getUri();
                     Bitmap mphoto = null;
                     try {
-                        mphoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), cropImageUri);
+                      //  mphoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), cropImageUri);
+                        mphoto = getBitmapFromContentResolver(cropImageUri);
                         mphoto = getResizedBitmap(mphoto, 800);
 
 
@@ -582,23 +572,14 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
     private boolean checkPermission() {
 
 
-            int camera = ActivityCompat.checkSelfPermission(this, perms[0]);
+        int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            //Note : version  11 and above first we take only storage permission once it get than we ask for camera permission
+        int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
+        int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
 
-
-            return Environment.isExternalStorageManager() && camera == PackageManager.PERMISSION_GRANTED;
-        } else {
-            int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(this, perms[1]);
-            int READ_EXTERNAL = ActivityCompat.checkSelfPermission(this, perms[2]);
-
-
-            return camera == PackageManager.PERMISSION_GRANTED
-                    && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
-                    && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
-
-        }
+        return camera == PackageManager.PERMISSION_GRANTED
+                && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
+                && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
     }
 
     //0005
@@ -617,49 +598,6 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    private void requestStoragePermissionV11() {
-
-                //    ActivityCompat.requestPermissions(this, new String[]{CAMERA}, Constants.PERMISSION_CAMERA_V11_CONSTANT);
-
-                try {
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                    intent.addCategory("android.intent.category.DEFAULT");
-                    intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
-                    startActivityForResult(intent, Constants.PERMISSION_CAMMERA_STORAGE_V11_CONSTANT);
-                } catch (Exception e) {
-                    Intent intent = new Intent();
-                    intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                    startActivityForResult(intent, Constants.PERMISSION_CAMMERA_STORAGE_V11_CONSTANT);
-                }
-
-
-    }
-
-    private boolean checkCameraPermissionV11(){
-
-
-        int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
-
-        return camera == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean checkCameraRationalePermissionV11() {
-
-        boolean camera = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, Manifest.permission.CAMERA);
-
-
-        return camera ;
-
-
-    }
-
-    private void requestCameraPermissionV11() {
-
-        // For Version 11 seperately called Camera permission to storage permission PERMISSION_CAMERA_V11_CONSTANT
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, Constants.PERMISSION_CAMMERA_STORAGE_V11_CONSTANT);
-
-    }
-
     private void requestPermission() {
 
             //below android 11
@@ -669,40 +607,6 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
 
 
 
-
-    public void dialogStorage() {
-
-
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Permission Required..!");
-        builder.setMessage("Please allow the storage permission");
-        builder.setCancelable(false);
-
-        builder.setPositiveButton(
-                "Allow",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        if (!checkPermission()) {
-                            if (SDK_INT >= Build.VERSION_CODES.R) {
-
-                                requestStoragePermissionV11();
-
-
-
-                            }
-                        }
-                    }
-                });
-
-
-        androidx.appcompat.app.AlertDialog exitdialog = builder.create();
-        exitdialog.show();
-        Button positive = exitdialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        positive.setTextColor(getResources().getColor(R.color.black));
-
-
-    }
 
 
     @Override

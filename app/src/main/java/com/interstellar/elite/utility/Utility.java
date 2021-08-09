@@ -49,7 +49,7 @@ public class Utility {
 
     public static File createDirIfNotExists() {
 
-        File file = new File(Environment.getExternalStorageDirectory(), "/Elite-Interstellar");
+        File file = new File(Environment.getExternalStorageDirectory(), "/ElitePlus");
         if (!file.exists()) {
             if (!file.mkdirs()) {
                 Log.e("TravellerLog :: ", "Problem creating Image folder");

@@ -223,7 +223,7 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
 
             downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
-
+           //downloadPdf("http://elite.interstellar.co.in/uploads/1559381990.pdf", "Elite_GlobalAssureDocs" + Utility.currentDateTime())    // For Testing Purpose
         }
     }
 
