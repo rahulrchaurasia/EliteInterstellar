@@ -208,7 +208,12 @@ public class BaseActivity extends AppCompatActivity {
     public File saveImageToStorage(Bitmap bitmap, String name) {
         FileOutputStream outStream = null;
 
-        File dir = Utility.createDirIfNotExists();
+        File dir = null;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            dir = Utility.createDirIfNotExists();
+        }else{
+            dir = createDirIfNotExistsNew(getApplicationContext());
+        }
         String fileName = name + ".jpg";
         fileName = fileName.replaceAll("\\s+", "");
         File outFile = new File(dir, fileName);
@@ -221,6 +226,18 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return outFile;
+    }
+
+    public  File createDirIfNotExistsNew(Context context) {
+        boolean ret = true;
+
+        // external storage.
+        File file = new File(context.getExternalFilesDir( Environment.DIRECTORY_PICTURES), "ElitePlus");
+        if (file.mkdirs()) {
+            Log.e("File Log", "Directory not created");
+        }
+
+        return file;
     }
 
     public void showAlert(String strBody) {

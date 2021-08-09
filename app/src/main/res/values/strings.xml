@@ -34,6 +34,7 @@
 
     <string name="versionUpdate"> New version available on play store, Please update. </string>
     <string name="camera_access_required">Camera access is required to display the camera.</string>
+    <string name="storage_access_required">Storage access is required to save the image.</string>
 
     <string name="confirmMessage">Do you want to Submit it?</string>
 

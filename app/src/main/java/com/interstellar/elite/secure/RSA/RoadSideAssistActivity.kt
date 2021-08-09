@@ -222,8 +222,8 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
         gloabalAssureEntity.CertificateFile.let {
 
 
-            downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
-           //downloadPdf("http://elite.interstellar.co.in/uploads/1559381990.pdf", "Elite_GlobalAssureDocs" + Utility.currentDateTime())    // For Testing Purpose
+           // downloadPdf(it, "Elite_GlobalAssureDocs" + Utility.currentDateTime())
+           downloadPdf("http://elite.interstellar.co.in/uploads/1559381990.pdf", "Elite_GlobalAssureDocs" + Utility.currentDateTime())    // For Testing Purpose
         }
     }
 
@@ -696,12 +696,14 @@ class RoadSideAssistActivity : BaseActivity(), View.OnClickListener, IResponseSu
 
 
     fun downloadPdf(url: String?, name: String) {
-        Toast.makeText(this, "Downlaod started..", Toast.LENGTH_LONG).show()
-        val r = DownloadManager.Request(Uri.parse(url))
-        r.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$name.pdf")
-        r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        r.setMimeType(MimeTypeMap.getFileExtensionFromUrl(url))
-        val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        dm.enqueue(r)
+        try {
+            Toast.makeText(this, "Downlaod started..", Toast.LENGTH_LONG).show()
+            val r = DownloadManager.Request(Uri.parse(url))
+            r.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$name.pdf")
+            r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            r.setMimeType(MimeTypeMap.getFileExtensionFromUrl(url))
+            val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(r)
+        }catch ( ex : Exception ){}
     }
 }

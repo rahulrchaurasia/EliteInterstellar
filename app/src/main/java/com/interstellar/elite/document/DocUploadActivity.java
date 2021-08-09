@@ -575,10 +575,11 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
         int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
         int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
+        boolean minSdk29 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
         int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
 
         return camera == PackageManager.PERMISSION_GRANTED
-                && WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
+                && ( WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED || minSdk29)
                 && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
     }
 
@@ -591,6 +592,7 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
 
         boolean write_external = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, perms[1]);
         boolean read_external = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, perms[2]);
+
 
         return camera || write_external || read_external;
 
