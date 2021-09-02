@@ -575,12 +575,19 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
         int camera = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[0]);
 
         int WRITE_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[1]);
-        boolean minSdk29 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+
         int READ_EXTERNAL = ActivityCompat.checkSelfPermission(getApplicationContext(), perms[2]);
 
-        return camera == PackageManager.PERMISSION_GRANTED
-                && ( WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED || minSdk29)
-                && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            return camera == PackageManager.PERMISSION_GRANTED
+
+                    && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
+        }else{
+            return camera == PackageManager.PERMISSION_GRANTED
+                    &&  WRITE_EXTERNAL == PackageManager.PERMISSION_GRANTED
+                    && READ_EXTERNAL == PackageManager.PERMISSION_GRANTED;
+
+        }
     }
 
     //0005
@@ -594,9 +601,12 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
         boolean read_external = ActivityCompat.shouldShowRequestPermissionRationale(DocUploadActivity.this, perms[2]);
 
 
-        return camera || write_external || read_external;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            return  camera ||  read_external;
+        }else{
+            return  camera ||write_external   || read_external;
 
-
+        }
     }
 
 
@@ -623,40 +633,38 @@ public class DocUploadActivity extends BaseActivity implements View.OnClickListe
                         boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                         boolean writeExternal = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                         boolean readExternal = grantResults[2] == PackageManager.PERMISSION_GRANTED;
-
-                        if (camera && writeExternal && readExternal) {
+                         boolean minSdk29 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+                        if (camera && (writeExternal || minSdk29) && readExternal) {
 
                             showCamerGalleryPopUp();
 
                         }
-
-
-
 
                 }
                 break;
 
             case Constants.PERMISSION_CAMMERA_STORAGE_V11_CONSTANT:
 
+//
+//                if (SDK_INT >= Build.VERSION_CODES.R) {
+//
+//                    if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                        if (Environment.isExternalStorageManager()) {
+//
+//                            showCamerGalleryPopUp();
+//
+//                        }
+//                    } else {
+//                        // Permission request was denied.
+//                        Snackbar.make(lyParent, R.string.camera_permission_denied,
+//                                Snackbar.LENGTH_SHORT)
+//                                .show();
+//                    }
+//                }else{
+//
+//                }
 
-                if (SDK_INT >= Build.VERSION_CODES.R) {
-
-                    if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                        if (Environment.isExternalStorageManager()) {
-
-                            showCamerGalleryPopUp();
-
-                        }
-                    } else {
-                        // Permission request was denied.
-                        Snackbar.make(lyParent, R.string.camera_permission_denied,
-                                Snackbar.LENGTH_SHORT)
-                                .show();
-                    }
-                }else{
-
-                }
                 break;
 
 
