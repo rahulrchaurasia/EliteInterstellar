@@ -235,7 +235,7 @@ class DashBoardProductListActivity : BaseActivityKotlin() {
             var opdShopUrl: String = "http://elite.interstellar.co.in/MaxBupa/Index.html?"
 
 
-            val append = "fba_id="+ loginEntity!!.user_id + "&sub_fba_id=1&ss_id=1"
+            val append = "fba_id="+ loginEntity!!.user_id + "&sub_fba_id=eliteplus&ss_id=1"
 
                 opdShopUrl = opdShopUrl + append
 
